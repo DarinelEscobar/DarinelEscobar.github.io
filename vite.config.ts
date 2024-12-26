@@ -5,7 +5,7 @@ import { resolve } from "path";
 
 export default defineConfig({
 
-  base: "/",
+  base: "",
   plugins: [react()],
   resolve: {
     alias: {
@@ -16,4 +16,5 @@ export default defineConfig({
     outDir: "dist",
     sourcemap: true,
   },
+  assetsInclude: ['**/*.svg'],
 });

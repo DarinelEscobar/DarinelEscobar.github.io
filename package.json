@@ -9,7 +9,7 @@
     "build": "tsc && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "deploy": "gh-pages -d dist && cp dist/index.html dist/404.html"
+    "deploy": "vite build && copy dist\\index.html dist\\404.html && gh-pages -d dist"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.1.0",
