@@ -54,6 +54,25 @@ const config: Config = {
           "4": "hsl(var(--chart-4))",
           "5": "hsl(var(--chart-5))",
         },
+        dark: "#161310",
+        "50-dark": "rgba(22, 19, 16, 0.5)",
+        white: "#ECEBEB",
+        "50-white": "rgba(236, 235, 235, 0.5)",
+      },
+      fontFamily: {
+        rob: ["Roboto", "sans-serif"],
+        lat: ["Lato", "sans-serif"],
+        car: ["Cormorant Garamond", "serif"],
+      },
+      fontSize: {
+        robotoBold: "15px",
+        latoMedium: "15px",
+        cormorantRegular: "15px",
+      },
+      lineHeight: {
+        robotoBold: "auto",
+        latoMedium: "auto",
+        cormorantRegular: "auto",
       },
       borderRadius: {
         lg: "var(--radius)",
