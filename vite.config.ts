@@ -5,7 +5,7 @@ import { resolve } from "path";
 
 export default defineConfig({
 
-  base: "/react-vite-shadcn-ui-template/",
+  base: "/",
   plugins: [react()],
   resolve: {
     alias: {

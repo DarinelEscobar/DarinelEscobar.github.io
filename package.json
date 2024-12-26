@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.3.0",
   "type": "module",
-  "homepage": "https://DarinelGuillen.github.io/react-vite-shadcn-ui-template",
+  "homepage": "https://DarinelGuillen.github.io/",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
