@@ -1,7 +1,9 @@
+
 import tailwindAnimate from "tailwindcss-animate";
 import type { Config } from "tailwindcss";
 
 const config: Config = {
+
   darkMode: ["class"],
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
@@ -14,11 +16,19 @@ const config: Config = {
     },
     extend: {
       colors: {
+
+        whi: "rgb(var(--whi))",
+        "5whi": "rgba(var(--5whi))",
+        dar: "rgb(var(--dar))",
+        "5dar": "rgba(var(--5dar))",
+
+
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
+
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
@@ -54,15 +64,11 @@ const config: Config = {
           "4": "hsl(var(--chart-4))",
           "5": "hsl(var(--chart-5))",
         },
-        dark: "#161310",
-        "50-dark": "rgba(22, 19, 16, 0.5)",
-        white: "#ECEBEB",
-        "50-white": "rgba(236, 235, 235, 0.5)",
       },
       fontFamily: {
         rob: ["Roboto", "sans-serif"],
         lat: ["Lato", "sans-serif"],
-        car: ["Cormorant Garamond", "serif"],
+        cor: ["Cormorant", "serif"],
       },
       fontSize: {
         robotoBold: "15px",
