@@ -8,22 +8,23 @@ import Footer from './Footer';
 
 const HomePage: React.FC = () => {
   return (
-    <main className="relative bg-whi text-white min-h-screen overflow-y-scroll scroll-smooth">
-      {/* Header */}
-      <Header />
+   <main className="relative bg-whi  scroll-smooth">
+  {/* Header */}
+  <Header />
 
-      {/* Main Content */}
-      <MainContent />
+  {/* Main Content */}
+  <MainContent />
 
-      {/* About Me Section */}
-      <AboutMe />
+  {/* About Me Section */}
+  <AboutMe />
 
-      {/* Skills Section */}
-      <Skills />
+  {/* Skills Section */}
+  <Skills />
 
-      {/* Footer */}
-      <Footer />
-    </main>
+  {/* Footer */}
+  <Footer />
+</main>
+
   );
 };
 

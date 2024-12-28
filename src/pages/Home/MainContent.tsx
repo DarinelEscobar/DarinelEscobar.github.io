@@ -16,7 +16,7 @@ const MainContent: React.FC = () => {
 
       {/* Título dinámico */}
       <div className="w-full flex items-center justify-center px-4 pb-8">
-        <h1 className="custom-title font-cor">
+        <h1 className="custom-title font-cor text-dar">
           Darinel Escobar
         </h1>
       </div>
