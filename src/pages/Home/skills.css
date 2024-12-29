@@ -1,0 +1,59 @@
+/* skills.css */
+
+/* Animaciones para los blobs */
+@keyframes blob {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    transform: translate(30px, -50px) scale(1.1);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+  100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+}
+
+.animate-blob {
+  animation: blob 7s infinite;
+}
+
+/* Retrasos en la animación */
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
+
+/* Elementos decorativos flotantes (blobs) */
+.blob {
+  pointer-events: none; /* Evita que los blobs intercepten eventos del ratón */
+  z-index: 0; /* Coloca los blobs detrás de los cards */
+}
+
+/* Grid de Skills */
+.skills-grid {
+  z-index: 10; /* Asegura que la cuadrícula de skills esté por encima de los blobs */
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--white);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #94a3b8;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
+}
