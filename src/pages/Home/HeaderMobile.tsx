@@ -18,7 +18,7 @@ const HeaderMobile: React.FC<HeaderMobileProps> = ({
   formattedTime,
 }) => {
   return (
-    <div className="py-3 px-5 flex justify-between items-center text-sm bg-bla text-white">
+    <div className="py-3 px-5 flex justify-between items-center text-sm bg-bla text-white z-30">
       <h1 className="font-rob text-lg font-bold text-dar">Darinel Escobar</h1>
       <button onClick={toggleMenu} className="font-rob text-lg font-bold text-dar">
         {isMenuOpen ? "Close" : "Menu"}

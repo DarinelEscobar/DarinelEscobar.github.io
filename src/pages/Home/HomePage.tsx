@@ -8,7 +8,7 @@ import Footer from './Footer';
 
 const HomePage: React.FC = () => {
   return (
-   <main className="relative bg-whi  scroll-smooth">
+   <main className="relative bg-whi  scroll-smooth text-dar">
   {/* Header */}
   <Header />
 
