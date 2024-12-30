@@ -1,23 +1,23 @@
 import React from "react";
-import { FaPhone, FaGithub, FaLinkedin } from "react-icons/fa";
+import { FaWhatsapp, FaGithub, FaLinkedin } from "react-icons/fa";
+
 import data from "../../../data/data.json";
 
 const ContactMe: React.FC = () => {
-  const { email } = data.resume.personal_info;
+  const { email, phone } = data.resume.personal_info;
 
-  // Celdas ocupadas inicialmente (por textos y elementos estáticos)
   const occupiedCells = [
-    { row: 1, col: 8 }, // "M"
-    { row: 2, col: 8 }, // "E"
-    { row: 2, col: 2 }, // Parte de "CONTACT"
+    { row: 1, col: 8 },
+    { row: 2, col: 8 },
+    { row: 2, col: 2 },
     { row: 2, col: 3 },
     { row: 2, col: 4 },
     { row: 2, col: 5 },
     { row: 2, col: 6 },
-    { row: 3, col: 2 }, // "Let's get in touch" comienza aquí
-    { row: 3, col: 3 }, // Reserva la segunda celda del texto
-    { row: 3, col: 4 }, // Reserva la tercera celda del texto
-    { row: 4, col: 6 }, // Email
+    { row: 3, col: 2 },
+    { row: 3, col: 3 },
+    { row: 3, col: 4 },
+    { row: 4, col: 6 },
     { row: 4, col: 7 },
     { row: 4, col: 8 },
   ];
@@ -33,7 +33,7 @@ const ContactMe: React.FC = () => {
         (cell) => cell.row === position.row && cell.col === position.col
       )
     );
-    occupiedCells.push(position); // Marcar como ocupada
+    occupiedCells.push(position);
     return position;
   };
 
@@ -89,7 +89,14 @@ const ContactMe: React.FC = () => {
           }}
           className="flex items-center justify-center border border-5bla"
         >
-          <FaPhone className="text-3xl text-dar" />
+          <a
+            href={`https://wa.me/${phone.replace(/\D/g, '')}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center"
+          >
+            <FaWhatsapp className="text-3xl text-dar" />
+          </a>
         </div>
         <div
           style={{
@@ -114,7 +121,7 @@ const ContactMe: React.FC = () => {
         <div className="col-start-6 col-span-3 row-start-4 flex items-center justify-end pr-4">
           <a
             href={`mailto:${email}`}
-            className="custom-contactmail font-rob text-black transition-all duration-300 hover:text-gray-600"
+            className="custom-contactmail font-rob text-dar transition-all duration-300 hover:text-blue-500"
           >
             {email}
           </a>

@@ -1,7 +1,6 @@
+// Skills.jsx
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-
-// Importaciones de íconos desde lucide-react
 import {
   Code2,
   Database,
@@ -22,11 +21,9 @@ import {
 } from 'lucide-react';
 import './skills.css';
 
-const Skills: React.FC = () => {
-  // Estado para manejar el hover sobre cada skill
-  const [isHovered, setIsHovered] = useState<string | null>(null);
+const Skills = () => {
+  const [isHovered, setIsHovered] = useState(null);
 
-  // Elementos de menú (barra lateral)
   const menuItems = [
     { icon: Code2, text: 'Frontend Development', active: true },
     { icon: Database, text: 'Backend Development' },
@@ -38,7 +35,6 @@ const Skills: React.FC = () => {
     { icon: Languages, text: 'Languages' },
   ];
 
-  // Lista de Skills (icono, nombre y color principal)
   const skills = [
     { name: 'Development', icon: Terminal, color: '#3B82F6' },
     { name: 'Design System', icon: Palette, color: '#EC4899' },
@@ -51,13 +47,13 @@ const Skills: React.FC = () => {
   ];
 
   return (
-    <div className="flex min-h-screen bg-gradient-to-br from-[rgb(236,235,235)] to-gray-100 items-center">
+    <div className="flex min-h-screen bg-whi items-center">
       {/* Barra Lateral / Sidebar */}
       <motion.aside
-        // Animación inicial para deslizar la barra lateral
         initial={{ x: -300 }}
         animate={{ x: 0 }}
-        className="w-auto h-full bg-whi bg-opacity-90 shadow-lg rounded-xl my-4 ml-4 overflow-hidden flex flex-col"
+        transition={{ duration: 0.6 }}
+        className="sidebar my-4 ml-4 overflow-hidden flex flex-col"
       >
         {/* Navegación de la barra lateral */}
         <nav className="flex-1 px-4 py-2 space-y-2 overflow-y-auto h-auto">
@@ -65,18 +61,16 @@ const Skills: React.FC = () => {
             <motion.a
               key={item.text}
               href="#"
-              // Clases y estilos dinámicos para ítems activos / inactivos
               className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-300 relative group ${
                 item.active
-                  ? 'bg-blue-500 bg-opacity-20 text-white'
-                  : 'text-gray-300 hover:bg-gray-700 hover:bg-opacity-50 hover:text-white'
+                  ? 'bg-blue-300 bg-opacity-20 text-dar'
+                  : 'text-5dar hover:bg-gray-700 hover:bg-opacity-50 hover:text-whi'
               }`}
-              // Efectos de framer-motion
               whileHover={{ x: 5 }}
               whileTap={{ scale: 0.98 }}
             >
-              <item.icon className="w-5 h-5" />
-              <span className="font-lato font-medium text-sm tracking-wide">
+              <item.icon className="w-5 h-5  " />
+              <span className="font-lat text-5dar text-sm tracking-wide">
                 {item.text}
               </span>
               {/* Indicador visual para el elemento activo */}
@@ -94,17 +88,17 @@ const Skills: React.FC = () => {
       {/* Contenido Principal */}
       <main className="flex-1 p-12">
         <motion.div
-          // Efecto inicial de aparición y desplazamiento
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
           className="max-w-5xl mx-auto space-y-16"
         >
           {/* Encabezado */}
           <header className="text-center space-y-4">
-            <h1 className="text-6xl font-serif font-bold text-gray-800 tracking-tight">
+            <h1 className="text-6xl font-serif font-bold text-text-color tracking-tight">
               Frontend Developer
             </h1>
-            <p className="text-gray-600 text-lg tracking-wide font-light">
+            <p className="text-gray-600 dark:text-gray-400 text-lg tracking-wide font-light">
               Crafting beautiful and responsive web experiences
             </p>
           </header>
@@ -117,18 +111,12 @@ const Skills: React.FC = () => {
                 <motion.div
                   key={skill.name}
                   className="relative group"
-                  // Manejo de eventos onHover para cambiar el estado
                   onHoverStart={() => setIsHovered(skill.name)}
                   onHoverEnd={() => setIsHovered(null)}
-                  // Pequeña animación de escala al hacer hover/click
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  <div
-                    className="flex flex-col items-center p-6 rounded-xl bg-white border border-gray-100
-                               transition-all duration-300 group-hover:shadow-lg group-hover:shadow-gray-200/50"
-                  >
-                    {/* Contenedor del ícono con background dinámico en hover */}
+                  <div className="flex flex-col items-center p-6 card transition-all duration-300 group-hover:shadow-lg group-hover:shadow-gray-200/50">
                     <div
                       className="p-3 rounded-lg mb-4 transition-colors duration-300"
                       style={{
@@ -143,12 +131,11 @@ const Skills: React.FC = () => {
                         }}
                       />
                     </div>
-                    {/* Nombre de la skill con color dinámico en hover */}
                     <h3
-                      className="text-lg font-lato font-semibold transition-colors duration-300"
+                      className="text-lg font-lat transition-colors duration-300"
                       style={{
                         color:
-                          isHovered === skill.name ? skill.color : 'rgb(50, 50, 50)',
+                          isHovered === skill.name ? skill.color : 'rgb(var(--text-color))',
                       }}
                     >
                       {skill.name}
@@ -159,9 +146,9 @@ const Skills: React.FC = () => {
             </div>
 
             {/* Elementos decorativos flotantes (blobs) */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-blue-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob blob" />
-            <div className="absolute top-20 right-20 w-64 h-64 bg-purple-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000 blob" />
-            <div className="absolute top-40 right-0 w-64 h-64 bg-pink-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000 blob" />
+            <div className="absolute top-0 right-0 w-64 h-64 bg-blue-200 dark:bg-blue-800 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob blob" />
+            <div className="absolute top-20 right-20 w-64 h-64 bg-purple-200 dark:bg-purple-800 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000 blob" />
+            <div className="absolute top-40 right-0 w-64 h-64 bg-pink-200 dark:bg-pink-800 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000 blob" />
           </div>
         </motion.div>
       </main>
