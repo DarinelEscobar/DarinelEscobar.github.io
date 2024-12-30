@@ -5,6 +5,7 @@ import MainContent from './MainContent';
 import AboutMe from './AboutMe';
 import Skills from './Skills';
 import Footer from './Footer';
+import ContactMe from './ContactMe';
 
 const HomePage: React.FC = () => {
   return (
@@ -21,6 +22,7 @@ const HomePage: React.FC = () => {
   {/* Skills Section */}
   <Skills />
 
+  <ContactMe />
   {/* Footer */}
   <Footer />
 </main>
