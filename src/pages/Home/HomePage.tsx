@@ -1,11 +1,11 @@
 // src/pages/Home/HomePage.tsx
 import React from 'react';
-import Header from '../../components/Header/Header';
+import Header from '@/components/Header/Header';
 import MainContent from './MainContent';
 import AboutMe from './AboutMe';
 import Skills from './Skills';
-import Footer from './Footer';
-import ContactMe from '../../components/ContactMe/ContactMe';
+import Title from './Title';
+import ContactMe from '@/components/ContactMe/ContactMe';
 
 const HomePage: React.FC = () => {
   return (
@@ -23,8 +23,9 @@ const HomePage: React.FC = () => {
   <Skills />
 
   <ContactMe />
-  {/* Footer */}
-  <Footer />
+  {/* Title */}
+  <Title />
+
 </main>
 
   );

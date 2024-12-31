@@ -1,7 +1,7 @@
 // src/components/Header/HeaderDesktop.tsx
 import React from "react";
 import { Link } from "react-router-dom";
-import data from "@data/data.json";  
+import data from "@data/data.json";
 
 interface HeaderDesktopProps {
   formattedTime: string;
@@ -29,17 +29,17 @@ interface InfoSectionProps {
 
 const InfoSection: React.FC<InfoSectionProps> = ({ title, content }) => (
   <div className="flex flex-col text-left gap-0.5">
-    <h1 className="font-rob text-[.89rem] font-bold text-lg leading-none text-dar">{title}</h1>
-    <p className="font-lat text-[.89rem] text-base text-5dar leading-none">{content}</p>
+    <h1 className="font-rob text-dar text-[0.89rem] font-bold">{title}</h1>
+    <p className="font-lat text-dar text-[0.89rem]">{content}</p>
   </div>
 );
 
 const NavigationLinks: React.FC = () => (
   <div className="flex flex-col text-left gap-0.5">
-    <h1 className="font-rob text-[.89rem] font-bold text-lg leading-none text-dar">Navigation:</h1>
-    <p className="font-lat text-[.89rem] text-base text-5dar leading-none">
-      <Link to="/">Index</Link>, <Link to="/Projects">Projects</Link>,{" "}
-      <Link to="/Archive">Archive</Link>, <Link to="/Contact">Contact</Link>
+    <h1 className="font-rob text-dar text-[0.89rem] font-bold">Navigation:</h1>
+    <p className="font-lat text-dar text-[0.89rem]">
+      <Link to="/">Index</Link>, <Link to="/Contact">Contact</Link>,{" "}
+      <Link to="/Page2">Archive</Link>
     </p>
   </div>
 );
@@ -51,10 +51,10 @@ interface ThemeToggleProps {
 
 const ThemeToggle: React.FC<ThemeToggleProps> = ({ isDarkMode, toggleDarkMode }) => (
   <div className="flex flex-col text-left gap-0.5">
-    <h1 className="font-rob text-[.89rem] font-bold text-lg leading-none text-dar">Theme:</h1>
+    <h1 className="font-rob text-dar text-[0.89rem] font-bold">Theme:</h1>
     <button
       onClick={toggleDarkMode}
-      className="font-rob text-[.89rem] font-bold text-lg leading-none text-dar underline"
+      className="font-rob text-dar text-[0.89rem] underline"
     >
       {isDarkMode ? "Light Mode" : "Dark Mode"}
     </button>
