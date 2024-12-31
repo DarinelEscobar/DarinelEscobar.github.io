@@ -9,7 +9,7 @@ import ContactMe from '@/components/ContactMe/ContactMe';
 
 const HomePage: React.FC = () => {
   return (
-   <main className="relative bg-whi  scroll-smooth text-dar">
+   <main className="Container bg-whi  scroll-smooth text-dar w-[100vw]">
   {/* Header */}
   <Header />
 
