@@ -1,5 +1,3 @@
-/* skills.css */
-
 /* ------------------------------------------- */
 /*            SIDEBAR - MODO CLARO            */
 /* ------------------------------------------- */
@@ -13,7 +11,7 @@
 }
 
 /* ------------------------------------------- */
-/*            SIDEBAR - MODO OSCURO            */
+/*            SIDEBAR - MODO OSCURO           */
 /* ------------------------------------------- */
 
 .dark .sidebar {
@@ -24,9 +22,8 @@
   transition: all 0.3s ease;
 }
 
-
 /* ------------------------------------------- */
-/*            CARD - MODO CLARO               */
+/*          CARD - MODO CLARO                 */
 /* ------------------------------------------- */
 
 .card {
@@ -38,56 +35,51 @@
 }
 
 /* ------------------------------------------- */
-/*          CARD - MODO OSCURO                 */
+/*          CARD - MODO OSCURO                */
 /* ------------------------------------------- */
 
 .dark .card {
   border-radius: 12px;
-  background: linear-gradient(315deg, #242424, #2d2d2d); /* Fondo más uniforme */
-  box-shadow: -2px -2px 4px rgba(255, 255, 255, 0.03), /* Sombras suaves */
-              2px 2px 4px rgba(0, 0, 0, 0.2);          /* Sombras inferiores */
+  background: linear-gradient(315deg, #242424, #2d2d2d);
+  box-shadow: -2px -2px 4px rgba(255, 255, 255, 0.03),
+              2px 2px 4px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease;
 }
 
 .dark .card:hover {
-  transform: translateY(-1px); /* Efecto hover más sutil */
-  box-shadow: -2px -2px 4px rgba(255, 255, 255, 0.05), /* Sombras suaves */
-              2px 2px 4px rgba(0, 0, 0, 0.15);         /* Sombras inferiores */
-  background: linear-gradient(315deg, #272727, #313131); /* Cambios sutiles en el fondo */
+  transform: translateY(-1px);
+  box-shadow: -2px -2px 4px rgba(255, 255, 255, 0.05),
+              2px 2px 4px rgba(0, 0, 0, 0.15);
+  background: linear-gradient(315deg, #272727, #313131);
   transition: all 0.3s ease;
 }
 
-/* ------------------------------------------- */
-/*           TEXTO E ICONOS - MODO OSCURO      */
-/* ------------------------------------------- */
-
 .dark .card h3 {
-  color: rgba(240, 240, 240, 0.85); /* Texto más integrado */
+  color: rgba(240, 240, 240, 0.85);
   transition: color 0.3s ease;
 }
 
 .dark .card:hover h3 {
-  color: rgba(255, 255, 255, 1); /* Brillo sutil en hover */
+  color: rgba(255, 255, 255, 1);
 }
 
 .dark .card .icon {
-  color: rgba(200, 200, 200, 0.8); /* Iconos más neutros */
+  color: rgba(200, 200, 200, 0.8);
   transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .dark .card:hover .icon {
-  color: rgba(255, 255, 255, 0.9); /* Iconos más brillantes */
-  transform: scale(1.05); /* Movimiento ligero */
+  color: rgba(255, 255, 255, 0.9);
+  transform: scale(1.05);
 }
 
-
 /* ------------------------------------------- */
-/*           ANIMACIÓN DE BLOB                */
+/*          ANIMACIÓN DE BLOB                */
 /* ------------------------------------------- */
 
 @keyframes blob {
   0% {
-    transform: translate(0px, 0px) scale(1);
+    transform: translate(0, 0) scale(1);
   }
   33% {
     transform: translate(30px, -50px) scale(1.1);
@@ -96,13 +88,21 @@
     transform: translate(-20px, 20px) scale(0.9);
   }
   100% {
-    transform: translate(0px, 0px) scale(1);
+    transform: translate(0, 0) scale(1);
   }
 }
 
 .animate-blob {
   animation: blob 7s infinite;
+  animation-timing-function: ease-in-out; /* smoother transitions */
+  animation-fill-mode: forwards;         /* ensures it stays visible */
 }
+
+/* Optional: slower or different timing
+.animate-blob {
+  animation: blob 10s infinite alternate;
+}
+*/
 
 .animation-delay-2000 {
   animation-delay: 2s;
@@ -113,31 +113,25 @@
 }
 
 .blob {
-  pointer-events: none; /* Evita que los blobs intercepten eventos del ratón */
-  z-index: 0;           /* Detrás de las cards */
+  pointer-events: none; /* Don’t capture mouse events */
+  z-index: 0;          /* Keep behind the grid */
+  /* If you want to ensure they're always behind:
+     z-index: -1;
+  */
 }
 
+/* Bump up the z-index of the skill items */
 .skills-grid {
-  z-index: 10; /* Encima de los blobs */
+  z-index: 2;
 }
-/* ------------------------------------------- */
-/*           BLOBS - MODO OSCURO               */
-/* ------------------------------------------- */
 
+/* MODO OSCURO: Opcional, si deseas un look diferente en dark mode */
 .dark .blob {
-  background: rgba(100, 100, 255, 0.15); /* Colores vibrantes */
+  background: rgba(100, 100, 255, 0.15);
+  /* Try removing or changing the blend mode if it becomes “invisible” on light bg */
   mix-blend-mode: screen;
   filter: blur(80px);
-  opacity: 0.8; /* Reduce la opacidad para suavizar */
-}
-
-/* ------------------------------------------- */
-/*           SOMBRAS EN GRID - HOVER           */
-/* ------------------------------------------- */
-
-.dark .skills-grid .card:hover {
-  box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.1), /* Sombra blanca sutil */
-              0px 0px 5px rgba(0, 0, 0, 0.2);       /* Sombra inferior tenue */
+  opacity: 0.8;
 }
 
 /* ------------------------------------------- */

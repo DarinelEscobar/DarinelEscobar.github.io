@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import HeaderMobile from "./HeaderMobile";
-
+import data from "../../../data/data.json"; // Adjust the path as necessary
 
 const Header: React.FC = () => {
   const [isDarkMode, setIsDarkMode] = useState(() =>
@@ -53,6 +53,8 @@ const Header: React.FC = () => {
 
   const isMobile = window.matchMedia("(max-width: 768px)").matches;
 
+  const { short_name, rol, location  } = data.resume.personal_info;
+
   return (
     <header className="sticky top-0 left-0 w-full z-30">
       {isMobile ? (
@@ -67,10 +69,10 @@ const Header: React.FC = () => {
         <div className="absolute top-0 left-0 w-full py-3 px-5 flex justify-between text-sm bgs-transparent z-10">
           <div className="flex flex-col text-left gap-0.5">
             <h1 className="font-rob text-[.89rem] font-bold text-lg leading-none text-dar">
-              Darinel Escobar:
+              {short_name}:
             </h1>
             <p className="font-lat text-[.89rem] text-base text-5dar leading-none">
-              Software Engineering
+              {rol}
             </p>
           </div>
           <div className="flex flex-col text-left gap-0.5">
@@ -78,7 +80,7 @@ const Header: React.FC = () => {
               Location:
             </h1>
             <p className="font-lat text-[.89rem] text-base text-5dar leading-none">
-              Chiapas, Mexico ({formattedTime})
+            {location} ({formattedTime})
             </p>
           </div>
           <div className="flex flex-col text-left gap-0.5">
