@@ -1,6 +1,8 @@
 // src/pages/Home/components/AboutMe.tsx
 import React from 'react';
-import data from "../../../data/data.json"; // Adjust path to match your project structure
+import data from "@data/data.json";
+
+
 
 const AboutMe: React.FC = () => {
   const { summary } = data.resume.professional_summary;

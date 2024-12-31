@@ -1,6 +1,6 @@
 // src/pages/Home/HomePage.tsx
 import React from 'react';
-import Header from './Header';
+import Header from '../../components/Header/Header';
 import MainContent from './MainContent';
 import AboutMe from './AboutMe';
 import Skills from './Skills';

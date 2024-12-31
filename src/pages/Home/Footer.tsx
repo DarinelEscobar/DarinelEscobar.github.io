@@ -1,7 +1,9 @@
 import React from 'react';
 import { FaEnvelope, FaLinkedin, FaGithub, FaWhatsapp } from 'react-icons/fa';
 import { ChevronUp } from 'lucide-react';
-import data from "../../../data/data.json"; // Adjust the path to match your structure
+import data from "@data/data.json";
+
+
 
 const Footer: React.FC = () => {
   const { short_name, email, linkedin, github, phone } = data.resume.personal_info;

@@ -1,7 +1,8 @@
 // src/pages/Home/components/MainContent.tsx
 import React from 'react';
 import img from "../../assets/images/me.png";
-import data from "../../../data/data.json"; // Adjust the path as per your provided route
+import data from "@data/data.json";
+
 
 const MainContent: React.FC = () => {
   const { short_name } = data.resume.personal_info;

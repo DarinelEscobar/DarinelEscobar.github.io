@@ -29,7 +29,8 @@ import {
 } from 'lucide-react';
 
 
-import data from '../../../data/data.json';
+import data from "@data/data.json";
+
 
 import './skills.css';
 

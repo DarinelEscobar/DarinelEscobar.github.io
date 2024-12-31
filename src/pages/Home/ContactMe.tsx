@@ -1,7 +1,8 @@
 import React from "react";
 import { FaWhatsapp, FaGithub, FaLinkedin } from "react-icons/fa";
 
-import data from "../../../data/data.json";
+import data from "@data/data.json";
+
 
 const ContactMe: React.FC = () => {
   const { email, phone } = data.resume.personal_info;
