@@ -5,7 +5,7 @@ import MainContent from './MainContent';
 import AboutMe from './AboutMe';
 import Skills from './Skills';
 import Footer from './Footer';
-import ContactMe from './ContactMe';
+import ContactMe from '../../components/ContactMe/ContactMe';
 
 const HomePage: React.FC = () => {
   return (
