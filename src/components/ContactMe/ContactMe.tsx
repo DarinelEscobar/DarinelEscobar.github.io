@@ -1,17 +1,157 @@
 import React, { useState, useEffect } from "react";
 import { FaWhatsapp, FaGithub, FaLinkedin } from "react-icons/fa";
-import ContactGrid from "./ContactGrid";
-import ContactText from "./ContactText";
-import ContactIcon from "./ContactIcon";
+import { IconType } from "react-icons";
 import data from "@data/data.json";
 
+// COMPONENTES EXISTENTES
+import ContactGrid from "./ContactGrid";
+import ContactIcon from "./ContactIcon";
+import ContactText from "./ContactText";
+
+// Tipos e interfaces
 interface Cell {
   row: number;
   col: number;
 }
 
-const ContactMe: React.FC = () => {
-  const { email, phone, linkedin, github } = data.resume.personal_info; // Importa las variables directamente
+interface ContactIconProps {
+  Icon: IconType;
+  href?: string;
+  position: Cell;
+}
+
+// =======================================================================================
+//                          VERSIÓN MOBILE: Layout sencillo
+// =======================================================================================
+const MobileContact: React.FC = () => {
+  const { email, phone, linkedin, github } = data.resume.personal_info;
+
+  return (
+    <section className="w-full min-h-screen bg-whi flex flex-col items-center justify-center p-6">
+      <h1 className="font-cor text-3xl text-dar mb-6">CONTACT</h1>
+      <h2 className="font-lat text-dar text-lg mb-4">
+        Let&apos;s get in touch ._.
+      </h2>
+
+      {/* Íconos en una fila o columna sencillos */}
+      <div className="flex items-center justify-center gap-6 mb-4">
+        <a
+          href={`https://wa.me/${phone.replace(/\D/g, "")}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-dar text-4xl hover:text-blue-500 transition-colors"
+          aria-label="WhatsApp"
+        >
+          <FaWhatsapp />
+        </a>
+
+        <a
+          href={github}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-dar text-4xl hover:text-blue-500 transition-colors"
+          aria-label="GitHub"
+        >
+          <FaGithub />
+        </a>
+
+        <a
+          href={linkedin}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-dar text-4xl hover:text-blue-500 transition-colors"
+          aria-label="LinkedIn"
+        >
+          <FaLinkedin />
+        </a>
+      </div>
+
+      {/* Email */}
+      <a
+        href={`mailto:${email}`}
+        className="font-rob text-dar text-lg hover:text-blue-500 transition-colors"
+      >
+        {email}
+      </a>
+    </section>
+  );
+};
+
+// =======================================================================================
+//                         VERSIÓN TABLET: Grilla reducida y ordenada
+// =======================================================================================
+const TabletContact: React.FC = () => {
+  const { email, phone, linkedin, github } = data.resume.personal_info;
+
+  return (
+    <section className="w-full min-h-screen bg-whi flex items-center justify-center">
+      {/* Grilla de 4 x 3 */}
+      <div className="grid grid-cols-4 grid-rows-3 w-full h-full relative">
+        {/* Versión “pequeña” de la grilla (sin posiciones aleatorias) */}
+        <div className="col-span-4 row-span-1 flex flex-col items-center justify-center">
+          <h1 className="font-cor text-dar text-5xl mb-2">CONTACT</h1>
+          <h2 className="font-lat text-dar text-xl">Let&apos;s get in touch ._.</h2>
+        </div>
+
+        {/* Íconos en celdas fijas (ej. posiciones definidas) */}
+        <div className="col-start-2 row-start-2 flex items-center justify-center border border-5bla">
+          <a
+            href={`https://wa.me/${phone.replace(/\D/g, "")}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-dar text-3xl hover:text-blue-500 transition-colors"
+            aria-label="WhatsApp"
+          >
+            <FaWhatsapp />
+          </a>
+        </div>
+        <div className="col-start-3 row-start-2 flex items-center justify-center border border-5bla">
+          <a
+            href={github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-dar text-3xl hover:text-blue-500 transition-colors"
+            aria-label="GitHub"
+          >
+            <FaGithub />
+          </a>
+        </div>
+        <div className="col-start-4 row-start-2 flex items-center justify-center border border-5bla">
+          <a
+            href={linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-dar text-3xl hover:text-blue-500 transition-colors"
+            aria-label="LinkedIn"
+          >
+            <FaLinkedin />
+          </a>
+        </div>
+
+        {/* Email en la parte de abajo */}
+        <div className="col-span-4 row-start-3 flex items-center justify-center">
+          <a
+            href={`mailto:${email}`}
+            className="font-rob text-dar text-lg hover:text-blue-500 transition-colors"
+          >
+            {email}
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// =======================================================================================
+//            VERSIÓN DESKTOP: Grilla grande (8 x 5) con posiciones aleatorias
+// =======================================================================================
+
+const ContactMeDesktop: React.FC = () => {
+  const { email, phone, linkedin, github } = data.resume.personal_info;
+
+  // ----------------- LÓGICA DE POSICIONES ALEATORIAS --------------------
+  const totalRows = 5;
+  const totalCols = 8;
 
   const initialOccupiedCells: Cell[] = [
     { row: 1, col: 8 },
@@ -28,9 +168,6 @@ const ContactMe: React.FC = () => {
     { row: 4, col: 7 },
     { row: 4, col: 8 },
   ];
-
-  const totalRows = 5;
-  const totalCols = 8;
 
   const [iconPositions, setIconPositions] = useState<{
     phone: Cell | null;
@@ -82,19 +219,23 @@ const ContactMe: React.FC = () => {
     } catch (error) {
       console.error(error);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (!iconPositions.phone || !iconPositions.github || !iconPositions.linkedin) {
     return null;
   }
 
+  // Render
   return (
     <section className="h-screen w-screen bg-whi flex items-center justify-center">
       <div className="grid grid-cols-8 grid-rows-5 w-full h-full relative">
+        {/* Grilla de fondo + letras M/E */}
         <ContactGrid />
+        {/* Texto CONTACT & subtítulo */}
         <ContactText />
 
-        {/* Íconos distribuidos dinámicamente */}
+        {/* Íconos distribuidos aleatoriamente */}
         <ContactIcon
           Icon={FaWhatsapp}
           href={`https://wa.me/${phone.replace(/\D/g, "")}`}
@@ -102,16 +243,16 @@ const ContactMe: React.FC = () => {
         />
         <ContactIcon
           Icon={FaGithub}
-          href={github} // Usa la URL de GitHub desde el JSON
+          href={github}
           position={iconPositions.github}
         />
         <ContactIcon
           Icon={FaLinkedin}
-          href={linkedin} // Usa la URL de LinkedIn desde el JSON
+          href={linkedin}
           position={iconPositions.linkedin}
         />
 
-        {/* Email */}
+        {/* Email en la parte de abajo */}
         <div className="col-start-6 col-span-3 row-start-4 flex items-center justify-end pr-4">
           <a
             href={`mailto:${email}`}
@@ -122,6 +263,30 @@ const ContactMe: React.FC = () => {
         </div>
       </div>
     </section>
+  );
+};
+
+// =======================================================================================
+//                 CONTACTME PRINCIPAL: Renderiza según el breakpoint
+// =======================================================================================
+const ContactMe: React.FC = () => {
+  return (
+    <>
+      {/* MOBILE: “block” hasta sm, “hidden” en sm o superior */}
+      <div className="block sm:hidden">
+        <MobileContact />
+      </div>
+
+      {/* TABLET: “hidden” antes de sm y después de md, “block” entre sm y md */}
+      <div className="hidden sm:block md:hidden">
+        <TabletContact />
+      </div>
+
+      {/* DESKTOP: “hidden” hasta md, “block” en md o superior */}
+      <div className="hidden md:block">
+        <ContactMeDesktop />
+      </div>
+    </>
   );
 };
 

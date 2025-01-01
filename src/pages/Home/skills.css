@@ -98,12 +98,6 @@
   animation-fill-mode: forwards;         /* ensures it stays visible */
 }
 
-/* Optional: slower or different timing
-.animate-blob {
-  animation: blob 10s infinite alternate;
-}
-*/
-
 .animation-delay-2000 {
   animation-delay: 2s;
 }
@@ -115,9 +109,6 @@
 .blob {
   pointer-events: none; /* Don’t capture mouse events */
   z-index: 0;          /* Keep behind the grid */
-  /* If you want to ensure they're always behind:
-     z-index: -1;
-  */
 }
 
 /* Bump up the z-index of the skill items */
@@ -125,10 +116,9 @@
   z-index: 2;
 }
 
-/* MODO OSCURO: Opcional, si deseas un look diferente en dark mode */
+/* MODO OSCURO */
 .dark .blob {
   background: rgba(100, 100, 255, 0.15);
-  /* Try removing or changing the blend mode if it becomes “invisible” on light bg */
   mix-blend-mode: screen;
   filter: blur(80px);
   opacity: 0.8;
