@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 
-// Badge images
+
 import awsAcademyCloudFoundations from '../../assets/images/badge/aws-academy-graduate-aws-academy-cloud-foundations.png';
 import awsAcademyCloudDeveloping from '../../assets/images/badge/aws-academy-graduate-aws-academy-cloud-developing.png';
 import awsAcademyCloudSecurityFoundations from '../../assets/images/badge/aws-academy-graduate-aws-academy-cloud-security-foundations.png';
 import awsAcademyIntroductionToCloud from '../../assets/images/badge/aws-academy-graduate-aws-academy-introduction-to-cloud-semester-1.png';
 
-// React icons
+
 import * as SiIcons from 'react-icons/si';
 import * as FaIcons from 'react-icons/fa';
 import * as GiIcons from 'react-icons/gi';
 
-// Lucide icons
+
 import {
   Code2,
   Cloud,
@@ -26,14 +26,14 @@ import {
   Award,
 } from 'lucide-react';
 
-// Data
+
 import data from "@data/data.json";
 
-// CSS
+
 import './skills.css';
 
 const Skills: React.FC = () => {
-  // Mapa de imágenes para certificaciones
+
   const imageMap: Record<string, string> = {
     awsAcademyCloudFoundations,
     awsAcademyCloudDeveloping,
@@ -41,19 +41,19 @@ const Skills: React.FC = () => {
     awsAcademyIntroductionToCloud,
   };
 
-  // Unimos secciones de Skills_Technologies y certifications
+
   const combinedSections = {
     ...data.resume.Skills_Technologies,
     certifications: data.resume.certifications,
   };
 
-  // Claves de cada sección
+
   const sectionKeys = Object.keys(combinedSections);
 
   const [selectedSection, setSelectedSection] = useState(sectionKeys[0]);
   const [isHovered, setIsHovered] = useState<string | null>(null);
 
-  // Retorna el componente de ícono apropiado según la librería e iconName
+
   const getIcon = (iconName: string, library: string) => {
     switch (library.toLowerCase()) {
       case 'si':
@@ -92,27 +92,27 @@ const Skills: React.FC = () => {
     }
   };
 
-  // Da formato al título de la sección
+
   const formatSectionTitle = (sectionKey: string) =>
     sectionKey
       .replace(/_/g, ' ')
       .replace(/\b\w/g, (char) => char.toUpperCase());
 
-  // Sección activa
+
   const activeSection = combinedSections[selectedSection];
 
-  // Skills (o items) en la sección activa
+
   let currentSkills: any[] = [];
   if (activeSection) {
-    // Lenguajes
+
     if (selectedSection === 'languages' && activeSection.languages_list) {
       currentSkills = activeSection.languages_list;
     }
-    // Certificaciones
+
     else if (selectedSection === 'certifications' && activeSection.items) {
       currentSkills = activeSection.items;
     }
-    // Otras secciones
+
     else if (activeSection.skills) {
       currentSkills = activeSection.skills;
     }
@@ -131,9 +131,9 @@ const Skills: React.FC = () => {
          * - md:w-48   : en pantallas medianas, texto con truncado.
          * - lg:w-64   : en pantallas grandes, más ancho para texto completo.
          */
-        className="sidebar z-10 my-4 ml-4 flex flex-col w-16 md:w-48 lg:w-64 overflow-visible"
+        className="sidebar z-10 my-4 ml-4 flex flex-col w-16 md:w-48 lg:w-64 overflow-visible "
       >
-        <nav className="flex-1 px-4 py-2 space-y-2 overflow-y-auto h-auto">
+        <nav className="flex-1  px-4 py-2 space-y-2 overflow-y-auto h-auto">
           {sectionKeys.map((key) => {
             const isActive = key === selectedSection;
             const {
@@ -184,10 +184,7 @@ const Skills: React.FC = () => {
       </motion.aside>
 
       {/* MAIN CONTENT */}
-      {/**
-       * Agregamos un poco de margen superior (mt-8 o mt-12)
-       * para que el header no quede pegado.
-       */}
+
       <main className="flex-1 p-12 relative mt-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
