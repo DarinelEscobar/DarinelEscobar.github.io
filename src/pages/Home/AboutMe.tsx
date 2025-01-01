@@ -6,7 +6,7 @@ const AboutMe: React.FC = () => {
   const { summary, note } = data.resume.professional_summary;
 
   return (
-    <section className="flex items-center justify-center w-full h-screen bg-5dar text-whi">
+    <section className="flex items-center justify-center w-screen h-screen bg-5dar text-whi">
       <div className="text-center max-w-screen-md">
         <p className="text-[3rem] leading-relaxed font-cor">
           {summary}

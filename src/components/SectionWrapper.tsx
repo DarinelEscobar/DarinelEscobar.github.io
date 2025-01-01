@@ -1,29 +1,32 @@
 // Path: C:\Users\darin\Documents\react-vite-shadcn-ui-template\src\components\SectionWrapper.tsx
-
 import React, { useEffect, useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 
 interface SectionWrapperProps {
   children: React.ReactNode;
-  index?: number; // para identificar la sección
+  index?: number;
 }
 
 const SectionWrapper: React.FC<SectionWrapperProps> = ({ children, index = 0 }) => {
-  const ref = useRef<HTMLDivElement>(null);
+  const { ref, inView } = useInView({
+    threshold: 0.3,
+    triggerOnce: false,
+  });
 
-  // Hook de Framer Motion para saber si el elemento está en el viewport
-  const isInView = useInView(ref, { margin: "-10% 0px -10% 0px", once: false });
-
-  // Al “entrar” en la vista, guardamos en Local Storage el índice actual
   useEffect(() => {
-    if (isInView) {
-      localStorage.setItem("activeSection", String(index));
+    if (inView) {
+      // guardamos en localStorage SOLO si no es la sección 0
+      if (index !== 0) {
+        localStorage.setItem("activeSection", String(index));
+      } else {
+        // O, si prefieres, puedes guardar 0 para la principal
+        // localStorage.setItem("activeSection", "0");
+      }
     }
-  }, [isInView, index]);
+  }, [inView, index]);
 
   return (
-    // Usamos motion.section para disparar animaciones suaves de entrada
-    <motion.section
+    <section
       ref={ref}
       className="
         snap-start
@@ -34,14 +37,9 @@ const SectionWrapper: React.FC<SectionWrapperProps> = ({ children, index = 0 }) 
         justify-center
         relative
       "
-      // Variants para la animación de entrada
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.5 }}
-      transition={{ duration: 0.8 }}
     >
       {children}
-    </motion.section>
+    </section>
   );
 };
 

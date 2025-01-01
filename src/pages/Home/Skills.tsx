@@ -1,8 +1,9 @@
-// Path: C:\Users\darin\Documents\react-vite-shadcn-ui-template\src\pages\Home\Skills.tsx
+// Path: src\pages\Home\Skills.tsx
+import React, { useState, useEffect } from "react";
+import { motion, useAnimation } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 
-import React, { useState } from "react";
-import { motion } from "framer-motion";
-
+// Importa tus badges, iconos, etc.
 import awsAcademyCloudFoundations from "../../assets/images/badge/aws-academy-graduate-aws-academy-cloud-foundations.png";
 import awsAcademyCloudDeveloping from "../../assets/images/badge/aws-academy-graduate-aws-academy-cloud-developing.png";
 import awsAcademyCloudSecurityFoundations from "../../assets/images/badge/aws-academy-graduate-aws-academy-cloud-security-foundations.png";
@@ -11,7 +12,6 @@ import awsAcademyIntroductionToCloud from "../../assets/images/badge/aws-academy
 import * as SiIcons from "react-icons/si";
 import * as FaIcons from "react-icons/fa";
 import * as GiIcons from "react-icons/gi";
-
 import {
   Code2,
   Cloud,
@@ -26,10 +26,12 @@ import {
 } from "lucide-react";
 
 import data from "@data/data.json";
-
 import "./skills.css";
 
 const Skills: React.FC = () => {
+  // --------------------------------------------------
+  // Lógica normal de tu Skills
+  // --------------------------------------------------
   const imageMap: Record<string, string> = {
     awsAcademyCloudFoundations,
     awsAcademyCloudDeveloping,
@@ -43,7 +45,6 @@ const Skills: React.FC = () => {
   };
 
   const sectionKeys = Object.keys(combinedSections);
-
   const [selectedSection, setSelectedSection] = useState(sectionKeys[0]);
   const [isHovered, setIsHovered] = useState<string | null>(null);
 
@@ -57,28 +58,28 @@ const Skills: React.FC = () => {
         return GiIcons[iconName as keyof typeof GiIcons];
       case "lucide-react": {
         const lucideMap: Record<string, React.FC<React.SVGProps<SVGSVGElement>>> =
-        {
-          code: Code2,
-          Code: Code2,
-          cloud: Cloud,
-          Cloud: Cloud,
-          database: Database,
-          Database: Database,
-          smartphone: Smartphone,
-          Smartphone: Smartphone,
-          server: Server,
-          Server: Server,
-          layoutpanelleft: LayoutPanelLeft,
-          LayoutPanelLeft: LayoutPanelLeft,
-          pocketknife: PocketKnife,
-          PocketKnife: PocketKnife,
-          hearthandshake: HeartHandshake,
-          HeartHandshake: HeartHandshake,
-          speech: Speech,
-          Speech: Speech,
-          award: Award,
-          Award: Award,
-        };
+          {
+            code: Code2,
+            Code: Code2,
+            cloud: Cloud,
+            Cloud: Cloud,
+            database: Database,
+            Database: Database,
+            smartphone: Smartphone,
+            Smartphone: Smartphone,
+            server: Server,
+            Server: Server,
+            layoutpanelleft: LayoutPanelLeft,
+            LayoutPanelLeft: LayoutPanelLeft,
+            pocketknife: PocketKnife,
+            PocketKnife: PocketKnife,
+            hearthandshake: HeartHandshake,
+            HeartHandshake: HeartHandshake,
+            speech: Speech,
+            Speech: Speech,
+            award: Award,
+            Award: Award,
+          };
         return lucideMap[iconName] || Code2;
       }
       default:
@@ -92,8 +93,8 @@ const Skills: React.FC = () => {
       .replace(/\b\w/g, (char) => char.toUpperCase());
 
   const activeSection = combinedSections[selectedSection];
-
   let currentSkills: any[] = [];
+
   if (activeSection) {
     if (selectedSection === "languages" && activeSection.languages_list) {
       currentSkills = activeSection.languages_list;
@@ -104,28 +105,48 @@ const Skills: React.FC = () => {
     }
   }
 
-  // Variants para la sidebar
+  // --------------------------------------------------
+  // 1) UseIntersectionObserver + useAnimation
+  // --------------------------------------------------
+  // a) Creamos un ref para todo el contenedor (o uno específico para aside).
+  const { ref, inView } = useInView({
+    threshold: 0.2,    // Ajusta para indicar cuánta parte debe ser visible
+    triggerOnce: false // Queremos que se repita siempre
+  });
+
+  // b) Controles de la animación
+  const asideControls = useAnimation();
+
+  // Variants para el aside
   const sidebarVariants = {
     hidden: { x: -300, opacity: 0 },
-    show: { x: 0, opacity: 1 },
+    show:   { x: 0,    opacity: 1 },
   };
 
-  // Variants para el contenido principal
-  const contentVariants = {
-    hidden: { y: 30, opacity: 0 },
-    show: { y: 0, opacity: 1 },
-  };
+  // c) Efecto que se repite:
+  //    si inView = true → asideControls.start('show'),
+  //    si inView = false → asideControls.start('hidden')
+  useEffect(() => {
+    if (inView) {
+      asideControls.start("show");
+    } else {
+      asideControls.start("hidden");
+    }
+  }, [inView, asideControls]);
 
+  // --------------------------------------------------
+  // Render
+  // --------------------------------------------------
   return (
-    <div className="flex h-screen w-[100wh] bg-whi justify-center items-start">
-      {/* SIDEBAR */}
+    // ref al CONTENEDOR que queremos observar
+    <div ref={ref} className="flex h-full w-full bg-whi justify-center items-start">
+      {/* SIDEBAR: se anima en base a asideControls */}
       <motion.aside
+        className="sidebar z-10 my-4 ml-4 flex flex-col w-16 md:w-48 lg:w-64 overflow-visible"
         variants={sidebarVariants}
         initial="hidden"
-        whileInView="show"        // se animará al entrar en viewport
-        viewport={{ once: true }}  // solo la primera vez que entra
+        animate={asideControls}
         transition={{ duration: 0.6 }}
-        className="sidebar z-10 my-4 ml-4 flex flex-col w-16 md:w-48 lg:w-64 overflow-visible"
       >
         <nav className="flex-1 px-4 py-2 space-y-2 overflow-y-auto h-auto">
           {sectionKeys.map((key) => {
@@ -163,12 +184,10 @@ const Skills: React.FC = () => {
                   />
                 )}
 
-                {/* Texto */}
                 <span className="hidden md:block font-lat text-5dar text-sm tracking-wide truncate whitespace-nowrap">
                   {formatSectionTitle(key)}
                 </span>
 
-                {/* Indicador de sección activa */}
                 {isActive && (
                   <motion.div
                     className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-5 bg-blue-400 rounded-full"
@@ -182,14 +201,7 @@ const Skills: React.FC = () => {
       </motion.aside>
 
       {/* MAIN CONTENT */}
-      <motion.main
-        className="flex-1 p-12 relative mt-8"
-        variants={contentVariants}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.6 }}
-      >
+      <div className="flex-1 p-12 relative mt-8">
         <div className="max-w-5xl mx-auto space-y-16">
           {/* Título dinámico */}
           <header className="text-center">
@@ -276,12 +288,12 @@ const Skills: React.FC = () => {
             </div>
           )}
 
-          {/* BLOBS DECORATIVOS */}
+          {/* BLOBS DECORATIVOS (si los usas) */}
           <div className="absolute top-0 right-0 w-64 h-64 bg-blue-200 dark:bg-blue-800 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob blob" />
           <div className="absolute top-20 right-20 w-64 h-64 bg-purple-200 dark:bg-purple-800 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000 blob" />
           <div className="absolute top-40 right-0 w-64 h-64 bg-pink-200 dark:bg-pink-800 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000 blob" />
         </div>
-      </motion.main>
+      </div>
     </div>
   );
 };

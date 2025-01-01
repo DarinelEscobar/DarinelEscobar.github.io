@@ -7,7 +7,7 @@ const MainContent: React.FC = () => {
   const { short_name } = data.resume.personal_info;
 
   return (
-    <section className="flex flex-col items-center justify-between h-screen w-full bg-whi text-dar">
+    <section className="flex flex-col items-center justify-between h-screen w-screen bg-whi text-dar">
       {/* Contenedor principal con flex-grow */}
       <div className="flex-grow flex items-center justify-center">
         <img

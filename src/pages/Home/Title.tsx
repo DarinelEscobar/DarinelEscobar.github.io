@@ -7,7 +7,7 @@ const Title: React.FC = () => {
   const { short_name, rol } = data.resume.personal_info;
 
   return (
-    <section className="flex flex-col justify-between h-screen w-full  bg-whi text-dar">
+    <section className="flex flex-col justify-between h-screen w-screen  bg-whi text-dar">
       {/* Título */}
       <div className="flex items-center justify-center flex-grow flex-col">
         <h1 className="custom-title font-cor">{short_name}</h1>
