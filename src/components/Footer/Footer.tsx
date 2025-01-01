@@ -3,12 +3,25 @@ import React from 'react';
 import { FaEnvelope, FaLinkedin, FaGithub, FaWhatsapp } from 'react-icons/fa';
 import { ChevronUp } from 'lucide-react';
 import data from "@data/data.json";
+import { motion } from 'framer-motion';
+
+// Variants para un sutil slide desde abajo
+const footerVariants = {
+  hidden: { opacity: 0, y: 30 },
+  show:   { opacity: 1, y: 0, transition: { duration: 0.7 } },
+};
 
 const Footer: React.FC = () => {
   const { short_name, email, linkedin, github, phone } = data.resume.personal_info;
 
   return (
-    <footer className="w-full py-3 px-5 bottom-0 text-sm bg-transparent z-10">
+    // Envuelve todo en motion.footer
+    <motion.footer
+      className="w-full py-3 px-5 text-sm bg-transparent z-10"
+      variants={footerVariants}
+      initial="hidden"
+      animate="show"
+    >
       {/* VERSIÓN COMPACTA (MOBILE) */}
       <div className="block md:hidden flex-col items-center justify-between">
         {/* Compacta: Una sola “fila” o dos “filas” con lo esencial */}
@@ -136,7 +149,7 @@ const Footer: React.FC = () => {
           </p>
         </div>
       </div>
-    </footer>
+    </motion.footer>
   );
 };
 

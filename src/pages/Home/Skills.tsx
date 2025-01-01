@@ -139,7 +139,7 @@ const Skills: React.FC = () => {
   // --------------------------------------------------
   return (
     // ref al CONTENEDOR que queremos observar
-    <div ref={ref} className="flex h-full w-full bg-whi justify-center items-start">
+    <div ref={ref} className="flex h-full w-screen bg-whi justify-center items-start">
       {/* SIDEBAR: se anima en base a asideControls */}
       <motion.aside
         className="sidebar z-10 my-4 ml-4 flex flex-col w-16 md:w-48 lg:w-64 overflow-visible"
@@ -160,7 +160,7 @@ const Skills: React.FC = () => {
             const IconComponent = getIcon(iconName, library);
 
             return (
-              <motion.div
+              <motion.divF
                 key={key}
                 onClick={() => setSelectedSection(key)}
                 className={`
@@ -194,7 +194,7 @@ const Skills: React.FC = () => {
                     layoutId="activeIndicator"
                   />
                 )}
-              </motion.div>
+              </motion.divF>
             );
           })}
         </nav>
