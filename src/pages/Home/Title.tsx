@@ -1,35 +1,33 @@
 // Path: C:\Users\darin\Documents\react-vite-shadcn-ui-template\src\pages\Home\Title.tsx
-import React from "react";
+import React, { useEffect } from "react";
 import Footer from "@/components/Footer/Footer";
 import data from "@data/data.json";
 
-// 1) Importamos framer-motion
-import { motion } from "framer-motion";
+// 1) Import framer-motion + intersection-observer
+import { motion, useAnimation } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 
-// Variants para “stagger” (animación escalonada)
-const containerVariants = {
+const variantsContainer = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
     transition: {
-      // Stagger para los hijos
+      // Stagger para que hijos aparezcan escalonados
       staggerChildren: 0.2,
     },
   },
 };
 
-const childVariants = {
-  hidden: {
-    opacity: 0,
-    y: 50 // Empieza un poco más abajo
-  },
+const variantsChild = {
+  hidden: { opacity: 0, y: 50 },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
+      duration: 0.6,
       type: "spring",
       stiffness: 120,
-      damping: 15,
+      damping: 14,
     },
   },
 };
@@ -37,40 +35,38 @@ const childVariants = {
 const Title: React.FC = () => {
   const { short_name, rol } = data.resume.personal_info;
 
+  // 2) useInView y useAnimation
+  const { ref, inView } = useInView({ threshold: 0.3, triggerOnce: false });
+  const controls = useAnimation();
+
+  useEffect(() => {
+    if (inView) {
+      controls.start("visible");
+    } else {
+      controls.start("hidden");
+    }
+  }, [inView, controls]);
+
   return (
-    // 2) Usamos motion.section para animar todo el contenedor
+    // 3) motion.section controlado por variants + controls
     <motion.section
+      ref={ref}
       className="flex flex-col justify-between h-screen w-screen bg-whi text-dar"
-      variants={containerVariants}
+      variants={variantsContainer}
       initial="hidden"
-      animate="visible"
-      // Si quisieras que se repita al entrar en viewport, puedes usar:
-      // viewport={{ once: false }} // NO se ejecuta solo la primera vez
-      // onViewportEnter={() => ...} // etc.
+      animate={controls}
     >
-      {/* Título y texto central */}
-      <motion.div
-        className="flex items-center justify-center flex-grow flex-col"
-        variants={containerVariants} // Podrías usar uno global o separar
-      >
-        {/* Cada uno es “hijo” y tendrá su animación escalonada */}
-        <motion.h1
-          className="custom-title font-cor"
-          variants={childVariants}
-        >
+      <motion.div className="flex items-center justify-center flex-grow flex-col">
+        <motion.h1 className="custom-title font-cor" variants={variantsChild}>
           {short_name}
         </motion.h1>
-
-        <motion.p
-          className="custom-paragraph font-cor"
-          variants={childVariants}
-        >
+        <motion.p className="custom-paragraph font-cor" variants={variantsChild}>
           {rol}
         </motion.p>
       </motion.div>
 
-      {/* Footer animado como hijo también si deseas */}
-      <motion.div variants={childVariants}>
+      {/* Footer */}
+      <motion.div variants={variantsChild}>
         <Footer />
       </motion.div>
     </motion.section>
