@@ -8,7 +8,7 @@ const Footer: React.FC = () => {
   const { short_name, email, linkedin, github, phone } = data.resume.personal_info;
 
   return (
-    <footer className="w-full py-3 px-5 text-sm bg-transparent z-10">
+    <footer className="w-full py-3 px-5 bottom-0 text-sm bg-transparent z-10">
       {/* VERSIÓN COMPACTA (MOBILE) */}
       <div className="block md:hidden flex-col items-center justify-between">
         {/* Compacta: Una sola “fila” o dos “filas” con lo esencial */}

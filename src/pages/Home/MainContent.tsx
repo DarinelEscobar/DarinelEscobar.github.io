@@ -1,14 +1,13 @@
-// src/pages/Home/components/MainContent.tsx
-import React from 'react';
+// Path: C:\Users\darin\Documents\react-vite-shadcn-ui-template\src\pages\Home\MainContent.tsx
+import React from "react";
 import img from "../../assets/images/me.png";
 import data from "@data/data.json";
-
 
 const MainContent: React.FC = () => {
   const { short_name } = data.resume.personal_info;
 
   return (
-    <section className="flex flex-col items-center justify-between h-screen bg-whi text-dar">
+    <section className="flex flex-col items-center justify-between h-screen w-full bg-whi text-dar">
       {/* Contenedor principal con flex-grow */}
       <div className="flex-grow flex items-center justify-center">
         <img
@@ -20,9 +19,7 @@ const MainContent: React.FC = () => {
 
       {/* Título dinámico */}
       <div className="w-full flex items-center justify-center px-4 pb-8">
-        <h1 className="custom-title font-cor text-dar">
-          {short_name}
-        </h1>
+        <h1 className="custom-title font-cor text-dar">{short_name}</h1>
       </div>
     </section>
   );

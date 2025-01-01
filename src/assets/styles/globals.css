@@ -73,6 +73,7 @@ html, body {
   @apply w-full h-full overflow-x-visible m-0 p-0 bg-whi; /* Asegura que sticky funcione */
 }
 
+
 #root {
   @apply relative; /* No uses overflow-x-hidden aquí */
 }

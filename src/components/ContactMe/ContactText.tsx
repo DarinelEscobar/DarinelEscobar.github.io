@@ -1,4 +1,4 @@
-// src/components/ContactMe/ContactText.tsx
+// Path: C:\Users\darin\Documents\react-vite-shadcn-ui-template\src\components\ContactMe\ContactText.tsx
 import React from "react";
 
 const ContactText: React.FC = () => {
@@ -11,7 +11,9 @@ const ContactText: React.FC = () => {
 
       {/* Subtítulo */}
       <div className="col-start-2 col-span-2 row-start-3 flex items-center">
-        <h2 className="custom-contactmail font-lat text-dar">Let's get in touch ._.</h2>
+        <h2 className="custom-contactmail font-lat text-dar">
+          Let&apos;s get in touch ._.
+        </h2>
       </div>
     </>
   );

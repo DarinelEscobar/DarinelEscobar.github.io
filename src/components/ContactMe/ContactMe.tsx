@@ -1,3 +1,4 @@
+// Path: C:\Users\darin\Documents\react-vite-shadcn-ui-template\src\components\ContactMe\ContactMe.tsx
 import React, { useState, useEffect } from "react";
 import { FaWhatsapp, FaGithub, FaLinkedin } from "react-icons/fa";
 import { IconType } from "react-icons";
@@ -21,7 +22,7 @@ interface ContactIconProps {
 }
 
 // =======================================================================================
-//                          VERSIÓN MOBILE: Layout sencillo
+//                         VERSIÓN MOBILE: Layout sencillo
 // =======================================================================================
 const MobileContact: React.FC = () => {
   const { email, phone, linkedin, github } = data.resume.personal_info;
@@ -33,7 +34,7 @@ const MobileContact: React.FC = () => {
         Let&apos;s get in touch ._.
       </h2>
 
-      {/* Íconos en una fila o columna sencillos */}
+      {/* íconos en una fila o columna sencillos */}
       <div className="flex items-center justify-center gap-6 mb-4">
         <a
           href={`https://wa.me/${phone.replace(/\D/g, "")}`}
