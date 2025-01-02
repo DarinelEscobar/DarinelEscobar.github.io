@@ -66,9 +66,9 @@ const config: Config = {
         },
       },
       fontFamily: {
-        rob: ["Roboto", "sans-serif"],
-        lat: ["Lato", "sans-serif"],
-        cor: ["Cormorant", "serif"],
+        cor: ['Cormorant', 'serif'],
+        lato: ['Lato', 'sans-serif'],
+        roboto: ['Roboto', 'sans-serif'],
       },
       fontSize: {
         robotoBold: "15px",

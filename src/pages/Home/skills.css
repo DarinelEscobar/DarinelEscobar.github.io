@@ -4,10 +4,14 @@
 
 .sidebar {
   border-radius: 16px;
-  background: linear-gradient(315deg, #eeeeee, #f9f9f9);
-  box-shadow: -6px -6px 12px #ffffff,
-              6px 6px 12px #c8c8c8;
-  transition: all 0.3s ease;
+  background: linear-gradient(135deg, #f9f9f9, #eaeaea);
+  box-shadow: -6px -6px 12px rgba(255, 255, 255, 0.8),
+              6px 6px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s ease;
+}
+
+.sidebar:hover {
+  transform: scale(1.02);
 }
 
 /* ------------------------------------------- */
@@ -15,11 +19,14 @@
 /* ------------------------------------------- */
 
 .dark .sidebar {
-  border-radius: 16px;
-  background: linear-gradient(315deg, #1e1e1e, #2a2a2a);
-  box-shadow: -4px -4px 8px rgba(0, 0, 0, 0.6),
-              4px 4px 8px rgba(50, 50, 50, 0.3);
-  transition: all 0.3s ease;
+  background: linear-gradient(135deg, #1c1c1c, #2b2b2b);
+  box-shadow: -4px -4px 8px rgba(255, 255, 255, 0.03),
+              4px 4px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.4s ease;
+}
+
+.dark .sidebar:hover {
+  transform: scale(1.02);
 }
 
 /* ------------------------------------------- */
@@ -28,10 +35,16 @@
 
 .card {
   border-radius: 12px;
-  background: linear-gradient(315deg, #f9f9f9, #eaeaea);
-  box-shadow: -4px -4px 8px #ffffff,
-              4px 4px 8px #cacaca;
-  transition: all 0.3s ease;
+  background: linear-gradient(145deg, #ffffff, #e6e6e6);
+  box-shadow: -4px -4px 8px rgba(255, 255, 255, 0.8),
+              4px 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.card:hover {
+  transform: translateY(-8px) scale(1.05);
+  box-shadow: -6px -6px 12px rgba(255, 255, 255, 0.9),
+              6px 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 /* ------------------------------------------- */
@@ -39,24 +52,20 @@
 /* ------------------------------------------- */
 
 .dark .card {
-  border-radius: 12px;
-  background: linear-gradient(315deg, #242424, #2d2d2d);
-  box-shadow: -2px -2px 4px rgba(255, 255, 255, 0.03),
-              2px 2px 4px rgba(0, 0, 0, 0.2);
-  transition: all 0.3s ease;
+  background: linear-gradient(145deg, #252525, #313131);
+  box-shadow: -4px -4px 8px rgba(255, 255, 255, 0.03),
+              4px 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .dark .card:hover {
-  transform: translateY(-1px);
-  box-shadow: -2px -2px 4px rgba(255, 255, 255, 0.05),
-              2px 2px 4px rgba(0, 0, 0, 0.15);
-  background: linear-gradient(315deg, #272727, #313131);
-  transition: all 0.3s ease;
+  transform: translateY(-8px) scale(1.05);
+  box-shadow: -6px -6px 12px rgba(255, 255, 255, 0.05),
+              6px 6px 12px rgba(0, 0, 0, 0.25);
 }
 
 .dark .card h3 {
   color: rgba(240, 240, 240, 0.85);
-  transition: color 0.3s ease;
+  transition: color 0.4s ease;
 }
 
 .dark .card:hover h3 {
@@ -65,12 +74,12 @@
 
 .dark .card .icon {
   color: rgba(200, 200, 200, 0.8);
-  transition: color 0.3s ease, transform 0.3s ease;
+  transition: color 0.4s ease, transform 0.4s ease;
 }
 
 .dark .card:hover .icon {
   color: rgba(255, 255, 255, 0.9);
-  transform: scale(1.05);
+  transform: scale(1.2);
 }
 
 /* ------------------------------------------- */
@@ -82,7 +91,7 @@
     transform: translate(0, 0) scale(1);
   }
   33% {
-    transform: translate(30px, -50px) scale(1.1);
+    transform: translate(30px, -50px) scale(1.2);
   }
   66% {
     transform: translate(-20px, 20px) scale(0.9);
@@ -93,9 +102,9 @@
 }
 
 .animate-blob {
-  animation: blob 7s infinite;
-  animation-timing-function: ease-in-out; /* smoother transitions */
-  animation-fill-mode: forwards;         /* ensures it stays visible */
+  animation: blob 10s infinite;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
 }
 
 .animation-delay-2000 {
@@ -107,40 +116,13 @@
 }
 
 .blob {
-  pointer-events: none; /* Don’t capture mouse events */
-  z-index: 0;          /* Keep behind the grid */
+  pointer-events: none;
+  z-index: 0;
 }
 
-/* Bump up the z-index of the skill items */
-.skills-grid {
-  z-index: 2;
-}
-
-/* MODO OSCURO */
 .dark .blob {
-  background: rgba(100, 100, 255, 0.15);
+  background: rgba(150, 150, 255, 0.2);
   mix-blend-mode: screen;
-  filter: blur(80px);
-  opacity: 0.8;
-}
-
-/* ------------------------------------------- */
-/*        SCROLLBAR PERSONALIZADO (OPT)       */
-/* ------------------------------------------- */
-
-::-webkit-scrollbar {
-  width: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--white);
-}
-
-::-webkit-scrollbar-thumb {
-  background: #94a3b8;
-  border-radius: 3px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #64748b;
+  filter: blur(90px);
+  opacity: 0.85;
 }
