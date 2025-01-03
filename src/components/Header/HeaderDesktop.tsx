@@ -25,7 +25,11 @@ const staggerContainer = {
   },
 };
 
-const HeaderDesktop: React.FC<HeaderDesktopProps> = ({ formattedTime, toggleDarkMode, isDarkMode }) => {
+const HeaderDesktop: React.FC<HeaderDesktopProps> = ({
+  formattedTime,
+  toggleDarkMode,
+  isDarkMode,
+}) => {
   const { short_name, rol, location } = data.resume.personal_info;
 
   const controls = useAnimation();
@@ -42,7 +46,22 @@ const HeaderDesktop: React.FC<HeaderDesktopProps> = ({ formattedTime, toggleDark
   return (
     <motion.div
       ref={ref}
-      className="absolute top-0 left-0 w-full py-3 px-5 flex justify-between text-sm bg-transparent z-10"
+      className="
+        absolute
+        top-0
+        left-0
+        w-full
+        py-3
+        px-5
+        flex
+        justify-between
+        text-sm
+        bg-transparent
+        z-10
+        transition-colors
+        duration-500
+        ease-in-out
+      "
       initial="hidden"
       animate={controls}
       variants={staggerContainer}
@@ -71,7 +90,7 @@ const NavigationLinks: React.FC = () => (
   <motion.div className="flex flex-col text-left gap-0.5" variants={fadeIn}>
     <h1 className="font-rob text-dar text-[0.89rem] font-bold">Navigation:</h1>
     <p className="font-lat text-dar text-[0.89rem]">
-      <Link to="/">Index</Link>, <Link to="/Contact">Contact</Link>, {" "}
+      <Link to="/">Index</Link>, <Link to="/Contact">Contact</Link>,{" "}
       <Link to="/Page2">Archive</Link>
     </p>
   </motion.div>
@@ -82,7 +101,10 @@ interface ThemeToggleProps {
   toggleDarkMode: () => void;
 }
 
-const ThemeToggle: React.FC<ThemeToggleProps> = ({ isDarkMode, toggleDarkMode }) => (
+const ThemeToggle: React.FC<ThemeToggleProps> = ({
+  isDarkMode,
+  toggleDarkMode,
+}) => (
   <motion.div className="flex flex-col text-left gap-0.5" variants={fadeIn}>
     <h1 className="font-rob text-dar text-[0.89rem] font-bold">Theme:</h1>
     <button

@@ -1,31 +1,35 @@
-// src/components/Header/hooks/useDarkMode.ts
-import { useState, useEffect } from "react";
+// src/hooks/useDarkMode.ts
+import { useEffect, useState } from "react";
 
-const useDarkMode = () => {
-  const [isDarkMode, setIsDarkMode] = useState(() =>
-    document.documentElement.classList.contains("dark")
-  );
+function useDarkMode() {
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  useEffect(() => {
+    // Al montar, leer qué tema estaba guardado
+    const storedTheme = localStorage.getItem("theme");
+    if (storedTheme === "dark") {
+      document.documentElement.classList.add("dark");
+      setIsDarkMode(true);
+    } else {
+      document.documentElement.classList.remove("dark");
+      setIsDarkMode(false);
+    }
+  }, []);
 
   const toggleDarkMode = () => {
     const newMode = !isDarkMode;
     setIsDarkMode(newMode);
 
     if (newMode) {
+      localStorage.setItem("theme", "dark");
       document.documentElement.classList.add("dark");
     } else {
+      localStorage.setItem("theme", "light");
       document.documentElement.classList.remove("dark");
     }
   };
 
-  useEffect(() => {
-    const darkModePreference = window.matchMedia("(prefers-color-scheme: dark)");
-    if (darkModePreference.matches && !document.documentElement.classList.contains("dark")) {
-      document.documentElement.classList.add("dark");
-      setIsDarkMode(true);
-    }
-  }, []);
-
   return { isDarkMode, toggleDarkMode };
-};
+}
 
 export default useDarkMode;

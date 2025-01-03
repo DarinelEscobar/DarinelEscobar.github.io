@@ -1,5 +1,3 @@
-// Path: C:\Users\darin\Documents\react-vite-shadcn-ui-template\src\pages\Home\HomePage.tsx
-
 import React, { useEffect, useRef } from "react";
 import Header from "@/components/Header/Header";
 import MainContent from "./MainContent";
@@ -15,8 +13,6 @@ const HomePage: React.FC = () => {
 
   useEffect(() => {
     const savedIndex = localStorage.getItem("activeSection");
-    // Si savedIndex NO existe (null) o es "0", NO hacemos scroll
-    // (significa que está en la primera sección o nunca cambió)
     if (savedIndex && savedIndex !== "0") {
       const idx = parseInt(savedIndex, 10);
       if (!isNaN(idx) && sectionRefs.current[idx]) {
@@ -25,7 +21,6 @@ const HomePage: React.FC = () => {
     }
   }, []);
 
-  // Función para asignar refs
   const setSectionRef = (el: HTMLDivElement | null, index: number) => {
     if (el) {
       sectionRefs.current[index] = el;
@@ -44,6 +39,9 @@ const HomePage: React.FC = () => {
         snap-mandatory
         overflow-auto
         scroll-smooth
+        transition-colors
+        duration-1000
+        ease-in-out
       "
       style={{ scrollSnapType: "y mandatory", overscrollBehavior: "none" }}
     >

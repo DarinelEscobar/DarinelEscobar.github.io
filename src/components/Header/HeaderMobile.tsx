@@ -21,11 +21,24 @@ const HeaderMobile: React.FC<HeaderMobileProps> = ({
   const { short_name, rol, location } = data.resume.personal_info;
 
   return (
-    <div className="py-3 px-5 flex justify-between items-center text-sm bg-bla text-white z-30">
+    <div
+      className="
+        py-3
+        px-5
+        flex
+        justify-between
+        items-center
+        text-sm
+        bg-bla
+        text-white
+        z-30
+        transition-colors
+        duration-500
+        ease-in-out
+      "
+    >
       {/* Nombre corto (como en HeaderDesktop) */}
-      <h1 className="font-rob text-lg font-bold text-dar">
-        {short_name}
-      </h1>
+      <h1 className="font-rob text-lg font-bold text-dar">{short_name}</h1>
 
       {/* Botón para abrir/cerrar menú */}
       <button
@@ -36,12 +49,10 @@ const HeaderMobile: React.FC<HeaderMobileProps> = ({
       </button>
 
       {isMenuOpen && (
-        <div className="fixed inset-0 bg-whi text-white z-50 flex flex-col">
+        <div className="fixed inset-0 bg-whi text-white z-50 flex flex-col transition-colors duration-500 ease-in-out">
           {/* Sección superior del menú (botón Close) */}
           <div className="w-full flex justify-between items-center px-5 py-4 border-b border-gray-700">
-            <h1 className="font-rob text-lg font-bold text-dar">
-              {short_name}
-            </h1>
+            <h1 className="font-rob text-lg font-bold text-dar">{short_name}</h1>
             <button
               onClick={toggleMenu}
               className="font-rob text-lg font-bold text-dar hover:underline"
@@ -80,22 +91,9 @@ const HeaderMobile: React.FC<HeaderMobileProps> = ({
 
           {/* NAVEGACIÓN (enlaces) */}
           <div className="mt-auto flex flex-col gap-6 px-5 pb-10 text-dar">
-            <MobileLink
-              to="/"
-              indexNumber="01"
-              label="Index"
-            />
-            <MobileLink
-              to="/Contact"
-              indexNumber="02"
-              label="Contact"
-            />
-            <MobileLink
-              to="/Archive"
-              indexNumber="03"
-              label="Archive"
-            />
-            {/* Agrega más links si los necesitas */}
+            <MobileLink to="/" indexNumber="01" label="Index" />
+            <MobileLink to="/Contact" indexNumber="02" label="Contact" />
+            <MobileLink to="/Archive" indexNumber="03" label="Archive" />
           </div>
         </div>
       )}
@@ -103,11 +101,6 @@ const HeaderMobile: React.FC<HeaderMobileProps> = ({
   );
 };
 
-/**
- * Componente auxiliar para un Link con estilo (índice + label + flecha)
- * Reemplaza “Projects” / “Page2” con tus rutas,
- * o añade nuevos si tu Desktop Header maneja otros.
- */
 interface MobileLinkProps {
   to: string;
   indexNumber: string;
