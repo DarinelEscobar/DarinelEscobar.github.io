@@ -1,32 +1,23 @@
 // Path: C:\Users\darin\Documents\react-vite-shadcn-ui-template\src\components\ContactMe\ContactMe.tsx
+
 import React, { useState, useEffect } from "react";
 import { FaWhatsapp, FaGithub, FaLinkedin } from "react-icons/fa";
-import { IconType } from "react-icons";
 import data from "@data/data.json";
 
-// COMPONENTES EXISTENTES
+// COMPONENTES
 import ContactGrid from "./ContactGrid";
 import ContactIcon from "./ContactIcon";
 import ContactText from "./ContactText";
 
-// Tipos e interfaces
+// Tipos
 interface Cell {
   row: number;
   col: number;
 }
 
-interface ContactIconProps {
-  Icon: IconType;
-  href?: string;
-  position: Cell;
-}
-
-// =======================================================================================
-//                         VERSIÓN MOBILE: Layout sencillo
-// =======================================================================================
+// ================== MOBILE ==================
 const MobileContact: React.FC = () => {
   const { email, phone, linkedin, github } = data.resume.personal_info;
-
   return (
     <section className="w-full min-h-screen bg-whi flex flex-col items-center justify-center p-6">
       <h1 className="font-cor text-3xl text-dar mb-6">CONTACT</h1>
@@ -34,7 +25,6 @@ const MobileContact: React.FC = () => {
         Let&apos;s get in touch ._.
       </h2>
 
-      {/* íconos en una fila o columna sencillos */}
       <div className="flex items-center justify-center gap-6 mb-4">
         <a
           href={`https://wa.me/${phone.replace(/\D/g, "")}`}
@@ -45,7 +35,6 @@ const MobileContact: React.FC = () => {
         >
           <FaWhatsapp />
         </a>
-
         <a
           href={github}
           target="_blank"
@@ -55,7 +44,6 @@ const MobileContact: React.FC = () => {
         >
           <FaGithub />
         </a>
-
         <a
           href={linkedin}
           target="_blank"
@@ -67,7 +55,6 @@ const MobileContact: React.FC = () => {
         </a>
       </div>
 
-      {/* Email */}
       <a
         href={`mailto:${email}`}
         className="font-rob text-dar text-lg hover:text-blue-500 transition-colors"
@@ -78,23 +65,20 @@ const MobileContact: React.FC = () => {
   );
 };
 
-// =======================================================================================
-//                         VERSIÓN TABLET: Grilla reducida y ordenada
-// =======================================================================================
+// ================== TABLET ==================
 const TabletContact: React.FC = () => {
   const { email, phone, linkedin, github } = data.resume.personal_info;
 
   return (
     <section className="w-full min-h-screen bg-whi flex items-center justify-center">
-      {/* Grilla de 4 x 3 */}
       <div className="grid grid-cols-4 grid-rows-3 w-full h-full relative">
-        {/* Versión “pequeña” de la grilla (sin posiciones aleatorias) */}
         <div className="col-span-4 row-span-1 flex flex-col items-center justify-center">
           <h1 className="font-cor text-dar text-5xl mb-2">CONTACT</h1>
-          <h2 className="font-lat text-dar text-xl">Let&apos;s get in touch ._.</h2>
+          <h2 className="font-lat text-dar text-xl">
+            Let&apos;s get in touch ._.
+          </h2>
         </div>
 
-        {/* Íconos en celdas fijas (ej. posiciones definidas) */}
         <div className="col-start-2 row-start-2 flex items-center justify-center border border-5bla">
           <a
             href={`https://wa.me/${phone.replace(/\D/g, "")}`}
@@ -129,7 +113,6 @@ const TabletContact: React.FC = () => {
           </a>
         </div>
 
-        {/* Email en la parte de abajo */}
         <div className="col-span-4 row-start-3 flex items-center justify-center">
           <a
             href={`mailto:${email}`}
@@ -143,17 +126,11 @@ const TabletContact: React.FC = () => {
   );
 };
 
-// =======================================================================================
-//            VERSIÓN DESKTOP: Grilla grande (8 x 5) con posiciones aleatorias
-// =======================================================================================
-
+// ================== DESKTOP ==================
 const ContactMeDesktop: React.FC = () => {
   const { email, phone, linkedin, github } = data.resume.personal_info;
 
-  // ----------------- LÓGICA DE POSICIONES ALEATORIAS --------------------
-  const totalRows = 5;
-  const totalCols = 8;
-
+  // Ocupadas: M/E y otras celdas
   const initialOccupiedCells: Cell[] = [
     { row: 1, col: 8 },
     { row: 2, col: 8 },
@@ -169,6 +146,9 @@ const ContactMeDesktop: React.FC = () => {
     { row: 4, col: 7 },
     { row: 4, col: 8 },
   ];
+
+  const totalRows = 5;
+  const totalCols = 8;
 
   const [iconPositions, setIconPositions] = useState<{
     phone: Cell | null;
@@ -189,7 +169,7 @@ const ContactMeDesktop: React.FC = () => {
       const row = Math.floor(Math.random() * totalRows) + 1;
       const col = Math.floor(Math.random() * totalCols) + 1;
       position = { row, col };
-      attempts += 1;
+      attempts++;
       if (attempts > maxAttempts) {
         throw new Error("No se pudieron encontrar celdas libres para los íconos.");
       }
@@ -203,6 +183,7 @@ const ContactMeDesktop: React.FC = () => {
   useEffect(() => {
     try {
       const occupied = [...initialOccupiedCells];
+
       const phonePos = getRandomCell(occupied);
       occupied.push(phonePos);
 
@@ -220,40 +201,39 @@ const ContactMeDesktop: React.FC = () => {
     } catch (error) {
       console.error(error);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (!iconPositions.phone || !iconPositions.github || !iconPositions.linkedin) {
     return null;
   }
 
-  // Render
   return (
     <section className="h-screen w-screen bg-whi flex items-center justify-center">
       <div className="grid grid-cols-8 grid-rows-5 w-full h-full relative">
-        {/* Grilla de fondo + letras M/E */}
+        {/* Grilla de celdas + letras M/E */}
         <ContactGrid />
-        {/* Texto CONTACT & subtítulo */}
+
+        {/* Texto CONTACT y subtítulo */}
         <ContactText />
 
-        {/* Íconos distribuidos aleatoriamente */}
+        {/* Íconos en celdas aleatorias */}
         <ContactIcon
           Icon={FaWhatsapp}
           href={`https://wa.me/${phone.replace(/\D/g, "")}`}
-          position={iconPositions.phone}
+          position={iconPositions.phone!}
         />
         <ContactIcon
           Icon={FaGithub}
           href={github}
-          position={iconPositions.github}
+          position={iconPositions.github!}
         />
         <ContactIcon
           Icon={FaLinkedin}
           href={linkedin}
-          position={iconPositions.linkedin}
+          position={iconPositions.linkedin!}
         />
 
-        {/* Email en la parte de abajo */}
+        {/* Email al final */}
         <div className="col-start-6 col-span-3 row-start-4 flex items-center justify-end pr-4">
           <a
             href={`mailto:${email}`}
@@ -267,23 +247,21 @@ const ContactMeDesktop: React.FC = () => {
   );
 };
 
-// =======================================================================================
-//                 CONTACTME PRINCIPAL: Renderiza según el breakpoint
-// =======================================================================================
+// =============== CONTACTME PRINCIPAL ===============
 const ContactMe: React.FC = () => {
   return (
     <>
-      {/* MOBILE: “block” hasta sm, “hidden” en sm o superior */}
+      {/* MOBILE */}
       <div className="block sm:hidden">
         <MobileContact />
       </div>
 
-      {/* TABLET: “hidden” antes de sm y después de md, “block” entre sm y md */}
+      {/* TABLET */}
       <div className="hidden sm:block md:hidden">
         <TabletContact />
       </div>
 
-      {/* DESKTOP: “hidden” hasta md, “block” en md o superior */}
+      {/* DESKTOP */}
       <div className="hidden md:block">
         <ContactMeDesktop />
       </div>

@@ -1,8 +1,9 @@
 // Path: C:\Users\darin\Documents\react-vite-shadcn-ui-template\src\components\ContactMe\ContactIcon.tsx
+
 import React from "react";
 import { IconType } from "react-icons";
-// ** Framer Motion import opcional por si deseas animar el ícono **
 import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 
 interface ContactIconProps {
   Icon: IconType;
@@ -13,16 +14,36 @@ interface ContactIconProps {
   };
 }
 
+// Variantes un poco más “fancy” para el ícono
+const iconVariants = {
+  hidden: { opacity: 0, scale: 0.8, y: 20 },
+  show: {
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    transition: { type: "spring", stiffness: 150, damping: 10 },
+  },
+};
+
 const ContactIcon: React.FC<ContactIconProps> = ({ Icon, href, position }) => {
+  const { ref, inView } = useInView({
+    threshold: 0.2,
+    triggerOnce: false,
+  });
+
   return (
     <motion.div
+      ref={ref}
+      variants={iconVariants}
+      initial="hidden"
+      animate={inView ? "show" : "hidden"}
       style={{
         gridColumnStart: position.col,
         gridRowStart: position.row,
       }}
       className="flex items-center justify-center border border-5bla"
-      // Ejemplo de pequeña animación al hacer hover:
-      whileHover={{ scale: 1.1 }}
+      whileHover={{ scale: 1.15, rotate: 2 }}
+      whileTap={{ scale: 0.9 }}
       transition={{ duration: 0.2 }}
     >
       {href ? (
