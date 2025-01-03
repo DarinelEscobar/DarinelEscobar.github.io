@@ -1,33 +1,26 @@
+// Path: C:\Users\darin\Documents\react-vite-shadcn-ui-template\src\pages\Home\AboutMe.tsx
+
 import React, { useState, useEffect } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 
-// Ejemplo de importación de íconos si los necesitas
-// import { IconName } from "lucide-react";
-
 const AboutMe: React.FC = () => {
-  // Controla la aparición del texto adicional con este estado
   const [showNote, setShowNote] = useState(false);
 
-  // Efectos de animación con framer-motion + intersection observer
   const titleControls = useAnimation();
   const textControls = useAnimation();
 
-  // Hooks para intersection observer
-  // threshold = 0.3 => se dispara cuando el 30% del componente es visible
   const { ref: aboutMeRef, inView: aboutMeInView } = useInView({
     threshold: 0.3,
-    triggerOnce: false, // si quieres que se anime cada vez que entres
+    triggerOnce: false,
   });
 
   useEffect(() => {
-    // Mostramos la nota a los 500ms
     const timer = setTimeout(() => setShowNote(true), 500);
     return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {
-    // Si está en vista => inicia animaciones
     if (aboutMeInView) {
       titleControls.start("visible");
       textControls.start("visible");
@@ -37,7 +30,6 @@ const AboutMe: React.FC = () => {
     }
   }, [aboutMeInView, titleControls, textControls]);
 
-  // Variants para animar "título" y "texto" según inView
   const variantsTitle = {
     hidden: { opacity: 0, y: -20 },
     visible: {
@@ -51,7 +43,6 @@ const AboutMe: React.FC = () => {
     },
   };
 
-  // Variants para animar cada “línea” del título de manera escalonada
   const variantsLine = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
@@ -69,7 +60,6 @@ const AboutMe: React.FC = () => {
   return (
     <section
       ref={aboutMeRef}
-      // Clases de Tailwind para soportar dark mode: "dark:bg-gray-900", "dark:text-white", etc.
       className="min-h-screen flex items-center justify-center
                  bg-gradient-radial from-white via-[#ECECEC] to-[#DCDCDC]
                  dark:bg-gradient-radial dark:from-[#1F1F1F] dark:via-[#2C2C2C] dark:to-[#3B3B3B]
@@ -85,7 +75,7 @@ const AboutMe: React.FC = () => {
         <motion.div
           className="md:w-5/12 mb-8 md:mb-0 text-shadow"
           variants={variantsTitle}
-          initial="hidden"
+          initial={aboutMeInView ? "visible" : "hidden"} // Cambio aquí
           animate={titleControls}
         >
           <motion.h1
@@ -93,11 +83,12 @@ const AboutMe: React.FC = () => {
                        leading-snug"
           >
             {/* Cada línea del título animada por separado */}
-            <motion.div variants={variantsLine} whileHover={{ scale: 1.1, color: "#2563EB" }}>
+            <motion.div
+              variants={variantsLine}
+              whileHover={{ scale: 1.1, color: "#2563EB" }}
+            >
               I'm{" "}
-              <span className="text-blue-500 dark:text-blue-400">
-                Darinel
-              </span>,
+              <span className="text-blue-500 dark:text-blue-400">Darinel</span>,
             </motion.div>
 
             <motion.div
@@ -147,7 +138,7 @@ const AboutMe: React.FC = () => {
           <motion.div
             className="md:w-5/12 md:text-right text-shadow"
             variants={variantsText}
-            initial="hidden"
+            initial={aboutMeInView ? "visible" : "hidden"} // Cambio aquí
             animate={textControls}
           >
             <p className="text-xl md:text-2xl lg:text-3xl leading-relaxed font-sans text-warm-gray-700 dark:text-gray-200">
