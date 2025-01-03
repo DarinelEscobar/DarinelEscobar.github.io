@@ -66,10 +66,10 @@
   }
 html, body, body * {
   transition:
-    background-color 1s cubic-bezier(0.4, 0, 0.2, 1),
-    color 1s cubic-bezier(0.4, 0, 0.2, 1),
-    border-color 1s cubic-bezier(0.4, 0, 0.2, 1),
-    fill 1s cubic-bezier(0.4, 0, 0.2, 1);
+    background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    fill 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 }

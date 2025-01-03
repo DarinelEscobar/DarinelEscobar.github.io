@@ -59,7 +59,7 @@ const HeaderDesktop: React.FC<HeaderDesktopProps> = ({
         bg-transparent
         z-10
         transition-colors
-        duration-500
+        duration-100
         ease-in-out
       "
       initial="hidden"

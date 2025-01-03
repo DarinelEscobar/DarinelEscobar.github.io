@@ -24,7 +24,7 @@ const Header: React.FC = () => {
         w-full
         z-30
         transition-colors
-        duration-500
+        duration-100
         ease-in-out
       "
     >

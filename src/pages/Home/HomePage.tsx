@@ -40,7 +40,7 @@ const HomePage: React.FC = () => {
         overflow-auto
         scroll-smooth
         transition-colors
-        duration-1000
+        duration-100
         ease-in-out
       "
       style={{ scrollSnapType: "y mandatory", overscrollBehavior: "none" }}
