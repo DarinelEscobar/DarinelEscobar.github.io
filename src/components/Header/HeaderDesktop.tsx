@@ -91,7 +91,7 @@ const NavigationLinks: React.FC = () => (
     <h1 className="font-rob text-dar text-[0.89rem] font-bold">Navigation:</h1>
     <p className="font-lat text-dar text-[0.89rem]">
       <Link to="/">Index</Link>, <Link to="/Contact">Contact</Link>,{" "}
-      <Link to="/Page2">Archive</Link>
+      {/* <Link to="/Page2">Archive</Link> */}
     </p>
   </motion.div>
 );

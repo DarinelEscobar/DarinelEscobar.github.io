@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { motion, useAnimation, AnimatePresence } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 
-// Importa tus badges, iconos, etc.
+
 import awsAcademyCloudFoundations from "../../assets/images/badge/aws-academy-graduate-aws-academy-cloud-foundations.png";
 import awsAcademyCloudDeveloping from "../../assets/images/badge/aws-academy-graduate-aws-academy-cloud-developing.png";
 import awsAcademyCloudSecurityFoundations from "../../assets/images/badge/aws-academy-graduate-aws-academy-cloud-security-foundations.png";
@@ -44,7 +44,7 @@ const Skills: React.FC = () => {
   const [selectedSection, setSelectedSection] = useState(sectionKeys[0]);
   const [isHovered, setIsHovered] = useState<string | null>(null);
 
-  // Función para obtener icono según librería
+
   const getIcon = (iconName: string, library: string) => {
     switch (library.toLowerCase()) {
       case "si":
@@ -84,13 +84,13 @@ const Skills: React.FC = () => {
     }
   };
 
-  // Formatea los títulos de cada sección
+
   const formatSectionTitle = (sectionKey: string) =>
     sectionKey
       .replace(/_/g, " ")
       .replace(/\b\w/g, (char) => char.toUpperCase());
 
-  // Sección activa
+
   const activeSection = combinedSections[selectedSection];
   let currentSkills: any[] = [];
 
@@ -104,7 +104,7 @@ const Skills: React.FC = () => {
     }
   }
 
-  // Intersección para animar aparición del sidebar
+
   const { ref, inView } = useInView({
     threshold: 0.2,
     triggerOnce: false,
@@ -129,7 +129,7 @@ const Skills: React.FC = () => {
     }
   }, [inView, asideControls]);
 
-  // Hover de las tarjetas
+
   const skillCardHover = {
     hover: {
       scale: 1.1,
@@ -141,21 +141,21 @@ const Skills: React.FC = () => {
     },
   };
 
-  // Variantes para animar contenedor de tarjetas
+
   const containerVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        staggerChildren: 0.08, // retrasa la anim de cada hijo
+        staggerChildren: 0.08,
         when: "beforeChildren",
       },
     },
     exit: { opacity: 0, y: -20 },
   };
 
-  // Variantes para cada tarjeta
+
   const itemVariants = {
     hidden: { opacity: 0, scale: 0.9 },
     visible: {
@@ -166,7 +166,7 @@ const Skills: React.FC = () => {
     exit: { opacity: 0, scale: 0.95 },
   };
 
-  // Variantes para animar el título H1
+
   const titleVariants = {
     hidden: { opacity: 0, scale: 0.8, y: -20 },
     visible: {
