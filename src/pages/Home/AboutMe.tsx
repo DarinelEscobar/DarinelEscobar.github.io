@@ -1,4 +1,4 @@
-// Path: C:\Users\darin\Documents\react-vite-shadcn-ui-template\src\pages\Home\AboutMe.tsx
+// src\pages\Home\AboutMe.tsx
 
 import React, { useState, useEffect } from "react";
 import { motion, useAnimation } from "framer-motion";

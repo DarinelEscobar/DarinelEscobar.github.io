@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import Header from "@/components/Header/Header";
+import Projects from "./Projects";
 import MainContent from "./MainContent";
 import AboutMe from "./AboutMe";
 import Skills from "./Skills";
@@ -46,6 +47,12 @@ const HomePage: React.FC = () => {
       style={{ scrollSnapType: "y mandatory", overscrollBehavior: "none" }}
     >
       <Header />
+      <SectionWrapper index={5}>
+        <div ref={(el) => setSectionRef(el, 5)}>
+      <Projects/>
+        </div>
+      </SectionWrapper>
+
 
       {/* Sección 0: MainContent (Principal) */}
       <SectionWrapper index={0}>

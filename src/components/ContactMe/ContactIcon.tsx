@@ -1,4 +1,4 @@
-// Path: C:\Users\darin\Documents\react-vite-shadcn-ui-template\src\components\ContactMe\ContactIcon.tsx
+// \src\components\ContactMe\ContactIcon.tsx
 
 import React from "react";
 import { IconType } from "react-icons";

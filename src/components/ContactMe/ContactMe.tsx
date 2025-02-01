@@ -1,4 +1,4 @@
-// Path: C:\Users\darin\Documents\react-vite-shadcn-ui-template\src\components\ContactMe\ContactMe.tsx
+// \src\components\ContactMe\ContactMe.tsx
 
 import React, { useState, useEffect } from "react";
 import { FaWhatsapp, FaGithub, FaLinkedin } from "react-icons/fa";

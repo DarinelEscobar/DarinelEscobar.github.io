@@ -1,4 +1,4 @@
-// Path: C:\Users\darin\Documents\react-vite-shadcn-ui-template\src\components\ContactMe\ContactGrid.tsx
+// \src\components\ContactMe\ContactGrid.tsx
 
 import React from "react";
 import { motion } from "framer-motion";

@@ -4,7 +4,7 @@ import data from "@data/data.json";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 
-// Variants for container and children animations
+
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -29,8 +29,8 @@ const itemVariants = {
 const MainContent: React.FC = () => {
   const { short_name } = data.resume.personal_info;
 
-  // Intersection Observer
-  const { ref, inView } = useInView({ threshold: 0.3, triggerOnce: true });
+
+  const { ref, inView } = useInView({ threshold: 0.3, triggerOnce: false });
   const controls = useAnimation();
 
   useEffect(() => {

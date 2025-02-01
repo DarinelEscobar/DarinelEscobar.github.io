@@ -1,4 +1,4 @@
-// Path: C:\Users\darin\Documents\react-vite-shadcn-ui-template\src\pages\Home\Title.tsx
+// \src\pages\Home\Title.tsx
 import React, { useEffect } from "react";
 import Footer from "@/components/Footer/Footer";
 import data from "@data/data.json";
