@@ -1,0 +1,32 @@
+.card {
+  border-radius: 12px;
+  background: linear-gradient(145deg, #ffffff, #e6e6e6);
+  box-shadow: -4px -4px 8px rgba(255, 255, 255, 0.8),
+              4px 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  border: 2px solid rgba(221, 221, 221, 0.3);
+  isolation: isolate;
+}
+
+.card * {
+  transform: translateZ(0);
+}
+
+.card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: -6px -6px 12px rgba(255, 255, 255, 0.9),
+              6px 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Modo oscuro */
+.dark .card {
+  background: linear-gradient(145deg, #1F1F1F, #2C2C2C);
+  border: 2px solid rgba(102, 102, 102, 0.3);
+  box-shadow: -4px -4px 8px rgba(25, 25, 25, 0.8),
+              4px 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.dark .card:hover {
+  box-shadow: -6px -6px 12px rgba(25, 25, 25, 0.9),
+              6px 6px 12px rgba(0, 0, 0, 0.6);
+}
