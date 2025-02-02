@@ -1,9 +1,9 @@
-// \src\pages\Home\Title.tsx
+
 import React, { useEffect } from "react";
 import Footer from "@/components/Footer/Footer";
 import data from "@data/data.json";
 
-// 1) Import framer-motion + intersection-observer
+
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 
@@ -12,7 +12,7 @@ const variantsContainer = {
   visible: {
     opacity: 1,
     transition: {
-      // Stagger para que hijos aparezcan escalonados
+
       staggerChildren: 0.2,
     },
   },
@@ -35,7 +35,7 @@ const variantsChild = {
 const Title: React.FC = () => {
   const { short_name, rol } = data.resume.personal_info;
 
-  // 2) useInView y useAnimation
+
   const { ref, inView } = useInView({ threshold: 0.3, triggerOnce: false });
   const controls = useAnimation();
 
@@ -48,7 +48,7 @@ const Title: React.FC = () => {
   }, [inView, controls]);
 
   return (
-    // 3) motion.section controlado por variants + controls
+
     <motion.section
       ref={ref}
       className="flex flex-col justify-between h-screen w-screen bg-whi text-dar"
