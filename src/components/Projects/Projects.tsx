@@ -3,6 +3,13 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import data from "@data/experience.json";
 
+
+import "./Projects.css";
+
+
+import { ChevronLeft, ChevronRight } from "lucide-react";
+
+
 import ProjectCard from "./ProjectCard";
 import ProjectNavigation from "./ProjectNavigation";
 
@@ -11,11 +18,12 @@ import { formatDate } from "./dateUtils";
 
 const Projects: React.FC = () => {
 
+
+
   const [currentProjectIndex, setCurrentProjectIndex] = useState(0);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const [direction, setDirection] = useState(1);
-
 
   const projects = data.experience.projects;
   const currentProject = projects[currentProjectIndex];
@@ -45,29 +53,31 @@ const Projects: React.FC = () => {
     }
   };
 
+
+
+
   return (
     <motion.div
       ref={ref}
       className="relative flex flex-col min-h-screen w-screen bg-whi justify-center items-center py-8 lg:py-0 px-4 sm:px-6 transition-colors duration-300"
     >
-      {/* Contenido principal con animación de entrada y salida */}
       <AnimatePresence custom={direction} mode="wait">
         <ProjectCard
           key={currentProjectIndex}
           direction={direction}
-          project={currentProject}
-          media={media}
-          currentImageIndex={currentImageIndex}
-          setCurrentImageIndex={setCurrentImageIndex}
+          currentProject={currentProject}
           startDate={startDate}
           endDate={endDate}
+          media={media}
+          currentProjectIndex={currentProjectIndex}
+          currentImageIndex={currentImageIndex}
+          setCurrentImageIndex={setCurrentImageIndex}
         />
       </AnimatePresence>
 
-      {/* Componente de navegación (flechas) */}
       <ProjectNavigation
-        onPrev={handlePrevProject}
-        onNext={handleNextProject}
+        handlePrevProject={handlePrevProject}
+        handleNextProject={handleNextProject}
         disablePrev={currentProjectIndex === 0}
         disableNext={currentProjectIndex === projects.length - 1}
       />

@@ -6,8 +6,10 @@ import {
   itemVariants,
   imageVariants,
 } from "./variants";
+import imgSample from '../../assets/images/Sample.png'
 
-interface MediaItem {
+
+interface Media {
   url: string;
   description?: string;
 }
@@ -18,33 +20,36 @@ interface Project {
   description: string;
   start_date: string;
   end_date: string;
-  media?: MediaItem[];
-  // Agrega más campos si los tuviera tu JSON
+  media?: Media[];
+
 }
 
 interface ProjectCardProps {
-  project: Project;
   direction: number;
-  media: MediaItem[];
-  currentImageIndex: number;
-  setCurrentImageIndex: React.Dispatch<React.SetStateAction<number>>;
+  currentProject: Project;
   startDate: string;
   endDate: string;
+  media: Media[];
+  currentProjectIndex: number;
+  currentImageIndex: number;
+  setCurrentImageIndex: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({
-  project,
   direction,
-  media,
-  currentImageIndex,
-  setCurrentImageIndex,
+  currentProject,
   startDate,
   endDate,
+  media,
+  currentProjectIndex,
+  currentImageIndex,
+  setCurrentImageIndex,
 }) => {
   return (
+
     <motion.div
-      key={project.name} // O algo único
-      className="flex justify-center items-center lg:w-[90%]"
+      key={currentProjectIndex}
+      className="flex justify-center items-center  lg:w-[90%] "
       variants={containerVariants}
       initial="hidden"
       animate="visible"
@@ -73,19 +78,19 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             variants={itemVariants}
             className="font-rob text-xs sm:text-sm uppercase tracking-[0.2em] text-blue-500 dark:text-blue-400"
           >
-            {project.role}
+            {currentProject.role}
           </motion.h4>
           <motion.h2
             variants={itemVariants}
             className="font-cor text-2xl sm:text-3xl font-bold leading-tight"
           >
-            {project.name}
+            {currentProject.name}
           </motion.h2>
           <motion.p
             variants={itemVariants}
             className="font-lat text-dar p-4 text-base bg-gray-400/20 rounded-md border border-gray-300/30 dark:border-gray-600 shadow-sm"
           >
-            {project.description}
+            {currentProject.description}
           </motion.p>
 
           {media.length > 1 && (
@@ -122,19 +127,19 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             variants={itemVariants}
             className="font-rob text-sm uppercase tracking-[0.2em] text-blue-500 dark:text-blue-400"
           >
-            {project.role}
+            {currentProject.role}
           </motion.h4>
           <motion.h2
             variants={itemVariants}
             className="font-cor text-4xl font-bold leading-tight"
           >
-            {project.name}
+            {currentProject.name}
           </motion.h2>
           <motion.p
             variants={itemVariants}
             className="font-lat text-dar dark:text-whi p-4 text-base bg-gray-400/20 rounded-md border border-gray-600 shadow-sm"
           >
-            {project.description}
+            {currentProject.description}
           </motion.p>
 
           {media.length > 1 && (
@@ -165,9 +170,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           {media.length > 0 ? (
             <motion.img
               src={media[currentImageIndex].url}
-              alt={
-                media[currentImageIndex].description || "Sin descripción de imagen"
-              }
+              alt={media[currentImageIndex].description || "Project Media"}
               className="w-full h-full object-cover rounded-xl lg:translate-y-9 border-b border-gray-200/30 dark:border-gray-600"
               whileHover={{ scale: 1.03 }}
               transition={{ type: "spring", stiffness: 300 }}

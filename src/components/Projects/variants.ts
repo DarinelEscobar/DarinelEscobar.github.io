@@ -1,4 +1,4 @@
-// Variantes para animar la aparición de los contenedores hijos
+
 export const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -11,7 +11,7 @@ export const containerVariants = {
   },
 };
 
-// Variantes para elementos individuales (texto, bullets, etc.)
+
 export const itemVariants = {
   hidden: { opacity: 0, y: 30 },
   visible: {
@@ -21,7 +21,7 @@ export const itemVariants = {
   },
 };
 
-// Variantes para la imagen del proyecto
+
 export const imageVariants = {
   hidden: { scale: 0.9, opacity: 0 },
   visible: {
@@ -39,8 +39,8 @@ export const imageVariants = {
   },
 };
 
-// Variantes para la tarjeta de proyecto
-// Usamos la prop "direction" para determinar desde qué lado aparece o sale el contenido
+
+
 export const projectCardVariants = {
   initial: (direction: number) => ({
     opacity: 0,
