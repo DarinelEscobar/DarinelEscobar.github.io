@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import Header from "@/components/Header/Header";
-import Projects from "./Projects";
+import Projects from "@/components/Projects/Projects";
 import MainContent from "./MainContent";
 import AboutMe from "./AboutMe";
 import Skills from "./Skills";
