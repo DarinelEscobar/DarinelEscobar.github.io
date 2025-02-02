@@ -6,8 +6,6 @@ import {
   itemVariants,
   imageVariants,
 } from "./variants";
-import imgSample from '../../assets/images/Sample.png'
-
 
 interface Media {
   url: string;
@@ -21,7 +19,6 @@ interface Project {
   start_date: string;
   end_date: string;
   media?: Media[];
-
 }
 
 interface ProjectCardProps {
@@ -45,11 +42,22 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   currentImageIndex,
   setCurrentImageIndex,
 }) => {
-  return (
 
+  const getAssetImage = (url: string) => {
+    try {
+
+      const assetPath = url.replace('@/', './');
+      return new URL(`/src/${assetPath}`, import.meta.url).href;
+    } catch (error) {
+      console.error("Error loading image:", error);
+      return "";
+    }
+  };
+
+  return (
     <motion.div
       key={currentProjectIndex}
-      className="flex justify-center items-center  lg:w-[90%] "
+      className="flex justify-center items-center lg:w-[90%]"
       variants={containerVariants}
       initial="hidden"
       animate="visible"
@@ -161,7 +169,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           )}
         </motion.div>
 
-        {/* Contenedor de imágenes */}
+        {/* Contenedor de imágenes mejorado */}
         <motion.div
           className="card w-full lg:absolute right-0 lg:top-1/4 lg:pl-9 lg:w-[55%] h-[300px] sm:h-[400px] lg:h-[60%] overflow-hidden mt-6 lg:mt-0"
           variants={imageVariants}
@@ -169,11 +177,15 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         >
           {media.length > 0 ? (
             <motion.img
-              src={media[currentImageIndex].url}
+              src={getAssetImage(media[currentImageIndex].url)}
               alt={media[currentImageIndex].description || "Project Media"}
               className="w-full h-full object-cover rounded-xl lg:translate-y-9 border-b border-gray-200/30 dark:border-gray-600"
               whileHover={{ scale: 1.03 }}
               transition={{ type: "spring", stiffness: 300 }}
+              loading="lazy"
+              onError={(e) => {
+                (e.currentTarget as HTMLImageElement).style.display = 'none';
+              }}
             />
           ) : (
             <div className="w-full h-full flex items-center justify-center bg-gray-200 dark:bg-gray-700 rounded-xl">
