@@ -47,43 +47,40 @@ const HomePage: React.FC = () => {
       style={{ scrollSnapType: "y mandatory", overscrollBehavior: "none" }}
     >
       <Header />
-      <SectionWrapper index={5}>
-        <div ref={(el) => setSectionRef(el, 5)}>
-      <Projects/>
-        </div>
-      </SectionWrapper>
 
 
-      {/* Sección 0: MainContent (Principal) */}
+
       <SectionWrapper index={0}>
         <div ref={(el) => setSectionRef(el, 0)}>
           <MainContent />
         </div>
       </SectionWrapper>
 
-      {/* Sección 1: AboutMe */}
       <SectionWrapper index={1}>
         <div ref={(el) => setSectionRef(el, 1)}>
           <AboutMe />
         </div>
       </SectionWrapper>
 
-      {/* Sección 2: Skills */}
       <SectionWrapper index={2}>
+        <div ref={(el) => setSectionRef(el, 5)}>
+      <Projects/>
+        </div>
+      </SectionWrapper>
+
+      <SectionWrapper index={3}>
         <div ref={(el) => setSectionRef(el, 2)}>
           <Skills />
         </div>
       </SectionWrapper>
 
-      {/* Sección 3: ContactMe */}
-      <SectionWrapper index={3}>
+      <SectionWrapper index={4}>
         <div ref={(el) => setSectionRef(el, 3)}>
           <ContactMe />
         </div>
       </SectionWrapper>
 
-      {/* Sección 4: Title */}
-      <SectionWrapper index={4}>
+      <SectionWrapper index={5}>
         <div ref={(el) => setSectionRef(el, 4)}>
           <Title />
         </div>

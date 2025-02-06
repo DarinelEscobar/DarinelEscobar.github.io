@@ -8,30 +8,30 @@ import {
   Building,
   ChevronLeft,
   ChevronRight,
-  X, // <-- icono para cerrar
+  X,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-// Importa el JSON
+
 import data from "@data/experience.json";
 
-// Tipos de Props
+
 interface DetailsProjectsProps {
-  projectIndex: number; // índice del proyecto en el array data.experience.projects
-  onClose: () => void;  // función para cerrar la ventana
+  projectIndex: number;
+  onClose: () => void;
 }
 
 const DetailsProjects: React.FC<DetailsProjectsProps> = ({ projectIndex, onClose }) => {
-  // Obtener el proyecto a partir del índice
+
   const project = data.experience.projects[projectIndex];
 
-  // Manejo del índice de imágenes
+
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  // Funciones para cambiar la imagen actual
+
   const nextImage = () => {
     setCurrentImageIndex((prevIndex) => (prevIndex + 1) % project.media.length);
   };
@@ -42,8 +42,8 @@ const DetailsProjects: React.FC<DetailsProjectsProps> = ({ projectIndex, onClose
     );
   };
 
-  // Estilos de overlay para que sea absoluto y pueda hacer scroll
-  // Puedes personalizar animaciones con Framer Motion si deseas transiciones
+
+
   return (
     <div className="fixed inset-0 z-50 overflow-auto bg-black/70">
       {/* Contenedor principal que permite scroll */}
