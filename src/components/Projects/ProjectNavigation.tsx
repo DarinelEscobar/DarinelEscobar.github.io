@@ -1,12 +1,12 @@
 import React from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight, AlertCircle } from "lucide-react";
+import { ChevronLeft, ChevronRight, Maximize2 } from "lucide-react";
 
 interface ProjectNavigationProps {
   handlePrevProject: () => void;
   handleNextProject: () => void;
   disablePrev: boolean;
   disableNext: boolean;
+  onExpandProject: () => void;
 }
 
 const ProjectNavigation: React.FC<ProjectNavigationProps> = ({
@@ -14,69 +14,42 @@ const ProjectNavigation: React.FC<ProjectNavigationProps> = ({
   handleNextProject,
   disablePrev,
   disableNext,
+  onExpandProject,
 }) => {
   return (
-    <div className="absolute bottom-8 left-0 right-0 flex flex-col items-center justify-center px-8 gap-3">
-      {/* Contenedor principal con glassmorphism mejorado */}
-      <motion.div
-        className="flex items-center justify-center gap-2 p-1.5
-        bg-[rgba(245,245,245,0.3)] dark:bg-[rgba(15,15,15,0.4)]
-        backdrop-blur-[8px] rounded-xl
-        border border-[rgba(220,220,220,0.4)] dark:border-[rgba(100,100,100,0.2)]
-        shadow-[0_8px_32px_rgba(31,38,135,0.1)] dark:shadow-[0_8px_32px_rba(0,0,0,0.3)]
-        hover:shadow-[0_12px_40px_rgba(31,38,135,0.15)] dark:hover:shadow-[0_12px_40px_rgba(0,0,0,0.4)]
-        transition-all duration-300"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
+
+    <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center space-x-4 px-4 py-2
+                    bg-gray-200/30 dark:bg-gray-700/40
+                    backdrop-blur-sm rounded-full shadow-lg">
+
+      <button
+        onClick={handlePrevProject}
+        disabled={disablePrev}
+        className="p-2 rounded-full bg-white/80 dark:bg-white/10
+                   hover:bg-white dark:hover:bg-white/20
+                   disabled:opacity-50 transition-colors"
       >
-        {/* Botón Anterior */}
-        <motion.button
-          onClick={handlePrevProject}
-          disabled={disablePrev}
-          whileHover={{
-            scale: 1.05,
-            backgroundColor: "rgba(220,220,220,0.3)",
-            transition: { duration: 0.2 }
-          }}
-          whileTap={{
-            scale: 0.95,
-            backgroundColor: "rgba(220,220,220,0.1)"
-          }}
-          className="flex items-center justify-center p-2.5 rounded-xl
-          text-[rgb(51,51,51)] dark:text-[rgb(204,204,204)]
-          disabled:opacity-30 disabled:cursor-not-allowed
-          transition-all cursor-pointer hover:bg-[rgba(230,230,230,0.2)]"
-        >
-          <ChevronLeft className="h-7 w-7 stroke-[1.7] hover:stroke-blue-600" />
-        </motion.button>
+        <ChevronLeft />
+      </button>
 
-        {/* Separador visual sutil */}
-        <div className="h-8 w-px bg-gray-300/20 dark:bg-gray-600/20 mx-1.5" />
+      <button
+        onClick={onExpandProject}
+        className="p-2 rounded-full bg-white/80 dark:bg-white/10
+                   hover:bg-white dark:hover:bg-white/20
+                   transition-colors"
+      >
+        <Maximize2 />
+      </button>
 
-        {/* Botón Siguiente */}
-        <motion.button
-          onClick={handleNextProject}
-          disabled={disableNext}
-          whileHover={{
-            scale: 1.05,
-            backgroundColor: "rgba(220,220,220,0.3)",
-            transition: { duration: 0.2 }
-          }}
-          whileTap={{
-            scale: 0.95,
-            backgroundColor: "rgba(220,220,220,0.1)"
-          }}
-          className="flex items-center justify-center p-2.5 rounded-xl
-          text-[rgb(51,51,51)] dark:text-[rgb(204,204,204)]
-          disabled:opacity-30 disabled:cursor-not-allowed
-          transition-all cursor-pointer hover:bg-[rgba(230,230,230,0.2)]"
-        >
-          <ChevronRight className="h-7 w-7 stroke-[1.7] hover:stroke-blue-600" />
-        </motion.button>
-      </motion.div>
-
-      
+      <button
+        onClick={handleNextProject}
+        disabled={disableNext}
+        className="p-2 rounded-full bg-white/80 dark:bg-white/10
+                   hover:bg-white dark:hover:bg-white/20
+                   disabled:opacity-50 transition-colors"
+      >
+        <ChevronRight />
+      </button>
     </div>
   );
 };
