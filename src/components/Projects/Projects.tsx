@@ -7,7 +7,7 @@ import "./Projects.css";
 
 import ProjectCard from "./ProjectCard";
 import ProjectNavigation from "./ProjectNavigation";
-import DetailsProjects from "../DetailsProjects/DetailsProjects"; // <— Asegúrate de la ruta correcta
+import DetailsProjects from "../DetailsProjects/DetailsProjects";
 
 import { formatDate } from "./dateUtils";
 
@@ -16,7 +16,7 @@ const Projects: React.FC = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [direction, setDirection] = useState(1);
 
-  // Estado para controlar la ventana emergente de "DetailsProjects"
+
   const [expandedProjectIndex, setExpandedProjectIndex] = useState<number | null>(null);
 
   const projects = data.experience.projects;
@@ -44,19 +44,10 @@ const Projects: React.FC = () => {
     }
   };
 
-  /**
-   * handleExpandProject:
-   *  - recibe el índice del proyecto (o ID) que queremos expandir.
-   *  - establece ese índice en el estado `expandedProjectIndex`.
-   */
   const handleExpandProject = (projectIndex: number) => {
     setExpandedProjectIndex(projectIndex);
   };
 
-  /**
-   * handleCloseDetails:
-   *  - cierra la ventana emergente de "DetailsProjects"
-   */
   const handleCloseDetails = () => {
     setExpandedProjectIndex(null);
   };
@@ -80,7 +71,6 @@ const Projects: React.FC = () => {
         />
       </AnimatePresence>
 
-      {/* Componente de Navegación + Botón de Expandir */}
       <ProjectNavigation
         handlePrevProject={handlePrevProject}
         handleNextProject={handleNextProject}
@@ -89,7 +79,6 @@ const Projects: React.FC = () => {
         onExpandProject={() => handleExpandProject(currentProjectIndex)}
       />
 
-      {/* Ventana emergente DetailsProjects si expandedProjectIndex NO es null */}
       {expandedProjectIndex !== null && (
         <DetailsProjects
           projectIndex={expandedProjectIndex}
