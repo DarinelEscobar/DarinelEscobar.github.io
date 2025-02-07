@@ -21,15 +21,16 @@ const HeroSection: React.FC<HeroSectionProps> = ({ project }) => {
             {project.description}
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
-            <Button
+            {project.url && (
+              <Button
               size="lg"
               className="w-full sm:w-auto px-8 py-6 text-lg"
-              onClick={() => alert("Exploring the project...")}
+              onClick={() => window.open(project.url, "_blank")}
             >
               Explore Project
-            </Button>
+              </Button>
+            )}
             <Button
-              variant="outline"
               size="lg"
               className="w-full sm:w-auto px-8 py-6 text-lg"
               onClick={() => window.open(project.repository, "_blank")}
@@ -69,3 +70,4 @@ const HeroSection: React.FC<HeroSectionProps> = ({ project }) => {
 };
 
 export default HeroSection;
+
