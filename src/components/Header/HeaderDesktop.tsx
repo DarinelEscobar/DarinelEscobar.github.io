@@ -46,22 +46,7 @@ const HeaderDesktop: React.FC<HeaderDesktopProps> = ({
   return (
     <motion.div
       ref={ref}
-      className="
-        absolute
-        top-0
-        left-0
-        w-full
-        py-3
-        px-5
-        flex
-        justify-between
-        text-sm
-        bg-transparent
-        z-10
-        transition-colors
-        duration-100
-        ease-in-out
-      "
+      className="top-0 left-0 z-10 absolute flex justify-between bg-transparent px-5 py-3 w-full text-sm transition-colors duration-100 ease-in-out"
       initial="hidden"
       animate={controls}
       variants={staggerContainer}
@@ -80,17 +65,17 @@ interface InfoSectionProps {
 }
 
 const InfoSection: React.FC<InfoSectionProps> = ({ title, content }) => (
-  <motion.div className="flex flex-col text-left gap-0.5" variants={fadeIn}>
-    <h1 className="font-rob text-dar text-[0.89rem] font-bold">{title}</h1>
-    <p className="font-lat text-dar text-[0.89rem]">{content}</p>
+  <motion.div className="flex flex-col gap-0.5 text-left" variants={fadeIn}>
+    <h1 className="font-bold font-rob text-[0.89rem] text-dar">{title}</h1>
+    <p className="font-lat text-[0.89rem] text-dar">{content}</p>
   </motion.div>
 );
 
 const NavigationLinks: React.FC = () => (
-  <motion.div className="flex flex-col text-left gap-0.5" variants={fadeIn}>
-    <h1 className="font-rob text-dar text-[0.89rem] font-bold">Navigation:</h1>
-    <p className="font-lat text-dar text-[0.89rem]">
-      <Link to="/">Index</Link>, <Link to="/Contact">Contact</Link>,{" "}
+  <motion.div className="flex flex-col gap-0.5 text-left" variants={fadeIn}>
+    <h1 className="font-bold font-rob text-[0.89rem] text-dar">Navigation:</h1>
+    <p className="font-lat text-[0.89rem] text-dar">
+      <Link to="/">Index</Link>,{" "} <Link to="/Contact">Contact</Link>,{" "} <Link to="/Project">Projects</Link>
       {/* <Link to="/Page2">Archive</Link> */}
     </p>
   </motion.div>
@@ -105,11 +90,11 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({
   isDarkMode,
   toggleDarkMode,
 }) => (
-  <motion.div className="flex flex-col text-left gap-0.5" variants={fadeIn}>
-    <h1 className="font-rob text-dar text-[0.89rem] font-bold">Theme:</h1>
+  <motion.div className="flex flex-col gap-0.5 text-left" variants={fadeIn}>
+    <h1 className="font-bold font-rob text-[0.89rem] text-dar">Theme:</h1>
     <button
       onClick={toggleDarkMode}
-      className="font-rob text-dar text-[0.89rem] underline"
+      className="font-rob text-[0.89rem] text-dar underline"
     >
       {isDarkMode ? "Light Mode" : "Dark Mode"}
     </button>
