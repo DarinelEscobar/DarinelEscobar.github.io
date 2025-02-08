@@ -3,7 +3,7 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import HomePage from "@/pages/Home/HomePage";
 import Contact from "@/pages/Contact/Contact";
-import Page2 from "@/pages/Page2/Page2";
+import Project from "@/pages/Project/Project";
 
 export default function AppRoutes() {
   const location = useLocation();
@@ -47,7 +47,7 @@ export default function AppRoutes() {
           }
         />
         <Route
-          path="/page2"
+          path="/Project"
           element={
             <motion.div
               variants={pageVariants}
@@ -56,7 +56,7 @@ export default function AppRoutes() {
               exit="exit"
               transition={{ duration: 0.5 }}
             >
-              <Page2 />
+              <Project />
             </motion.div>
           }
         />

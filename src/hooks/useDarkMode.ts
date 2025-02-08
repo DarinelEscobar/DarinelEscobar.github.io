@@ -1,11 +1,11 @@
-// src/hooks/useDarkMode.ts
+
 import { useEffect, useState } from "react";
 
 function useDarkMode() {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   useEffect(() => {
-    // Al montar, leer qué tema estaba guardado
+
     const storedTheme = localStorage.getItem("theme");
     if (storedTheme === "dark") {
       document.documentElement.classList.add("dark");
