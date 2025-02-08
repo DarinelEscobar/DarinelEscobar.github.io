@@ -22,67 +22,54 @@ const HeaderMobile: React.FC<HeaderMobileProps> = ({
 
   return (
     <div
-      className="
-        py-3
-        px-5
-        flex
-        justify-between
-        items-center
-        text-sm
-        bg-bla
-        text-white
-        z-30
-        transition-colors
-        duration-500
-        ease-in-out
-      "
+      className="z-30 flex justify-between items-center bg-bla px-5 py-3 text-sm text-white transition-colors duration-500 ease-in-out"
     >
       {/* Nombre corto (como en HeaderDesktop) */}
-      <h1 className="font-rob text-lg font-bold text-dar">{short_name}</h1>
+      <h1 className="font-bold font-rob text-dar text-lg">{short_name}</h1>
 
       {/* Botón para abrir/cerrar menú */}
       <button
         onClick={toggleMenu}
-        className="font-rob text-lg font-bold text-dar"
+        className="font-bold font-rob text-dar text-lg"
       >
         {isMenuOpen ? "Close" : "Menu"}
       </button>
 
       {isMenuOpen && (
-        <div className="fixed inset-0 bg-whi text-white z-50 flex flex-col transition-colors duration-500 ease-in-out">
+        <div className="z-50 fixed inset-0 flex flex-col bg-whi text-white transition-colors duration-500 ease-in-out">
           {/* Sección superior del menú (botón Close) */}
-          <div className="w-full flex justify-between items-center px-5 py-4 border-b border-gray-700">
-            <h1 className="font-rob text-lg font-bold text-dar">{short_name}</h1>
+          <div className="flex justify-between items-center border-gray-700 px-5 py-4 border-b w-full">
+            <h1 className="font-bold font-rob text-dar text-lg">{short_name}</h1>
             <button
               onClick={toggleMenu}
-              className="font-rob text-lg font-bold text-dar hover:underline"
+              className="font-bold font-rob text-dar text-lg hover:underline"
             >
               Close
             </button>
           </div>
 
           {/* CONTENIDO PRINCIPAL DEL MENÚ */}
-          <div className="flex flex-col justify-start items-start px-5 gap-6 mt-4 text-dar">
+          <div className="flex flex-col justify-start items-start gap-6 mt-4 px-5 text-dar">
             {/* Info: Nombre corto + rol */}
             <div>
-              <h2 className="font-rob text-xl font-bold">{short_name}</h2>
-              <p className="font-lat text-base text-5dar">{rol}</p>
+              <h2 className="font-bold font-rob text-xl">{short_name}</h2>
+              <p className="font-lat text-5dar text-base">{rol}</p>
             </div>
 
             {/* Info: Location + hora */}
             <div>
-              <h2 className="font-rob text-base font-bold">Location:</h2>
-              <p className="font-lat text-sm text-5dar">
+              <h2 className="font-bold font-rob text-base">Location:</h2>
+              <p className="font-lat text-5dar text-sm">
                 {location} ({formattedTime})
               </p>
             </div>
 
             {/* Toggle de tema */}
             <div>
-              <h2 className="font-rob text-base font-bold">Theme:</h2>
+              <h2 className="font-bold font-rob text-base">Theme:</h2>
               <button
                 onClick={toggleDarkMode}
-                className="font-lat text-sm underline text-5dar"
+                className="font-lat text-5dar text-sm underline"
               >
                 {isDarkMode ? "Light Mode" : "Dark Mode"}
               </button>
@@ -90,9 +77,10 @@ const HeaderMobile: React.FC<HeaderMobileProps> = ({
           </div>
 
           {/* NAVEGACIÓN (enlaces) */}
-          <div className="mt-auto flex flex-col gap-6 px-5 pb-10 text-dar">
+          <div className="flex flex-col gap-6 mt-auto px-5 pb-10 text-dar">
             <MobileLink to="/" indexNumber="01" label="Index" />
             <MobileLink to="/Contact" indexNumber="02" label="Contact" />
+            <MobileLink to="/Project" indexNumber="03" label="Projects" />
             {/* <MobileLink to="/Archive" indexNumber="03" label="Archive" /> */}
           </div>
         </div>
@@ -109,11 +97,11 @@ interface MobileLinkProps {
 const MobileLink: React.FC<MobileLinkProps> = ({ to, indexNumber, label }) => (
   <Link
     to={to}
-    className="flex justify-between items-center text-xl font-bold border-b border-gray-700 pb-4"
+    className="flex justify-between items-center border-gray-700 pb-4 border-b font-bold text-xl"
     onClick={() => window.scrollTo(0, 0)}
   >
     <div className="flex items-center gap-3">
-      <span className="text-2xl font-extrabold">{indexNumber}</span> {label}
+      <span className="font-extrabold text-2xl">{indexNumber}</span> {label}
     </div>
     <ArrowUpRight size={20} className="text-5dar" />
   </Link>
