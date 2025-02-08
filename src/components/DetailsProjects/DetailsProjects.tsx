@@ -5,15 +5,12 @@ import HeroSection from "./HeroSection";
 import ProjectDetails from "./ProjectDetails";
 import TechnicalSidebar from "./TechnicalSidebar";
 import MediaGallery from "./MediaGallery";
-
-
 import { motion } from "framer-motion";
 
 interface DetailsProjectsProps {
   projectIndex: number;
   onClose: () => void;
 }
-
 
 const modalVariants = {
   hidden: { opacity: 0, scale: 0.95 },
@@ -32,24 +29,23 @@ const DetailsProjects: React.FC<DetailsProjectsProps> = ({
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   return (
-
     <motion.div
       className="z-50 fixed inset-0 bg-black/70 overflow-auto"
       variants={modalVariants}
       initial="hidden"
       animate="visible"
     >
-      {/* Contenedor principal (permite scroll interno) */}
-      <div className="relative w-full min-h-full">
+      {/* Contenedor principal */}
+      <div className="absolute w-full min-h-full">
         {/* Botón para cerrar */}
         <button
           onClick={onClose}
-          className="top-4 right-4 z-50 absolute bg-white/90 hover:bg-white dark:hover:bg-gray-800 dark:bg-gray-800/80 shadow p-2 rounded-full transition-colors"
+          className="top-4 right-4 z-50 fixed bg-white/90 hover:bg-white dark:hover:bg-gray-800 dark:bg-gray-800/80 shadow p-2 rounded-full transition-colors"
         >
-          <X className="w-5 h-5 text-gray-800 dark:text-gray-200" />
+          <X className="w-5 h-5 text-dar dark:text-gray-200" />
         </button>
 
-        {/* Fondo general y texto principal, imitando tus otras secciones */}
+        {/* Fondo general y texto principal */}
         <div className="bg-whi min-h-screen text-dar">
           {/* Sección Hero */}
           <HeroSection project={project} />
