@@ -1,66 +1,104 @@
-
-
 import React from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ArrowUpRight } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { CheckCircle, Trophy, ArrowUpRight, Star } from "lucide-react";
+import { motion } from "framer-motion";
+
+interface Project {
+  description: string;
+  responsibilities: string[];
+  achievements: string[];
+}
 
 interface ProjectDetailsProps {
-  project: any;
+  project: Project;
 }
+
+const detailsVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, delay: 0.2 },
+  },
+};
 
 const ProjectDetails: React.FC<ProjectDetailsProps> = ({ project }) => {
   return (
-    <div className="lg:col-span-2 space-y-16">
-      {/* Descripción del proyecto */}
-      <div className="space-y-8">
-        <h2 className="text-3xl font-bold">Project Description</h2>
-        <p className="text-lg text-muted-foreground leading-relaxed">
+    <motion.div
+      className="space-y-16 lg:col-span-2"
+      variants={detailsVariants}
+      initial="hidden"
+      animate="visible"
+    >
+      {/* Visión General del Proyecto */}
+      <section className="space-y-6">
+        <div className="flex items-center gap-3">
+          <div className="flex justify-center items-center bg-blue-500/10 p-2 rounded-full">
+            <ArrowUpRight className="w-6 h-6 text-blue-500" />
+          </div>
+          <h2 className="font-bold font-cor text-3xl text-dar dark:text-5whi tracking-tight">
+            Project Overview
+          </h2>
+        </div>
+        <p className="max-w-3xl font-lat text-5dar text-lg dark:text-5whi leading-relaxed">
           {project.description}
         </p>
-      </div>
+      </section>
 
-      {/* Responsabilidades */}
-      <div className="space-y-12">
-        <h3 className="text-2xl font-bold">Responsibilities</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {project.responsibilities.map((resp: string, index: number) => (
-            <Card
-              key={index}
-              className="hover:shadow-lg transition-shadow duration-200"
-            >
-              <CardContent className="flex items-start p-6 gap-4">
-                <div className="p-3 bg-primary/10 rounded-lg">
-                  <ArrowUpRight className="h-6 w-6" />
+      {/* Responsabilidades Clave */}
+      <section className="space-y-6">
+        <div className="flex items-center gap-3">
+          <div className="flex justify-center items-center bg-green-500/10 p-2 rounded-full">
+            <CheckCircle className="w-6 h-6 text-green-500" />
+          </div>
+          <h3 className="font-cor font-semibold text-2xl text-dar dark:text-5whi tracking-tight">
+            Key Responsibilities
+          </h3>
+        </div>
+        <div className="flex flex-col gap-6">
+          {project.responsibilities.map((resp, index) => (
+            <Card key={index} className="border-5whi dark:border-5dar hover:shadow-md border transition-shadow duration-300">
+              <CardContent className="flex flex-col gap-4 p-6">
+                <div className="flex items-start gap-3">
+                  <div className="flex justify-center items-center bg-blue-500/10 p-3 rounded-lg">
+                    <CheckCircle className="w-6 h-6 text-blue-500" />
+                  </div>
+                  <p className="font-rob text-dar text-lg dark:text-5whi leading-relaxed">
+                    {resp}
+                  </p>
                 </div>
-                <p className="text-lg leading-relaxed">{resp}</p>
               </CardContent>
             </Card>
           ))}
         </div>
-      </div>
+      </section>
 
-      {/* Logros clave */}
-      <div className="space-y-12">
-        <h3 className="text-2xl font-bold">Key Achievements</h3>
+      {/* Logros Destacados */}
+      <section className="space-y-6">
+        <div className="flex items-center gap-3">
+          <div className="flex justify-center items-center bg-yellow-500/10 p-2 rounded-full">
+            <Trophy className="w-6 h-6 text-yellow-500" />
+          </div>
+          <h3 className="font-cor font-semibold text-2xl text-dar dark:text-5whi tracking-tight">
+            Notable Achievements
+          </h3>
+        </div>
         <div className="space-y-6">
-          {project.achievements.map((achievement: string, index: number) => (
-            <Card
-              key={index}
-              className="bg-secondary/5 hover:shadow-lg transition-shadow duration-200"
-            >
-              <CardHeader className="pb-2">
-                <CardTitle className="text-xl">
-                  {`Achievement ${index + 1}`}
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">{achievement}</p>
+          {project.achievements.map((achievement, index) => (
+            <Card key={index} className="border-5whi dark:border-5dar bg-gradient-to-r from-whi/5 dark:from-dar/5 to-transparent hover:shadow-md border border-blue-500/50 border-l-4 transition-shadow duration-300">
+              <CardContent className="flex items-start gap-4 p-6">
+                <div className="flex justify-center items-center bg-yellow-500/10 p-2 rounded-full">
+                  <Star className="w-5 h-5 text-yellow-500" />
+                </div>
+                <p className="font-lat text-dar text-lg dark:text-5whi leading-relaxed">
+                  {achievement}
+                </p>
               </CardContent>
             </Card>
           ))}
         </div>
-      </div>
-    </div>
+      </section>
+    </motion.div>
   );
 };
 
