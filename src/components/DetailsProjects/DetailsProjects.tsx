@@ -1,5 +1,3 @@
-
-
 import React, { useState } from "react";
 import { X } from "lucide-react";
 import data from "@data/experience.json";
@@ -8,10 +6,23 @@ import ProjectDetails from "./ProjectDetails";
 import TechnicalSidebar from "./TechnicalSidebar";
 import MediaGallery from "./MediaGallery";
 
+
+import { motion } from "framer-motion";
+
 interface DetailsProjectsProps {
   projectIndex: number;
   onClose: () => void;
 }
+
+
+const modalVariants = {
+  hidden: { opacity: 0, scale: 0.95 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 0.4 },
+  },
+};
 
 const DetailsProjects: React.FC<DetailsProjectsProps> = ({
   projectIndex,
@@ -21,24 +32,31 @@ const DetailsProjects: React.FC<DetailsProjectsProps> = ({
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   return (
-    <div className="fixed inset-0 z-50 overflow-auto bg-black/70">
-      {/* Contenedor principal (permite scroll) */}
-      <div className="relative min-h-full w-full">
+
+    <motion.div
+      className="z-50 fixed inset-0 bg-black/70 overflow-auto"
+      variants={modalVariants}
+      initial="hidden"
+      animate="visible"
+    >
+      {/* Contenedor principal (permite scroll interno) */}
+      <div className="relative w-full min-h-full">
         {/* Botón para cerrar */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 p-2 bg-white/90 rounded-full shadow hover:bg-white z-50"
+          className="top-4 right-4 z-50 absolute bg-white/90 hover:bg-white dark:hover:bg-gray-800 dark:bg-gray-800/80 shadow p-2 rounded-full transition-colors"
         >
-          <X className="h-5 w-5" />
+          <X className="w-5 h-5 text-gray-800 dark:text-gray-200" />
         </button>
 
-        <div className="min-h-screen bg-background text-foreground">
+        {/* Fondo general y texto principal, imitando tus otras secciones */}
+        <div className="bg-whi min-h-screen text-dar">
           {/* Sección Hero */}
           <HeroSection project={project} />
 
           {/* Sección de detalles del proyecto y barra lateral */}
-          <section className="py-24 px-4">
-            <div className="container mx-auto grid lg:grid-cols-3 gap-12">
+          <section className="px-4 py-24">
+            <div className="gap-12 grid lg:grid-cols-3 mx-auto container">
               <ProjectDetails project={project} />
               <TechnicalSidebar project={project} />
             </div>
@@ -54,7 +72,7 @@ const DetailsProjects: React.FC<DetailsProjectsProps> = ({
           )}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
