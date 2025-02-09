@@ -1,4 +1,3 @@
-// src/components/Footer/Footer.tsx
 import React, { useEffect } from 'react';
 import { FaEnvelope, FaLinkedin, FaGithub, FaWhatsapp } from 'react-icons/fa';
 import { ChevronUp } from 'lucide-react';
@@ -6,7 +5,6 @@ import data from "@data/data.json";
 import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 
-// Variants para un sutil slide desde abajo
 const footerVariants = {
   hidden: { opacity: 0, y: 30 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.7 } },
@@ -25,140 +23,97 @@ const Footer: React.FC = () => {
     }
   }, [inView, controls]);
 
+  const scrollToTop = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const mainContainer = document.getElementById('main-container');
+    if (mainContainer) {
+      mainContainer.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   return (
-    // Envuelve todo en motion.footer
     <motion.footer
       ref={ref}
-      className="w-full py-3 px-5 text-sm bg-transparent z-10"
+      className="z-10 bg-transparent px-5 py-3 w-full text-sm"
       variants={footerVariants}
       initial="hidden"
       animate={controls}
     >
-      {/* VERSIÓN COMPACTA (MOBILE) */}
-      <div className="block md:hidden flex-col items-center justify-between">
-        {/* Compacta: Una sola “fila” o dos “filas” con lo esencial */}
-        <div className="flex items-center justify-between">
-          {/* Año y Derechos */}
-          <p className="text-dar text-[0.89rem]">
-            &copy; 2024
-          </p>
-          {/* Subir al top */}
-          <a href="#top" className="text-dar text-[0.89rem] flex items-center gap-1 hover:underline">
+      {/* MOBILE VERSION */}
+      <div className="md:hidden block flex-col justify-between items-center">
+        <div className="flex justify-between items-center">
+          <p className="text-[0.89rem] text-dar">&copy; 2024</p>
+          <a
+            href="#top"
+            onClick={scrollToTop}
+            className="flex items-center gap-1 text-[0.89rem] text-dar hover:underline"
+          >
             Top <ChevronUp size={16} />
           </a>
         </div>
 
-        {/* Íconos de contacto */}
-        <div className="mt-2 flex items-center gap-3 justify-center">
-          <a
-            href={`mailto:${email}`}
-            className="hover:underline flex items-center gap-1"
-            aria-label="Email"
-          >
+        <div className="flex justify-center items-center gap-3 mt-2">
+          <a href={`mailto:${email}`} className="flex items-center gap-1 hover:underline" aria-label="Email">
             <FaEnvelope />
           </a>
-          <a
-            href={linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:underline flex items-center gap-1"
-            aria-label="LinkedIn"
-          >
+          <a href={linkedin} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:underline" aria-label="LinkedIn">
             <FaLinkedin />
           </a>
-          <a
-            href={github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:underline flex items-center gap-1"
-            aria-label="GitHub"
-          >
+          <a href={github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:underline" aria-label="GitHub">
             <FaGithub />
           </a>
-          <a
-            href={`https://wa.me/${phone.replace(/\D/g, '')}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:underline flex items-center gap-1"
-            aria-label="WhatsApp"
-          >
+          <a href={`https://wa.me/${phone.replace(/\D/g, '')}`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:underline" aria-label="WhatsApp">
             <FaWhatsapp />
           </a>
         </div>
 
-        {/* Autor, si deseas mostrarlo en mobile */}
         <div className="mt-2 text-center">
-          <p className="text-dar text-[0.89rem]">
-            {short_name}
-          </p>
+          <p className="text-[0.89rem] text-dar">{short_name}</p>
         </div>
       </div>
 
-      {/* VERSIÓN COMPLETA (DESKTOP) */}
+      {/* DESKTOP VERSION */}
       <div className="hidden md:flex justify-between">
-        {/* Columna: Copyright */}
         <div className="text-left">
-          <h1 className="font-bold font-rob text-dar text-[0.89rem]">Copyright:</h1>
-          <p className="text-dar text-[0.89rem] flex items-center gap-1">
-            &copy; 2024
-          </p>
+          <h1 className="font-rob font-bold text-[0.89rem] text-dar">Copyright:</h1>
+          <p className="flex items-center gap-1 text-[0.89rem] text-dar">&copy; 2024</p>
         </div>
 
-        {/* Columna: Quick Jump */}
         <div className="text-left">
-          <h1 className="font-bold font-rob text-dar text-[0.89rem]">Quick Jump:</h1>
-          <p className="text-dar text-[0.89rem] flex items-center gap-1">
+          <h1 className="font-rob font-bold text-[0.89rem] text-dar">Quick Jump:</h1>
+          <a
+            href="#top"
+            onClick={scrollToTop}
+            className="flex items-center gap-1 text-[0.89rem] text-dar hover:underline"
+          >
             Ascend to Top <ChevronUp size={16} />
-          </p>
+          </a>
         </div>
 
-        {/* Columna: Contact Info */}
         <div className="text-left">
-          <h1 className="font-bold font-rob text-dar text-[0.89rem]">Contact Info:</h1>
-          <p className="text-dar text-[0.89rem] flex items-center gap-2">
-            <a
-              href={`mailto:${email}`}
-              className="hover:underline flex items-center gap-1"
-              aria-label="Email"
-            >
+          <h1 className="font-rob font-bold text-[0.89rem] text-dar">Contact Info:</h1>
+          <p className="flex items-center gap-2 text-[0.89rem] text-dar">
+            <a href={`mailto:${email}`} className="flex items-center gap-1 hover:underline" aria-label="Email">
               <FaEnvelope />
             </a>
-            <a
-              href={linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:underline flex items-center gap-1"
-              aria-label="LinkedIn"
-            >
+            <a href={linkedin} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:underline" aria-label="LinkedIn">
               <FaLinkedin />
             </a>
-            <a
-              href={github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:underline flex items-center gap-1"
-              aria-label="GitHub"
-            >
+            <a href={github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:underline" aria-label="GitHub">
               <FaGithub />
             </a>
-            <a
-              href={`https://wa.me/${phone.replace(/\D/g, '')}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:underline flex items-center gap-1"
-              aria-label="WhatsApp"
-            >
+            <a href={`https://wa.me/${phone.replace(/\D/g, '')}`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:underline" aria-label="WhatsApp">
               <FaWhatsapp />
             </a>
           </p>
         </div>
 
-        {/* Columna: Crafted & Aesthetic by */}
         <div className="text-left">
-          <h1 className="font-bold font-rob text-dar text-[0.89rem]">Crafted & Aesthetic by:</h1>
-          <p className="text-dar text-[0.89rem] flex items-center gap-1">
-            {short_name}
-          </p>
+          <h1 className="font-rob font-bold text-[0.89rem] text-dar">Crafted & Aesthetic by:</h1>
+          <p className="flex items-center gap-1 text-[0.89rem] text-dar">{short_name}</p>
         </div>
       </div>
     </motion.footer>

@@ -25,26 +25,26 @@ const TechnicalSidebar: React.FC<TechnicalSidebarProps> = ({ project }) => {
       initial="hidden"
       animate="visible"
     >
-      <Card className="top-24 sticky border-5whi dark:border-5dar bg-whi dark:bg-dar shadow-lg border">
+      <Card className="top-24 sticky bg-whi shadow-lg border border-5whi dark:border-5dar">
         <CardHeader className="pb-4">
-          <CardTitle className="font-cor text-2xl text-dar dark:text-5whi">
+          <CardTitle className="font-cor text-dar text-2xl">
             Technical Details
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-8">
-          <div className="space-y-6 font-lat text-dar dark:text-5whi">
+          <div className="space-y-6 font-lat text-dar">
             <div className="flex items-center gap-4">
               <Building className="w-6 h-6 text-blue-500" />
               <div>
-                <p className="text-5dar text-sm dark:text-5whi">Client</p>
-                <p className="font-medium font-rob text-lg">{project.client}</p>
+                <p className="text-5dar text-sm">Client</p>
+                <p className="font-rob font-medium text-lg">{project.client}</p>
               </div>
             </div>
             <div className="flex items-center gap-4">
               <Calendar className="w-6 h-6 text-blue-500" />
               <div>
-                <p className="text-5dar text-sm dark:text-5whi">Duration</p>
-                <p className="font-medium font-rob text-lg">
+                <p className="text-5dar text-sm">Duration</p>
+                <p className="font-rob font-medium text-lg">
                   {new Date(project.start_date).toLocaleDateString()} - {" "}
                   {new Date(project.end_date).toLocaleDateString()}
                 </p>
@@ -53,8 +53,8 @@ const TechnicalSidebar: React.FC<TechnicalSidebarProps> = ({ project }) => {
             <div className="flex items-center gap-4">
               <Users className="w-6 h-6 text-blue-500" />
               <div>
-                <p className="text-5dar text-sm dark:text-5whi">Team</p>
-                <p className="font-medium font-rob text-lg">
+                <p className="text-5dar text-sm">Team</p>
+                <p className="font-rob font-medium text-lg">
                   {project.team_size} developers
                 </p>
               </div>
@@ -64,14 +64,14 @@ const TechnicalSidebar: React.FC<TechnicalSidebarProps> = ({ project }) => {
           {/* Tecnología */}
           {project.technologies && (
             <div className="space-y-4">
-              <h4 className="font-cor font-semibold text-dar text-lg dark:text-5whi">
+              <h4 className="font-cor font-semibold text-dar text-lg">
                 Technology Stack
               </h4>
               <div className="flex flex-wrap gap-3">
                 {Object.entries(project.technologies).map(
                   ([category, techs]: [string, string[]]) => (
                     <div key={category} className="space-y-2">
-                      <span className="font-lat text-5dar text-sm dark:text-5whi">
+                      <span className="font-lat text-5dar text-sm">
                         {category}:
                       </span>
                       <div className="flex flex-wrap gap-2">
@@ -79,7 +79,7 @@ const TechnicalSidebar: React.FC<TechnicalSidebarProps> = ({ project }) => {
                           <Badge
                             key={tech}
                             variant="outline"
-                            className="hover:bg-blue-500/5 px-3 py-1.5 border-blue-500/20 font-medium font-rob text-dar text-sm dark:text-5whi"
+                            className="hover:bg-blue-500/5 px-3 py-1.5 border-blue-500/20 font-rob font-medium text-dar text-sm"
                           >
                             {tech}
                           </Badge>

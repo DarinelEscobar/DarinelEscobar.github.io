@@ -20,7 +20,7 @@ const heroVariants = {
 const HeroSection: React.FC<HeroSectionProps> = ({ project }) => {
   return (
     <motion.section
-      className="flex items-center bg-whi px-4 py-24 min-h-[50vh]"
+      className="flex items-center px-4 py-24 min-h-[50vh]"
       variants={heroVariants}
       initial="hidden"
       animate="visible"
@@ -28,17 +28,17 @@ const HeroSection: React.FC<HeroSectionProps> = ({ project }) => {
       <div className="flex lg:flex-row flex-col items-center gap-12 mx-auto container">
         {/* Información principal del proyecto */}
         <div className="space-y-8 w-full lg:w-1/2">
-          <h1 className="font-bold font-cor text-4xl text-dar md:text-5xl dark:text-5whi leading-tight">
+          <h1 className="font-cor font-bold text-dar text-4xl md:text-5xl leading-tight">
             {project.name}
           </h1>
-          <p className="font-lat text-5dar text-lg md:text-xl dark:text-5whi leading-relaxed">
+          <p className="font-lat text-dar text-lg md:text-xl leading-relaxed">
             {project.description}
           </p>
           <div className="flex sm:flex-row flex-col gap-4">
             {project.url && (
               <Button
                 size="lg"
-                className="bg-blue-500 hover:bg-blue-600 dark:hover:bg-blue-700 dark:bg-blue-600 px-8 py-6 w-full sm:w-auto text-lg text-whi"
+                className="bg-blue-500 hover:bg-blue-600 dark:hover:bg-blue-700 dark:bg-blue-600 px-8 py-6 w-full sm:w-auto text-whi text-lg"
                 onClick={() => window.open(project.url, "_blank")}
               >
                 Explore Project
@@ -47,7 +47,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ project }) => {
             {project.repository && (
               <Button
                 size="lg"
-                className="flex items-center gap-2 bg-dar hover:bg-5dar dark:hover:bg-5dar dark:bg-5dar px-8 py-6 w-full sm:w-auto text-lg text-whi"
+                className="flex items-center gap-2 bg-dar hover:bg-5dar dark:hover:bg-5dar dark:bg-5dar px-8 py-6 w-full sm:w-auto text-whi text-lg"
                 onClick={() => window.open(project.repository, "_blank")}
               >
                 View Repository
@@ -59,14 +59,14 @@ const HeroSection: React.FC<HeroSectionProps> = ({ project }) => {
 
         {/* Imagen principal del proyecto */}
         <div className="group relative w-full lg:w-1/2">
-          <div className="border-5whi dark:border-5dar shadow-2xl border rounded-xl overflow-hidden">
+          <div className="shadow-2xl border border-5whi dark:border-5dar rounded-xl overflow-hidden">
             {project.media && project.media.length > 0 ? (
               <img
                 src={getAssetImage(project.media[0].url)}
                 alt={project.media[0].description || "Project Image"}
                 width={800}
                 height={500}
-                className="group-hover:scale-105 transition-transform duration-300 object-cover"
+                className="object-cover group-hover:scale-105 transition-transform duration-300"
               />
             ) : (
               <div className="flex justify-center items-center bg-5whi dark:bg-5dar w-full h-full">

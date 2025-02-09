@@ -6,7 +6,6 @@ import AboutMe from "./AboutMe";
 import Skills from "./Skills";
 import Title from "./Title";
 import ContactMe from "@/components/ContactMe/ContactMe";
-
 import SectionWrapper from "@/components/SectionWrapper";
 
 const HomePage: React.FC = () => {
@@ -30,25 +29,11 @@ const HomePage: React.FC = () => {
 
   return (
     <main
-      className="
-        Container
-        bg-whi
-        text-dar
-        w-[100vw]
-        h-screen
-        snap-y
-        snap-mandatory
-        overflow-auto
-        scroll-smooth
-        transition-colors
-        duration-100
-        ease-in-out
-      "
+      id="main-container"
+      className="bg-whi w-[100vw] h-screen overflow-auto text-dar transition-colors duration-100 ease-in-out scroll-smooth snap-mandatory snap-y Container"
       style={{ scrollSnapType: "y mandatory", overscrollBehavior: "none" }}
     >
       <Header />
-
-
 
       <SectionWrapper index={0}>
         <div ref={(el) => setSectionRef(el, 0)}>
@@ -64,7 +49,7 @@ const HomePage: React.FC = () => {
 
       <SectionWrapper index={2}>
         <div ref={(el) => setSectionRef(el, 5)}>
-      <Projects/>
+          <Projects/>
         </div>
       </SectionWrapper>
 
