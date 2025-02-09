@@ -13,20 +13,12 @@ const Header: React.FC = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+
   const isMobile = window.matchMedia("(max-width: 768px)").matches;
 
   return (
     <header
-      className="
-        sticky
-        top-0
-        left-0
-        w-full
-        z-30
-        transition-colors
-        duration-100
-        ease-in-out
-      "
+      className="top-0 left-0 z-50 sticky pt-[env(safe-area-inset-top)] w-full transition-colors duration-100 ease-in-out"
     >
       {isMobile ? (
         <HeaderMobile

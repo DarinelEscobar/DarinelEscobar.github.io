@@ -22,27 +22,31 @@ const HeaderMobile: React.FC<HeaderMobileProps> = ({
 
   return (
     <div
-      className="z-30 flex justify-between items-center bg-bla px-5 py-3 text-sm text-white transition-colors duration-500 ease-in-out"
+      className="z-30 flex justify-between items-center bg-bla px-5 py-3 text-white text-sm transition-colors duration-500 ease-in-out"
     >
-      {/* Nombre corto (como en HeaderDesktop) */}
-      <h1 className="font-bold font-rob text-dar text-lg">{short_name}</h1>
+      {/* Nombre corto */}
+      <h1 className="font-rob font-bold text-dar text-lg">{short_name}</h1>
 
       {/* Botón para abrir/cerrar menú */}
       <button
         onClick={toggleMenu}
-        className="font-bold font-rob text-dar text-lg"
+        className="font-rob font-bold text-dar text-lg"
       >
         {isMenuOpen ? "Close" : "Menu"}
       </button>
 
       {isMenuOpen && (
-        <div className="z-50 fixed inset-0 flex flex-col bg-whi text-white transition-colors duration-500 ease-in-out">
+        <div
+          className="z-50 fixed inset-0 flex flex-col bg-whi text-white transition-colors duration-500 ease-in-out"
+        >
           {/* Sección superior del menú (botón Close) */}
-          <div className="flex justify-between items-center border-gray-700 px-5 py-4 border-b w-full">
-            <h1 className="font-bold font-rob text-dar text-lg">{short_name}</h1>
+          <div className="flex justify-between items-center px-5 py-4 border-gray-700 border-b w-full">
+            <h1 className="font-rob font-bold text-dar text-lg">
+              {short_name}
+            </h1>
             <button
               onClick={toggleMenu}
-              className="font-bold font-rob text-dar text-lg hover:underline"
+              className="font-rob font-bold text-dar text-lg hover:underline"
             >
               Close
             </button>
@@ -52,13 +56,13 @@ const HeaderMobile: React.FC<HeaderMobileProps> = ({
           <div className="flex flex-col justify-start items-start gap-6 mt-4 px-5 text-dar">
             {/* Info: Nombre corto + rol */}
             <div>
-              <h2 className="font-bold font-rob text-xl">{short_name}</h2>
+              <h2 className="font-rob font-bold text-xl">{short_name}</h2>
               <p className="font-lat text-5dar text-base">{rol}</p>
             </div>
 
             {/* Info: Location + hora */}
             <div>
-              <h2 className="font-bold font-rob text-base">Location:</h2>
+              <h2 className="font-rob font-bold text-base">Location:</h2>
               <p className="font-lat text-5dar text-sm">
                 {location} ({formattedTime})
               </p>
@@ -66,7 +70,7 @@ const HeaderMobile: React.FC<HeaderMobileProps> = ({
 
             {/* Toggle de tema */}
             <div>
-              <h2 className="font-bold font-rob text-base">Theme:</h2>
+              <h2 className="font-rob font-bold text-base">Theme:</h2>
               <button
                 onClick={toggleDarkMode}
                 className="font-lat text-5dar text-sm underline"
@@ -94,10 +98,11 @@ interface MobileLinkProps {
   indexNumber: string;
   label: string;
 }
+
 const MobileLink: React.FC<MobileLinkProps> = ({ to, indexNumber, label }) => (
   <Link
     to={to}
-    className="flex justify-between items-center border-gray-700 pb-4 border-b font-bold text-xl"
+    className="flex justify-between items-center pb-4 border-gray-700 border-b font-bold text-xl"
     onClick={() => window.scrollTo(0, 0)}
   >
     <div className="flex items-center gap-3">
