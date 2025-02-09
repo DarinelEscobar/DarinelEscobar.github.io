@@ -1,8 +1,6 @@
-
 import React, { useEffect } from "react";
 import Footer from "@/components/Footer/Footer";
 import data from "@data/data.json";
-
 
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
@@ -12,7 +10,6 @@ const variantsContainer = {
   visible: {
     opacity: 1,
     transition: {
-
       staggerChildren: 0.2,
     },
   },
@@ -34,10 +31,19 @@ const variantsChild = {
 
 const Title: React.FC = () => {
   const { short_name, rol } = data.resume.personal_info;
-
-
   const { ref, inView } = useInView({ threshold: 0.3, triggerOnce: false });
   const controls = useAnimation();
+
+  // Actualizamos la variable CSS --vh para que represente el alto real de la ventana
+  useEffect(() => {
+    const setVh = () => {
+      const vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+    };
+    setVh();
+    window.addEventListener('resize', setVh);
+    return () => window.removeEventListener('resize', setVh);
+  }, []);
 
   useEffect(() => {
     if (inView) {
@@ -48,15 +54,15 @@ const Title: React.FC = () => {
   }, [inView, controls]);
 
   return (
-
     <motion.section
       ref={ref}
-      className="flex flex-col justify-between h-screen w-screen bg-whi text-dar"
+      // En lugar de h-screen usamos la variable --vh para calcular el alto real
+      className="flex flex-col justify-between bg-whi w-screen min-h-[calc(var(--vh,1vh)*100)] text-dar"
       variants={variantsContainer}
       initial="hidden"
       animate={controls}
     >
-      <motion.div className="flex items-center justify-center flex-grow flex-col">
+      <motion.div className="flex flex-col flex-grow justify-center items-center">
         <motion.h1 className="custom-title font-cor" variants={variantsChild}>
           {short_name}
         </motion.h1>

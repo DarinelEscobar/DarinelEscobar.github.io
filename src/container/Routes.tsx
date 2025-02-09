@@ -1,4 +1,3 @@
-// \routes.tsx
 import { Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import HomePage from "@/pages/Home/HomePage";
@@ -8,10 +7,25 @@ import Project from "@/pages/Project/Project";
 export default function AppRoutes() {
   const location = useLocation();
 
-  // Animation variants for page transitions
+
   const pageVariants = {
     initial: { opacity: 0, x: 50 },
-    animate: { opacity: 1, x: 0 },
+    animate: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 0.5,
+        onComplete: () => {
+          const savedIndex = localStorage.getItem("activeSection");
+          if (savedIndex && location.pathname === "/") {
+            const mainContainer = document.getElementById('main-container');
+            if (mainContainer) {
+              mainContainer.scrollTo(0, 0);
+            }
+          }
+        }
+      }
+    },
     exit: { opacity: 0, x: -50 },
   };
 

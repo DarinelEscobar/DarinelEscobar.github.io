@@ -30,8 +30,9 @@ const HomePage: React.FC = () => {
   return (
     <main
       id="main-container"
-      className="bg-whi w-[100vw] h-screen overflow-auto text-dar transition-colors duration-100 ease-in-out scroll-smooth snap-mandatory snap-y Container"
-      style={{ scrollSnapType: "y mandatory", overscrollBehavior: "none" }}
+      // Se agrega pt-[env(safe-area-inset-top)] para que el contenido no inicie detrás del header sticky
+      className="pt-[env(safe-area-inset-top)] bg-whi w-[100vw] h-screen overflow-auto text-dar transition-colors duration-100 ease-in-out scroll-smooth snap-mandatory snap-y Container"
+      style={{ scrollSnapType: "y mandatory" }}
     >
       <Header />
 
@@ -49,7 +50,7 @@ const HomePage: React.FC = () => {
 
       <SectionWrapper index={2}>
         <div ref={(el) => setSectionRef(el, 5)}>
-          <Projects/>
+          <Projects />
         </div>
       </SectionWrapper>
 
