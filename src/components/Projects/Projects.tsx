@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import data from "@data/experience.json";
 
@@ -21,11 +20,8 @@ const Projects: React.FC = () => {
   const currentProject = projects[currentProjectIndex];
   const media = currentProject.media || [];
 
-  // Observa si el contenedor está en vista (no es estrictamente necesario para la posición,
-  // pero lo mantengo ya que puede servir para animaciones que tengas configuradas)
-  const { ref, inView } = useInView({ threshold: 0.2, triggerOnce: false });
+  const { ref } = useInView({ threshold: 0.2, triggerOnce: false });
 
-  // Ajusta la variable --vh con el alto real del viewport en móviles
   useEffect(() => {
     const setVh = () => {
       const vh = window.innerHeight * 0.01;
@@ -36,11 +32,9 @@ const Projects: React.FC = () => {
     return () => window.removeEventListener("resize", setVh);
   }, []);
 
-  // Formateo de fechas
   const startDate = formatDate(currentProject.start_date);
   const endDate = formatDate(currentProject.end_date);
 
-  // Funciones de navegación
   const handlePrevProject = () => {
     if (currentProjectIndex > 0) {
       setDirection(-1);
@@ -66,24 +60,21 @@ const Projects: React.FC = () => {
   };
 
   return (
-    <motion.div
+    <div
       ref={ref}
-      // Importante: "relative" + uso de la variable --vh para altura real en móviles
-      className="relative flex flex-col justify-center items-center bg-whi px-4 sm:px-6 py-8 lg:py-0 w-screen min-h-[calc(var(--vh,1vh)*100)] transition-colors duration-300"
+      className="relative flex flex-col justify-center items-center bg-whi px-4 sm:px-6 py-8 lg:py-0 w-screen min-h-[calc(var(--vh,1vh)*100)]"
     >
-      <AnimatePresence custom={direction} mode="wait">
-        <ProjectCard
-          key={currentProjectIndex}
-          direction={direction}
-          currentProject={currentProject}
-          startDate={startDate}
-          endDate={endDate}
-          media={media}
-          currentProjectIndex={currentProjectIndex}
-          currentImageIndex={currentImageIndex}
-          setCurrentImageIndex={setCurrentImageIndex}
-        />
-      </AnimatePresence>
+      <ProjectCard
+        key={currentProjectIndex}
+        direction={direction}
+        currentProject={currentProject}
+        startDate={startDate}
+        endDate={endDate}
+        media={media}
+        currentProjectIndex={currentProjectIndex}
+        currentImageIndex={currentImageIndex}
+        setCurrentImageIndex={setCurrentImageIndex}
+      />
 
       <ProjectNavigation
         handlePrevProject={handlePrevProject}
@@ -99,7 +90,7 @@ const Projects: React.FC = () => {
           onClose={handleCloseDetails}
         />
       )}
-    </motion.div>
+    </div>
   );
 };
 
