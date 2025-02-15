@@ -12,12 +12,13 @@ interface DetailsProjectsProps {
   onClose: () => void;
 }
 
+// Animación para el modal (fondo + escalado inicial)
 const modalVariants = {
-  hidden: { opacity: 0, scale: 0.95 },
+  hidden: { opacity: 0, scale: 0.85 },
   visible: {
     opacity: 1,
     scale: 1,
-    transition: { duration: 0.4 },
+    transition: { duration: 0.5, ease: "easeOut" },
   },
 };
 
@@ -45,7 +46,7 @@ const DetailsProjects: React.FC<DetailsProjectsProps> = ({
           <X className="w-5 h-5 text-dar dark:text-gray-200" />
         </button>
 
-        {/* Fondo general y texto principal */}
+        {/* Fondo general y contenido */}
         <div className="bg-whi min-h-screen text-dar">
           {/* Sección Hero */}
           <HeroSection project={project} />

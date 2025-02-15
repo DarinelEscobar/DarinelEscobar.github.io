@@ -1,6 +1,12 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, ChevronRight, Expand, Minimize, Loader2 } from "lucide-react";
+import {
+  ChevronLeft,
+  ChevronRight,
+  Expand,
+  Minimize,
+  Loader2,
+} from "lucide-react";
 import { getAssetImage } from "./utils";
 import { motion, AnimatePresence } from "framer-motion";
 import { useSwipeable } from "react-swipeable";
@@ -18,11 +24,37 @@ interface MediaGalleryProps {
 }
 
 const galleryVariants = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: 50, scale: 0.9 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, delay: 0.1 },
+    scale: 1,
+    transition: { duration: 0.6, delay: 0.1, ease: "easeOut" },
+  },
+};
+
+// Contenedor para la lista de miniaturas, usa stagger
+const thumbnailsContainer = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.08,
+    },
+  },
+};
+
+// Animación de cada thumbnail
+const thumbnailItem = {
+  hidden: { y: 20, opacity: 0, scale: 0.9 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    scale: 1,
+    transition: {
+      type: "spring",
+      stiffness: 120,
+      damping: 14,
+    },
   },
 };
 
@@ -41,23 +73,18 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({
 
   const calculateImagePosition = useCallback(() => {
     if (!containerRef || !imageDimensions) return {};
-
-    const containerWidth = containerRef.clientWidth;
-    const containerHeight = containerRef.clientHeight;
     const aspectRatio = imageDimensions.width / imageDimensions.height;
-
     if (aspectRatio > 1) {
       return {
-        width: '100%',
-        height: 'auto',
-        maxHeight: '100%'
+        width: "100%",
+        height: "auto",
+        maxHeight: "100%",
       };
     }
-
     return {
-      width: 'auto',
-      height: '100%',
-      maxWidth: '100%'
+      width: "auto",
+      height: "100%",
+      maxWidth: "100%",
     };
   }, [containerRef, imageDimensions]);
 
@@ -68,14 +95,16 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({
 
   const prevImage = useCallback(() => {
     setIsLoading(true);
-    setCurrentImageIndex((currentImageIndex - 1 + media.length) % media.length);
+    setCurrentImageIndex(
+      (currentImageIndex - 1 + media.length) % media.length
+    );
   }, [currentImageIndex, media.length, setCurrentImageIndex]);
 
   const handlers = useSwipeable({
     onSwipedLeft: nextImage,
     onSwipedRight: prevImage,
     trackMouse: true,
-    delta: 50
+    delta: 50,
   });
 
   useHotkeys("left", prevImage);
@@ -98,9 +127,9 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({
   const toggleFullscreen = () => {
     setIsFullscreen(!isFullscreen);
     if (!isFullscreen) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = '';
+      document.body.style.overflow = "";
     }
   };
 
@@ -113,10 +142,11 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({
       }`}
       variants={galleryVariants}
       initial="hidden"
-      animate="visible"
+      whileInView="visible"
+      viewport={{ once: false, amount: 0.1 }}
     >
       <div className="space-y-6 mx-auto container">
-        <h2 className="mb-8 font-bold text-3xl text-center text-gray-800 dark:text-gray-100">
+        <h2 className="mb-8 font-bold text-gray-800 dark:text-gray-100 text-3xl text-center">
           Multimedia Material
         </h2>
 
@@ -144,22 +174,25 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({
 
                 <img
                   src={getAssetImage(media[currentImageIndex].url)}
-                  alt={media[currentImageIndex].description || "Project Media"}
+                  alt={
+                    media[currentImageIndex].description || "Project Media"
+                  }
                   className={`${
                     isLoading ? "opacity-0" : "opacity-100"
                   } transition-opacity duration-300`}
                   style={{
                     ...calculateImagePosition(),
-                    objectFit: 'contain'
+                    objectFit: "contain",
                   }}
                 />
 
+                {/* Texto/Dimensiones sobre la imagen */}
                 <div className="right-0 bottom-0 left-0 absolute bg-gradient-to-t from-black/90 via-black/70 to-transparent px-6 pt-16 pb-4 pointer-events-none">
-                  <p className="drop-shadow-lg font-medium text-lg text-white/90">
+                  <p className="drop-shadow-lg font-medium text-white/90 text-lg">
                     {media[currentImageIndex].description}
                   </p>
                   {imageDimensions && (
-                    <p className="mt-1 text-sm text-white/60">
+                    <p className="mt-1 text-white/60 text-sm">
                       {imageDimensions.width}×{imageDimensions.height}px
                     </p>
                   )}
@@ -167,6 +200,7 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({
               </motion.div>
             </AnimatePresence>
 
+            {/* Botón para fullscreen */}
             <div className="top-4 right-4 z-10 absolute flex gap-2">
               <Button
                 variant="ghost"
@@ -207,7 +241,7 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({
 
           {/* Progress Indicators */}
           <div className="bottom-4 left-1/2 z-10 absolute flex items-center gap-3 bg-black/30 dark:bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full -translate-x-1/2">
-            <span className="font-medium text-sm text-white">
+            <span className="font-medium text-white text-sm">
               {currentImageIndex + 1} / {media.length}
             </span>
             <div className="bg-white/30 w-px h-4" />
@@ -227,8 +261,14 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({
           </div>
         </div>
 
-        {/* Thumbnail Grid */}
-        <div className="gap-3 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 px-4">
+        {/* Thumbnail Grid con stagger */}
+        <motion.div
+          className="gap-3 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 px-4"
+          variants={thumbnailsContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: false, amount: 0.2 }}
+        >
           {media.map((mediaItem, index) => (
             <motion.div
               key={index}
@@ -237,7 +277,8 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({
                   ? "border-blue-500 scale-105 z-10"
                   : "border-transparent hover:border-blue-300"
               }`}
-              whileHover={{ scale: 1.03 }}
+              variants={thumbnailItem}
+              whileHover={{ scale: 1.05, rotateZ: 0.5 }}
               onClick={() => setCurrentImageIndex(index)}
             >
               <div className="relative bg-gray-100 dark:bg-gray-900 aspect-square">
@@ -252,7 +293,7 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({
               </div>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
 
       {isFullscreen && (

@@ -8,12 +8,35 @@ interface HeroSectionProps {
   project: any;
 }
 
-const heroVariants = {
-  hidden: { opacity: 0, y: 30 },
+// Contenedor para animación escalonada (cada hijo se revelará en cadena)
+const containerVariants = {
+  hidden: { opacity: 0, rotateX: 15, scale: 0.9 },
   visible: {
     opacity: 1,
+    rotateX: 0,
+    scale: 1,
+    transition: {
+      type: "spring",
+      damping: 14,
+      stiffness: 90,
+      // Animaciones hijas escalonadas
+      staggerChildren: 0.12,
+      delayChildren: 0.2,
+    },
+  },
+};
+
+// Cada elemento hijo con un suave movimiento “spring”
+const childVariants = {
+  hidden: { y: 40, opacity: 0 },
+  visible: {
     y: 0,
-    transition: { duration: 0.6 },
+    opacity: 1,
+    transition: {
+      type: "spring",
+      damping: 15,
+      stiffness: 100,
+    },
   },
 };
 
@@ -21,20 +44,35 @@ const HeroSection: React.FC<HeroSectionProps> = ({ project }) => {
   return (
     <motion.section
       className="flex items-center px-4 py-24 min-h-[50vh]"
-      variants={heroVariants}
+      variants={containerVariants}
       initial="hidden"
-      animate="visible"
+      whileInView="visible"
+      viewport={{ once: false, amount: 0.2 }}
     >
       <div className="flex lg:flex-row flex-col items-center gap-12 mx-auto container">
         {/* Información principal del proyecto */}
-        <div className="space-y-8 w-full lg:w-1/2">
-          <h1 className="font-cor font-bold text-dar text-4xl md:text-5xl leading-tight">
+        <motion.div
+          className="space-y-8 w-full lg:w-1/2"
+          variants={childVariants}
+        >
+          <motion.h1
+            className="font-cor font-bold text-dar text-4xl md:text-5xl leading-tight"
+            variants={childVariants}
+          >
             {project.name}
-          </h1>
-          <p className="font-lat text-dar text-lg md:text-xl leading-relaxed">
+          </motion.h1>
+
+          <motion.p
+            className="font-lat text-dar text-lg md:text-xl leading-relaxed"
+            variants={childVariants}
+          >
             {project.description}
-          </p>
-          <div className="flex sm:flex-row flex-col gap-4">
+          </motion.p>
+
+          <motion.div
+            className="flex sm:flex-row flex-col gap-4"
+            variants={childVariants}
+          >
             {project.url && (
               <Button
                 size="lg"
@@ -54,14 +92,18 @@ const HeroSection: React.FC<HeroSectionProps> = ({ project }) => {
                 <ArrowUpRight className="w-5 h-5" />
               </Button>
             )}
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
         {/* Imagen principal del proyecto */}
-        <div className="group relative w-full lg:w-1/2">
+        <motion.div
+          className="group relative w-full lg:w-1/2"
+          variants={childVariants}
+          whileHover={{ scale: 1.02, rotateZ: 0.5 }}
+        >
           <div className="shadow-2xl border border-5whi dark:border-5dar rounded-xl overflow-hidden">
             {project.media && project.media.length > 0 ? (
-              <img
+              <motion.img
                 src={getAssetImage(project.media[0].url)}
                 alt={project.media[0].description || "Project Image"}
                 width={800}
@@ -74,7 +116,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ project }) => {
               </div>
             )}
           </div>
-        </div>
+        </motion.div>
       </div>
     </motion.section>
   );
