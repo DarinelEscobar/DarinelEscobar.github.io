@@ -1,18 +1,37 @@
 import React, { useState } from "react";
 import { X } from "lucide-react";
-import data from "@data/experience.json";
 import HeroSection from "./HeroSection";
 import ProjectDetails from "./ProjectDetails";
 import TechnicalSidebar from "./TechnicalSidebar";
 import MediaGallery from "./MediaGallery";
 import { motion } from "framer-motion";
 
+interface Project {
+  name: string;
+  Project_Overview: string;
+  description: string;
+  role: string;
+  start_date: string;
+  end_date: string;
+  client: string;
+  team_size: number;
+  url?: string;
+  repository?: string;
+  responsibilities?: string[];
+  achievements?: string[];
+  media?: {
+    type: string;
+    url: string;
+    description?: string;
+  }[];
+}
+
 interface DetailsProjectsProps {
+  projects: Project[];
   projectIndex: number;
   onClose: () => void;
 }
 
-// Animación para el modal (fondo + escalado inicial)
 const modalVariants = {
   hidden: { opacity: 0, scale: 0.85 },
   visible: {
@@ -23,10 +42,15 @@ const modalVariants = {
 };
 
 const DetailsProjects: React.FC<DetailsProjectsProps> = ({
+  projects,
   projectIndex,
   onClose,
 }) => {
-  const project = data.experience.projects[projectIndex];
+  if (projectIndex < 0 || projectIndex >= projects.length) {
+    return null;
+  }
+
+  const project = projects[projectIndex];
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   return (
@@ -36,22 +60,17 @@ const DetailsProjects: React.FC<DetailsProjectsProps> = ({
       initial="hidden"
       animate="visible"
     >
-      {/* Contenedor principal */}
       <div className="absolute w-full min-h-full">
-        {/* Botón para cerrar */}
         <button
           onClick={onClose}
           className="top-4 right-4 z-50 fixed bg-white/90 hover:bg-white dark:hover:bg-gray-800 dark:bg-gray-800/80 shadow p-2 rounded-full transition-colors"
         >
-          <X className="w-5 h-5 text-dar dark:text-gray-200" />
+          <X className="w-5 h-5 text-dark dark:text-gray-200" />
         </button>
 
-        {/* Fondo general y contenido */}
-        <div className="bg-whi min-h-screen text-dar">
-          {/* Sección Hero */}
+        <div className="bg-white min-h-screen text-dark">
           <HeroSection project={project} />
 
-          {/* Sección de detalles del proyecto y barra lateral */}
           <section className="px-4 py-24">
             <div className="gap-12 grid lg:grid-cols-3 mx-auto container">
               <ProjectDetails project={project} />
@@ -59,7 +78,6 @@ const DetailsProjects: React.FC<DetailsProjectsProps> = ({
             </div>
           </section>
 
-          {/* Sección Multimedia (Slider + Galería) */}
           {project.media && project.media.length > 0 && (
             <MediaGallery
               media={project.media}

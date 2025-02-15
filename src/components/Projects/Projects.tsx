@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
-import data from "@data/experience.json";
+import dataExperience from "@data/experience.json";
+import dataProjects from "@data/projects.json";
 
 import "./Projects.css";
 
@@ -16,8 +17,13 @@ const Projects: React.FC = () => {
   const [direction, setDirection] = useState(1);
   const [expandedProjectIndex, setExpandedProjectIndex] = useState<number | null>(null);
 
-  const projects = data.experience.projects;
-  const currentProject = projects[currentProjectIndex];
+  // Unify projects from both sources
+  const experienceProjects = dataExperience.experience.projects || [];
+  const personalProjects = dataProjects.projects.personal_projects || [];
+  const mergedProjects = [...experienceProjects, ...personalProjects];
+
+  // Prevent errors when accessing undefined indexes
+  const currentProject = mergedProjects[currentProjectIndex] || {};
   const media = currentProject.media || [];
 
   const { ref } = useInView({ threshold: 0.2, triggerOnce: false });
@@ -32,8 +38,8 @@ const Projects: React.FC = () => {
     return () => window.removeEventListener("resize", setVh);
   }, []);
 
-  const startDate = formatDate(currentProject.start_date);
-  const endDate = formatDate(currentProject.end_date);
+  const startDate = currentProject.start_date ? formatDate(currentProject.start_date) : "";
+  const endDate = currentProject.end_date ? formatDate(currentProject.end_date) : "";
 
   const handlePrevProject = () => {
     if (currentProjectIndex > 0) {
@@ -44,7 +50,7 @@ const Projects: React.FC = () => {
   };
 
   const handleNextProject = () => {
-    if (currentProjectIndex < projects.length - 1) {
+    if (currentProjectIndex < mergedProjects.length - 1) {
       setDirection(1);
       setCurrentImageIndex(0);
       setCurrentProjectIndex((prev) => prev + 1);
@@ -80,12 +86,13 @@ const Projects: React.FC = () => {
         handlePrevProject={handlePrevProject}
         handleNextProject={handleNextProject}
         disablePrev={currentProjectIndex === 0}
-        disableNext={currentProjectIndex === projects.length - 1}
+        disableNext={currentProjectIndex === mergedProjects.length - 1}
         onExpandProject={() => handleExpandProject(currentProjectIndex)}
       />
 
       {expandedProjectIndex !== null && (
         <DetailsProjects
+          projects={mergedProjects} // Ensure DetailsProjects gets the unified data
           projectIndex={expandedProjectIndex}
           onClose={handleCloseDetails}
         />
