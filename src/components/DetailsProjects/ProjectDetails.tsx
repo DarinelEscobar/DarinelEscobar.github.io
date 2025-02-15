@@ -4,6 +4,7 @@ import { CheckCircle, Trophy, ArrowUpRight, Star } from "lucide-react";
 import { motion } from "framer-motion";
 
 interface Project {
+  Project_Overview:string;
   description: string;
   responsibilities: string[];
   achievements: string[];
@@ -41,7 +42,7 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({ project }) => {
           </h2>
         </div>
         <p className="max-w-3xl font-lat text-dar text-lg leading-relaxed">
-          {project.description}
+          {project.Project_Overview}
         </p>
       </section>
 
