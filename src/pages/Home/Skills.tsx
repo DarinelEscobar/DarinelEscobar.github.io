@@ -1,18 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { motion, useAnimation, AnimatePresence } from "framer-motion";
-import { useInView } from "react-intersection-observer";
+import React, { useState, useEffect } from "react"
 
+// Framer Motion (si lo necesitas, opcional)
+import { motion } from "framer-motion"
 
-import awsAcademyCloudFoundations from "../../assets/images/badge/aws-academy-graduate-aws-academy-cloud-foundations.png";
-import awsAcademyCloudDeveloping from "../../assets/images/badge/aws-academy-graduate-aws-academy-cloud-developing.png";
-import awsAcademyCloudSecurityFoundations from "../../assets/images/badge/aws-academy-graduate-aws-academy-cloud-security-foundations.png";
-import awsAcademyIntroductionToCloud from "../../assets/images/badge/aws-academy-graduate-aws-academy-introduction-to-cloud-semester-1.png";
-
-import * as SiIcons from "react-icons/si";
-import * as FaIcons from "react-icons/fa";
-import * as GiIcons from "react-icons/gi";
+// Lucide Icons
 import {
-  Code2,
+  Code2 as Code,
   Cloud,
   Database,
   Smartphone,
@@ -22,355 +15,333 @@ import {
   HeartHandshake,
   Speech,
   Award,
-} from "lucide-react";
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react"
 
-import data from "@data/data.json";
-import "./skills.css";
+// React Icons (para mapear iconos de otras librerías)
+import * as SiIcons from "react-icons/si"
+import * as FaIcons from "react-icons/fa"
+import * as GiIcons from "react-icons/gi"
 
-const Skills: React.FC = () => {
-  const imageMap: Record<string, string> = {
-    awsAcademyCloudFoundations,
-    awsAcademyCloudDeveloping,
-    awsAcademyCloudSecurityFoundations,
-    awsAcademyIntroductionToCloud,
-  };
+// Import del data.json
+import data from "@data/data.json"
 
-  const combinedSections = {
-    ...data.resume.Skills_Technologies,
-    certifications: data.resume.certifications,
-  };
+// Componentes de UI (Carousel, Card, Badge, etc.)
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel"
+import { Badge } from "@/components/ui/badge"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { cn } from "@/lib/utils"
 
-  const sectionKeys = Object.keys(combinedSections);
-  const [selectedSection, setSelectedSection] = useState(sectionKeys[0]);
-  const [isHovered, setIsHovered] = useState<string | null>(null);
+// -------------------------------------------------------------------
+// 1) FUNCIONES AUXILIARES PARA MAPEAR ICÓNOS
+// -------------------------------------------------------------------
+const lucideMap: Record<string, React.FC<React.SVGProps<SVGSVGElement>>> = {
+  code: Code,
+  Code: Code,
+  cloud: Cloud,
+  Cloud: Cloud,
+  database: Database,
+  Database: Database,
+  smartphone: Smartphone,
+  Smartphone: Smartphone,
+  server: Server,
+  Server: Server,
+  layoutpanelleft: LayoutPanelLeft,
+  LayoutPanelLeft: LayoutPanelLeft,
+  pocketknife: PocketKnife,
+  PocketKnife: PocketKnife,
+  hearthandshake: HeartHandshake,
+  HeartHandshake: HeartHandshake,
+  speech: Speech,
+  Speech: Speech,
+  award: Award,
+  Award: Award,
+}
 
-
-  const getIcon = (iconName: string, library: string) => {
-    switch (library.toLowerCase()) {
-      case "si":
-        return SiIcons[iconName as keyof typeof SiIcons];
-      case "fa":
-        return FaIcons[iconName as keyof typeof FaIcons];
-      case "gi":
-        return GiIcons[iconName as keyof typeof GiIcons];
-      case "lucide-react": {
-        const lucideMap: Record<string, React.FC<React.SVGProps<SVGSVGElement>>> =
-          {
-            code: Code2,
-            Code: Code2,
-            cloud: Cloud,
-            Cloud: Cloud,
-            database: Database,
-            Database: Database,
-            smartphone: Smartphone,
-            Smartphone: Smartphone,
-            server: Server,
-            Server: Server,
-            layoutpanelleft: LayoutPanelLeft,
-            LayoutPanelLeft: LayoutPanelLeft,
-            pocketknife: PocketKnife,
-            PocketKnife: PocketKnife,
-            hearthandshake: HeartHandshake,
-            HeartHandshake: HeartHandshake,
-            speech: Speech,
-            Speech: Speech,
-            award: Award,
-            Award: Award,
-          };
-        return lucideMap[iconName] || Code2;
-      }
-      default:
-        return null;
+function getIcon(iconName: string, library: string) {
+  switch (library.toLowerCase()) {
+    case "lucide-react": {
+      const LucideIcon = lucideMap[iconName] || Code
+      return <LucideIcon className="w-5 h-5" />
     }
-  };
-
-
-  const formatSectionTitle = (sectionKey: string) =>
-    sectionKey
-      .replace(/_/g, " ")
-      .replace(/\b\w/g, (char) => char.toUpperCase());
-
-
-  const activeSection = combinedSections[selectedSection];
-  let currentSkills: any[] = [];
-
-  if (activeSection) {
-    if (selectedSection === "languages" && activeSection.languages_list) {
-      currentSkills = activeSection.languages_list;
-    } else if (selectedSection === "certifications" && activeSection.items) {
-      currentSkills = activeSection.items;
-    } else if (activeSection.skills) {
-      currentSkills = activeSection.skills;
-    }
+    case "fa":
+      return React.createElement(FaIcons[iconName as keyof typeof FaIcons] || FaIcons.FaQuestion, {
+        className: "h-5 w-5",
+      })
+    case "si":
+      return React.createElement(SiIcons[iconName as keyof typeof SiIcons] || SiIcons.SiCodio, {
+        className: "h-5 w-5",
+      })
+    case "gi":
+      return React.createElement(GiIcons[iconName as keyof typeof GiIcons] || GiIcons.GiInfo, {
+        className: "h-5 w-5",
+      })
+    default:
+      return <Code className="w-5 h-5" />
   }
+}
 
+function formatSectionTitle(key: string): string {
+  return key
+    .replace(/_/g, " ")
+    .replace(/\b\w/g, (char) => char.toUpperCase())
+}
 
-  const { ref, inView } = useInView({
-    threshold: 0.2,
-    triggerOnce: false,
-  });
+// -------------------------------------------------------------------
+// 2) TRANSFORMACIÓN DE DATA
+// -------------------------------------------------------------------
+interface Skill {
+  name: string
+  icon: string
+  library: string
+  color: string
+}
 
-  const asideControls = useAnimation();
+interface SectionIcon {
+  name: string
+  library: string
+  color: string
+}
 
-  const sidebarVariants = {
-    hidden: { x: -300, opacity: 0 },
-    show: {
-      x: 0,
-      opacity: 1,
-      transition: { type: "spring", stiffness: 150, damping: 20 },
-    },
-  };
+interface CertificationItem {
+  name: string
+  link: string
+  imageKey: string
+}
+
+interface CombinedSection {
+  section_icon?: SectionIcon
+  skills?: Skill[]
+  languages_list?: Skill[]
+  items?: CertificationItem[]
+}
+
+const combinedSections = {
+  ...data.resume.Skills_Technologies,
+  certifications: data.resume.certifications,
+}
+
+const sectionKeys = Object.keys(combinedSections)
+
+function createSkillSections(): {
+  title: string
+  icon: React.ReactNode
+  color: string
+  skills: { name: string; icon: React.ReactNode; color: string }[]
+}[] {
+  return sectionKeys.map((key) => {
+    const sectionObj: CombinedSection = combinedSections[key]
+    const secIcon = sectionObj.section_icon || { name: "code", library: "lucide-react", color: "#333" }
+
+    let skillArray: Skill[] = []
+    if (sectionObj.skills) {
+      skillArray = sectionObj.skills
+    } else if (sectionObj.languages_list) {
+      skillArray = sectionObj.languages_list
+    } else if (sectionObj.items) {
+      // Para certificaciones, generamos "skills" ficticios
+      skillArray = sectionObj.items.map((cert) => ({
+        name: cert.name,
+        icon: "award",
+        library: "lucide-react",
+        color: secIcon.color,
+      }))
+    }
+
+    const finalSkills = skillArray.map((sk) => ({
+      name: sk.name,
+      icon: getIcon(sk.icon, sk.library),
+      color: sk.color,
+    }))
+
+    return {
+      title: formatSectionTitle(key),
+      icon: getIcon(secIcon.name, secIcon.library),
+      color: secIcon.color,
+      skills: finalSkills,
+    }
+  })
+}
+
+// -------------------------------------------------------------------
+// 3) FUNCIONES PARA ESCALAR SLIDES (efecto coverflow/stack)
+// -------------------------------------------------------------------
+/**
+ * Dada la posición `index` y la posición central `current`,
+ * calculamos la “distancia” al centro y retornamos clases
+ * de Tailwind para lograr escalas y opacidades diferentes.
+ *
+ * - Centro: más grande (scale-110)
+ * - Inmediatos al centro: tamaño medio (scale-90)
+ * - Más lejanos: pequeño (scale-75) o menor
+ */
+function getSlideClasses(index: number, current: number, count: number) {
+  // Distancia circular (tomando en cuenta loop)
+  const dist = (index - current + count) % count
+
+  switch (dist) {
+    case 0:
+      // Slide central: más grande
+      return "z-30 scale-110 opacity-100"
+    case 1:
+    case count - 1:
+      // Inmediatos
+      return "z-20 scale-90 opacity-95"
+    case 2:
+    case count - 2:
+      // Lejanos
+      return "z-10 scale-75 opacity-90"
+    default:
+      // Todo lo demás se hace aún más pequeño y casi invisible
+      return "z-0 scale-50 opacity-0 pointer-events-none"
+  }
+}
+
+// -------------------------------------------------------------------
+// 4) COMPONENTE PRINCIPAL SkillsCarousel
+// -------------------------------------------------------------------
+const Skills: React.FC = () => {
+  const skillSections = createSkillSections()
+
+  const [api, setApi] = useState<any>(null)
+  const [current, setCurrent] = useState(0)
+  const [count, setCount] = useState(0)
 
   useEffect(() => {
-    if (inView) {
-      asideControls.start("show");
-    } else {
-      asideControls.start("hidden");
-    }
-  }, [inView, asideControls]);
+    if (!api) return
 
+    setCount(api.scrollSnapList().length)
+    setCurrent(api.selectedScrollSnap())
 
-  const skillCardHover = {
-    hover: {
-      scale: 1.1,
-      rotate: 1,
-      transition: { type: "spring", stiffness: 200, damping: 12 },
-    },
-    tap: {
-      scale: 0.95,
-    },
-  };
-
-
-  const containerVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        staggerChildren: 0.08,
-        when: "beforeChildren",
-      },
-    },
-    exit: { opacity: 0, y: -20 },
-  };
-
-
-  const itemVariants = {
-    hidden: { opacity: 0, scale: 0.9 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: { type: "spring", stiffness: 120, damping: 12 },
-    },
-    exit: { opacity: 0, scale: 0.95 },
-  };
-
-
-  const titleVariants = {
-    hidden: { opacity: 0, scale: 0.8, y: -20 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      y: 0,
-      transition: {
-        type: "spring",
-        stiffness: 120,
-        damping: 14,
-      },
-    },
-    exit: { opacity: 0, scale: 0.8, y: 20 },
-  };
+    api.on("select", () => {
+      setCurrent(api.selectedScrollSnap())
+    })
+  }, [api])
 
   return (
-    <div ref={ref} className="flex h-full w-screen bg-whi justify-center items-start">
-      {/* SIDEBAR */}
-      <motion.aside
-        className="sidebar z-10 my-4 ml-4 flex flex-col w-16 md:w-48 lg:w-64 overflow-visible"
-        variants={sidebarVariants}
-        initial="hidden"
-        animate={asideControls}
+    <div className="relative bg-gray-50 w-screen min-h-screen overflow-hidden font-sans">
+      {/* Fondo sutil */}
+      <div className="absolute inset-0 bg-white opacity-40 pointer-events-none" />
+
+      {/* Carousel principal */}
+      <Carousel
+        setApi={setApi}
+        className="relative mx-auto py-12 w-full max-w-6xl"
+        opts={{
+          align: "center",
+          loop: true,
+          // Puedes ajustar spacing si quieres más separación lateral
+          // slides: { perView: 1, spacing: 0 },
+        }}
       >
-        <nav className="flex-1 px-4 py-2 space-y-2 overflow-y-auto h-auto">
-          {sectionKeys.map((key) => {
-            const isActive = key === selectedSection;
-            const {
-              name: iconName = "",
-              library = "",
-              color = "",
-            } = combinedSections[key].section_icon || {};
-
-            const IconComponent = getIcon(iconName, library);
-
-            return (
-              <motion.div
-                key={key}
-                onClick={() => setSelectedSection(key)}
-                className={`
-                  flex items-center gap-3 px-4 py-3 rounded-lg
-                  transition-all duration-300
-                  relative group cursor-pointer
-                  ${
-                    isActive
-                      ? "bg-blue-300 bg-opacity-20 text-dar"
-                      : "text-5dar hover:bg-gray-700 hover:bg-opacity-50 hover:text-whi"
-                  }
-                `}
-                whileHover={{ x: 10 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                {IconComponent && (
-                  <IconComponent
-                    className="shrink-0 w-5 h-5"
-                    style={{ color: color || "#000" }}
-                  />
-                )}
-
-                <span className="hidden md:block font-lat text-5dar text-sm tracking-wide truncate whitespace-nowrap">
-                  {formatSectionTitle(key)}
-                </span>
-
-                {isActive && (
-                  <motion.div
-                    className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-5 bg-blue-400 rounded-full"
-                    layoutId="activeIndicator"
-                  />
-                )}
-              </motion.div>
-            );
-          })}
-        </nav>
-      </motion.aside>
-
-      {/* CONTENIDO PRINCIPAL */}
-      <div className="flex-1 p-12 relative mt-8">
-        <div className="max-w-5xl mx-auto space-y-16">
-          {/* TÍTULO CON ANIMACIÓN */}
-          <AnimatePresence mode="wait">
-            <motion.header
-              key={selectedSection + "-header"}
-              variants={titleVariants}
-              initial="hidden"
-              animate="visible"
-              exit="exit"
-              className="text-center"
+        <CarouselContent
+          className={cn(
+            "relative flex",
+            // Aseguramos que se muestren las slides laterales aunque estén escaladas
+            "overflow-visible px-4"
+          )}
+        >
+          {skillSections.map((section, index) => (
+            <CarouselItem
+              key={index}
+              // Agregamos las clases de transformación dinámica
+              className={cn(
+                "transition-all duration-500 ease-in-out origin-center",
+                "basis-[70%] md:basis-[40%] lg:basis-[30%] mx-auto",
+                getSlideClasses(index, current, count)
+              )}
             >
-              <h1 className="text-4xl md:text-6xl font-serif font-bold text-text-color tracking-tight">
-                {formatSectionTitle(selectedSection)}
-              </h1>
-            </motion.header>
-          </AnimatePresence>
-
-          {/* LISTADO DE CERTIFICACIONES O SKILLS CON APARICIÓN/TRANSICIÓN */}
-          <AnimatePresence mode="wait">
-            {selectedSection === "certifications" ? (
-              <motion.div
-                key={selectedSection}
-                variants={containerVariants}
-                initial="hidden"
-                animate="visible"
-                exit="exit"
-                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6"
+              <Card
+                className={cn(
+                  "h-full w-full border border-gray-200 bg-white rounded-3xl shadow-lg",
+                  "overflow-hidden flex flex-col items-center justify-center"
+                )}
               >
-                {currentSkills.map((cert: any) => (
-                  <motion.div
-                    key={cert.name}
-                    className="relative group"
-                    variants={itemVariants}
-                    whileHover="hover"
-                    whileTap="tap"
-                    animate="visible"
-                    exit="exit"
-                    custom={cert.name}
-                  >
-                    <div className="flex flex-col items-center p-6 card transition-all duration-300 group-hover:shadow-lg group-hover:shadow-gray-200/50">
-                      <a
-                        href={cert.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <img
-                          src={imageMap[cert.imageKey]}
-                          alt={cert.name}
-                          className="w-32 h-auto mb-4 object-contain"
-                        />
-                      </a>
-                      <h3 className="text-lg font-lat">{cert.name}</h3>
-                    </div>
-                  </motion.div>
-                ))}
-              </motion.div>
-            ) : (
-              <motion.div
-                key={selectedSection}
-                variants={containerVariants}
-                initial="hidden"
-                animate="visible"
-                exit="exit"
-                className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 skills-grid"
-              >
-                {currentSkills.map((skill: any) => {
-                  const SkillIcon = getIcon(skill.icon, skill.library);
-                  return (
-                    <motion.div
-                      key={skill.name}
-                      className="relative group"
-                      variants={itemVariants}
-                      onHoverStart={() => setIsHovered(skill.name)}
-                      onHoverEnd={() => setIsHovered(null)}
-                      whileHover="hover"
-                      whileTap="tap"
-                      animate="visible"
-                      exit="exit"
-                      custom={skill.name}
+                <CardHeader className="p-6 text-center">
+                  <div className="flex flex-col items-center gap-4">
+                    <div
+                      className="flex justify-center items-center bg-white shadow-sm p-4 border border-gray-200 rounded-full"
+                      style={{ minWidth: "60px", minHeight: "60px" }}
                     >
-                      <div className="flex flex-col items-center p-6 card transition-all duration-300 group-hover:shadow-lg group-hover:shadow-gray-200/50">
-                        <div
-                          className="p-3 rounded-lg mb-4 transition-colors duration-300"
-                          style={{
-                            backgroundColor:
-                              isHovered === skill.name ? `${skill.color}10` : "transparent",
-                          }}
-                        >
-                          {SkillIcon && (
-                            <SkillIcon
-                              className="w-8 h-8 transition-transform duration-300 group-hover:scale-110"
-                              style={{
-                                color:
-                                  isHovered === skill.name
-                                    ? skill.color
-                                    : "#64748b",
-                              }}
-                            />
-                          )}
-                        </div>
-                        <h3
-                          className="text-lg font-lat transition-colors duration-300"
-                          style={{
-                            color:
-                              isHovered === skill.name
-                                ? skill.color
-                                : "rgb(var(--text-color))",
-                          }}
-                        >
-                          {skill.name}
-                        </h3>
-                      </div>
-                    </motion.div>
-                  );
-                })}
-              </motion.div>
-            )}
-          </AnimatePresence>
+                      {React.cloneElement(section.icon as React.ReactElement, {
+                        style: { color: "#333" },
+                        className: "h-8 w-8",
+                      })}
+                    </div>
+                    <CardTitle className="font-bold text-gray-800 text-2xl">
+                      {section.title}
+                    </CardTitle>
+                  </div>
+                </CardHeader>
+                <CardContent className="p-6 w-full">
+                  <div className="place-items-center gap-3 grid grid-cols-2">
+                    {section.skills.map((skill, skillIndex) => (
+                      <Badge
+                        key={skillIndex}
+                        variant="secondary"
+                        className={cn(
+                          "flex items-center gap-2 py-2 px-3",
+                          "bg-white border border-gray-200 shadow-sm",
+                          "text-sm font-medium text-gray-700 rounded-md"
+                        )}
+                      >
+                        {React.cloneElement(skill.icon as React.ReactElement, {
+                          style: { color: "#555" },
+                          className: "h-5 w-5",
+                        })}
+                        <span>{skill.name}</span>
+                      </Badge>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
 
-          {/* BLOB ANIMATIONS */}
-          <div className="absolute top-0 right-0 w-64 h-64 bg-blue-200 dark:bg-blue-800 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob blob" />
-          <div className="absolute top-20 right-20 w-64 h-64 bg-purple-200 dark:bg-purple-800 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000 blob" />
-          <div className="absolute top-40 right-0 w-64 h-64 bg-pink-200 dark:bg-pink-800 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000 blob" />
+        {/* Botones de navegación */}
+        <CarouselPrevious
+          className={cn(
+            "hidden md:flex absolute top-1/2 -translate-y-1/2 -left-8",
+            "bg-white border border-gray-200 shadow-md p-2 rounded-full",
+            "hover:shadow-lg transition-all duration-300"
+          )}
+        >
+          <ChevronLeft className="w-6 h-6 text-gray-700" />
+        </CarouselPrevious>
+        <CarouselNext
+          className={cn(
+            "hidden md:flex absolute top-1/2 -translate-y-1/2 -right-8",
+            "bg-white border border-gray-200 shadow-md p-2 rounded-full",
+            "hover:shadow-lg transition-all duration-300"
+          )}
+        >
+          <ChevronRight className="w-6 h-6 text-gray-700" />
+        </CarouselNext>
+
+        {/* Indicadores de posición */}
+        <div className="flex justify-center gap-2 mt-8">
+          {Array.from({ length: count }).map((_, i) => (
+            <button
+              key={i}
+              className={cn(
+                "w-3 h-3 rounded-full transition-all duration-300",
+                current === i ? "bg-gray-800 scale-125" : "bg-gray-300 hover:bg-gray-400"
+              )}
+              onClick={() => api?.scrollTo(i)}
+            />
+          ))}
         </div>
-      </div>
+      </Carousel>
     </div>
-  );
-};
+  )
+}
 
-export default Skills;
+export default Skills
