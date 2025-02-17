@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react"
 
-// Framer Motion (si lo necesitas, opcional)
+
 import { motion } from "framer-motion"
 
-// Lucide Icons
+
 import {
   Code2 as Code,
   Cloud,
@@ -19,15 +19,15 @@ import {
   ChevronRight,
 } from "lucide-react"
 
-// React Icons (para mapear iconos de otras librerías)
+
 import * as SiIcons from "react-icons/si"
 import * as FaIcons from "react-icons/fa"
 import * as GiIcons from "react-icons/gi"
 
-// Import del data.json
+
 import data from "@data/data.json"
 
-// Componentes de UI (Carousel, Card, Badge, etc.)
+
 import {
   Carousel,
   CarouselContent,
@@ -39,9 +39,9 @@ import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { cn } from "@/lib/utils"
 
-// -------------------------------------------------------------------
-// 1) FUNCIONES AUXILIARES PARA MAPEAR ICÓNOS
-// -------------------------------------------------------------------
+
+
+
 const lucideMap: Record<string, React.FC<React.SVGProps<SVGSVGElement>>> = {
   code: Code,
   Code: Code,
@@ -94,9 +94,9 @@ function formatSectionTitle(key: string): string {
     .replace(/\b\w/g, (char) => char.toUpperCase())
 }
 
-// -------------------------------------------------------------------
-// 2) TRANSFORMACIÓN DE DATA
-// -------------------------------------------------------------------
+
+
+
 interface Skill {
   name: string
   icon: string
@@ -146,7 +146,7 @@ function createSkillSections(): {
     } else if (sectionObj.languages_list) {
       skillArray = sectionObj.languages_list
     } else if (sectionObj.items) {
-      // Para certificaciones, generamos "skills" ficticios
+
       skillArray = sectionObj.items.map((cert) => ({
         name: cert.name,
         icon: "award",
@@ -170,9 +170,9 @@ function createSkillSections(): {
   })
 }
 
-// -------------------------------------------------------------------
-// 3) FUNCIONES PARA ESCALAR SLIDES (efecto coverflow/stack)
-// -------------------------------------------------------------------
+
+
+
 /**
  * Dada la posición `index` y la posición central `current`,
  * calculamos la “distancia” al centro y retornamos clases
@@ -183,30 +183,30 @@ function createSkillSections(): {
  * - Más lejanos: pequeño (scale-75) o menor
  */
 function getSlideClasses(index: number, current: number, count: number) {
-  // Distancia circular (tomando en cuenta loop)
+
   const dist = (index - current + count) % count
 
   switch (dist) {
     case 0:
-      // Slide central: más grande
+
       return "z-30 scale-110 opacity-100"
     case 1:
     case count - 1:
-      // Inmediatos
+
       return "z-20 scale-90 opacity-95"
     case 2:
     case count - 2:
-      // Lejanos
+
       return "z-10 scale-75 opacity-90"
     default:
-      // Todo lo demás se hace aún más pequeño y casi invisible
+
       return "z-0 scale-50 opacity-0 pointer-events-none"
   }
 }
 
-// -------------------------------------------------------------------
-// 4) COMPONENTE PRINCIPAL SkillsCarousel
-// -------------------------------------------------------------------
+
+
+
 const Skills: React.FC = () => {
   const skillSections = createSkillSections()
 
@@ -237,21 +237,21 @@ const Skills: React.FC = () => {
         opts={{
           align: "center",
           loop: true,
-          // Puedes ajustar spacing si quieres más separación lateral
-          // slides: { perView: 1, spacing: 0 },
+
+
         }}
       >
         <CarouselContent
           className={cn(
             "relative flex",
-            // Aseguramos que se muestren las slides laterales aunque estén escaladas
+
             "overflow-visible px-4"
           )}
         >
           {skillSections.map((section, index) => (
             <CarouselItem
               key={index}
-              // Agregamos las clases de transformación dinámica
+
               className={cn(
                 "transition-all duration-500 ease-in-out origin-center",
                 "basis-[70%] md:basis-[40%] lg:basis-[30%] mx-auto",
