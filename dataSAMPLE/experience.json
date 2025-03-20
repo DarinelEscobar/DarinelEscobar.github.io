@@ -1,0 +1,93 @@
+{
+  "experience": {
+    "projects": [
+      {
+        "name": "Plataforma Web para Gestión de Cursos en Línea",
+        "Project_Overview": "Este proyecto consistió en desarrollar una plataforma centralizada para la gestión de cursos en línea, permitiendo a estudiantes y profesores interactuar en un entorno intuitivo. La plataforma facilita la administración de contenido, inscripciones y evaluaciones de manera eficiente.",
+        "description": "Desarrollo de una plataforma web que permite la gestión de cursos en línea, incluyendo la creación de materiales, administración de estudiantes y evaluación automatizada.",
+        "role": "Desarrollador Full-stack",
+        "technologies": {
+          "Frontend": ["React", "Next.js", "Tailwind CSS"],
+          "Backend": ["Node.js", "Express"],
+          "Database": ["PostgreSQL"],
+          "Tools": ["Docker", "Postman", "Figma"],
+          "Project Management": ["Jira", "Trello"]
+        },
+        "start_date": "2024-06-01",
+        "end_date": "2024-12-31",
+        "responsibilities": [
+          "Desarrollo de la interfaz de usuario con React y Tailwind CSS.",
+          "Creación de APIs REST seguras con autenticación JWT.",
+          "Diseño de la base de datos en PostgreSQL para gestionar usuarios, cursos y evaluaciones.",
+          "Implementación de notificaciones en tiempo real con WebSockets.",
+          "Optimización del rendimiento y tiempos de carga mediante SSR con Next.js."
+        ],
+        "achievements": [
+          "Reducción del tiempo de carga en un 30% mediante la optimización del frontend.",
+          "Mejor experiencia del usuario gracias a una navegación intuitiva y accesible.",
+          "Mayor retención de estudiantes debido a la facilidad de acceso a los contenidos."
+        ],
+        "client": "Cliente Ejemplo",
+        "team_size": 5,
+        "url": "https://www.plataformacursos.com",
+        "repository": "https://github.com/usuario/plataforma-cursos",
+        "media": [
+          {
+            "type": "image",
+            "description": "Vista principal de la plataforma con cursos disponibles.",
+            "url": "assets/images/platform/main.png"
+          },
+          {
+            "type": "image",
+            "description": "Interfaz de usuario en modo oscuro para una mejor experiencia visual.",
+            "url": "assets/images/platform/dark-mode.png"
+          }
+        ]
+      },
+      {
+        "name": "Sistema de Administración de Inventarios",
+        "Project_Overview": "Un sistema web para la gestión eficiente de inventarios en empresas pequeñas y medianas. Permite la supervisión de existencias, ventas y órdenes de compra en tiempo real.",
+        "description": "Desarrollo de un sistema que ayuda a empresas a gestionar su inventario en tiempo real, mejorando la eficiencia en la administración de productos y pedidos.",
+        "role": "Desarrollador Backend",
+        "technologies": {
+          "Frontend": ["Vue.js", "Vuetify"],
+          "Backend": ["Django", "Django REST Framework"],
+          "Database": ["MySQL"],
+          "APIs": ["RESTful APIs"],
+          "Project Management": ["Asana", "GitHub"],
+          "Tools": ["Postman", "Docker", "Swagger"]
+        },
+        "start_date": "2024-03-01",
+        "end_date": "2024-09-30",
+        "responsibilities": [
+          "Diseño y desarrollo de la lógica de negocio en Django.",
+          "Creación de API REST para la gestión de productos, ventas y compras.",
+          "Optimización de consultas SQL para mejorar el rendimiento del sistema.",
+          "Integración de notificaciones automáticas de inventario bajo mínimos.",
+          "Despliegue del sistema en AWS con balanceo de carga."
+        ],
+        "achievements": [
+          "Reducción del tiempo de procesamiento de órdenes en un 40%.",
+          "Automatización de notificaciones para evitar quiebres de stock.",
+          "Incremento de eficiencia en la administración del inventario con reportes detallados."
+        ],
+        "client": "Empresa Ejemplo",
+        "team_size": 4,
+        "url": "https://www.sistemainventario.com",
+        "repository": "https://github.com/usuario/sistema-inventario",
+        "media": [
+          {
+            "type": "image",
+            "description": "Vista general del panel de administración de inventarios.",
+            "url": "assets/images/inventory/dashboard.png"
+          },
+          {
+            "type": "image",
+            "description": "Sección de productos con información detallada.",
+            "url": "assets/images/inventory/products.png"
+          }
+        ]
+      }
+    ]
+  }
+}

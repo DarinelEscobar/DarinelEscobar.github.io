@@ -1,0 +1,74 @@
+{
+  "projects": {
+    "personal_projects": [
+      {
+        "name": "Aplicación de Gestión de Tareas",
+        "Project_Overview": "Aplicación web para la gestión eficiente de tareas, permitiendo a los usuarios organizar y priorizar actividades con recordatorios integrados.",
+        "description": "Desarrollo de una aplicación que permite crear, modificar y eliminar tareas, con opciones de categorización y recordatorios automatizados.",
+        "role": "Desarrollador Único",
+        "technologies": {
+          "Frontend": ["Vue.js", "Tailwind CSS", "Pinia"],
+          "Backend": ["Firebase"],
+          "Deployment": ["Vercel"]
+        },
+        "start_date": "2024-02-01",
+        "end_date": "2024-03-15",
+        "responsibilities": [
+          "Diseñar una interfaz amigable y accesible para todos los usuarios.",
+          "Implementar la sincronización de datos en tiempo real con Firebase.",
+          "Optimizar la gestión de estados con Pinia para una mejor experiencia de usuario."
+        ],
+        "achievements": [
+          "Facilitó la organización personal de usuarios, incrementando la productividad en un 25%.",
+          "Sistema de recordatorios que ayudó a reducir tareas olvidadas en un 40%.",
+          "Interfaz altamente responsiva con carga optimizada para dispositivos móviles."
+        ],
+        "client": "Proyecto Personal",
+        "team_size": 1,
+        "url": "https://www.gestiontareas.com",
+        "repository": "https://github.com/usuario/gestion-tareas",
+        "media": [
+          {
+            "type": "image",
+            "description": "Vista principal del dashboard de tareas.",
+            "url": "assets/images/tareas/dashboard.png"
+          }
+        ]
+      },
+      {
+        "name": "Extensión de Navegador para Gestión de Notas",
+        "Project_Overview": "Extensión de navegador que permite tomar y organizar notas de manera rápida mientras se navega en internet.",
+        "description": "Desarrollo de una extensión que facilita la toma de notas, permitiendo organizarlas en categorías y sincronizarlas con almacenamiento en la nube.",
+        "role": "Desarrollador Frontend",
+        "technologies": {
+          "Browser Extension": ["JavaScript", "Chrome APIs"],
+          "Styling": ["Tailwind CSS"],
+          "Tools": ["Webpack", "npm", "Postman"]
+        },
+        "start_date": "2024-04-01",
+        "end_date": "2024-05-10",
+        "responsibilities": [
+          "Desarrollar la interfaz y diseño responsivo de la extensión.",
+          "Integrar APIs de almacenamiento en la nube para sincronización de notas.",
+          "Optimizar la extensión para garantizar un rendimiento fluido y sin interrupciones."
+        ],
+        "achievements": [
+          "Incremento del 30% en la productividad de usuarios que toman notas con frecuencia.",
+          "Implementación de sincronización en la nube que permitió el acceso multiplataforma.",
+          "Diseño minimalista e intuitivo que facilitó la rápida adopción del usuario."
+        ],
+        "client": "Proyecto Personal",
+        "team_size": 1,
+        "url": "N/A",
+        "repository": "https://github.com/usuario/extension-notas",
+        "media": [
+          {
+            "type": "image",
+            "description": "Vista de la interfaz principal de la extensión mostrando notas organizadas.",
+            "url": "assets/images/notas/extension.png"
+          }
+        ]
+      }
+    ]
+  }
+}

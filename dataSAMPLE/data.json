@@ -1,0 +1,62 @@
+{
+  "resume": {
+    "personal_info": {
+      "full_name": "Nombre Completo Aquí",
+      "short_name": "Nombre Corto Aquí",
+      "rol": "Puesto Aquí",
+      "location": "Ubicación Aquí",
+      "email": "correo@ejemplo.com",
+      "phone": "+00 000 000 0000",
+      "linkedin": "https://www.linkedin.com/in/perfil-aqui",
+      "github": "https://github.com/perfil-aqui",
+      "portfolio": "https://www.portafolio.com"
+    },
+    "professional_summary": {
+      "summary": "Resumen profesional aquí.",
+      "note": "Nota adicional aquí."
+    },
+    "Skills_Technologies": {
+      "technical_skills": {
+        "section_icon": { "name": "code", "library": "lucide-react", "color": "#3B82F6" },
+        "skills": [
+          { "name": "Lenguaje de Programación Aquí", "icon": "IconoAquí", "library": "si", "color": "#000000" },
+          { "name": "Otra Tecnología Aquí", "icon": "IconoAquí", "library": "si", "color": "#000000" }
+        ]
+      },
+      "devOps": {
+        "section_icon": { "name": "Cloud", "library": "lucide-react", "color": "#10B981" },
+        "skills": [
+          { "name": "Herramienta DevOps Aquí", "icon": "IconoAquí", "library": "fa", "color": "#000000" },
+          { "name": "Otra Herramienta Aquí", "icon": "IconoAquí", "library": "si", "color": "#000000" }
+        ]
+      }
+    },
+    "education": [
+      {
+        "degree": "Grado Académico Aquí",
+        "institution": "Institución Aquí",
+        "graduation_date": "Fecha Aquí",
+        "relevant_coursework": ["Curso Relevante Aquí", "Otro Curso Aquí"]
+      }
+    ],
+    "certifications": {
+      "section_icon": {
+        "name": "Award",
+        "library": "lucide-react",
+        "color": "#FFD700"
+      },
+      "items": [
+        {
+          "name": "Certificación Aquí",
+          "link": "https://www.credly.com/badges/enlace-aqui",
+          "imageKey": "imagenCertificacionAqui"
+        },
+        {
+          "name": "Otra Certificación Aquí",
+          "link": "https://www.credly.com/badges/enlace-aqui",
+          "imageKey": "imagenCertificacionAqui"
+        }
+      ]
+    }
+  }
+}
