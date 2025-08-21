@@ -1,62 +1,132 @@
 {
   "resume": {
     "personal_info": {
-      "full_name": "Nombre Completo Aquí",
-      "short_name": "Nombre Corto Aquí",
-      "rol": "Puesto Aquí",
-      "location": "Ubicación Aquí",
-      "email": "correo@ejemplo.com",
-      "phone": "+00 000 000 0000",
-      "linkedin": "https://www.linkedin.com/in/perfil-aqui",
-      "github": "https://github.com/perfil-aqui",
-      "portfolio": "https://www.portafolio.com"
+      "full_name": "Christian Darinel Escobar Guillen",
+      "short_name": "Darinel Escobar",
+      "rol": "Software Engineering",
+      "location": "Chiapas, Mexico ",
+      "email": "darinel.escobar@outlook.com",
+      "phone": "+52 961 302 1060",
+      "linkedin": "https://www.linkedin.com/in/darinel-escobar",
+      "github": "https://github.com/DarinelEscobar",
+      "portfolio": "https://www.sample.com"
     },
     "professional_summary": {
-      "summary": "Resumen profesional aquí.",
-      "note": "Nota adicional aquí."
+      "summary": "I'm Darinel a versatile software engineer who enjoys full-stack development and problem-solving.",
+      "note":"  Always eager to learn and grow, I thrive on tackling new challenges and expanding my skill set."
     },
-    "Skills_Technologies": {
-      "technical_skills": {
-        "section_icon": { "name": "code", "library": "lucide-react", "color": "#3B82F6" },
-        "skills": [
-          { "name": "Lenguaje de Programación Aquí", "icon": "IconoAquí", "library": "si", "color": "#000000" },
-          { "name": "Otra Tecnología Aquí", "icon": "IconoAquí", "library": "si", "color": "#000000" }
-        ]
-      },
-      "devOps": {
-        "section_icon": { "name": "Cloud", "library": "lucide-react", "color": "#10B981" },
-        "skills": [
-          { "name": "Herramienta DevOps Aquí", "icon": "IconoAquí", "library": "fa", "color": "#000000" },
-          { "name": "Otra Herramienta Aquí", "icon": "IconoAquí", "library": "si", "color": "#000000" }
-        ]
-      }
-    },
+  "Skills_Technologies": {
+  "technical_skills": {
+    "section_icon": { "name": "code", "library": "lucide-react", "color": "#3B82F6" },
+    "skills": [
+      { "name": "Python", "icon": "SiPython", "library": "si", "color": "#306998" },
+      { "name": "JavaScript", "icon": "SiJavascript", "library": "si", "color": "#F7DF1E" },
+      { "name": "SQL", "icon": "SiMysql", "library": "si", "color": "#4479A1" },
+      { "name": "AWS", "icon": "FaAws", "library": "fa", "color": "#FF9900" }
+    ]
+  },
+
+  "devOps": {
+    "section_icon": { "name": "Cloud", "library": "lucide-react", "color": "#10B981" },
+    "skills": [
+      { "name": "Docker", "icon": "FaDocker", "library": "fa", "color": "#2496ED" },
+      { "name": "AWS", "icon": "FaAws", "library": "fa", "color": "#FF9900" },
+      { "name": "Git", "icon": "FaGit", "library": "fa", "color": "#F05032" }
+    ]
+  },
+  "databases": {
+    "section_icon": { "name": "Database", "library": "lucide-react", "color": "#DB2777" },
+    "skills": [
+      { "name": "MySQL", "icon": "SiMysql", "library": "si", "color": "#4479A1" },
+      { "name": "MongoDB", "icon": "SiMongodb", "library": "si", "color": "#47A248" }
+    ]
+  },
+  "mobile_development": {
+    "section_icon": { "name": "Smartphone", "library": "lucide-react", "color": "#F59E0B" },
+    "skills": [
+      { "name": "React Native", "icon": "FaReact", "library": "fa", "color": "#61DAFB" },
+      { "name": "Flutter", "icon": "SiFlutter", "library": "si", "color": "#02569B" }
+    ]
+  },
+  "backend_development": {
+    "section_icon": { "name": "server", "library": "lucide-react", "color": "#8B5CF6" },
+    "skills": [
+      { "name": "Node.js", "icon": "FaNode", "library": "fa", "color": "#339933" },
+      { "name": "Laravel", "icon": "SiLaravel", "library": "si", "color": "#FF2D20" },
+      { "name": "CodeIgniter", "icon": "SiCodeigniter", "library": "si", "color": "#DD4814" },
+      { "name": "RabbitMQ", "icon": "SiRabbitmq", "library": "si", "color": "#FF6600" }
+    ]
+  },
+  "frontend_development": {
+    "section_icon": { "name": "LayoutPanelLeft", "library": "lucide-react", "color": "#06B6D4" },
+    "skills": [
+      { "name": "React", "icon": "FaReact", "library": "fa", "color": "#61DAFB" },
+      { "name": "Tailwind CSS", "icon": "SiTailwindcss", "library": "si", "color": "#06B6D4" },
+      { "name": "Bootstrap", "icon": "FaBootstrap", "library": "fa", "color": "#7952B3" },
+      { "name": "Figma", "icon": "FaFigma", "library": "fa", "color": "#F24E1E" }
+    ]
+  },
+  "tools": {
+    "section_icon": { "name": "PocketKnife", "library": "lucide-react", "color": "#DC2626" },
+    "skills": [
+      { "name": "Postman", "icon": "SiPostman", "library": "si", "color": "#FF6C37" }
+    ]
+  },
+  "soft_skills": {
+    "section_icon": { "name": "HeartHandshake", "library": "lucide-react", "color": "#FACC15" },
+    "skills": [
+      { "name": "Problem Solving", "icon": "FaLightbulb", "library": "fa", "color": "#FCD34D" },
+      { "name": "Time Management", "icon": "FaClock", "library": "fa", "color": "#4B5563" }
+    ]
+  },
+  "languages": {
+    "section_icon": { "name": "Speech", "library": "lucide-react", "color": "#2563EB" },
+    "languages_list": [
+      { "name": "English B2", "icon": "GiEagleEmblem", "library": "gi", "color": "#1E3A8A" },
+      { "name": "Spanish Native", "icon": "GiCactus", "library": "gi", "color": "#E11D48" },
+      { "name": "Japanese N4", "icon": "GiFuji", "library": "gi", "color": "#9CA3AF" }
+    ]
+  }
+},
+
     "education": [
       {
-        "degree": "Grado Académico Aquí",
-        "institution": "Institución Aquí",
-        "graduation_date": "Fecha Aquí",
-        "relevant_coursework": ["Curso Relevante Aquí", "Otro Curso Aquí"]
+        "degree": "Bachelor of Software Engineering",
+        "institution": "Universidad Politecnica de Chiapas",
+        "graduation_date": "2025-04",
+        "relevant_coursework": ["Software Architecture", "Cloud Computing", "Database Systems", "Data Structures and Algorithms", "Web Development", "Software Engineering Principles"]
       }
     ],
-    "certifications": {
-      "section_icon": {
-        "name": "Award",
-        "library": "lucide-react",
-        "color": "#FFD700"
-      },
-      "items": [
-        {
-          "name": "Certificación Aquí",
-          "link": "https://www.credly.com/badges/enlace-aqui",
-          "imageKey": "imagenCertificacionAqui"
-        },
-        {
-          "name": "Otra Certificación Aquí",
-          "link": "https://www.credly.com/badges/enlace-aqui",
-          "imageKey": "imagenCertificacionAqui"
-        }
-      ]
+
+     "certifications": {
+  "section_icon": {
+    "name": "Award",
+    "library": "lucide-react",
+    "color": "#FFD700"
+  },
+  "items": [
+    {
+      "name": "AWS Academy Cloud Foundations",
+      "link": "https://www.credly.com/badges/17c50411-0cbe-4586-bd34-00c130c92e22/public_url",
+      "imageKey": "awsAcademyCloudFoundations"
+    },
+    {
+      "name": "AWS Academy Cloud Developing",
+      "link": "https://www.credly.com/badges/920866d4-e314-469b-87d3-b4da8c069864/public_url",
+      "imageKey": "awsAcademyCloudDeveloping"
+    },
+    {
+      "name": "AWS Academy Cloud Security Foundations",
+      "link": "https://www.credly.com/badges/dbcfcfd3-7d99-4877-b777-1489e1edf8d5/public_url",
+      "imageKey": "awsAcademyCloudSecurityFoundations"
+    },
+    {
+      "name": "AWS Academy Introduction to Cloud Semester 1",
+      "link": "https://www.credly.com/badges/657cf76c-0b10-40ba-a55d-62f35c764ac2/public_url",
+      "imageKey": "awsAcademyIntroductionToCloud"
     }
+  ]
+}
+
   }
 }

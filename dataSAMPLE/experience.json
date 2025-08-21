@@ -2,91 +2,140 @@
   "experience": {
     "projects": [
       {
-        "name": "Plataforma Web para Gestión de Cursos en Línea",
-        "Project_Overview": "Este proyecto consistió en desarrollar una plataforma centralizada para la gestión de cursos en línea, permitiendo a estudiantes y profesores interactuar en un entorno intuitivo. La plataforma facilita la administración de contenido, inscripciones y evaluaciones de manera eficiente.",
-        "description": "Desarrollo de una plataforma web que permite la gestión de cursos en línea, incluyendo la creación de materiales, administración de estudiantes y evaluación automatizada.",
-        "role": "Desarrollador Full-stack",
+        "name": "Web Platform for Educational Offerings in Chiapas",
+        "Project_Overview": "This project aimed to create a centralized web platform to help students in Chiapas explore university programs with ease. The platform provides a structured database with detailed information on degree programs, admission requirements, costs, and institutional details. It offers intuitive search and filtering options, allowing students to compare different programs efficiently. Additionally, the platform enhances accessibility by enabling students to download academic plans and set reminders for key enrollment deadlines.",
+        "description": "Development of a web platform for students to search and explore university programs in Chiapas, providing a centralized source of detailed information on degrees, admission criteria, and costs. The platform includes key features for students such as search and filtering options, program details, admission requirements, cost breakdowns, and contact information.",
+        "role": "Full-stack Developer",
         "technologies": {
-          "Frontend": ["React", "Next.js", "Tailwind CSS"],
-          "Backend": ["Node.js", "Express"],
-          "Database": ["PostgreSQL"],
-          "Tools": ["Docker", "Postman", "Figma"],
-          "Project Management": ["Jira", "Trello"]
+          "Frontend": ["React", "Vite", "Tailwind CSS"],
+          "Backend": ["PHP", "CodeIgniter 4"],
+          "Tools": ["ShadCN/UI", "framer-motion", "Postman", "Eraser.io"],
+          "Project Management": ["Jira", "GitHub"]
         },
-        "start_date": "2024-06-01",
+        "start_date": "2024-08-01",
         "end_date": "2024-12-31",
         "responsibilities": [
-          "Desarrollo de la interfaz de usuario con React y Tailwind CSS.",
-          "Creación de APIs REST seguras con autenticación JWT.",
-          "Diseño de la base de datos en PostgreSQL para gestionar usuarios, cursos y evaluaciones.",
-          "Implementación de notificaciones en tiempo real con WebSockets.",
-          "Optimización del rendimiento y tiempos de carga mediante SSR con Next.js."
+          "Design and implement the user interface using React with Vite.",
+          "Develop secure RESTful APIs with PHP CodeIgniter 4, including password hash mechanisms and protected routes.",
+          "Design scalable endpoints to handle public statistics and administrative operations.",
+          "Implement pagination in the endpoints to optimize performance with over 1,000 universities.",
+          "Ensure data standardization to enable effective comparison of educational programs.",
+          "Implement tools for students to download academic plans and institutional profiles in PDF format.",
+          "Develop features for students to set reminders for important dates such as enrollment deadlines and exams."
         ],
         "achievements": [
-          "Reducción del tiempo de carga en un 30% mediante la optimización del frontend.",
-          "Mejor experiencia del usuario gracias a una navegación intuitiva y accesible.",
-          "Mayor retención de estudiantes debido a la facilidad de acceso a los contenidos."
+          "Significant reduction in system response time thanks to pagination.",
+          "Improved accessibility of educational information for students in Chiapas.",
+          "Successful implementation of a centralized platform, reducing the time students spend searching for educational opportunities.",
+          "Increased student awareness of the range of educational options available in Chiapas.",
+          "Development of an intuitive system allowing students to compare educational programs side-by-side, aiding informed decision-making."
         ],
-        "client": "Cliente Ejemplo",
-        "team_size": 5,
-        "url": "https://www.plataformacursos.com",
-        "repository": "https://github.com/usuario/plataforma-cursos",
+        "client": "Coepes Chiapas",
+        "team_size": 6,
+        "url": "https://plataforma.ieppd.chiapas.gob.mx/coepes/react/",
+        "repository": "https://github.com/DarinelEscobar/COEPES_public.git",
         "media": [
           {
             "type": "image",
-            "description": "Vista principal de la plataforma con cursos disponibles.",
-            "url": "assets/images/platform/main.png"
+            "description": "Favorites section where users can save preferred programs.",
+            "url": "assets/images/COEPES-Public/fav.png"
           },
           {
             "type": "image",
-            "description": "Interfaz de usuario en modo oscuro para una mejor experiencia visual.",
-            "url": "assets/images/platform/dark-mode.png"
+            "description": "University program page displayed in dark mode.",
+            "url": "assets/images/COEPES-Public/dark-view-program.png"
+          },
+          {
+            "type": "image",
+            "description": "University program page displayed in light mode.",
+            "url": "assets/images/COEPES-Public/view-program.png"
+          },
+
+          {
+            "type": "image",
+            "description": "Main dashboard displaying an overview of the university programs.",
+            "url": "assets/images/COEPES-Public/Main.png"
+          },
+          {
+            "type": "image",
+            "description": "Sidebar section showcasing favorite programs.",
+            "url": "assets/images/COEPES-Public/side-fav.png"
           }
         ]
       },
       {
-        "name": "Sistema de Administración de Inventarios",
-        "Project_Overview": "Un sistema web para la gestión eficiente de inventarios en empresas pequeñas y medianas. Permite la supervisión de existencias, ventas y órdenes de compra en tiempo real.",
-        "description": "Desarrollo de un sistema que ayuda a empresas a gestionar su inventario en tiempo real, mejorando la eficiencia en la administración de productos y pedidos.",
-        "role": "Desarrollador Backend",
+        "name": "Administrative System for University Programs",
+        "Project_Overview": "This system was developed to help university administrators manage academic program data more efficiently. It allows the creation, modification, and deletion of institution and program-related information while also facilitating the generation of statistical reports. The system enhances administrative workflows by providing an intuitive interface for non-technical users, ensuring data accuracy, and promoting engagement between institutions and prospective students.",
+        "description": "The administrative module was designed for administrators to manage university data, including creating, modifying, and deleting information related to institutions, programs, and other relevant data. This system also facilitates the generation of general usage statistics, ensuring effective data management.",
+        "role": "Full-stack Developer",
         "technologies": {
-          "Frontend": ["Vue.js", "Vuetify"],
-          "Backend": ["Django", "Django REST Framework"],
+          "Frontend": ["HTML", "CSS", "JavaScript", "Bootstrap", "React", "Vite"],
+          "Backend": ["PHP", "CodeIgniter 4"],
           "Database": ["MySQL"],
+          "Architecture": ["MVC (Model-View-Controller)"],
           "APIs": ["RESTful APIs"],
-          "Project Management": ["Asana", "GitHub"],
-          "Tools": ["Postman", "Docker", "Swagger"]
+          "Project Management": ["Jira", "GitHub"],
+          "Tools": ["Postman", "Eraser.io"]
         },
-        "start_date": "2024-03-01",
-        "end_date": "2024-09-30",
+        "start_date": "2024-08-01",
+        "end_date": "2024-12-31",
         "responsibilities": [
-          "Diseño y desarrollo de la lógica de negocio en Django.",
-          "Creación de API REST para la gestión de productos, ventas y compras.",
-          "Optimización de consultas SQL para mejorar el rendimiento del sistema.",
-          "Integración de notificaciones automáticas de inventario bajo mínimos.",
-          "Despliegue del sistema en AWS con balanceo de carga."
+          "Backend development using CodeIgniter 4 with MVC architecture.",
+          "Designing the admin interface with Bootstrap for a responsive and accessible layout.",
+          "Creating secure RESTful APIs for data insertion and retrieval.",
+          "The module 'Web Platform for Educational Offerings in Chiapas' made with React was integrated into the CodeIgniter project, functioning only as a pre-built view, making use of both Bootstrap and Tailwind CSS within the same project.",
+          "Developing a system for generating general usage statistics.",
+          "Implementing functionalities for administrators to manage academic programs, promotions, and updates.",
+          "Ensuring the accuracy and timely updates of educational data within the platform.",
+          "Monitoring key performance metrics and gathering user feedback to improve platform usability."
         ],
         "achievements": [
-          "Reducción del tiempo de procesamiento de órdenes en un 40%.",
-          "Automatización de notificaciones para evitar quiebres de stock.",
-          "Incremento de eficiencia en la administración del inventario con reportes detallados."
+          "An efficient and secure system streamlining administrative tasks for university staff.",
+          "An intuitive interface that facilitated interaction for non-technical users.",
+          "A platform allowing institutions to easily manage their academic programs, promotions, and updates, reducing reliance on manual processes.",
+          "A system that allows administrators to generate reports displaying the number of visits to each university within the system.",
+          "A centralized system for managing data to ensure information is current, contributing to the reduction of academic lag in Chiapas.",
+          "Enhanced institutional engagement, with universities actively updating and maintaining their program information.",
+          "A significant increase in platform adoption and student usage, improving access to education-related data."
         ],
-        "client": "Empresa Ejemplo",
-        "team_size": 4,
-        "url": "https://www.sistemainventario.com",
-        "repository": "https://github.com/usuario/sistema-inventario",
+        "client": "Coepes Chiapas",
+        "team_size": 6,
+        "url": "https://plataforma.ieppd.chiapas.gob.mx/coepes/login/",
+        "repository": "https://github.com/DarinelEscobar/coepes.git",
         "media": [
           {
             "type": "image",
-            "description": "Vista general del panel de administración de inventarios.",
-            "url": "assets/images/inventory/dashboard.png"
+            "description": "Login page of the platform with authentication features.",
+            "url": "assets/images/COEPES-Administrative/login.png"
           },
           {
             "type": "image",
-            "description": "Sección de productos con información detallada.",
-            "url": "assets/images/inventory/products.png"
+            "description": "General statistics dashboard showcasing user activity and system metrics.",
+            "url": "assets/images/COEPES-Administrative/estatistics.png"
+          },
+          {
+            "type": "image",
+            "description": "Detailed breakdown of statistics in a different format for analysis.",
+            "url": "assets/images/COEPES-Administrative/estatistics_2.png"
+          },
+          {
+            "type": "image",
+            "description": "Full view of the platform's statistical dashboard with various filtering options.",
+            "url": "assets/images/COEPES-Administrative/full-estastics.png"
+          },
+
+          {
+            "type": "image",
+            "description": "Modal window displaying available campus locations.",
+            "url": "assets/images/COEPES-Administrative/sedes-modal.png"
+          },
+          {
+            "type": "image",
+            "description": "University locations overview, showing available campuses on the map.",
+            "url": "assets/images/COEPES-Administrative/sedes-Uni.png"
           }
         ]
+
       }
     ]
   }

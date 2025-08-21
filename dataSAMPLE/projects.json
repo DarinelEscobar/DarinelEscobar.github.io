@@ -2,70 +2,71 @@
   "projects": {
     "personal_projects": [
       {
-        "name": "Aplicación de Gestión de Tareas",
-        "Project_Overview": "Aplicación web para la gestión eficiente de tareas, permitiendo a los usuarios organizar y priorizar actividades con recordatorios integrados.",
-        "description": "Desarrollo de una aplicación que permite crear, modificar y eliminar tareas, con opciones de categorización y recordatorios automatizados.",
-        "role": "Desarrollador Único",
+        "name": "Personal Portfolio Website",
+        "Project_Overview": "Un portafolio personal enfocado en mostrar proyectos y habilidades técnicas de manera interactiva y responsiva.",
+        "description": "Desarrollo de un portafolio moderno utilizando React y Tailwind CSS, con animaciones en Framer Motion. Permite a los visitantes explorar proyectos, revisar detalles técnicos y contactar a través de formularios integrados.",
+        "role": "Sole Developer",
         "technologies": {
-          "Frontend": ["Vue.js", "Tailwind CSS", "Pinia"],
-          "Backend": ["Firebase"],
-          "Deployment": ["Vercel"]
+          "Frontend": ["React", "Tailwind CSS", "Framer Motion", "HTML", "CSS"],
+          "Design": ["Figma"],
+          "Deployment": ["GitHub Pages"]
         },
-        "start_date": "2024-02-01",
-        "end_date": "2024-03-15",
+        "start_date": "2024-01-01",
+        "end_date": "2024-02-20",
         "responsibilities": [
-          "Diseñar una interfaz amigable y accesible para todos los usuarios.",
-          "Implementar la sincronización de datos en tiempo real con Firebase.",
-          "Optimizar la gestión de estados con Pinia para una mejor experiencia de usuario."
+          "Diseñar la arquitectura de componentes y el flujo de navegación.",
+          "Implementar un diseño responsivo para distintos tamaños de pantalla.",
+          "Integrar animaciones suaves con Framer Motion para destacar secciones clave."
         ],
         "achievements": [
-          "Facilitó la organización personal de usuarios, incrementando la productividad en un 25%.",
-          "Sistema de recordatorios que ayudó a reducir tareas olvidadas en un 40%.",
-          "Interfaz altamente responsiva con carga optimizada para dispositivos móviles."
+          "Incremento en la visibilidad de proyectos personales, recibiendo feedback de reclutadores.",
+          "La estructura modular permitió realizar futuras actualizaciones de contenido sin complicaciones.",
+          "Diseño completamente responsivo con excelente rendimiento en dispositivos móviles."
         ],
-        "client": "Proyecto Personal",
+        "client": "Personal",
         "team_size": 1,
-        "url": "https://www.gestiontareas.com",
-        "repository": "https://github.com/usuario/gestion-tareas",
+        "url": "https://darinelescobar.github.io/",
+        "repository": "https://github.com/DarinelEscobar/DarinelEscobar.github.io.git",
         "media": [
           {
             "type": "image",
-            "description": "Vista principal del dashboard de tareas.",
-            "url": "assets/images/tareas/dashboard.png"
+            "description": "Sección principal del portafolio con un diseño moderno.",
+            "url": "assets/images/Portafolio/Portafolio.png"
           }
         ]
       },
       {
-        "name": "Extensión de Navegador para Gestión de Notas",
-        "Project_Overview": "Extensión de navegador que permite tomar y organizar notas de manera rápida mientras se navega en internet.",
-        "description": "Desarrollo de una extensión que facilita la toma de notas, permitiendo organizarlas en categorías y sincronizarlas con almacenamiento en la nube.",
-        "role": "Desarrollador Frontend",
+        "name": "ChatGPT-SmartNavbar",
+        "Project_Overview": "Extensión de Chrome diseñada para acelerar el flujo de trabajo en ChatGPT, ofreciendo atajos y una administración inteligente de prompts.",
+        "description": "La extensión añade un menú de navegación intuitivo y dinámico en la interfaz de ChatGPT, permitiendo la búsqueda y organización de prompts, así como la creación de categorías personalizadas para facilitar la gestión de plantillas y mensajes frecuentes.",
+        "role": "Frontend Developer",
         "technologies": {
           "Browser Extension": ["JavaScript", "Chrome APIs"],
-          "Styling": ["Tailwind CSS"],
-          "Tools": ["Webpack", "npm", "Postman"]
+          "Styling": ["Tailwind CSS", "Bootstrap (opcional)"],
+          "Tools": ["npm", "Webpack", "Postman"]
         },
-        "start_date": "2024-04-01",
-        "end_date": "2024-05-10",
+        "start_date": "2024-03-01",
+        "end_date": "2024-04-15",
         "responsibilities": [
-          "Desarrollar la interfaz y diseño responsivo de la extensión.",
-          "Integrar APIs de almacenamiento en la nube para sincronización de notas.",
-          "Optimizar la extensión para garantizar un rendimiento fluido y sin interrupciones."
+          "Desarrollar la interfaz principal de la extensión con JavaScript y Tailwind CSS.",
+          "Configurar scripts de build y empaquetado para la extensión en Chrome.",
+          "Implementar funcionalidades de autocompletado y organización de prompts en múltiples categorías.",
+          "Optimizar el rendimiento mediante la observación del DOM y la actualización dinámica del contenido."
         ],
         "achievements": [
-          "Incremento del 30% en la productividad de usuarios que toman notas con frecuencia.",
-          "Implementación de sincronización en la nube que permitió el acceso multiplataforma.",
-          "Diseño minimalista e intuitivo que facilitó la rápida adopción del usuario."
+          "Mejoró significativamente la productividad de usuarios que utilizan ChatGPT de forma intensiva.",
+          "Implementación de un sistema de búsqueda flexible que soporta palabras incompletas o múltiples fragmentos.",
+          "Nueva funcionalidad de autoguardado de preferencias del usuario, facilitando el uso continuo."
         ],
         "client": "Proyecto Personal",
         "team_size": 1,
         "url": "N/A",
-        "repository": "https://github.com/usuario/extension-notas",
+        "repository": "https://github.com/DarinelEscobar/ChatGPT-SmartNavbar.git",
         "media": [
           {
             "type": "image",
-            "description": "Vista de la interfaz principal de la extensión mostrando notas organizadas.",
-            "url": "assets/images/notas/extension.png"
+            "description": "Vista principal de la extensión mostrando la barra de navegación inteligente.",
+            "url": "assets/images/Sample.png"
           }
         ]
       }
