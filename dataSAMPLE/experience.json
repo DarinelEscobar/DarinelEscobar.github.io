@@ -136,7 +136,214 @@
           }
         ]
 
+      },
+      {
+        "name": "Landing Page for Chiapas Events - Anytime Fitness Tuxtla",
+        "Project_Overview": "This project consisted of the design and implementation of a promotional landing page for Chiapas Events, developed for the company Anytime Fitness Tuxtla. The landing page was created to promote cultural, recreational, and sports events in the region, providing an attractive and modern interface for visitors.",
+        "description": "Development of a responsive landing page to showcase upcoming events in Chiapas. The site highlights event categories, advantages of participation, and includes a multimedia gallery. It was built with attention to visual design and user experience, ensuring accessibility across devices.",
+        "role": "Frontend Developer",
+        "technologies": {
+          "Frontend": ["React", "Vite", "Tailwind CSS"],
+          "Backend": [],
+          "Tools": ["ShadCN/UI", "Framer Motion", "Figma"],
+          "Project Management": ["GitHub"]
+        },
+        "start_date": "2025-04-11",
+        "end_date": "2025-04-14",
+        "responsibilities": [
+          "Design the structure and layout of the landing page based on the corporate branding.",
+          "Implement responsive design to ensure compatibility across desktop and mobile devices.",
+          "Integrate interactive components including carousel for featured events and animated transitions.",
+          "Optimize image assets for fast loading and better performance.",
+          "Implement modular and reusable UI components using Tailwind CSS and ShadCN/UI.",
+          "Coordinate with the client to adapt the site content to their communication objectives."
+        ],
+        "achievements": [
+          "Successful launch of a visually appealing and functional landing page.",
+          "Improved brand visibility for Anytime Fitness Tuxtla through online event promotion.",
+          "Responsive interface that adapts seamlessly to different devices.",
+          "Positive feedback from users due to its simplicity and ease of navigation."
+        ],
+        "client": "Anytime Fitness Tuxtla",
+        "team_size": 1,
+        "url": "https://chiapaseventos.com/",
+        "repository": "https://github.com/DarinelEscobar/Chiapas_Eventos.git",
+        "media": [
+          {
+            "type": "image",
+            "description": "Main landing page view.",
+            "url": "assets/images/chiapaseventos/main.png"
+          },
+          {
+            "type": "image",
+            "description": "Mobile header preview.",
+            "url": "assets/images/chiapaseventos/mobile_header.png"
+          },
+          {
+            "type": "image",
+            "description": "Secondary mobile layout image.",
+            "url": "assets/images/chiapaseventos/mobileimg2.png"
+          },
+          {
+            "type": "image",
+            "description": "Mobile footer preview.",
+            "url": "assets/images/chiapaseventos/mobile_footer3.png"
+          }
+        ]
+      },
+      {
+        "name": "AMIFIT Cobro App",
+        "Project_Overview": "This project focused on the development of a payment management web application for Anytime Fitness Tuxtla. The application enables gym members to pay their monthly fees, register passes, and purchase keyfobs through a secure online interface. It integrates Stripe for payment processing, supports QR code payment flows, and provides a responsive user interface tailored for mobile and desktop use.",
+        "description": "Development of a responsive payment application for Anytime Fitness members in Tuxtla. The platform allows users to register, pay monthly subscriptions, and handle keyfob purchases. Built with React and Stripe integration, it features a modular architecture and reusable components to simplify future maintenance and scaling.",
+        "role": "Full-stack Developer",
+        "technologies": {
+          "Frontend": ["React", "Tailwind CSS"],
+          "Backend": ["PHP", "CodeIgniter 4"],
+
+          "Tools": ["Stripe", "React-QR-Code", "Material-UI"],
+          "Project Management": ["GitHub"]
+        },
+        "start_date": "2025-04-05",
+        "end_date": "2025-05-30",
+        "responsibilities": [
+          "Design and implement payment workflows for monthly fees, passes, and keyfobs.",
+          "Integrate Stripe API for secure and reliable payment processing.",
+          "Implement QR code generation and scanning flow for user-friendly payment experience.",
+          "Develop modular UI components such as CardQR, SocioInfo, and Payment Summaries.",
+          "Refactor and maintain API endpoints for keyfob and monthly payment validation.",
+          "Ensure responsive and accessible interface across devices."
+        ],
+        "achievements": [
+          "Successful integration of Stripe with QR-based payment flow.",
+          "Deployment of a fully functional payment application in less than a week.",
+          "Improved efficiency in gym membership fee collection.",
+          "Simplified keyfob management and reduced administrative overhead."
+        ],
+        "client": "Anytime Fitness Tuxtla",
+        "team_size": 2,
+        "url": "https://cobro.amifit.mx/",
+        "repository": "https://github.com/DarinelEscobar/AMIFITCOBRO.git",
+        "media": [
+          {
+            "type": "image",
+            "description": "Main view of the AMIFIT Cobro application.",
+            "url": "assets/images/AMIFITCOBRO/mainview.png"
+          },
+          {
+            "type": "image",
+            "description": "Registration section to sign up new members.",
+            "url": "assets/images/AMIFITCOBRO/inscribete.png"
+          },
+          {
+            "type": "image",
+            "description": "Monthly fee payment page view.",
+            "url": "assets/images/AMIFITCOBRO/Mensualidad_view.png"
+          },
+          {
+            "type": "image",
+            "description": "Monthly payment flow using Stripe integration.",
+            "url": "assets/images/AMIFITCOBRO/Payment-mensualidad.png"
+          },
+          {
+            "type": "image",
+            "description": "Secondary overview of the platform.",
+            "url": "assets/images/AMIFITCOBRO/secondview.png"
+          },
+          {
+            "type": "image",
+            "description": "Successful payment confirmation screen for monthly fee.",
+            "url": "assets/images/AMIFITCOBRO/sucess_pago_realisado_mensualidad.png"
+          }
+        ]
+      },
+      {
+        "name": "AMIFIT App",
+        "Project_Overview": "This project delivers a membership and payment management system for Anytime Fitness Tuxtla. It centralizes keyfob sales, monthly fee payments, and inventory handling, integrating Stripe for online payments and email notifications for purchase confirmations. The backend is built on CodeIgniter 4 with structured controllers, models, and routes to ensure secure, maintainable operations.",
+        "description": "Development of a CodeIgniter 4 application to manage member operations: validating keys, processing monthly payments, handling standby payments during closures, and sending purchase confirmations. The interface uses Bootstrap for responsive views and supports Stripe payment links with verification and cancellation endpoints.",
+        "role": "Full-stack Developer",
+        "technologies": {
+          "Frontend": ["Bootstrap 5"],
+          "Backend": ["PHP", "CodeIgniter 4", "MySQL"],
+          "Tools": ["Stripe PHP", "PHPMailer", "Postman"],
+          "Project Management": ["GitHub"]
+        },
+        "start_date": "2025-04-02",
+        "end_date": "2025-05-14",
+        "responsibilities": [
+          "Implement Stripe payment flow: start, verify, and cancel payment endpoints.",
+          "Build MensualidadController for monthly fee validation, purchase, and email notifications.",
+          "Add PagosStandby model and logic to handle payments during gym closures.",
+          "Create keyfob routes and controllers with inventory validation and decrement.",
+          "Standardize JSON responses, error handling, and CORS headers.",
+          "Configure environment variables and refactor models for clarity and maintainability."
+        ],
+        "achievements": [
+          "Stripe integration with dynamic product concepts and standby handling.",
+          "Inventory support for multiple product types (KeyFob, Towels, Cord).",
+          "Automated PHPMailer confirmations for purchases.",
+          "Consistent API responses and improved developer ergonomics."
+        ],
+        "client": "Anytime Fitness Tuxtla",
+        "team_size": 2,
+        "url": "https://www.amifit.mx/",
+        "repository": "https://github.com/DarinelEscobar/amifit.git",
+        "media": [
+          {
+            "type": "image",
+            "description": "Main Login screen.",
+            "url": "assets/images/AmiFit/main_image.png"
+          }
+        ]
+      },
+      {
+        "name": "AEROBALAM",
+        "Project_Overview": "This project consisted of developing a flight management and booking platform called AEROBALAM. It provides an administration dashboard for managing users, destinations, coupons, and flight schedules. The system includes a calendar view for flights, user management with roles, and coupon management with activation and deactivation features.",
+        "description": "Development of a CodeIgniter 4 web application for flight operations. The platform enables administrators to manage destinations, user accounts, coupons, and flight schedules. Integrated FullCalendar for flight scheduling, DataTables for user and destination management, and SweetAlert for enhanced user feedback. Bootstrap was applied to ensure responsive UI components.",
+        "role": "Full-stack Developer",
+        "technologies": {
+          "Frontend": ["Bootstrap 5", "FullCalendar.js", "DataTables", "SweetAlert2"],
+          "Backend": ["PHP", "CodeIgniter 4", "MySQL"],
+          "Tools": ["Composer", "PHPMailer"],
+          "Project Management": ["GitHub"]
+        },
+        "start_date": "2025-04-01",
+        "end_date": "2025-04-30",
+        "responsibilities": [
+          "Implement flight calendar using FullCalendar with schedule and passenger detail views.",
+          "Develop user management system with DataTables integration and CRUD features.",
+          "Build destinations management module with create, edit, activate, and deactivate options.",
+          "Integrate coupon management system with validation, activation, and deactivation flows.",
+          "Enhance dashboard UI with Bootstrap and interactive modals.",
+          "Configure controllers, models, and routes for clean API responses."
+        ],
+        "achievements": [
+          "Successful integration of flight calendar with real-time event details.",
+          "Full CRUD support for users, destinations, and coupons.",
+          "Improved administrator efficiency with responsive dashboard tools.",
+          "Deployed a functional flight booking management platform in one week."
+        ],
+        "client": "AEROBALAM",
+        "team_size": 2,
+        "url": "https://mostradordigital.shop/aerobalam",
+        "repository": "https://github.com/DarinelEscobar/AEROBALAM.git",
+        "media": [
+          {
+            "type": "image",
+            "description": "Main dashboard view of AEROBALAM.",
+            "url": "assets/images/AeroBalam/main_Aerobalam.png"
+          },
+          {
+            "type": "image",
+            "description": "Ticket purchase interface.",
+            "url": "assets/images/AeroBalam/Aero_Buy_Tickets.png"
+          }
+        ]
       }
+
+
+
+
+
     ]
   }
 }
