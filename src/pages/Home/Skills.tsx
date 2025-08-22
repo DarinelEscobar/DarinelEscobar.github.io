@@ -56,15 +56,15 @@ const Skills: React.FC = () => {
   }, [api])
 
   return (
-    <div className="relative flex items-center justify-center w-screen min-h-screen overflow-hidden font-sans bg-gray-50 dark:bg-gray-900">
-      <div className="absolute inset-0 pointer-events-none bg-white/40 dark:bg-gray-900/40" />
+    <div
+      className="relative flex items-center justify-center w-screen min-h-screen overflow-visible font-sans bg-gradient-radial from-white via-[#ECECEC] to-[#DCDCDC] dark:from-[#1F1F1F] dark:via-[#2C2C2C] dark:to-[#3B3B3B]"
+    >
       <Carousel
         setApi={setApi}
-        className="relative mx-auto py-12 w-full max-w-6xl"
+        className="relative mx-auto py-12 w-full max-w-6xl overflow-visible"
         opts={{ align: "center", loop: true }}
       >
-        <CarouselContent className={cn("relative flex overflow-visible px-4")}
-        >
+        <CarouselContent className={cn("relative flex px-4")} overflow="visible">
           {skillSections.map((section, index) => (
             <CarouselItem
               key={index}
