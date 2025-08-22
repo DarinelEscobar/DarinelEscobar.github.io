@@ -10,7 +10,7 @@ import SectionWrapper from "@/components/SectionWrapper";
 import useSmoothScroll from "@/hooks/useSmoothScroll";
 
 const HomePage: React.FC = () => {
-  const sectionRefs = useRef<HTMLDivElement[]>([]);
+  const sectionRefs = useRef<HTMLElement[]>([]);
   const containerRef = useRef<HTMLDivElement>(null);
 
   useSmoothScroll(containerRef, sectionRefs);
@@ -25,7 +25,7 @@ const HomePage: React.FC = () => {
     }
   }, []);
 
-  const setSectionRef = (el: HTMLDivElement | null, index: number) => {
+  const setSectionRef = (el: HTMLElement | null, index: number) => {
     if (el) {
       sectionRefs.current[index] = el;
     }
@@ -41,40 +41,28 @@ const HomePage: React.FC = () => {
     >
       <Header />
 
-      <SectionWrapper index={0}>
-        <div ref={(el) => setSectionRef(el, 0)}>
-          <MainContent />
-        </div>
+      <SectionWrapper index={0} sectionRef={(el) => setSectionRef(el, 0)}>
+        <MainContent />
       </SectionWrapper>
 
-      <SectionWrapper index={1}>
-        <div ref={(el) => setSectionRef(el, 1)}>
-          <AboutMe />
-        </div>
+      <SectionWrapper index={1} sectionRef={(el) => setSectionRef(el, 1)}>
+        <AboutMe />
       </SectionWrapper>
 
-      <SectionWrapper index={2}>
-        <div ref={(el) => setSectionRef(el, 2)}>
-          <Projects />
-        </div>
+      <SectionWrapper index={2} sectionRef={(el) => setSectionRef(el, 2)}>
+        <Projects />
       </SectionWrapper>
 
-      <SectionWrapper index={3}>
-        <div ref={(el) => setSectionRef(el, 3)}>
-          <Skills />
-        </div>
+      <SectionWrapper index={3} sectionRef={(el) => setSectionRef(el, 3)}>
+        <Skills />
       </SectionWrapper>
 
-      <SectionWrapper index={4}>
-        <div ref={(el) => setSectionRef(el, 4)}>
-          <ContactMe />
-        </div>
+      <SectionWrapper index={4} sectionRef={(el) => setSectionRef(el, 4)}>
+        <ContactMe />
       </SectionWrapper>
 
-      <SectionWrapper index={5}>
-        <div ref={(el) => setSectionRef(el, 5)}>
-          <Title />
-        </div>
+      <SectionWrapper index={5} sectionRef={(el) => setSectionRef(el, 5)}>
+        <Title />
       </SectionWrapper>
     </main>
   );

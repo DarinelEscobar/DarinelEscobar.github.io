@@ -3,7 +3,7 @@ import { animate } from "framer-motion";
 
 function useSmoothScroll(
   containerRef: RefObject<HTMLDivElement>,
-  sectionRefs: MutableRefObject<HTMLDivElement[]>
+  sectionRefs: MutableRefObject<HTMLElement[]>
 ) {
   useEffect(() => {
     const container = containerRef.current;
