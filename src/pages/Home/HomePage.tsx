@@ -7,9 +7,13 @@ import Skills from "./Skills";
 import Title from "./Title";
 import ContactMe from "@/components/ContactMe/ContactMe";
 import SectionWrapper from "@/components/SectionWrapper";
+import useSmoothScroll from "@/hooks/useSmoothScroll";
 
 const HomePage: React.FC = () => {
   const sectionRefs = useRef<HTMLDivElement[]>([]);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useSmoothScroll(containerRef, sectionRefs);
 
   useEffect(() => {
     const savedIndex = localStorage.getItem("activeSection");
@@ -30,6 +34,7 @@ const HomePage: React.FC = () => {
   return (
     <main
       id="main-container"
+      ref={containerRef}
       // Se agrega pt-[env(safe-area-inset-top)] para que el contenido no inicie detrás del header sticky
       className="pt-[env(safe-area-inset-top)] bg-whi w-[100vw] h-screen overflow-auto text-dar transition-colors duration-100 ease-in-out scroll-smooth snap-mandatory snap-y Container"
       style={{ scrollSnapType: "y mandatory" }}
