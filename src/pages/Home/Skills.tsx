@@ -1,32 +1,6 @@
 import React, { useState, useEffect } from "react"
-
-
-import { motion } from "framer-motion"
-
-
-import {
-  Code2 as Code,
-  Cloud,
-  Database,
-  Smartphone,
-  Server,
-  LayoutPanelLeft,
-  PocketKnife,
-  HeartHandshake,
-  Speech,
-  Award,
-  ChevronLeft,
-  ChevronRight,
-} from "lucide-react"
-
-
-import * as SiIcons from "react-icons/si"
-import * as FaIcons from "react-icons/fa"
-import * as GiIcons from "react-icons/gi"
-
-
-import data from "@data/data.json"
-
+import { ChevronLeft, ChevronRight } from "lucide-react"
+import type { EmblaCarouselType } from "embla-carousel-react"
 
 import {
   Carousel,
@@ -38,140 +12,9 @@ import {
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { cn } from "@/lib/utils"
+import useSkillSections from "@/hooks/useSkillSections"
 
-
-
-
-const lucideMap: Record<string, React.FC<React.SVGProps<SVGSVGElement>>> = {
-  code: Code,
-  Code: Code,
-  cloud: Cloud,
-  Cloud: Cloud,
-  database: Database,
-  Database: Database,
-  smartphone: Smartphone,
-  Smartphone: Smartphone,
-  server: Server,
-  Server: Server,
-  layoutpanelleft: LayoutPanelLeft,
-  LayoutPanelLeft: LayoutPanelLeft,
-  pocketknife: PocketKnife,
-  PocketKnife: PocketKnife,
-  hearthandshake: HeartHandshake,
-  HeartHandshake: HeartHandshake,
-  speech: Speech,
-  Speech: Speech,
-  award: Award,
-  Award: Award,
-}
-
-function getIcon(iconName: string, library: string) {
-  switch (library.toLowerCase()) {
-    case "lucide-react": {
-      const LucideIcon = lucideMap[iconName] || Code
-      return <LucideIcon className="w-5 h-5" />
-    }
-    case "fa":
-      return React.createElement(FaIcons[iconName as keyof typeof FaIcons] || FaIcons.FaQuestion, {
-        className: "h-5 w-5",
-      })
-    case "si":
-      return React.createElement(SiIcons[iconName as keyof typeof SiIcons] || SiIcons.SiCodio, {
-        className: "h-5 w-5",
-      })
-    case "gi":
-      return React.createElement(GiIcons[iconName as keyof typeof GiIcons] || GiIcons.GiInfo, {
-        className: "h-5 w-5",
-      })
-    default:
-      return <Code className="w-5 h-5" />
-  }
-}
-
-function formatSectionTitle(key: string): string {
-  return key
-    .replace(/_/g, " ")
-    .replace(/\b\w/g, (char) => char.toUpperCase())
-}
-
-
-
-
-interface Skill {
-  name: string
-  icon: string
-  library: string
-  color: string
-}
-
-interface SectionIcon {
-  name: string
-  library: string
-  color: string
-}
-
-interface CertificationItem {
-  name: string
-  link: string
-  imageKey: string
-}
-
-interface CombinedSection {
-  section_icon?: SectionIcon
-  skills?: Skill[]
-  languages_list?: Skill[]
-  items?: CertificationItem[]
-}
-
-const combinedSections = {
-  ...data.resume.Skills_Technologies,
-  certifications: data.resume.certifications,
-}
-
-const sectionKeys = Object.keys(combinedSections)
-
-function createSkillSections(): {
-  title: string
-  icon: React.ReactNode
-  color: string
-  skills: { name: string; icon: React.ReactNode; color: string }[]
-}[] {
-  return sectionKeys.map((key) => {
-    const sectionObj: CombinedSection = combinedSections[key]
-    const secIcon = sectionObj.section_icon || { name: "code", library: "lucide-react", color: "#333" }
-
-    let skillArray: Skill[] = []
-    if (sectionObj.skills) {
-      skillArray = sectionObj.skills
-    } else if (sectionObj.languages_list) {
-      skillArray = sectionObj.languages_list
-    } else if (sectionObj.items) {
-
-      skillArray = sectionObj.items.map((cert) => ({
-        name: cert.name,
-        icon: "award",
-        library: "lucide-react",
-        color: secIcon.color,
-      }))
-    }
-
-    const finalSkills = skillArray.map((sk) => ({
-      name: sk.name,
-      icon: getIcon(sk.icon, sk.library),
-      color: sk.color,
-    }))
-
-    return {
-      title: formatSectionTitle(key),
-      icon: getIcon(secIcon.name, secIcon.library),
-      color: secIcon.color,
-      skills: finalSkills,
-    }
-  })
-}
-
-
-
+const MAX_VISIBLE_SKILLS = 8
 
 /**
  * Dada la posición `index` y la posición central `current`,
@@ -183,120 +26,95 @@ function createSkillSections(): {
  * - Más lejanos: pequeño (scale-75) o menor
  */
 function getSlideClasses(index: number, current: number, count: number) {
-
   const dist = (index - current + count) % count
 
   switch (dist) {
     case 0:
-
       return "z-30 scale-110 opacity-100"
     case 1:
     case count - 1:
-
       return "z-20 scale-90 opacity-95"
     case 2:
     case count - 2:
-
       return "z-10 scale-75 opacity-90"
     default:
-
       return "z-0 scale-50 opacity-0 pointer-events-none"
   }
 }
 
-
-
-
 const Skills: React.FC = () => {
-  const skillSections = createSkillSections()
-
-  const [api, setApi] = useState<any>(null)
+  const skillSections = useSkillSections()
+  const [api, setApi] = useState<EmblaCarouselType | null>(null)
   const [current, setCurrent] = useState(0)
   const [count, setCount] = useState(0)
 
   useEffect(() => {
     if (!api) return
-
     setCount(api.scrollSnapList().length)
     setCurrent(api.selectedScrollSnap())
-
     api.on("select", () => {
       setCurrent(api.selectedScrollSnap())
     })
   }, [api])
 
   return (
-    <div className="relative bg-gray-50 w-screen min-h-screen overflow-hidden font-sans">
-      {/* Fondo sutil */}
-      <div className="absolute inset-0 bg-white opacity-40 pointer-events-none" />
-
-      {/* Carousel principal */}
+    <div
+      className="relative flex items-center justify-center w-screen min-h-screen overflow-visible font-sans bg-gradient-radial from-white via-[#ECECEC] to-[#DCDCDC] dark:from-[#1F1F1F] dark:via-[#2C2C2C] dark:to-[#3B3B3B]"
+    >
       <Carousel
         setApi={setApi}
-        className="relative mx-auto py-12 w-full max-w-6xl"
-        opts={{
-          align: "center",
-          loop: true,
-
-
-        }}
+        className="relative mx-auto py-12 w-full max-w-6xl overflow-visible"
+        opts={{ align: "center", loop: true }}
       >
-        <CarouselContent
-          className={cn(
-            "relative flex",
-
-            "overflow-visible px-4"
-          )}
-        >
+        <CarouselContent className={cn("relative flex px-4")} overflow="visible">
           {skillSections.map((section, index) => (
             <CarouselItem
               key={index}
-
               className={cn(
-                "transition-all duration-500 ease-in-out origin-center",
-                "basis-[70%] md:basis-[40%] lg:basis-[30%] mx-auto",
+                "origin-center transition-[transform,opacity] duration-700 ease-in-out basis-[70%] md:basis-[40%] lg:basis-[30%] mx-auto",
                 getSlideClasses(index, current, count)
               )}
             >
               <Card
                 className={cn(
-                  "h-full w-full border border-gray-200 bg-white rounded-3xl shadow-lg",
-                  "overflow-hidden flex flex-col items-center justify-center"
+                  "h-[28rem] w-full rounded-3xl border border-gray-200 bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-700 dark:border-gray-700 shadow-lg",
+                  "flex flex-col overflow-hidden",
+                  "transition-transform duration-300 ease-in-out hover:-translate-y-2 hover:shadow-xl"
                 )}
               >
-                <CardHeader className="p-6 text-center">
-                  <div className="flex flex-col items-center gap-4">
+                <CardHeader className="p-8 text-center">
+                  <div className="flex flex-col items-center gap-6">
                     <div
-                      className="flex justify-center items-center bg-white shadow-sm p-4 border border-gray-200 rounded-full"
+                      className="flex items-center justify-center rounded-full border border-gray-200 bg-white dark:bg-gray-700 dark:border-gray-600 shadow-sm p-4"
                       style={{ minWidth: "60px", minHeight: "60px" }}
                     >
                       {React.cloneElement(section.icon as React.ReactElement, {
-                        style: { color: "#333" },
                         className: "h-8 w-8",
+                        style: { color: section.color },
                       })}
                     </div>
-                    <CardTitle className="font-bold text-gray-800 text-2xl">
+                    <CardTitle className="max-w-[10rem] truncate text-2xl font-bold text-gray-800 dark:text-gray-100">
                       {section.title}
                     </CardTitle>
                   </div>
                 </CardHeader>
-                <CardContent className="p-6 w-full">
-                  <div className="place-items-center gap-3 grid grid-cols-2">
-                    {section.skills.map((skill, skillIndex) => (
+                <CardContent className="flex-1 w-full p-8">
+                  <div className="grid h-full grid-cols-2 grid-rows-4 gap-4 place-items-center">
+                    {section.skills.slice(0, MAX_VISIBLE_SKILLS).map((skill, skillIndex) => (
                       <Badge
                         key={skillIndex}
                         variant="secondary"
                         className={cn(
-                          "flex items-center gap-2 py-2 px-3",
-                          "bg-white border border-gray-200 shadow-sm",
-                          "text-sm font-medium text-gray-700 rounded-md"
+                          "flex w-full items-center justify-center gap-2 py-2 px-3 rounded-md text-sm font-medium",
+                          "bg-white border border-gray-200 text-gray-700 shadow-sm",
+                          "dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200"
                         )}
                       >
                         {React.cloneElement(skill.icon as React.ReactElement, {
-                          style: { color: "#555" },
                           className: "h-5 w-5",
+                          style: { color: skill.color },
                         })}
-                        <span>{skill.name}</span>
+                        <span className="truncate max-w-[4.5rem]">{skill.name}</span>
                       </Badge>
                     ))}
                   </div>
@@ -306,34 +124,36 @@ const Skills: React.FC = () => {
           ))}
         </CarouselContent>
 
-        {/* Botones de navegación */}
         <CarouselPrevious
           className={cn(
             "hidden md:flex absolute top-1/2 -translate-y-1/2 -left-8",
-            "bg-white border border-gray-200 shadow-md p-2 rounded-full",
-            "hover:shadow-lg transition-all duration-300"
+            "p-2 rounded-full border bg-white text-gray-700 shadow-md",
+            "hover:shadow-lg transition-all duration-300",
+            "dark:bg-gray-800 dark:border-gray-700 dark:text-gray-200"
           )}
         >
-          <ChevronLeft className="w-6 h-6 text-gray-700" />
+          <ChevronLeft className="w-6 h-6" />
         </CarouselPrevious>
         <CarouselNext
           className={cn(
             "hidden md:flex absolute top-1/2 -translate-y-1/2 -right-8",
-            "bg-white border border-gray-200 shadow-md p-2 rounded-full",
-            "hover:shadow-lg transition-all duration-300"
+            "p-2 rounded-full border bg-white text-gray-700 shadow-md",
+            "hover:shadow-lg transition-all duration-300",
+            "dark:bg-gray-800 dark:border-gray-700 dark:text-gray-200"
           )}
         >
-          <ChevronRight className="w-6 h-6 text-gray-700" />
+          <ChevronRight className="w-6 h-6" />
         </CarouselNext>
 
-        {/* Indicadores de posición */}
-        <div className="flex justify-center gap-2 mt-8">
+        <div className="mt-8 flex justify-center gap-2">
           {Array.from({ length: count }).map((_, i) => (
             <button
               key={i}
               className={cn(
-                "w-3 h-3 rounded-full transition-all duration-300",
-                current === i ? "bg-gray-800 scale-125" : "bg-gray-300 hover:bg-gray-400"
+                "h-3 w-3 rounded-full transition-all duration-300",
+                current === i
+                  ? "bg-gray-800 dark:bg-gray-200 scale-125"
+                  : "bg-gray-300 dark:bg-gray-600 hover:bg-gray-400 dark:hover:bg-gray-500"
               )}
               onClick={() => api?.scrollTo(i)}
             />
@@ -345,3 +165,4 @@ const Skills: React.FC = () => {
 }
 
 export default Skills
+
