@@ -70,6 +70,10 @@ function formatSectionTitle(key: string): string {
   return key.replace(/_/g, " ").replace(/\b\w/g, (char) => char.toUpperCase())
 }
 
+function truncate(text: string, max: number): string {
+  return text.length > max ? `${text.slice(0, max)}…` : text
+}
+
 interface Skill {
   name: string
   icon: string
@@ -133,13 +137,13 @@ export default function useSkillSections(): SkillSection[] {
     }
 
     const finalSkills = skillArray.map((sk) => ({
-      name: sk.name,
+      name: truncate(sk.name, 16),
       icon: getIcon(sk.icon, sk.library),
       color: sk.color,
     }))
 
     return {
-      title: formatSectionTitle(key),
+      title: truncate(formatSectionTitle(key), 24),
       icon: getIcon(secIcon.name, secIcon.library),
       color: secIcon.color,
       skills: finalSkills,
