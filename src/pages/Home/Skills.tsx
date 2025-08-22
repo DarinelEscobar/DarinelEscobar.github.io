@@ -14,6 +14,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { cn } from "@/lib/utils"
 import useSkillSections from "@/hooks/useSkillSections"
 
+const MAX_VISIBLE_SKILLS = 8
+
 /**
  * Dada la posición `index` y la posición central `current`,
  * calculamos la “distancia” al centro y retornamos clases
@@ -69,14 +71,14 @@ const Skills: React.FC = () => {
             <CarouselItem
               key={index}
               className={cn(
-                "origin-center transition-all duration-700 ease-in-out basis-[70%] md:basis-[40%] lg:basis-[30%] mx-auto",
+                "origin-center transition-[transform,opacity] duration-700 ease-in-out basis-[70%] md:basis-[40%] lg:basis-[30%] mx-auto",
                 getSlideClasses(index, current, count)
               )}
             >
               <Card
                 className={cn(
-                  "h-full w-full rounded-3xl border border-gray-200 bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-700 dark:border-gray-700 shadow-lg",
-                  "flex flex-col items-center justify-center overflow-hidden",
+                  "h-[28rem] w-full rounded-3xl border border-gray-200 bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-700 dark:border-gray-700 shadow-lg",
+                  "flex flex-col overflow-hidden",
                   "transition-transform duration-300 ease-in-out hover:-translate-y-2 hover:shadow-xl"
                 )}
               >
@@ -91,19 +93,19 @@ const Skills: React.FC = () => {
                         style: { color: section.color },
                       })}
                     </div>
-                    <CardTitle className="text-2xl font-bold text-gray-800 dark:text-gray-100">
+                    <CardTitle className="max-w-[10rem] truncate text-2xl font-bold text-gray-800 dark:text-gray-100">
                       {section.title}
                     </CardTitle>
                   </div>
                 </CardHeader>
-                <CardContent className="w-full p-8">
-                  <div className="grid grid-cols-2 gap-4 place-items-center">
-                    {section.skills.map((skill, skillIndex) => (
+                <CardContent className="flex-1 w-full p-8">
+                  <div className="grid h-full grid-cols-2 grid-rows-4 gap-4 place-items-center">
+                    {section.skills.slice(0, MAX_VISIBLE_SKILLS).map((skill, skillIndex) => (
                       <Badge
                         key={skillIndex}
                         variant="secondary"
                         className={cn(
-                          "flex items-center gap-2 py-2 px-3 rounded-md text-sm font-medium",
+                          "flex w-full items-center justify-center gap-2 py-2 px-3 rounded-md text-sm font-medium",
                           "bg-white border border-gray-200 text-gray-700 shadow-sm",
                           "dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200"
                         )}
@@ -112,7 +114,7 @@ const Skills: React.FC = () => {
                           className: "h-5 w-5",
                           style: { color: skill.color },
                         })}
-                        <span>{skill.name}</span>
+                        <span className="truncate max-w-[4.5rem]">{skill.name}</span>
                       </Badge>
                     ))}
                   </div>
