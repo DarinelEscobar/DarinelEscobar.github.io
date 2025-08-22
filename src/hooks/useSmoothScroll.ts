@@ -35,9 +35,12 @@ function useSmoothScroll(
       if (isAnimating) return;
 
       const direction = Math.sign(e.deltaY);
-      const currentIndex = Math.round(
-        container.scrollTop / container.clientHeight
-      );
+      const scrollPos = container.scrollTop;
+      const rawIndex = sectionRefs.current.findIndex((section, idx) => {
+        const next = sectionRefs.current[idx + 1];
+        return scrollPos >= section.offsetTop && (!next || scrollPos < next.offsetTop);
+      });
+      const currentIndex = rawIndex === -1 ? 0 : rawIndex;
       let nextIndex = currentIndex + direction;
       nextIndex = Math.max(0, Math.min(nextIndex, sectionRefs.current.length - 1));
       if (nextIndex !== currentIndex) {
