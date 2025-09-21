@@ -17,7 +17,7 @@ export default function AppRoutes() {
         duration: 0.5,
         onComplete: () => {
           const savedIndex = localStorage.getItem("activeSection");
-          if (savedIndex && location.pathname === "/") {
+          if (!savedIndex && location.pathname === "/") {
             const mainContainer = document.getElementById('main-container');
             if (mainContainer) {
               mainContainer.scrollTo(0, 0);
