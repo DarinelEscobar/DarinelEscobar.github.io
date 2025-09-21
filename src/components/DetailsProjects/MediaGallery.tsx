@@ -184,6 +184,10 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({
                     ...calculateImagePosition(),
                     objectFit: "contain",
                   }}
+                  loading="lazy"
+                  decoding="async"
+                  fetchpriority="low"
+                  sizes="(max-width: 1024px) 100vw, 60vw"
                 />
 
                 {/* Texto/Dimensiones sobre la imagen */}
@@ -286,6 +290,9 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({
                   src={getAssetImage(mediaItem.url)}
                   alt={mediaItem.description || `Media ${index + 1}`}
                   className="absolute inset-0 w-full h-full object-cover"
+                  loading="lazy"
+                  decoding="async"
+                  sizes="120px"
                 />
                 {index === currentImageIndex && (
                   <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px]" />

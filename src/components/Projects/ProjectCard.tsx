@@ -186,6 +186,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
               alt={media[currentImageIndex].description || "Project Media"}
               className="border-gray-200/30 dark:border-gray-600 border-b rounded-xl w-full h-full object-cover"
               loading="lazy"
+              decoding="async"
+              sizes="(min-width: 1024px) 55vw, 100vw"
               onError={(e) => {
                 (e.currentTarget as HTMLImageElement).style.display = "none";
               }}

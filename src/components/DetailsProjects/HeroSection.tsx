@@ -77,7 +77,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ project }) => {
               <Button
                 size="lg"
                 className="bg-blue-500 hover:bg-blue-600 dark:hover:bg-blue-700 dark:bg-blue-600 px-8 py-6 w-full sm:w-auto text-whi text-lg"
-                onClick={() => window.open(project.url, "_blank")}
+                onClick={() => window.open(project.url, "_blank", "noopener,noreferrer")}
               >
                 Explore Project
               </Button>
@@ -86,7 +86,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ project }) => {
               <Button
                 size="lg"
                 className="flex items-center gap-2 bg-dar hover:bg-5dar dark:hover:bg-5dar dark:bg-5dar px-8 py-6 w-full sm:w-auto text-whi text-lg"
-                onClick={() => window.open(project.repository, "_blank")}
+                onClick={() => window.open(project.repository, "_blank", "noopener,noreferrer")}
               >
                 View Repository
                 <ArrowUpRight className="w-5 h-5" />
@@ -109,6 +109,9 @@ const HeroSection: React.FC<HeroSectionProps> = ({ project }) => {
                 width={800}
                 height={500}
                 className="object-cover group-hover:scale-105 transition-transform duration-300"
+                loading="lazy"
+                decoding="async"
+                sizes="(min-width: 1024px) 50vw, 100vw"
               />
             ) : (
               <div className="flex justify-center items-center bg-5whi dark:bg-5dar w-full h-full">

@@ -5,6 +5,10 @@ import { resolve } from "path";
 export default defineConfig({
   base: "",
   plugins: [react()],
+  esbuild: {
+    // Trim dev-only calls in production bundles
+    drop: process.env.NODE_ENV === 'production' ? ["console", "debugger"] : [],
+  },
   resolve: {
     alias: {
       "@": resolve(__dirname, "./src"),
@@ -15,7 +19,15 @@ export default defineConfig({
   build: {
     outDir: "dist",
     sourcemap: true,
-    assetsInlineLimit: 0
+    assetsInlineLimit: 0,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          react: ["react", "react-dom", "react-router-dom"],
+          motion: ["framer-motion"],
+        },
+      },
+    },
   },
   assetsInclude: ['**/*.png', '**/*.jpg', '**/*.jpeg','**/*.svg']
 });

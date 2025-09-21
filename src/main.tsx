@@ -11,3 +11,14 @@ createRoot(document.getElementById("root")!).render(
     </HashRouter>
   </StrictMode>
 );
+
+// Idle-time warmup of secondary routes for snappier navigation
+const idle = (cb: () => void) =>
+  ("requestIdleCallback" in window
+    ? (window as any).requestIdleCallback(cb)
+    : setTimeout(cb, 1200));
+
+idle(() => {
+  import("@/pages/Contact/Contact");
+  import("@/pages/Project/Project");
+});
