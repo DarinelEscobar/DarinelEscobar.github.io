@@ -5,6 +5,7 @@ type Options = {
   pixelThreshold?: number; // threshold to treat pixel-delta as chunky
   animationMs?: number; // duration to lock wheel inputs while animating
   backStrength?: number; // overshoot strength for easeOutBack
+  maxQueue?: number; // how many extra sections to queue while animating
 };
 
 /**
@@ -22,9 +23,13 @@ export function usePageWheelScroll(
     pixelThreshold = 60,
     animationMs = 700,
     backStrength = 1.3,
+    maxQueue = 2,
   } = options;
 
   const isAnimatingRef = React.useRef(false);
+  const queuedStepsRef = React.useRef(0);
+  const lastDirectionRef = React.useRef<1 | -1 | 0>(0);
+  const targetIndexRef = React.useRef<number | null>(null);
 
   const animateTo = React.useCallback(
     (el: HTMLElement, to: number, duration: number, back = backStrength) => {
@@ -71,9 +76,21 @@ export function usePageWheelScroll(
     const el = containerRef.current;
     if (!el) return;
 
+    // Respect user accessibility setting
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      return;
+    }
+
     const handleWheel = (e: WheelEvent) => {
       if (isAnimatingRef.current) {
-        e.preventDefault();
+        // Allow queueing more steps in the same direction for a smoother multi-step flow
+        const dir = Math.sign(e.deltaY) as 1 | -1 | 0;
+        if (dir !== 0 && dir === lastDirectionRef.current && queuedStepsRef.current < maxQueue) {
+          e.preventDefault();
+          queuedStepsRef.current += 1;
+        } else {
+          e.preventDefault();
+        }
         return;
       }
 
@@ -104,18 +121,36 @@ export function usePageWheelScroll(
       const total = sectionRefs.current.length;
       if (viewport <= 0 || total === 0) return;
 
-      const direction = Math.sign(e.deltaY);
+      const direction = Math.sign(e.deltaY) as 1 | -1 | 0;
       const currentIndex = Math.round(el.scrollTop / viewport);
       let nextIndex = currentIndex + (direction > 0 ? 1 : -1);
       nextIndex = Math.max(0, Math.min(total - 1, nextIndex));
 
       if (nextIndex === currentIndex) return;
 
-      isAnimatingRef.current = true;
-      const targetTop = nextIndex * viewport;
-      animateTo(el, targetTop, animationMs).finally(() => {
-        isAnimatingRef.current = false;
-      });
+      // Dynamic easing based on input intensity
+      const intensity = Math.min(1, Math.abs(e.deltaY) / 240); // normalize to [0,1]
+      const duration = Math.max(400, Math.round(animationMs - intensity * 200));
+      const back = Math.min(1.9, backStrength + intensity * 0.4);
+
+      const run = (fromIndex: number, toIndex: number) => {
+        isAnimatingRef.current = true;
+        lastDirectionRef.current = direction || 1;
+        targetIndexRef.current = toIndex;
+        const targetTop = toIndex * viewport;
+        animateTo(el, targetTop, duration, back).finally(() => {
+          isAnimatingRef.current = false;
+          // If there are queued steps in same direction, continue
+          if (queuedStepsRef.current > 0) {
+            const dir = lastDirectionRef.current;
+            const next = Math.max(0, Math.min(total - 1, (targetIndexRef.current ?? toIndex) + (dir > 0 ? 1 : -1)));
+            queuedStepsRef.current -= 1;
+            run(toIndex, next);
+          }
+        });
+      };
+
+      run(currentIndex, nextIndex);
     };
 
     el.addEventListener("wheel", handleWheel, { passive: false });

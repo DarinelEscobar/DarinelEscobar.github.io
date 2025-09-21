@@ -21,7 +21,7 @@ const SectionWrapper: React.FC<SectionWrapperProps> = ({ children, index }) => {
   return (
     <section
       ref={ref}
-      className="relative flex justify-center items-center w-full h-screen snap-start"
+      className="relative flex justify-center items-center w-full h-screen snap-start snap-always"
     >
       {children}
     </section>
