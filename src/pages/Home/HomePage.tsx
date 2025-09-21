@@ -7,9 +7,11 @@ import Skills from "./Skills";
 import Title from "./Title";
 import ContactMe from "@/components/ContactMe/ContactMe";
 import SectionWrapper from "@/components/SectionWrapper";
+import { usePageWheelScroll } from "@/hooks/usePageWheelScroll";
 
 const HomePage: React.FC = () => {
   const sectionRefs = useRef<HTMLDivElement[]>([]);
+  const containerRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     const savedIndex = localStorage.getItem("activeSection");
@@ -20,6 +22,13 @@ const HomePage: React.FC = () => {
       }
     }
   }, []);
+
+  // Normalize mouse wheel into smooth, page-by-page scroll
+  usePageWheelScroll(containerRef as React.RefObject<HTMLElement>, sectionRefs as unknown as React.MutableRefObject<HTMLElement[]>, {
+    interceptTouchpad: false,
+    pixelThreshold: 60,
+    animationMs: 700,
+  });
 
   const setSectionRef = (el: HTMLDivElement | null, index: number) => {
     if (el) {
@@ -33,6 +42,9 @@ const HomePage: React.FC = () => {
       // Se agrega pt-[env(safe-area-inset-top)] para que el contenido no inicie detrás del header sticky
       className="pt-[env(safe-area-inset-top)] bg-whi w-[100vw] h-screen overflow-auto text-dar transition-colors duration-100 ease-in-out scroll-smooth snap-mandatory snap-y Container"
       style={{ scrollSnapType: "y mandatory" }}
+      ref={(el) => {
+        if (el) containerRef.current = el;
+      }}
     >
       <Header />
 
