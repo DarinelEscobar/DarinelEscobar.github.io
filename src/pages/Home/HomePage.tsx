@@ -49,25 +49,25 @@ const HomePage: React.FC = () => {
       </SectionWrapper>
 
       <SectionWrapper index={2}>
-        <div ref={(el) => setSectionRef(el, 5)}>
+        <div ref={(el) => setSectionRef(el, 2)}>
           <Projects />
         </div>
       </SectionWrapper>
 
       <SectionWrapper index={3}>
-        <div ref={(el) => setSectionRef(el, 2)}>
+        <div ref={(el) => setSectionRef(el, 3)}>
           <Skills />
         </div>
       </SectionWrapper>
 
       <SectionWrapper index={4}>
-        <div ref={(el) => setSectionRef(el, 3)}>
+        <div ref={(el) => setSectionRef(el, 4)}>
           <ContactMe />
         </div>
       </SectionWrapper>
 
       <SectionWrapper index={5}>
-        <div ref={(el) => setSectionRef(el, 4)}>
+        <div ref={(el) => setSectionRef(el, 5)}>
           <Title />
         </div>
       </SectionWrapper>
