@@ -24,11 +24,17 @@ const HomePage: React.FC = () => {
   }, []);
 
   // Normalize mouse wheel into smooth, page-by-page scroll
-  usePageWheelScroll(containerRef as React.RefObject<HTMLElement>, sectionRefs as unknown as React.MutableRefObject<HTMLElement[]>, {
-    interceptTouchpad: false,
-    pixelThreshold: 60,
-    animationMs: 700,
-  });
+  usePageWheelScroll(
+    containerRef as React.RefObject<HTMLElement>,
+    sectionRefs as unknown as React.MutableRefObject<HTMLElement[]>,
+    {
+      interceptTouchpad: false,
+      pixelThreshold: 60,
+      animationMs: 800,
+      backStrength: 1.4,
+      maxQueue: 2,
+    }
+  );
 
   const setSectionRef = (el: HTMLDivElement | null, index: number) => {
     if (el) {
@@ -40,7 +46,7 @@ const HomePage: React.FC = () => {
     <main
       id="main-container"
       // Se agrega pt-[env(safe-area-inset-top)] para que el contenido no inicie detrás del header sticky
-      className="pt-[env(safe-area-inset-top)] bg-whi w-[100vw] h-screen overflow-auto text-dar transition-colors duration-100 ease-in-out scroll-smooth snap-mandatory snap-y Container"
+      className="pt-[env(safe-area-inset-top)] bg-whi w-[100vw] h-screen overflow-auto overscroll-y-contain text-dar transition-colors duration-100 ease-in-out scroll-smooth snap-mandatory snap-y Container"
       style={{ scrollSnapType: "y mandatory" }}
       ref={(el) => {
         if (el) containerRef.current = el;
