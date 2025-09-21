@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+// ✅ Corrected: src/components/Projects/ProjectNavigation.tsx
+import React from "react";
 import { ChevronLeft, ChevronRight, Maximize2 } from "lucide-react";
-import { motion, useAnimation } from "framer-motion";
-import { useInView } from "react-intersection-observer";
+import { motion } from "framer-motion";
 
 interface ProjectNavigationProps {
   handlePrevProject: () => void;
@@ -13,13 +13,7 @@ interface ProjectNavigationProps {
 
 const containerVariants = {
   hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.2
-    }
-  }
+  visible: { opacity: 1 }
 };
 
 const itemVariants = {
@@ -34,21 +28,17 @@ const ProjectNavigation: React.FC<ProjectNavigationProps> = ({
   disableNext,
   onExpandProject,
 }) => {
-  const controls = useAnimation();
-  const { ref, inView } = useInView({ triggerOnce: false, threshold: 0.1 });
-
-  useEffect(() => {
-    if (inView) controls.start("visible");
-    if (!inView) controls.start("hidden");
-  }, [controls, inView]);
-
   return (
     <motion.div
-      ref={ref}
       initial="hidden"
-      animate={controls}
+      animate="visible"
       variants={containerVariants}
-      className="bottom-[calc(2rem+env(safe-area-inset-bottom))] left-1/2 z-50 absolute flex items-center space-x-4 bg-gray-200/30 dark:bg-gray-700/40 shadow-lg backdrop-blur-sm px-4 py-2 rounded-full -translate-x-1/2"
+      className="
+        z-50 inline-flex items-center space-x-3
+        bg-gray-200/30 dark:bg-gray-700/40 shadow-lg backdrop-blur-sm px-3 py-2 rounded-full
+        fixed left-1/2 -translate-x-1/2 bottom-[calc(env(safe-area-inset-bottom)+8px)]
+        md:absolute md:bottom-[calc(2rem+env(safe-area-inset-bottom))] md:left-1/2 md:-translate-x-1/2
+      "
     >
       <motion.button
         variants={itemVariants}
