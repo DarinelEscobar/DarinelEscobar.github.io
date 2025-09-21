@@ -26,7 +26,7 @@ const Projects: React.FC = () => {
   const currentProject = mergedProjects[currentProjectIndex] || {};
   const media = currentProject.media || [];
 
-  const { ref } = useInView({ threshold: 0.2, triggerOnce: false });
+  const { ref, inView } = useInView({ threshold: 0.35, triggerOnce: false });
 
   useEffect(() => {
     const setVh = () => {
@@ -82,13 +82,15 @@ const Projects: React.FC = () => {
         setCurrentImageIndex={setCurrentImageIndex}
       />
 
-      <ProjectNavigation
-        handlePrevProject={handlePrevProject}
-        handleNextProject={handleNextProject}
-        disablePrev={currentProjectIndex === 0}
-        disableNext={currentProjectIndex === mergedProjects.length - 1}
-        onExpandProject={() => handleExpandProject(currentProjectIndex)}
-      />
+      {inView && (
+        <ProjectNavigation
+          handlePrevProject={handlePrevProject}
+          handleNextProject={handleNextProject}
+          disablePrev={currentProjectIndex === 0}
+          disableNext={currentProjectIndex === mergedProjects.length - 1}
+          onExpandProject={() => handleExpandProject(currentProjectIndex)}
+        />
+      )}
 
       {expandedProjectIndex !== null && (
         <DetailsProjects

@@ -109,6 +109,8 @@ Cada carpeta mantiene un único componente u objetivo, favoreciendo responsabili
 4. **Build de producción**
    ```bash
    pnpm build
+   npx gh-pages -d dist #Desply in gp pages branch
+   serve dist #Local only
    ```
    Genera el contenido optimizado en `dist/` listo para desplegar en GitHub Pages o cualquier hosting estático.
 5. **Vista previa del build**
