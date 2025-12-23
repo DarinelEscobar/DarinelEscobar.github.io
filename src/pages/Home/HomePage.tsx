@@ -32,7 +32,6 @@ const HomePage: React.FC = () => {
       pixelThreshold: 60,
       animationMs: 800,
       backStrength: 1.4,
-      maxQueue: 2,
     }
   );
 

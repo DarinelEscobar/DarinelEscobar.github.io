@@ -5,7 +5,6 @@ type Options = {
   pixelThreshold?: number; // threshold to treat pixel-delta as chunky
   animationMs?: number; // duration to lock wheel inputs while animating
   backStrength?: number; // overshoot strength for easeOutBack
-  maxQueue?: number; // how many extra sections to queue while animating
 };
 
 /**
@@ -23,11 +22,9 @@ export function usePageWheelScroll(
     pixelThreshold = 60,
     animationMs = 700,
     backStrength = 1.3,
-    maxQueue = 2,
   } = options;
 
   const isAnimatingRef = React.useRef(false);
-  const queuedStepsRef = React.useRef(0);
   const lastDirectionRef = React.useRef<1 | -1 | 0>(0);
   const targetIndexRef = React.useRef<number | null>(null);
 
@@ -83,14 +80,8 @@ export function usePageWheelScroll(
 
     const handleWheel = (e: WheelEvent) => {
       if (isAnimatingRef.current) {
-        // Allow queueing more steps in the same direction for a smoother multi-step flow
-        const dir = Math.sign(e.deltaY) as 1 | -1 | 0;
-        if (dir !== 0 && dir === lastDirectionRef.current && queuedStepsRef.current < maxQueue) {
-          e.preventDefault();
-          queuedStepsRef.current += 1;
-        } else {
-          e.preventDefault();
-        }
+        // Strictly prevent default and ignore input while animating
+        e.preventDefault();
         return;
       }
 
@@ -133,24 +124,17 @@ export function usePageWheelScroll(
       const duration = Math.max(400, Math.round(animationMs - intensity * 200));
       const back = Math.min(1.9, backStrength + intensity * 0.4);
 
-      const run = (fromIndex: number, toIndex: number) => {
+      const run = (toIndex: number) => {
         isAnimatingRef.current = true;
         lastDirectionRef.current = direction || 1;
         targetIndexRef.current = toIndex;
         const targetTop = toIndex * viewport;
         animateTo(el, targetTop, duration, back).finally(() => {
           isAnimatingRef.current = false;
-          // If there are queued steps in same direction, continue
-          if (queuedStepsRef.current > 0) {
-            const dir = lastDirectionRef.current;
-            const next = Math.max(0, Math.min(total - 1, (targetIndexRef.current ?? toIndex) + (dir > 0 ? 1 : -1)));
-            queuedStepsRef.current -= 1;
-            run(toIndex, next);
-          }
         });
       };
 
-      run(currentIndex, nextIndex);
+      run(nextIndex);
     };
 
     el.addEventListener("wheel", handleWheel, { passive: false });
