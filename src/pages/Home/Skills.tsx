@@ -149,14 +149,25 @@ const Skills: React.FC = () => {
           {Array.from({ length: count }).map((_, i) => (
             <button
               key={i}
+              aria-label={`Go to slide ${i + 1}`}
               className={cn(
-                "h-3 w-3 rounded-full transition-all duration-300",
-                current === i
-                  ? "bg-gray-800 dark:bg-gray-200 scale-125"
-                  : "bg-gray-300 dark:bg-gray-600 hover:bg-gray-400 dark:hover:bg-gray-500"
+                "w-12 h-12 flex items-center justify-center transition-all duration-300 rounded-full", // Touch target 48px
+                // Visual states handled on the span mainly, but we can keep some strictness or move logic.
+                // The original had color on the button itself.
+                // Let's use the USER's suggested structure:
+                // <button ...><span class="w-3 h-3 ..."></span></button>
               )}
               onClick={() => api?.scrollTo(i)}
-            />
+            >
+              <span
+                className={cn(
+                  "w-3 h-3 rounded-full transition-all duration-300",
+                  current === i
+                    ? "bg-gray-800 dark:bg-gray-200 scale-125"
+                    : "bg-gray-300 dark:bg-gray-600 hover:bg-gray-400 dark:hover:bg-gray-500"
+                )}
+              />
+            </button>
           ))}
         </div>
       </Carousel>

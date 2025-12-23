@@ -104,9 +104,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             {startDate} – {endDate}
           </motion.span>
 
-          <motion.h4 variants={itemVariants} className="font-rob text-blue-500 dark:text-blue-400 text-xs sm:text-sm uppercase tracking-[0.2em]">
+          <motion.p variants={itemVariants} className="font-rob text-blue-500 dark:text-blue-400 text-xs sm:text-sm uppercase tracking-[0.2em] font-bold">
             {currentProject.role}
-          </motion.h4>
+          </motion.p>
 
           <motion.h2 variants={itemVariants} className="font-cor font-bold text-2xl sm:text-3xl leading-tight">
             {currentProject.name}
@@ -143,9 +143,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             {startDate} – {endDate}
           </motion.span>
 
-          <motion.h4 variants={itemVariants} className="font-rob text-blue-500 dark:text-blue-400 text-sm uppercase tracking-[0.2em]">
+          <motion.p variants={itemVariants} className="font-rob text-blue-500 dark:text-blue-400 text-xs sm:text-sm uppercase tracking-[0.2em] font-bold">
             {currentProject.role}
-          </motion.h4>
+          </motion.p>
 
           <motion.h2 variants={itemVariants} className="font-cor font-bold text-4xl leading-tight">
             {currentProject.name}
