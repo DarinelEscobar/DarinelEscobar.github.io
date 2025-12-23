@@ -67,6 +67,7 @@ const MainContent: React.FC = () => {
           whileHover={{ rotate: 5, scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
           transition={{ type: "spring", stiffness: 150, damping: 15 }}
+          fetchPriority="high"
         />
       </motion.div>
 
