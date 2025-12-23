@@ -16,14 +16,7 @@ const containerVariants = {
   },
 };
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.8, ease: "easeOut" },
-  },
-};
+
 
 const MainContent: React.FC = () => {
   const { short_name } = data.resume.personal_info;
@@ -52,29 +45,30 @@ const MainContent: React.FC = () => {
       // Se reemplaza h-screen por min-h con la variable --vh para que se adapte al alto real
       className="flex flex-col justify-between items-center bg-whi w-screen min-h-[calc(var(--vh,1vh)*100)] text-dar"
       variants={containerVariants}
-      initial="hidden"
+      initial="visible"
       animate={controls}
     >
       {/* Imagen con efecto hover */}
       <motion.div
         className="flex flex-grow justify-center items-center"
-        variants={itemVariants}
+        /* Removed variants/animation from LCP element container to prevent layout shift/delay */
+        style={{ willChange: "transform" }}
       >
-        <motion.img
+        <img
           src={img}
           alt={short_name}
+          width="200"
+          height="300"
           className="shadow-lg rounded-md w-[200px] h-[300px] object-cover"
-          whileHover={{ rotate: 5, scale: 1.1 }}
-          whileTap={{ scale: 0.95 }}
-          transition={{ type: "spring", stiffness: 150, damping: 15 }}
-          fetchPriority="high"
+          {...({ fetchpriority: "high" } as any)}
+          decoding="async"
         />
       </motion.div>
 
       {/* Título dinámico */}
       <motion.div
         className="flex justify-center items-center px-4 pb-8 w-full"
-        variants={itemVariants}
+        /* Removed animation for LCP */
       >
         <h1 className="custom-title font-cor text-dar text-4xl tracking-wide">
           {short_name}

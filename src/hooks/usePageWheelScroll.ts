@@ -27,6 +27,8 @@ export function usePageWheelScroll(
   const isAnimatingRef = React.useRef(false);
   const lastDirectionRef = React.useRef<1 | -1 | 0>(0);
   const targetIndexRef = React.useRef<number | null>(null);
+  // Cache viewport height to avoid reading clientHeight on every wheel (reflow)
+  const viewportHeightRef = React.useRef(0);
 
   const animateTo = React.useCallback(
     (el: HTMLElement, to: number, duration: number, back = backStrength) => {
@@ -66,7 +68,7 @@ export function usePageWheelScroll(
         requestAnimationFrame(step);
       });
     },
-    []
+    [backStrength]
   );
 
   React.useEffect(() => {
@@ -78,49 +80,60 @@ export function usePageWheelScroll(
       return;
     }
 
+    // Initialize cache
+    viewportHeightRef.current = el.clientHeight;
+
+    // Update cache on resize
+    const updateViewport = () => {
+      viewportHeightRef.current = el.clientHeight;
+    };
+    window.addEventListener("resize", updateViewport);
+
     const handleWheel = (e: WheelEvent) => {
       if (isAnimatingRef.current) {
-        // Strictly prevent default and ignore input while animating
         e.preventDefault();
         return;
       }
 
-      const isLineMode = e.deltaMode === 1; // lines
-      const isPageMode = e.deltaMode === 2; // pages
+      const isLineMode = e.deltaMode === 1;
+      const isPageMode = e.deltaMode === 2;
       const isChunkyPixel = e.deltaMode === 0 && Math.abs(e.deltaY) >= pixelThreshold;
 
       const shouldIntercept = interceptTouchpad || isLineMode || isPageMode || isChunkyPixel;
       if (!shouldIntercept) return;
 
       // Avoid interfering with nested scrollable areas
+      // OPTIMIZED: Removed heavy getComputedStyle check.
+      // Relies on scrollHeight > clientHeight check which is cheaper (though still triggers layout).
       const target = e.target as HTMLElement | null;
       if (target) {
         let node: HTMLElement | null = target;
         while (node && node !== el) {
-          const style = window.getComputedStyle(node);
-          const canScrollY =
-            (style.overflowY === "auto" || style.overflowY === "scroll") &&
-            node.scrollHeight > node.clientHeight;
-          if (canScrollY) return; // let nested scroller handle it
+           // Simple heuristic: if content is significantly larger than view, assumes scrollable.
+          if (node.scrollHeight > node.clientHeight + 1) {
+             // We could check getComputedStyle(node).overflowY here but it forces heavy reflow.
+             // For now we assume if it has overflow content, we let it scroll.
+             return;
+          }
           node = node.parentElement;
         }
       }
 
       e.preventDefault();
 
-      const viewport = el.clientHeight;
+      const viewport = viewportHeightRef.current; // Use cached value
       const total = sectionRefs.current.length;
       if (viewport <= 0 || total === 0) return;
 
       const direction = Math.sign(e.deltaY) as 1 | -1 | 0;
-      const currentIndex = Math.round(el.scrollTop / viewport);
+      const scrollTop = el.scrollTop; // Triggers reflow but necessary for current position
+      const currentIndex = Math.round(scrollTop / viewport);
       let nextIndex = currentIndex + (direction > 0 ? 1 : -1);
       nextIndex = Math.max(0, Math.min(total - 1, nextIndex));
 
       if (nextIndex === currentIndex) return;
 
-      // Dynamic easing based on input intensity
-      const intensity = Math.min(1, Math.abs(e.deltaY) / 240); // normalize to [0,1]
+      const intensity = Math.min(1, Math.abs(e.deltaY) / 240);
       const duration = Math.max(400, Math.round(animationMs - intensity * 200));
       const back = Math.min(1.9, backStrength + intensity * 0.4);
 
@@ -140,6 +153,7 @@ export function usePageWheelScroll(
     el.addEventListener("wheel", handleWheel, { passive: false });
     return () => {
       el.removeEventListener("wheel", handleWheel as EventListener);
+      window.removeEventListener("resize", updateViewport);
     };
-  }, [containerRef, sectionRefs, interceptTouchpad, pixelThreshold, animationMs]);
+  }, [containerRef, sectionRefs, interceptTouchpad, pixelThreshold, animationMs, animateTo, backStrength]);
 }
