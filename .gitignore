@@ -24,3 +24,8 @@ dist-ssr
 *.sw?
 data/
 .env
+
+# Valid assets are now webp
+*.png
+*.jpg
+*.jpeg

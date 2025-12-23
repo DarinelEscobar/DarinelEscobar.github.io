@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import img from "../../assets/images/me.jpg";
+import img from "../../assets/images/me.webp";
 import data from "@data/data.json";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
