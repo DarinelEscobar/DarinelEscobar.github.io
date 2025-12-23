@@ -177,6 +177,15 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({
                   alt={
                     media[currentImageIndex].description || "Project Media"
                   }
+                  /* Optimization for specific fav icon */
+                  {...(media[currentImageIndex].url.includes("fav-400.webp")
+                    ? {
+                        width: 383,
+                        height: 295,
+                        loading: "lazy",
+                        decoding: "async",
+                      }
+                    : {})}
                   className={`${
                     isLoading ? "opacity-0" : "opacity-100"
                   } transition-opacity duration-300`}
