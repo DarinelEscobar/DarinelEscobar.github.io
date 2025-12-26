@@ -37,7 +37,7 @@ const HeaderMobile: React.FC<HeaderMobileProps> = ({
 
       {isMenuOpen && (
         <div
-          className="z-50 fixed inset-0 flex flex-col bg-whi text-white transition-colors duration-500 ease-in-out"
+          className="z-50 fixed inset-0 flex flex-col bg-whi text-white transition-colors duration-500 ease-in-out pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)] pl-[env(safe-area-inset-left)] pr-[env(safe-area-inset-right)]"
         >
           {/* Sección superior del menú (botón Close) */}
           <div className="flex justify-between items-center px-5 py-4 border-gray-700 border-b w-full">

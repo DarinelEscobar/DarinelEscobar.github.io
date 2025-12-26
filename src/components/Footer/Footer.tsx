@@ -37,7 +37,7 @@ const Footer: React.FC = () => {
   return (
     <motion.footer
       ref={ref}
-      className="z-10 bg-transparent px-5 py-3 w-full text-sm"
+      className="z-10 bg-transparent px-5 py-3 w-full text-sm pb-[env(safe-area-inset-bottom)] pl-[env(safe-area-inset-left)] pr-[env(safe-area-inset-right)]"
       variants={footerVariants}
       initial="hidden"
       animate={controls}

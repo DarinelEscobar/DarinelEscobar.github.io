@@ -114,7 +114,7 @@ const Skills: React.FC = () => {
                           className: "h-5 w-5",
                           style: { color: skill.color },
                         })}
-                        <span className="truncate max-w-[4.5rem]">{skill.name}</span>
+                        <span className="text-center w-full leading-tight">{skill.name}</span>
                       </Badge>
                     ))}
                   </div>
