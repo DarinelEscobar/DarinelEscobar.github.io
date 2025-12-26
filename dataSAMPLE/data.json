@@ -1,0 +1,94 @@
+{
+  "resume": {
+    "personal_info": {
+      "full_name": "John Doe",
+      "short_name": "John",
+      "rol": "Software Engineer",
+      "location": "City, Country",
+      "email": "john.doe@example.com",
+      "phone": "+1 234 567 890",
+      "linkedin": "https://linkedin.com/in/johndoe",
+      "github": "https://github.com/johndoe",
+      "portfolio": "https://johndoe.github.io/"
+    },
+    "professional_summary": {
+      "summary": "I'm John, a software engineer passionate about building scalable applications.",
+      "note": "Always learning and exploring new technologies."
+    },
+    "Skills_Technologies": {
+      "technical_skills": {
+        "section_icon": { "name": "code", "library": "lucide-react", "color": "#3B82F6" },
+        "skills": [
+          { "name": "Language A", "icon": "SiPython", "library": "si", "color": "#306998" },
+          { "name": "Language B", "icon": "SiJavascript", "library": "si", "color": "#F7DF1E" }
+        ]
+      },
+      "devOps": {
+        "section_icon": { "name": "Cloud", "library": "lucide-react", "color": "#10B981" },
+        "skills": [
+          { "name": "Tool A", "icon": "FaDocker", "library": "fa", "color": "#2496ED" }
+        ]
+      },
+      "databases": {
+        "section_icon": { "name": "Database", "library": "lucide-react", "color": "#DB2777" },
+        "skills": [
+          { "name": "DB A", "icon": "SiMysql", "library": "si", "color": "#4479A1" }
+        ]
+      },
+      "mobile_development": {
+        "section_icon": { "name": "Smartphone", "library": "lucide-react", "color": "#F59E0B" },
+        "skills": [
+          { "name": "Framework A", "icon": "FaReact", "library": "fa", "color": "#61DAFB" }
+        ]
+      },
+      "backend_development": {
+        "section_icon": { "name": "server", "library": "lucide-react", "color": "#8B5CF6" },
+        "skills": [
+          { "name": "Framework B", "icon": "FaNode", "library": "fa", "color": "#339933" }
+        ]
+      },
+      "frontend_development": {
+        "section_icon": { "name": "LayoutPanelLeft", "library": "lucide-react", "color": "#06B6D4" },
+        "skills": [
+          { "name": "Lib A", "icon": "FaReact", "library": "fa", "color": "#61DAFB" }
+        ]
+      },
+      "tools": {
+        "section_icon": { "name": "PocketKnife", "library": "lucide-react", "color": "#DC2626" },
+        "skills": [
+          { "name": "Tool B", "icon": "SiPostman", "library": "si", "color": "#FF6C37" }
+        ]
+      },
+      "soft_skills": {
+        "section_icon": { "name": "HeartHandshake", "library": "lucide-react", "color": "#FACC15" },
+        "skills": [
+          { "name": "Skill A", "icon": "FaLightbulb", "library": "fa", "color": "#FCD34D" }
+        ]
+      },
+      "languages": {
+        "section_icon": { "name": "Speech", "library": "lucide-react", "color": "#2563EB" },
+        "languages_list": [
+          { "name": "Language X", "icon": "GiEagleEmblem", "library": "gi", "color": "#1E3A8A" }
+        ]
+      }
+    },
+    "education": [
+      {
+        "degree": "Bachelor of Science",
+        "institution": "University Name",
+        "graduation_date": "2025-01",
+        "relevant_coursework": ["Course A", "Course B"]
+      }
+    ],
+    "certifications": {
+      "section_icon": { "name": "Award", "library": "lucide-react", "color": "#FFD700" },
+      "items": [
+        {
+          "name": "Certification Name",
+          "link": "https://example.com/cert",
+          "imageKey": "certImageKey"
+        }
+      ]
+    }
+  }
+}

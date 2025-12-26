@@ -1,0 +1,31 @@
+{
+  "projects": {
+    "personal_projects": [
+      {
+        "name": "Project Alpha",
+        "Project_Overview": "A sample project overview.",
+        "description": "This is a dummy description of Project Alpha.",
+        "role": "Full Stack Developer",
+        "technologies": {
+          "Frontend": ["React", "CSS"],
+          "Backend": ["Node.js"]
+        },
+        "start_date": "2023-01-01",
+        "end_date": "2023-06-01",
+        "url": "https://example.com/project-alpha"
+      },
+      {
+        "name": "Project Beta",
+        "Project_Overview": "Another sample project overview.",
+        "description": "This is a dummy description of Project Beta.",
+        "role": "Frontend Developer",
+        "technologies": {
+          "Frontend": ["Vue.js", "Tailwind"]
+        },
+        "start_date": "2023-07-01",
+        "end_date": "2023-12-01",
+        "url": "https://example.com/project-beta"
+      }
+    ]
+  }
+}

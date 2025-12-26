@@ -1,0 +1,70 @@
+{
+  "experience": {
+    "projects": [
+      {
+        "name": "Dummy Project 1",
+        "Project_Overview": "This is a dummy project overview.",
+        "description": "This is a dummy description of the project.",
+        "role": "Full-stack Developer",
+        "technologies": {
+          "Frontend": ["React", "CSS"],
+          "Backend": ["Node.js"],
+          "Tools": ["Git"],
+          "Project Management": ["Jira"]
+        },
+        "start_date": "2024-01-01",
+        "end_date": "2024-06-01",
+        "responsibilities": [
+          "Developed frontend components.",
+          "Implemented backend APIs."
+        ],
+        "achievements": [
+          "Completed the project on time."
+        ],
+        "client": "Client A",
+        "team_size": 3,
+        "url": "https://example.com/project1",
+        "repository": "https://github.com/example/project1",
+        "media": [
+          {
+            "type": "image",
+            "description": "Screenshot 1",
+            "url": "assets/images/dummy1.webp"
+          }
+        ]
+      },
+      {
+        "name": "Dummy Project 2",
+        "Project_Overview": "This is another dummy project overview.",
+        "description": "This is another dummy description.",
+        "role": "Backend Developer",
+        "technologies": {
+          "Frontend": ["Vue.js"],
+          "Backend": ["PHP"],
+          "Tools": ["Docker"],
+          "Project Management": ["Trello"]
+        },
+        "start_date": "2024-07-01",
+        "end_date": "2024-12-01",
+        "responsibilities": [
+          "Designed database schema.",
+          "Optimized queries."
+        ],
+        "achievements": [
+          "Improved performance by 20%."
+        ],
+        "client": "Client B",
+        "team_size": 4,
+        "url": "https://example.com/project2",
+        "repository": "https://github.com/example/project2",
+        "media": [
+          {
+            "type": "image",
+            "description": "Screenshot 2",
+            "url": "assets/images/dummy2.webp"
+          }
+        ]
+      }
+    ]
+  }
+}
