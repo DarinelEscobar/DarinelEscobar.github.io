@@ -30,8 +30,8 @@ const HomePage: React.FC = () => {
     {
       interceptTouchpad: false,
       pixelThreshold: 60,
-      animationMs: 800,
-      backStrength: 1.4,
+      animationMs: 500,
+      backStrength: 1.0,
     }
   );
 
