@@ -102,10 +102,13 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({ project }) => {
           viewport={{ once: false, amount: 0.2 }}
         >
           {project.responsibilities.map((resp, index) => (
-            <motion.div key={index} variants={cardItem}>
+            <motion.div
+              key={index}
+              variants={cardItem}
+              whileHover={{ scale: 1.03, rotateZ: 1 }}
+            >
               <Card
-                className="hover:shadow-md border border-5dar transition-shadow duration-300"
-                whileHover={{ scale: 1.03, rotateZ: 1 }}
+                className="hover:shadow-md border border-5dar dark:border-5dar/30 dark:bg-white/5 transition-shadow duration-300"
               >
                 <CardContent className="flex flex-col gap-4 p-6">
                   <div className="flex items-start gap-3">
@@ -145,10 +148,13 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({ project }) => {
           viewport={{ once: false, amount: 0.2 }}
         >
           {project.achievements.map((achievement, index) => (
-            <motion.div key={index} variants={cardItem}>
+            <motion.div
+              key={index}
+              variants={cardItem}
+              whileHover={{ scale: 1.03, rotateZ: 1 }}
+            >
               <Card
-                className="bg-gradient-to-r from-whi/5 dark:from-dar/5 to-transparent hover:shadow-md border border-5whi dark:border-5dar border-blue-500/50 border-l-4 transition-shadow duration-300"
-                whileHover={{ scale: 1.03, rotateZ: 1 }}
+                className="bg-gradient-to-r from-whi/5 to-transparent hover:shadow-md border border-5whi dark:border-5dar/30 border-blue-500/50 border-l-4 transition-shadow duration-300 dark:bg-white/5"
               >
                 <CardContent className="flex items-start gap-4 p-6">
                   <div className="flex justify-center items-center bg-yellow-500/10 p-2 rounded-full">

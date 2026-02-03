@@ -85,7 +85,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ project }) => {
             {project.repository && (
               <Button
                 size="lg"
-                className="flex items-center gap-2 bg-dar hover:bg-5dar dark:hover:bg-5dar dark:bg-5dar px-8 py-6 w-full sm:w-auto text-whi text-lg"
+                className="flex items-center gap-2 bg-dar hover:bg-5dar dark:hover:bg-gray-700 dark:bg-gray-800 px-8 py-6 w-full sm:w-auto text-whi text-lg"
                 onClick={() => window.open(project.repository, "_blank")}
               >
                 View Repository

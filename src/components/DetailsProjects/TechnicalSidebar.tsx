@@ -90,7 +90,7 @@ const TechnicalSidebar: React.FC<TechnicalSidebarProps> = ({ project }) => {
       whileInView="visible"
       viewport={{ once: false, amount: 0.2 }}
     >
-      <Card className="top-0 sticky bg-whi shadow-lg border border-5whi dark:border-5dar">
+      <Card className="top-0 sticky bg-whi dark:bg-white/5 shadow-lg border border-5whi dark:border-5dar/30">
         <CardHeader className="pb-4">
           <CardTitle className="font-cor text-dar text-2xl">
             Technical Details

@@ -24,16 +24,7 @@ const MainContent: React.FC = () => {
   const controls = useAnimation();
 
   // Actualiza la variable CSS --vh para reflejar el alto real de la ventana
-  useEffect(() => {
-    const setVh = () => {
-      const vh = window.innerHeight * 0.01;
-      document.documentElement.style.setProperty('--vh', `${vh}px`);
-    };
-    setVh();
-    window.addEventListener("resize", setVh);
-    return () => window.removeEventListener("resize", setVh);
-  }, []);
-
+  // Se elimina el cálculo manual de VH en favor de dvh CSS nativo
   useEffect(() => {
     if (inView) controls.start("visible");
     else controls.start("hidden");
@@ -43,14 +34,15 @@ const MainContent: React.FC = () => {
     <motion.section
       ref={ref}
       // Se reemplaza h-screen por min-h con la variable --vh para que se adapte al alto real
-      className="flex flex-col justify-between items-center bg-whi w-screen min-h-[calc(var(--vh,1vh)*100)] text-dar"
+      // Se reemplaza el cálculo manual de vh por 100dvh para mejor soporte móvil
+      className="flex flex-col justify-center md:justify-between items-center bg-whi w-screen min-h-[100dvh] text-dar gap-4 md:gap-0"
       variants={containerVariants}
       initial="visible"
       animate={controls}
     >
       {/* Imagen con efecto hover */}
       <motion.div
-        className="flex flex-grow justify-center items-center"
+        className="flex flex-none md:flex-grow justify-center items-center"
         /* Removed variants/animation from LCP element container to prevent layout shift/delay */
         style={{ willChange: "transform" }}
       >
@@ -67,7 +59,7 @@ const MainContent: React.FC = () => {
 
       {/* Título dinámico */}
       <motion.div
-        className="flex justify-center items-center px-4 pb-8 w-full"
+        className="flex justify-center items-center px-4 pb-4 md:pb-8 w-full"
         /* Removed animation for LCP */
       >
         <h1 className="custom-title font-cor text-dar text-4xl tracking-wide">

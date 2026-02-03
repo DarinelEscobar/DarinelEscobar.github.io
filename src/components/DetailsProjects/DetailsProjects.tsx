@@ -63,17 +63,23 @@ const DetailsProjects: React.FC<DetailsProjectsProps> = ({
       <div className="absolute w-full min-h-full">
         <button
           onClick={onClose}
-          className="top-4 right-4 z-50 fixed bg-white/90 hover:bg-white dark:hover:bg-gray-800 dark:bg-gray-800/80 shadow p-2 rounded-full transition-colors"
+          className="top-4 right-4 z-50 fixed bg-white/90 hover:bg-white dark:hover:bg-gray-700 dark:bg-gray-800/80 shadow p-2 rounded-full transition-colors"
         >
-          <X className="w-5 h-5 text-dark dark:text-gray-200" />
+          <X className="w-5 h-5 text-dark dark:text-whi" />
         </button>
 
-        <div className="bg-white min-h-screen text-dark">
+        <div className="bg-whi min-h-screen text-dar">
           <HeroSection project={project} />
 
           <section className="px-4 py-24">
             <div className="gap-12 grid lg:grid-cols-3 mx-auto container">
-              <ProjectDetails project={project} />
+              <ProjectDetails
+                project={{
+                  ...project,
+                  responsibilities: project.responsibilities || [],
+                  achievements: project.achievements || [],
+                }}
+              />
               <TechnicalSidebar project={project} />
             </div>
           </section>
