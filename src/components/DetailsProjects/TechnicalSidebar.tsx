@@ -3,16 +3,11 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Building, Calendar, Users, Briefcase } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { motion } from "framer-motion";
+import type { ProjectData } from "@/content/portfolio/types";
+import { usePortfolioContent } from "@/lib/portfolioContent";
 
 interface TechnicalSidebarProps {
-  project: {
-    start_date: string;
-    end_date: string;
-    client: string;
-    team_size: number;
-    role: string;
-    technologies?: Record<string, string[]>;
-  };
+  project: Pick<ProjectData, "start_date" | "end_date" | "client" | "team_size" | "role" | "technologies">;
 }
 
 // Variantes para contenedor principal
@@ -56,32 +51,71 @@ const badgeItem = {
   },
 };
 
-const calculateDuration = (start: string, end: string) => {
+const calculateDuration = (
+  start: string,
+  end: string,
+  locale: string,
+  labels: {
+    monthSingular: string;
+    monthPlural: string;
+    weekSingular: string;
+    weekPlural: string;
+    andLabel: string;
+  }
+) => {
   const startDate = new Date(start);
   const endDate = new Date(end);
+
+  if (Number.isNaN(startDate.getTime()) || Number.isNaN(endDate.getTime())) {
+    return null;
+  }
+
   const diffInDays = Math.floor(
     (endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24)
   );
   const months = Math.floor(diffInDays / 30);
   const weeks = Math.floor((diffInDays % 30) / 7);
 
-  const startFormatted = startDate.toLocaleDateString(undefined, {
+  const startFormatted = startDate.toLocaleDateString(locale, {
     month: "long",
     day: "numeric",
     year: "numeric",
   });
-  const endFormatted = endDate.toLocaleDateString(undefined, {
+  const endFormatted = endDate.toLocaleDateString(locale, {
     month: "long",
     day: "numeric",
     year: "numeric",
   });
 
-  return `${startFormatted} - ${endFormatted} (${months} month${
-    months > 1 ? "s" : ""
-  }${weeks > 0 ? ` and ${weeks} week${weeks > 1 ? "s" : ""}` : ""})`;
+  const durationParts: string[] = [];
+
+  if (months > 0) {
+    durationParts.push(`${months} ${months === 1 ? labels.monthSingular : labels.monthPlural}`);
+  }
+
+  if (weeks > 0) {
+    durationParts.push(`${weeks} ${weeks === 1 ? labels.weekSingular : labels.weekPlural}`);
+  }
+
+  const durationLabel = durationParts.length > 0 ? ` (${durationParts.join(` ${labels.andLabel} `)})` : "";
+
+  return `${startFormatted} - ${endFormatted}${durationLabel}`;
 };
 
 const TechnicalSidebar: React.FC<TechnicalSidebarProps> = ({ project }) => {
+  const {
+    ui: { locale, projects },
+  } = usePortfolioContent();
+  const duration = project.start_date && project.end_date
+    ? calculateDuration(project.start_date, project.end_date, locale.duration, {
+        monthSingular: projects.monthSingular,
+        monthPlural: projects.monthPlural,
+        weekSingular: projects.weekSingular,
+        weekPlural: projects.weekPlural,
+        andLabel: projects.andLabel,
+      })
+    : null;
+
   return (
     <motion.div
       className="lg:col-span-1"
@@ -93,7 +127,7 @@ const TechnicalSidebar: React.FC<TechnicalSidebarProps> = ({ project }) => {
       <Card className="top-0 sticky bg-whi dark:bg-white/5 shadow-lg border border-5whi dark:border-5dar/30">
         <CardHeader className="pb-4">
           <CardTitle className="font-cor text-dar text-2xl">
-            Technical Details
+            {projects.technicalDetailsLabel}
           </CardTitle>
         </CardHeader>
 
@@ -106,45 +140,50 @@ const TechnicalSidebar: React.FC<TechnicalSidebarProps> = ({ project }) => {
             whileInView="visible"
             viewport={{ once: false, amount: 0.2 }}
           >
-            <motion.div className="flex items-center gap-4" variants={sidebarItem}>
-              <Building className="w-6 h-6 text-blue-500" />
-              <div>
-                <p className="text-5dar text-sm">Client</p>
-                <p className="font-rob font-medium text-lg">{project.client}</p>
-              </div>
-            </motion.div>
+            {project.client && (
+              <motion.div className="flex items-center gap-4" variants={sidebarItem}>
+                <Building className="w-6 h-6 text-blue-500" />
+                <div>
+                  <p className="text-5dar text-sm">{projects.clientLabel}</p>
+                  <p className="font-rob font-medium text-lg">{project.client}</p>
+                </div>
+              </motion.div>
+            )}
 
-            <motion.div className="flex items-center gap-4" variants={sidebarItem}>
-              <Calendar className="w-6 h-6 text-blue-500" />
-              <div>
-                <p className="text-5dar text-sm">Duration</p>
-                <p className="font-rob font-medium text-lg">
-                  {calculateDuration(project.start_date, project.end_date)}
-                </p>
-              </div>
-            </motion.div>
+            {duration && (
+              <motion.div className="flex items-center gap-4" variants={sidebarItem}>
+                <Calendar className="w-6 h-6 text-blue-500" />
+                <div>
+                  <p className="text-5dar text-sm">{projects.durationLabel}</p>
+                  <p className="font-rob font-medium text-lg">{duration}</p>
+                </div>
+              </motion.div>
+            )}
 
-            <motion.div className="flex items-center gap-4" variants={sidebarItem}>
-              <Users className="w-6 h-6 text-blue-500" />
-              <div>
-                <p className="text-5dar text-sm">Team</p>
-                <p className="font-rob font-medium text-lg">
-                  {project.team_size} developers
-                </p>
-              </div>
-            </motion.div>
+            {typeof project.team_size === "number" && (
+              <motion.div className="flex items-center gap-4" variants={sidebarItem}>
+                <Users className="w-6 h-6 text-blue-500" />
+                <div>
+                  <p className="text-5dar text-sm">{projects.teamLabel}</p>
+                  <p className="font-rob font-medium text-lg">
+                    {project.team_size}{" "}
+                    {project.team_size === 1 ? projects.teamMemberSingular : projects.teamMemberPlural}
+                  </p>
+                </div>
+              </motion.div>
+            )}
 
             <motion.div className="flex items-center gap-4" variants={sidebarItem}>
               <Briefcase className="w-6 h-6 text-blue-500" />
               <div>
-                <p className="text-5dar text-sm">Role</p>
+                <p className="text-5dar text-sm">{projects.roleLabel}</p>
                 <p className="font-rob font-medium text-lg">{project.role}</p>
               </div>
             </motion.div>
           </motion.div>
 
           {/* Tecnología */}
-          {project.technologies && (
+          {project.technologies && Object.keys(project.technologies).length > 0 && (
             <motion.div
               className="space-y-4"
               variants={sidebarVariants}
@@ -156,7 +195,7 @@ const TechnicalSidebar: React.FC<TechnicalSidebarProps> = ({ project }) => {
                 className="font-cor font-semibold text-dar text-lg"
                 variants={sidebarItem}
               >
-                Technology Stack
+                {projects.technologyStackLabel}
               </motion.h4>
               <motion.div className="flex flex-wrap gap-3" variants={sidebarItem}>
                 {Object.entries(project.technologies).map(

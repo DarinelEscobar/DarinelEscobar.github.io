@@ -1,24 +1,17 @@
 import React, { useEffect } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import type { ProjectData } from "@/content/portfolio/types";
+import { usePortfolioContent } from "@/lib/portfolioContent";
 
 interface Media {
   url: string;
   description?: string;
 }
 
-interface Project {
-  name: string;
-  role: string;
-  description: string;
-  start_date: string;
-  end_date: string;
-  media?: Media[];
-}
-
 interface ProjectCardProps {
   direction: number;
-  currentProject: Project;
+  currentProject: ProjectData;
   startDate: string;
   endDate: string;
   media: Media[];
@@ -67,6 +60,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   currentImageIndex,
   setCurrentImageIndex,
 }) => {
+  const {
+    ui: { projects },
+  } = usePortfolioContent();
   const controls = useAnimation();
   const { ref, inView } = useInView({
     threshold: 0.1,
@@ -100,9 +96,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
       <div className="relative mb-16 lg:mb-24 w-full h-auto lg:h-[80vh] overflow-hidden lg:overflow-visible card">
         {/* Versión Mobile/Tablet */}
         <div className="lg:hidden flex flex-col space-y-4 p-6 text-dar dark:text-gray-100">
-          <motion.span variants={itemVariants} className="font-rob text-gray-500 dark:text-gray-400 text-xs">
-            {startDate} – {endDate}
-          </motion.span>
+          {(startDate || endDate) && (
+            <motion.span variants={itemVariants} className="font-rob text-gray-500 dark:text-gray-400 text-xs">
+              {[startDate, endDate].filter(Boolean).join(" - ")}
+            </motion.span>
+          )}
 
           <motion.p variants={itemVariants} className="font-rob text-blue-500 dark:text-blue-400 text-xs sm:text-sm uppercase tracking-[0.2em] font-bold">
             {currentProject.role}
@@ -138,10 +136,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 
         {/* Versión Desktop */}
         <div className="hidden lg:block top-1/4 left-8 z-10 absolute space-y-4 w-1/2 text-dar">
-
-          <motion.span variants={itemVariants} className="font-rob text-gray-500 dark:text-gray-400 text-sm">
-            {startDate} – {endDate}
-          </motion.span>
+          {(startDate || endDate) && (
+            <motion.span variants={itemVariants} className="font-rob text-gray-500 dark:text-gray-400 text-sm">
+              {[startDate, endDate].filter(Boolean).join(" - ")}
+            </motion.span>
+          )}
 
           <motion.p variants={itemVariants} className="font-rob text-blue-500 dark:text-blue-400 text-xs sm:text-sm uppercase tracking-[0.2em] font-bold">
             {currentProject.role}
@@ -183,7 +182,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           {media.length > 0 ? (
             <img
               src={getAssetImage(media[currentImageIndex].url)}
-              alt={media[currentImageIndex].description || "Project Media"}
+              alt={media[currentImageIndex].description || projects.multimediaMaterialLabel}
               className="border-gray-200/30 dark:border-gray-600 border-b rounded-xl w-full h-full object-cover"
               loading="lazy"
               onError={(e) => {
@@ -193,7 +192,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           ) : (
             <div className="flex justify-center items-center bg-gray-200 dark:bg-gray-700 rounded-xl w-full h-full">
               <p className="text-gray-500 dark:text-gray-300">
-                Sin imágenes disponibles
+                {projects.noImagesAvailableLabel}
               </p>
             </div>
           )}

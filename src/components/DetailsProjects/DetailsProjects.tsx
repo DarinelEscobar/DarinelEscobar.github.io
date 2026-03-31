@@ -5,29 +5,10 @@ import ProjectDetails from "./ProjectDetails";
 import TechnicalSidebar from "./TechnicalSidebar";
 import MediaGallery from "./MediaGallery";
 import { motion } from "framer-motion";
-
-interface Project {
-  name: string;
-  Project_Overview: string;
-  description: string;
-  role: string;
-  start_date: string;
-  end_date: string;
-  client: string;
-  team_size: number;
-  url?: string;
-  repository?: string;
-  responsibilities?: string[];
-  achievements?: string[];
-  media?: {
-    type: string;
-    url: string;
-    description?: string;
-  }[];
-}
+import type { ProjectData } from "@/content/portfolio/types";
 
 interface DetailsProjectsProps {
-  projects: Project[];
+  projects: ProjectData[];
   projectIndex: number;
   onClose: () => void;
 }

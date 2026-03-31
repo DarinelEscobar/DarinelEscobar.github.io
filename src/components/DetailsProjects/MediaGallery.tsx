@@ -11,6 +11,7 @@ import { getAssetImage } from "./utils";
 import { motion, AnimatePresence } from "framer-motion";
 import { useSwipeable } from "react-swipeable";
 import { useHotkeys } from "react-hotkeys-hook";
+import { usePortfolioContent } from "@/lib/portfolioContent";
 
 interface MediaItem {
   url: string;
@@ -20,7 +21,7 @@ interface MediaItem {
 interface MediaGalleryProps {
   media: MediaItem[];
   currentImageIndex: number;
-  setCurrentImageIndex: (index: number) => void;
+  setCurrentImageIndex: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const galleryVariants = {
@@ -63,6 +64,9 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({
   currentImageIndex,
   setCurrentImageIndex,
 }) => {
+  const {
+    ui: { projects },
+  } = usePortfolioContent();
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [imageDimensions, setImageDimensions] = useState<{
@@ -112,6 +116,14 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({
   useHotkeys("esc", () => setIsFullscreen(false));
 
   useEffect(() => {
+    document.body.style.overflow = isFullscreen ? "hidden" : "";
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isFullscreen]);
+
+  useEffect(() => {
     const img = new Image();
     img.src = getAssetImage(media[currentImageIndex].url);
     img.onload = () => {
@@ -125,12 +137,7 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({
   }, [currentImageIndex, media]);
 
   const toggleFullscreen = () => {
-    setIsFullscreen(!isFullscreen);
-    if (!isFullscreen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
+    setIsFullscreen((currentValue) => !currentValue);
   };
 
   return (
@@ -147,7 +154,7 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({
     >
       <div className="space-y-6 mx-auto container">
         <h2 className="mb-8 font-bold text-gray-800 dark:text-gray-100 text-3xl text-center">
-          Multimedia Material
+          {projects.multimediaMaterialLabel}
         </h2>
 
         <div className="group relative mx-auto max-w-6xl" {...handlers}>
@@ -174,9 +181,7 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({
 
                 <img
                   src={getAssetImage(media[currentImageIndex].url)}
-                  alt={
-                    media[currentImageIndex].description || "Project Media"
-                  }
+                  alt={media[currentImageIndex].description || projects.multimediaMaterialLabel}
                   /* Optimization for specific fav icon */
                   {...(media[currentImageIndex].url.includes("fav-400.webp")
                     ? {
@@ -229,7 +234,7 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({
           {/* Navigation Controls */}
           <div className="top-1/2 z-10 absolute flex justify-between px-4 w-full -translate-y-1/2">
             <Button
-              aria-label="Previous image"
+              aria-label={projects.previousImageLabel}
               variant="ghost"
               size="lg"
               className="bg-white/90 hover:bg-white dark:hover:bg-gray-900 dark:bg-gray-900/90 shadow-xl p-3 rounded-full hover:scale-105 transition-transform"
@@ -238,7 +243,7 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({
               <ChevronLeft className="w-8 h-8" />
             </Button>
             <Button
-              aria-label="Next image"
+              aria-label={projects.nextImageLabel}
               variant="ghost"
               size="lg"
               className="bg-white/90 hover:bg-white dark:hover:bg-gray-900 dark:bg-gray-900/90 shadow-xl p-3 rounded-full hover:scale-105 transition-transform"
@@ -293,7 +298,7 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({
               <div className="relative bg-gray-100 dark:bg-gray-900 aspect-square">
                 <img
                   src={getAssetImage(mediaItem.url)}
-                  alt={mediaItem.description || `Media ${index + 1}`}
+                  alt={mediaItem.description || `${projects.multimediaMaterialLabel} ${index + 1}`}
                   className="absolute inset-0 w-full h-full object-cover"
                 />
                 {index === currentImageIndex && (
