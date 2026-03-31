@@ -164,17 +164,22 @@ const DetailsProjects: React.FC<DetailsProjectsProps> = ({
           <motion.button
             type="button"
             aria-label="Scroll down to continue reading the project details"
-            className="bottom-6 left-1/2 z-40 fixed flex items-center gap-3 bg-white/92 shadow-2xl backdrop-blur-sm px-4 py-3 border border-black/10 rounded-full -translate-x-1/2 text-dar dark:bg-gray-900/92 dark:border-white/10 dark:text-whi"
+            className="bottom-6 left-1/2 z-40 fixed flex items-center gap-3 overflow-hidden border border-black/10 bg-white/95 px-4 py-3 rounded-full text-dar shadow-[0_18px_50px_rgba(15,23,42,0.18)] backdrop-blur-md -translate-x-1/2 dark:border-white/15 dark:bg-slate-950/88 dark:text-white dark:shadow-[0_24px_65px_rgba(0,0,0,0.6)]"
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 12 }}
             transition={{ duration: 0.25, ease: "easeOut" }}
             onClick={handleScrollHintClick}
           >
-            <span className="font-rob font-medium text-[0.68rem] tracking-[0.28em] uppercase">
+            <span className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-transparent to-blue-500/5 dark:from-blue-400/20 dark:via-transparent dark:to-cyan-300/10 pointer-events-none" />
+            <span className="z-10 flex justify-center items-center bg-blue-600 dark:bg-blue-500 shadow-[0_10px_25px_rgba(37,99,235,0.35)] rounded-full w-8 h-8 text-white">
+              <ChevronDown className="w-4 h-4" />
+            </span>
+            <span className="z-10 font-rob font-semibold text-[0.68rem] tracking-[0.28em] uppercase">
               Scroll to continue
             </span>
             <motion.span
+              className="z-10 text-blue-700 dark:text-blue-300"
               animate={{ y: [0, 5, 0] }}
               transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }}
             >
