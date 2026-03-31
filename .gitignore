@@ -22,7 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-data/
 .env
 
 # Valid assets are now webp
