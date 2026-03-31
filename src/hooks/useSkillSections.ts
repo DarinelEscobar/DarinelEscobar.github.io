@@ -10,6 +10,7 @@ import {
   HeartHandshake,
   Speech,
   Award,
+  type LucideIcon,
 } from "lucide-react";
 import {
   SiPython,
@@ -40,7 +41,7 @@ import { GiEagleEmblem, GiCactus, GiFuji, GiInfo } from "react-icons/gi";
 import { usePortfolioContent } from "@/lib/portfolioContent";
 
 // Map for Lucide icons
-const lucideMap: Record<string, React.FC<React.SVGProps<SVGSVGElement>>> = {
+const lucideMap: Record<string, LucideIcon> = {
   code: Code,
   Code: Code,
   cloud: Cloud,
@@ -102,7 +103,7 @@ function getIcon(iconName: string, library: string): React.ReactNode {
   switch (library.toLowerCase()) {
     case "lucide-react": {
       const LucideIcon = lucideMap[iconName] || Code;
-      return React.createElement(LucideIcon as React.ForwardRefExoticComponent<any>, { className: "w-5 h-5" });
+      return React.createElement(LucideIcon, { className: "w-5 h-5" });
     }
     case "fa": {
       const FaIcon = faMap[iconName] || FaQuestion;
@@ -120,7 +121,7 @@ function getIcon(iconName: string, library: string): React.ReactNode {
     }
 
     default:
-      return React.createElement(Code as React.ForwardRefExoticComponent<any>, { className: "w-5 h-5" });
+      return React.createElement(Code, { className: "w-5 h-5" });
   }
 }
 

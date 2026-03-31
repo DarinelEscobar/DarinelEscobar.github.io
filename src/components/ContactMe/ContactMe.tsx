@@ -15,6 +15,22 @@ interface Cell {
   col: number;
 }
 
+const initialOccupiedCells: Cell[] = [
+  { row: 1, col: 8 },
+  { row: 2, col: 8 },
+  { row: 2, col: 2 },
+  { row: 2, col: 3 },
+  { row: 2, col: 4 },
+  { row: 2, col: 5 },
+  { row: 2, col: 6 },
+  { row: 3, col: 2 },
+  { row: 3, col: 3 },
+  { row: 3, col: 4 },
+  { row: 4, col: 6 },
+  { row: 4, col: 7 },
+  { row: 4, col: 8 },
+];
+
 // ================== MOBILE ==================
 const MobileContact: React.FC = () => {
   const {
@@ -143,23 +159,6 @@ const ContactMeDesktop: React.FC = () => {
       personal_info: { email, phone, linkedin, github },
     },
   } = usePortfolioContent();
-
-  // Ocupadas: M/E y otras celdas
-  const initialOccupiedCells: Cell[] = [
-    { row: 1, col: 8 },
-    { row: 2, col: 8 },
-    { row: 2, col: 2 },
-    { row: 2, col: 3 },
-    { row: 2, col: 4 },
-    { row: 2, col: 5 },
-    { row: 2, col: 6 },
-    { row: 3, col: 2 },
-    { row: 3, col: 3 },
-    { row: 3, col: 4 },
-    { row: 4, col: 6 },
-    { row: 4, col: 7 },
-    { row: 4, col: 8 },
-  ];
 
   const totalRows = 5;
   const totalCols = 8;

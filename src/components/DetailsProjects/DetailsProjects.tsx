@@ -27,12 +27,13 @@ const DetailsProjects: React.FC<DetailsProjectsProps> = ({
   projectIndex,
   onClose,
 }) => {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
   if (projectIndex < 0 || projectIndex >= projects.length) {
     return null;
   }
 
   const project = projects[projectIndex];
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   return (
     <motion.div

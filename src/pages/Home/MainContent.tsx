@@ -53,7 +53,7 @@ const MainContent: React.FC = () => {
           width="200"
           height="300"
           className="shadow-lg rounded-md w-[200px] h-[300px] object-cover"
-          {...({ fetchpriority: "high" } as any)}
+          fetchPriority="high"
           decoding="async"
         />
       </motion.div>
