@@ -2,12 +2,16 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import data from "@data/data.json";
+import type { Language } from "@/content/portfolio/types";
+import { usePortfolioContent } from "@/lib/portfolioContent";
+import LanguageToggle from "./LanguageToggle";
 
 interface HeaderDesktopProps {
   formattedTime: string;
   toggleDarkMode: () => void;
   isDarkMode: boolean;
+  language: Language;
+  setLanguage: (language: Language) => void;
 }
 
 const fadeIn = {
@@ -29,8 +33,15 @@ const HeaderDesktop: React.FC<HeaderDesktopProps> = ({
   formattedTime,
   toggleDarkMode,
   isDarkMode,
+  language,
+  setLanguage,
 }) => {
-  const { short_name, rol, location } = data.resume.personal_info;
+  const {
+    resume: {
+      personal_info: { short_name, rol, location },
+    },
+    ui,
+  } = usePortfolioContent();
 
   const controls = useAnimation();
   const { ref, inView } = useInView({ threshold: 0.3, triggerOnce: true });
@@ -52,9 +63,18 @@ const HeaderDesktop: React.FC<HeaderDesktopProps> = ({
       variants={staggerContainer}
     >
       <InfoSection title={`${short_name}:`} content={rol} />
-      <InfoSection title="Location:" content={`${location} (${formattedTime})`} />
-      <NavigationLinks />
-      <ThemeToggle isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
+      <InfoSection title={ui.header.locationLabel} content={`${location} (${formattedTime})`} />
+      <NavigationLinks navigationLabel={ui.header.navigationLabel} navigationLinks={ui.header.navigationLinks} />
+      <ControlsSection
+        isDarkMode={isDarkMode}
+        toggleDarkMode={toggleDarkMode}
+        language={language}
+        setLanguage={setLanguage}
+        themeLabel={ui.header.themeLabel}
+        lightModeLabel={ui.header.lightModeLabel}
+        darkModeLabel={ui.header.darkModeLabel}
+        languageLabel={ui.header.languageLabel}
+      />
     </motion.div>
   );
 };
@@ -71,34 +91,68 @@ const InfoSection: React.FC<InfoSectionProps> = ({ title, content }) => (
   </motion.div>
 );
 
-const NavigationLinks: React.FC = () => (
+interface NavigationLinksProps {
+  navigationLabel: string;
+  navigationLinks: Array<{ to: string; label: string }>;
+}
+
+const NavigationLinks: React.FC<NavigationLinksProps> = ({
+  navigationLabel,
+  navigationLinks,
+}) => (
   <motion.div className="flex flex-col gap-0.5 text-left" variants={fadeIn}>
-    <h1 className="font-bold font-rob text-[0.89rem] text-dar">Navigation:</h1>
+    <h1 className="font-bold font-rob text-[0.89rem] text-dar">{navigationLabel}</h1>
     <p className="font-lat text-[0.89rem] text-dar">
-      <Link to="/">Index</Link>,{" "} <Link to="/Contact">Contact</Link>,{" "} <Link to="/Project">Projects</Link>
-      {/* <Link to="/Page2">Archive</Link> */}
+      {navigationLinks.map((link, index) => (
+        <React.Fragment key={link.to}>
+          {index > 0 ? ", " : ""}
+          <Link to={link.to}>{link.label}</Link>
+        </React.Fragment>
+      ))}
     </p>
   </motion.div>
 );
 
-interface ThemeToggleProps {
+interface ControlsSectionProps {
   isDarkMode: boolean;
   toggleDarkMode: () => void;
+  language: Language;
+  setLanguage: (language: Language) => void;
+  themeLabel: string;
+  lightModeLabel: string;
+  darkModeLabel: string;
+  languageLabel: string;
 }
 
-const ThemeToggle: React.FC<ThemeToggleProps> = ({
+const ControlsSection: React.FC<ControlsSectionProps> = ({
   isDarkMode,
   toggleDarkMode,
-}) => (
-  <motion.div className="flex flex-col gap-0.5 text-left" variants={fadeIn}>
-    <h1 className="font-bold font-rob text-[0.89rem] text-dar">Theme:</h1>
-    <button
-      onClick={toggleDarkMode}
-      className="font-rob text-[0.89rem] text-dar underline"
-    >
-      {isDarkMode ? "Light Mode" : "Dark Mode"}
-    </button>
-  </motion.div>
-);
+  language,
+  setLanguage,
+  themeLabel,
+  lightModeLabel,
+  darkModeLabel,
+  languageLabel,
+}) => {
+  return (
+    <motion.div className="flex flex-col gap-2 text-left" variants={fadeIn}>
+      <div className="flex flex-col gap-0.5">
+        <h1 className="font-bold font-rob text-[0.89rem] text-dar">{themeLabel}</h1>
+        <button
+          type="button"
+          onClick={toggleDarkMode}
+          className="w-fit font-rob text-[0.89rem] text-dar underline"
+        >
+          {isDarkMode ? lightModeLabel : darkModeLabel}
+        </button>
+      </div>
+
+      <div className="flex flex-col gap-1">
+        <h1 className="font-bold font-rob text-[0.89rem] text-dar">{languageLabel}</h1>
+        <LanguageToggle language={language} setLanguage={setLanguage} />
+      </div>
+    </motion.div>
+  );
+};
 
 export default HeaderDesktop;
