@@ -168,44 +168,39 @@
           "Enabled the platform to handle high-demand scenarios through a virtual queue and traffic monitoring workflow."
         ],
         "client": "EZTICKET",
-        "team_size": 4,
+        "team_size": 1,
         "url": "https://eztickets.mx/",
         "repository": "https://bitbucket.org/cybac/web-ez-tickets-v1",
         "media": [
           {
             "type": "image",
             "description": "Public event details page showing event information, venue, date, and primary call to action for ticket purchase.",
-            "url": "assets/images/EZTICKET/public-event-details.webp"
+            "url": "assets/images/eztickets.mx/public-event-details.webp"
           },
           {
             "type": "image",
             "description": "Checkout summary view with selected tickets, totals, and Mercado Pago payment integration.",
-            "url": "assets/images/EZTICKET/checkout-summary.webp"
+            "url": "assets/images/eztickets.mx/checkout-summary.webp"
           },
           {
             "type": "image",
             "description": "Administrator dashboard with quick access cards for artists, venues, events, users, purchases, and legal documents.",
-            "url": "assets/images/EZTICKET/admin-dashboard.webp"
+            "url": "assets/images/eztickets.mx/admin-dashboard.webp"
           },
           {
             "type": "image",
             "description": "Event management screen used to create and configure events, pricing, logistics, and sales availability.",
-            "url": "assets/images/EZTICKET/admin-event-management.webp"
+            "url": "assets/images/eztickets.mx/admin-event-management.webp"
           },
           {
             "type": "image",
             "description": "Event metrics dashboard displaying ticket sales, validation totals, venue occupancy, and purchase records.",
-            "url": "assets/images/EZTICKET/event-metrics.webp"
+            "url": "assets/images/eztickets.mx/event-metrics.webp"
           },
           {
             "type": "image",
             "description": "QR scanning interface for receptionist staff to validate ticket access points in real time.",
-            "url": "assets/images/EZTICKET/qr-validation.webp"
-          },
-          {
-            "type": "image",
-            "description": "Virtual queue screen used to manage user position and access during high-traffic purchase periods.",
-            "url": "assets/images/EZTICKET/virtual-queue.webp"
+            "url": "assets/images/eztickets.mx/qr-validation.webp"
           }
         ]
       },
@@ -496,83 +491,6 @@
             "type": "image",
             "description": "Washer Dashboard - Mobile-friendly task management view for field staff.",
             "url": "assets/images/Cybac-Lavafy/lavador-dashboard.webp"
-          }
-        ]
-      },
-      {
-        "name": "TuxVentas Marketplace Platform (web-tuxventa-v1)",
-        "Project_Overview": "TuxVentas is a role-based marketplace web application built to manage classified listings for products, services, and medicines. The platform combines a public catalog with seller and buyer workspaces, enabling category browsing, listing publication, image galleries, QR-based listing sharing, public Q&A, private conversations, mutual acceptance for contact reveal, reviews, moderation alerts, and automated lifecycle rules for listings and chats.",
-        "description": "Development of a Laravel 10 marketplace platform with a public catalog, seller dashboard, buyer conversation flows, and administrator moderation tools. The system allows users to publish listings, manage galleries and QR codes, answer public questions, negotiate privately, reveal contact details after mutual acceptance, close deals, submit reviews, and monitor alerts through an operational admin panel.",
-        "role": "Full-stack Developer",
-        "technologies": {
-          "Frontend": ["Laravel Blade", "Livewire 3", "Tailwind CSS", "Flowbite", "JavaScript", "Vite"],
-          "Backend": ["PHP 8.1", "Laravel 10", "Laravel Sanctum"],
-          "Database": ["MySQL"],
-          "APIs": ["RESTful APIs", "OpenAPI / Swagger"],
-          "Tools": ["Composer", "Git", "animejs", "qrcode"],
-          "Project Management": ["Bitbucket"]
-        },
-        "start_date": "2026-01-07",
-        "end_date": "2026-03-20",
-        "responsibilities": [
-          "Build the public marketplace catalog with search by title, category, and subcategory, plus listing detail pages with public questions and answers.",
-          "Develop the seller workspace to create listings, manage statuses, upload up to five images, regenerate QR codes, and answer public buyer questions.",
-          "Implement buyer and seller conversation flows with reusable threads, real-time style messaging, mutual acceptance, contact reveal, closure states, and retention windows.",
-          "Create the review and reputation workflow, including SELLER, BUYER, and SERVICE contexts with automatic low-rating alert creation for moderation.",
-          "Develop administrator modules for overview metrics, moderation alerts, listing status changes, user blocking and unblocking, and conversation inspection.",
-          "Model normalized category and subcategory catalogs for products, services, and medicines, exposing protected and public REST endpoints with Sanctum authentication.",
-          "Implement scheduled lifecycle rules to expire listings automatically and archive closed conversations after the configured retention period."
-        ],
-        "achievements": [
-          "Delivered a multi-role marketplace that unified public browsing, seller operations, buyer communication, and administrator moderation in one Laravel application.",
-          "Implemented a privacy-aware negotiation flow that reveals contact details only after both participants explicitly accept the deal.",
-          "Added automated review moderation by converting low-rating reviews into actionable admin alerts with assignment and resolution workflows.",
-          "Reduced manual maintenance through scheduler-driven expiration and retention commands for listings and closed conversations.",
-          "Supported multiple commercial domains through normalized category catalogs and reusable API presentation layers."
-        ],
-        "client": "TuxVentas",
-        "team_size": 4,
-        "repository": "https://bitbucket.org/cybac/web-tuxventa-v1",
-        "media": [
-          {
-            "type": "image",
-            "description": "Public marketplace catalog with search and filters by title, category, and subcategory. Capture route: /marketplace. View file: resources/views/pages/marketplace/index.blade.php",
-            "url": "assets/images/TuxVentas/public-marketplace-catalog.webp"
-          },
-          {
-            "type": "image",
-            "description": "Listing detail page with gallery, price, seller info, public questions, and CTA to start a conversation. Capture route: /marketplace/listings/{listingId}. View file: resources/views/pages/marketplace/show.blade.php",
-            "url": "assets/images/TuxVentas/public-listing-detail.webp"
-          },
-          {
-            "type": "image",
-            "description": "Seller dashboard for managing listings, statuses, activity stats, creation modal, gallery previews, and QR actions. Capture route: /marketplace/me/listings. View file: resources/views/pages/marketplace/me-listings.blade.php",
-            "url": "assets/images/TuxVentas/seller-listings-dashboard.webp"
-          },
-          {
-            "type": "image",
-            "description": "Conversation workspace for a listing with filters, message list, deal acceptance flow, and closure actions. Capture route: /marketplace/me/conversations?listing_id={listingId}. View file: resources/views/pages/marketplace/me-conversations.blade.php",
-            "url": "assets/images/TuxVentas/seller-conversation-workspace.webp"
-          },
-          {
-            "type": "image",
-            "description": "Buyer conversation history screen showing conversations started from marketplace listings. Capture route: /marketplace/me/buyer-conversations. View file: resources/views/pages/marketplace/my-buyer-conversations.blade.php",
-            "url": "assets/images/TuxVentas/buyer-conversations-list.webp"
-          },
-          {
-            "type": "image",
-            "description": "Administrator overview dashboard with high-level metrics for users, active listings, and pending alerts. Capture route: /dashboard?panel=overview. View file: resources/views/pages/admin.blade.php",
-            "url": "assets/images/TuxVentas/admin-overview-dashboard.webp"
-          },
-          {
-            "type": "image",
-            "description": "Alert moderation center with alert queue, filters, assignment actions, and review context inspection. Capture route: /dashboard?panel=alerts. View files: resources/views/pages/admin.blade.php and resources/views/livewire/admin/alerts-manager.blade.php",
-            "url": "assets/images/TuxVentas/admin-alerts-center.webp"
-          },
-          {
-            "type": "image",
-            "description": "Lifecycle operations panel for automatic listing expiration and conversation retention rules. Capture route: /dashboard?panel=lifecycle. View files: resources/views/pages/admin.blade.php and resources/views/livewire/admin/lifecycle-manager.blade.php",
-            "url": "assets/images/TuxVentas/admin-lifecycle-panel.webp"
           }
         ]
       }
