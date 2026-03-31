@@ -3,9 +3,13 @@
 import React, { useState, useEffect } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import { usePortfolioContent } from "@/lib/portfolioContent";
 
 const AboutMe: React.FC = () => {
   const [showNote, setShowNote] = useState(false);
+  const {
+    ui: { home },
+  } = usePortfolioContent();
 
   const titleControls = useAnimation();
   const textControls = useAnimation();
@@ -87,8 +91,9 @@ const AboutMe: React.FC = () => {
               variants={variantsLine}
               whileHover={{ scale: 1.1, color: "#2563EB" }}
             >
-              I'm{" "}
-              <span className="text-blue-500 dark:text-blue-400">Darinel</span>,
+              {home.about.line1Prefix}
+              <span className="text-blue-500 dark:text-blue-400">{home.about.line1Highlight}</span>
+              {home.about.line1Suffix}
             </motion.div>
 
             <motion.div
@@ -98,20 +103,22 @@ const AboutMe: React.FC = () => {
                 textShadow: "2px 2px 5px rgba(59, 130, 246, 0.5)",
               }}
             >
-              a{" "}
+              {home.about.line2Prefix}
               <span className="text-gray-600 dark:text-gray-300">
-                versatile software engineer
+                {home.about.line2Highlight}
               </span>
+              {home.about.line2Suffix}
             </motion.div>
 
             <motion.div
               variants={variantsLine}
               whileHover={{ x: 5, scale: 1.05, rotate: 1 }}
             >
-              who enjoys{" "}
+              {home.about.line3Prefix}
               <span className="text-gray-600 dark:text-gray-300">
-                full-stack development
+                {home.about.line3Highlight}
               </span>
+              {home.about.line3Suffix}
             </motion.div>
 
             <motion.div
@@ -121,11 +128,11 @@ const AboutMe: React.FC = () => {
                 textShadow: "2px 2px 5px rgba(0, 0, 0, 0.2)",
               }}
             >
-              and{" "}
+              {home.about.line4Prefix}
               <span className="text-gray-600 dark:text-gray-300">
-                problem-solving
+                {home.about.line4Highlight}
               </span>
-              .
+              {home.about.line4Suffix}
             </motion.div>
           </motion.h1>
         </motion.div>
@@ -142,7 +149,7 @@ const AboutMe: React.FC = () => {
             animate={textControls}
           >
             <p className="text-xl md:text-2xl lg:text-3xl leading-relaxed font-sans text-warm-gray-700 dark:text-gray-200">
-              Always eager to{" "}
+              {home.about.notePrefix}
               <motion.span
                 initial={{ backgroundSize: "0% 2px" }}
                 animate={{ backgroundSize: "100% 2px" }}
@@ -156,9 +163,9 @@ const AboutMe: React.FC = () => {
                            dark:from-gray-400 dark:to-gray-400
                            bg-no-repeat bg-bottom"
               >
-                learn and grow
+                {home.about.noteHighlightOne}
               </motion.span>
-              , I thrive on tackling{" "}
+              {home.about.noteMiddle}
               <motion.span
                 initial={{ backgroundSize: "0% 2px" }}
                 animate={{ backgroundSize: "100% 2px" }}
@@ -173,9 +180,9 @@ const AboutMe: React.FC = () => {
                            dark:from-gray-400 dark:to-gray-400
                            bg-no-repeat bg-bottom"
               >
-                new challenges
-              </motion.span>{" "}
-              and expanding my skill set.
+                {home.about.noteHighlightTwo}
+              </motion.span>
+              {home.about.noteSuffix}
             </p>
           </motion.div>
         )}

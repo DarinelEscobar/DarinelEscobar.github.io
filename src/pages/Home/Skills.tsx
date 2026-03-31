@@ -3,9 +3,13 @@ import { motion } from "framer-motion"
 import useSkillSections from "@/hooks/useSkillSections"
 import { Badge } from "@/components/ui/badge"
 import { cn } from "@/lib/utils"
+import { usePortfolioContent } from "@/lib/portfolioContent"
 
 const Skills: React.FC = () => {
   const skillSections = useSkillSections()
+  const {
+    ui: { home },
+  } = usePortfolioContent()
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -23,9 +27,12 @@ const Skills: React.FC = () => {
   }
 
   // Configuration for specific grid spans to create the "Bento" look
-  const getSpanClass = (title: string) => {
-    const t = title.toLowerCase()
-    if (t.includes("technical") || t.includes("frontend") || t.includes("backend")) {
+  const getSpanClass = (sectionId: string) => {
+    if (
+      sectionId === "technical_skills" ||
+      sectionId === "frontend_development" ||
+      sectionId === "backend_development"
+    ) {
       return "md:col-span-2 lg:col-span-2"
     }
     return "col-span-1"
@@ -48,7 +55,8 @@ const Skills: React.FC = () => {
               viewport={{ once: true }}
               className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white md:text-4xl"
             >
-              My <span className="text-blue-600 dark:text-blue-400">Skills</span>
+              {home.skills.titlePrefix}{" "}
+              <span className="text-blue-600 dark:text-blue-400">{home.skills.titleHighlight}</span>
             </motion.h2>
             <motion.p
                initial={{ opacity: 0 }}
@@ -57,7 +65,7 @@ const Skills: React.FC = () => {
                transition={{ delay: 0.1 }}
                className="text-sm text-gray-500 dark:text-gray-400"
             >
-              The tech stack I use to build solutions
+              {home.skills.subtitle}
             </motion.p>
           </div>
 
@@ -78,7 +86,7 @@ const Skills: React.FC = () => {
           className="grid auto-rows-min grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4"
         >
           {skillSections.map((section, index) => {
-            const spanClass = getSpanClass(section.title)
+            const spanClass = getSpanClass(section.id)
 
             return (
               <motion.div

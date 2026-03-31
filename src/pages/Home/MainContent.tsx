@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import img from "../../assets/images/me.webp";
-import data from "@data/data.json";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import { usePortfolioContent } from "@/lib/portfolioContent";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -15,11 +15,12 @@ const containerVariants = {
     },
   },
 };
-
-
-
 const MainContent: React.FC = () => {
-  const { short_name } = data.resume.personal_info;
+  const {
+    resume: {
+      personal_info: { short_name },
+    },
+  } = usePortfolioContent();
   const { ref, inView } = useInView({ threshold: 0.3, triggerOnce: false });
   const controls = useAnimation();
 

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import Footer from "@/components/Footer/Footer";
-import data from "@data/data.json";
+import { usePortfolioContent } from "@/lib/portfolioContent";
 
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
@@ -30,7 +30,11 @@ const variantsChild = {
 };
 
 const Title: React.FC = () => {
-  const { short_name, rol } = data.resume.personal_info;
+  const {
+    resume: {
+      personal_info: { short_name, rol },
+    },
+  } = usePortfolioContent();
   const { ref, inView } = useInView({ threshold: 0.3, triggerOnce: false });
   const controls = useAnimation();
 

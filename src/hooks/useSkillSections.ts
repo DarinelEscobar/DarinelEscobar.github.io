@@ -37,8 +37,7 @@ import {
   FaQuestion,
 } from "react-icons/fa";
 import { GiEagleEmblem, GiCactus, GiFuji, GiInfo } from "react-icons/gi";
-
-import data from "@data/data.json";
+import { usePortfolioContent } from "@/lib/portfolioContent";
 
 // Map for Lucide icons
 const lucideMap: Record<string, React.FC<React.SVGProps<SVGSVGElement>>> = {
@@ -125,10 +124,6 @@ function getIcon(iconName: string, library: string): React.ReactNode {
   }
 }
 
-function formatSectionTitle(key: string): string {
-  return key.replace(/_/g, " ").replace(/\b\w/g, (char) => char.toUpperCase());
-}
-
 function truncate(text: string, max: number): string {
   return text.length > max ? `${text.slice(0, max)}…` : text;
 }
@@ -160,6 +155,7 @@ interface CombinedSection {
 }
 
 export interface SkillSection {
+  id: string;
   title: string;
   icon: React.ReactNode;
   color: string;
@@ -167,9 +163,13 @@ export interface SkillSection {
 }
 
 export default function useSkillSections(): SkillSection[] {
+  const {
+    resume,
+    ui: { home },
+  } = usePortfolioContent();
   const combinedSections: Record<string, CombinedSection> = {
-    ...data.resume.Skills_Technologies,
-    certifications: data.resume.certifications,
+    ...resume.Skills_Technologies,
+    certifications: resume.certifications,
   };
 
   return Object.keys(combinedSections).map((key) => {
@@ -201,11 +201,11 @@ export default function useSkillSections(): SkillSection[] {
     }));
 
     return {
-      title: truncate(formatSectionTitle(key), 24),
+      id: key,
+      title: truncate(home.skills.sectionTitles[key] ?? key, 24),
       icon: getIcon(secIcon.name, secIcon.library),
       color: secIcon.color,
       skills: finalSkills,
     };
   });
 }
-
