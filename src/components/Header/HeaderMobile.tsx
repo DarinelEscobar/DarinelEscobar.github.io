@@ -82,7 +82,7 @@ const HeaderMobile: React.FC<HeaderMobileProps> = ({
             {/* Toggle de tema */}
             <div>
               <h2 className="font-rob font-bold text-base">{ui.header.themeLabel}</h2>
-              <div className="mt-2 flex flex-wrap items-center gap-3">
+              <div className="mt-2 flex flex-wrap items-center gap-2.5">
                 <button
                   type="button"
                   onClick={toggleDarkMode}

@@ -138,7 +138,7 @@ const ControlsSection: React.FC<ControlsSectionProps> = ({
     <motion.div className="flex flex-col gap-1.5 text-left" variants={fadeIn}>
       <div className="flex flex-col gap-0.5">
         <h1 className="font-bold font-rob text-[0.89rem] text-dar">{themeLabel}</h1>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2.5">
           <button
             type="button"
             onClick={toggleDarkMode}

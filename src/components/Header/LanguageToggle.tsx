@@ -28,7 +28,7 @@ const LanguageToggle: React.FC<LanguageToggleProps> = ({
       role="group"
       aria-label={sanitizedTooltipLabel}
       title={sanitizedTooltipLabel}
-      className={`inline-flex items-center gap-2 ${className}`}
+      className={`inline-flex items-center gap-1.5 ${className}`}
     >
       {toggleOptions.map((option, index) => {
         const isActive = option === language;
@@ -40,17 +40,17 @@ const LanguageToggle: React.FC<LanguageToggleProps> = ({
               aria-pressed={isActive}
               aria-label={`${sanitizedTooltipLabel}: ${option === "en" ? "English" : "Spanish"}`}
               onClick={() => setLanguage(option)}
-              className={`font-rob text-[0.89rem] uppercase tracking-[0.16em] transition-colors duration-200 focus-visible:outline-none ${
+              className={`border-b border-transparent pb-px font-rob text-[0.8rem] leading-none uppercase tracking-[0.08em] transition-all duration-200 focus-visible:outline-none ${
                 isActive
-                  ? "text-dar underline underline-offset-4 dark:text-white"
-                  : "text-dar/45 hover:text-dar dark:text-white/55 dark:hover:text-white/80"
+                  ? "border-dar/60 text-dar dark:border-white/70 dark:text-white"
+                  : "text-dar/40 hover:border-dar/25 hover:text-dar/70 dark:text-white/45 dark:hover:border-white/25 dark:hover:text-white/75"
               }`}
             >
               {languageLabels[option]}
             </button>
 
             {index < toggleOptions.length - 1 ? (
-              <span className="text-dar/25 dark:text-white/20">/</span>
+              <span className="-mt-px text-[0.72rem] text-dar/20 dark:text-white/18">/</span>
             ) : null}
           </React.Fragment>
         );
