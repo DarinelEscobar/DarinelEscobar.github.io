@@ -1,0 +1,761 @@
+
+{
+  "experience": {
+    "projects": [
+      {
+        "name": "Web Platform for Educational Offerings in Chiapas",
+        "Project_Overview": "This project aimed to create a centralized web platform to help students in Chiapas explore university programs with ease. The platform provides a structured database with detailed information on degree programs, admission requirements, costs, and institutional details. It offers intuitive search and filtering options, allowing students to compare different programs efficiently. Additionally, the platform enhances accessibility by enabling students to download academic plans and set reminders for key enrollment deadlines.",
+        "description": "Development of a web platform for students to search and explore university programs in Chiapas, providing a centralized source of detailed information on degrees, admission criteria, and costs. The platform includes key features for students such as search and filtering options, program details, admission requirements, cost breakdowns, and contact information.",
+        "role": "Full-stack Developer",
+        "technologies": {
+          "Frontend": ["React", "Vite", "Tailwind CSS"],
+          "Backend": ["PHP", "CodeIgniter 4"],
+          "Tools": ["ShadCN/UI", "framer-motion", "Postman", "Eraser.io"],
+          "Project Management": ["Jira", "GitHub"]
+        },
+        "start_date": "2024-08-01",
+        "end_date": "2024-12-31",
+        "responsibilities": [
+          "Design and implement the user interface using React with Vite.",
+          "Develop secure RESTful APIs with PHP CodeIgniter 4, including password hash mechanisms and protected routes.",
+          "Design scalable endpoints to handle public statistics and administrative operations.",
+          "Implement pagination in the endpoints to optimize performance with over 1,000 universities.",
+          "Ensure data standardization to enable effective comparison of educational programs.",
+          "Implement tools for students to download academic plans and institutional profiles in PDF format.",
+          "Develop features for students to set reminders for important dates such as enrollment deadlines and exams."
+        ],
+        "achievements": [
+          "Significant reduction in system response time thanks to pagination.",
+          "Improved accessibility of educational information for students in Chiapas.",
+          "Successful implementation of a centralized platform, reducing the time students spend searching for educational opportunities.",
+          "Increased student awareness of the range of educational options available in Chiapas.",
+          "Development of an intuitive system allowing students to compare educational programs side-by-side, aiding informed decision-making."
+        ],
+        "client": "Coepes Chiapas",
+        "team_size": 6,
+        "url": "https://plataforma.ieppd.chiapas.gob.mx/coepes/react/",
+        "repository": "https://github.com/DarinelEscobar/COEPES_public.git",
+        "media": [
+          {
+            "type": "image",
+            "description": "Favorites section where users can save preferred programs.",
+            "url": "assets/images/COEPES-Public/fav.webp"
+          },
+          {
+            "type": "image",
+            "description": "University program page displayed in dark mode.",
+            "url": "assets/images/COEPES-Public/dark-view-program.webp"
+          },
+          {
+            "type": "image",
+            "description": "University program page displayed in light mode.",
+            "url": "assets/images/COEPES-Public/view-program.webp"
+          },
+
+          {
+            "type": "image",
+            "description": "Main dashboard displaying an overview of the university programs.",
+            "url": "assets/images/COEPES-Public/Main.webp"
+          },
+          {
+            "type": "image",
+            "description": "Sidebar section showcasing favorite programs.",
+            "url": "assets/images/COEPES-Public/side-fav.webp"
+          }
+        ]
+      },
+      {
+        "name": "Administrative System for University Programs",
+        "Project_Overview": "This system was developed to help university administrators manage academic program data more efficiently. It allows the creation, modification, and deletion of institution and program-related information while also facilitating the generation of statistical reports. The system enhances administrative workflows by providing an intuitive interface for non-technical users, ensuring data accuracy, and promoting engagement between institutions and prospective students.",
+        "description": "The administrative module was designed for administrators to manage university data, including creating, modifying, and deleting information related to institutions, programs, and other relevant data. This system also facilitates the generation of general usage statistics, ensuring effective data management.",
+        "role": "Full-stack Developer",
+        "technologies": {
+          "Frontend": ["HTML", "CSS", "JavaScript", "Bootstrap", "React", "Vite"],
+          "Backend": ["PHP", "CodeIgniter 4"],
+          "Database": ["MySQL"],
+          "Architecture": ["MVC (Model-View-Controller)"],
+          "APIs": ["RESTful APIs"],
+          "Project Management": ["Jira", "GitHub"],
+          "Tools": ["Postman", "Eraser.io"]
+        },
+        "start_date": "2024-08-01",
+        "end_date": "2024-12-31",
+        "responsibilities": [
+          "Backend development using CodeIgniter 4 with MVC architecture.",
+          "Designing the admin interface with Bootstrap for a responsive and accessible layout.",
+          "Creating secure RESTful APIs for data insertion and retrieval.",
+          "The module 'Web Platform for Educational Offerings in Chiapas' made with React was integrated into the CodeIgniter project, functioning only as a pre-built view, making use of both Bootstrap and Tailwind CSS within the same project.",
+          "Developing a system for generating general usage statistics.",
+          "Implementing functionalities for administrators to manage academic programs, promotions, and updates.",
+          "Ensuring the accuracy and timely updates of educational data within the platform.",
+          "Monitoring key performance metrics and gathering user feedback to improve platform usability."
+        ],
+        "achievements": [
+          "An efficient and secure system streamlining administrative tasks for university staff.",
+          "An intuitive interface that facilitated interaction for non-technical users.",
+          "A platform allowing institutions to easily manage their academic programs, promotions, and updates, reducing reliance on manual processes.",
+          "A system that allows administrators to generate reports displaying the number of visits to each university within the system.",
+          "A centralized system for managing data to ensure information is current, contributing to the reduction of academic lag in Chiapas.",
+          "Enhanced institutional engagement, with universities actively updating and maintaining their program information.",
+          "A significant increase in platform adoption and student usage, improving access to education-related data."
+        ],
+        "client": "Coepes Chiapas",
+        "team_size": 6,
+        "url": "https://plataforma.ieppd.chiapas.gob.mx/coepes/login/",
+        "repository": "https://github.com/DarinelEscobar/coepes.git",
+        "media": [
+          {
+            "type": "image",
+            "description": "Login page of the platform with authentication features.",
+            "url": "assets/images/COEPES-Administrative/login.webp"
+          },
+          {
+            "type": "image",
+            "description": "General statistics dashboard showcasing user activity and system metrics.",
+            "url": "assets/images/COEPES-Administrative/estatistics.webp"
+          },
+          {
+            "type": "image",
+            "description": "Detailed breakdown of statistics in a different format for analysis.",
+            "url": "assets/images/COEPES-Administrative/estatistics_2.webp"
+          },
+          {
+            "type": "image",
+            "description": "Full view of the platform's statistical dashboard with various filtering options.",
+            "url": "assets/images/COEPES-Administrative/full-estastics.webp"
+          },
+
+          {
+            "type": "image",
+            "description": "Modal window displaying available campus locations.",
+            "url": "assets/images/COEPES-Administrative/sedes-modal.webp"
+          },
+          {
+            "type": "image",
+            "description": "University locations overview, showing available campuses on the map.",
+            "url": "assets/images/COEPES-Administrative/sedes-Uni.webp"
+          }
+        ]
+
+      },
+      {
+        "name": "EZTICKET - Event Ticketing and Access Control Platform",
+        "Project_Overview": "EZTICKET is a full-stack event ticketing platform built to centralize the publication, sale, and validation of event tickets. The system supports three operational roles: Administrator, Client, and Receptionist/Validator. It includes a public-facing website, seat and section-based ticket purchasing, Mercado Pago checkout, digital ticket issuance with QR codes, access validation, live event metrics, exportable reports, legal document management, and a virtual queue to handle traffic peaks.",
+        "description": "Development of a production-ready web platform for event organizers to manage artists, venues, seating layouts, events, purchases, and access validation. The system combines a public event catalog with an administrative panel and receptionist module, enabling end-to-end operations from event publication to ticket validation and post-sale reporting.",
+        "role": "Full-stack Developer",
+        "technologies": {
+          "Frontend": ["Laravel Blade", "Livewire 3", "Tailwind CSS", "Flowbite", "JavaScript", "Vite"],
+          "Backend": ["PHP 8.1", "Laravel 10", "MySQL"],
+          "Tools": ["Mercado Pago SDK", "Endroid QR Code", "DomPDF", "PhpSpreadsheet", "Composer", "Git"],
+          "Project Management": ["Bitbucket"]
+        },
+        "start_date": "2024-08-13",
+        "end_date": "2025-02-20",
+        "responsibilities": [
+          "Develop the public experience for browsing events, viewing event details, and purchasing tickets by section or assigned seat.",
+          "Build the administrative panel to manage artists, venues, events, sections, rows, seating layouts, purchases, branding, and legal documents.",
+          "Integrate Mercado Pago for checkout, payment status handling, webhook processing, and reservation release on failed or expired payments.",
+          "Implement QR code generation and digital ticket rendering for approved purchases, including access-point validation flows for reception staff.",
+          "Create event metrics and reporting modules with sales summaries, attendance validation data, and Excel export support.",
+          "Develop a virtual queue system with heartbeat tracking and availability checks to protect the purchase flow during traffic spikes.",
+          "Model and maintain database structures for events, venues, tickets, validations, user tracking, and purchase lifecycles."
+        ],
+        "achievements": [
+          "Delivered a production-ready platform that unified event publishing, online sales, digital ticket delivery, and access control in a single system.",
+          "Implemented a complete end-to-end ticketing flow from selection and payment to QR issuance and on-site validation.",
+          "Improved operational control for administrators through live event metrics, purchase tracking, and exportable reports.",
+          "Added automatic reservation expiration and release logic to recover inventory and prevent blocked seats during incomplete payments.",
+          "Enabled the platform to handle high-demand scenarios through a virtual queue and traffic monitoring workflow."
+        ],
+        "client": "EZTICKET",
+        "team_size": 4,
+        "url": "https://eztickets.mx/",
+        "repository": "https://bitbucket.org/cybac/web-ez-tickets-v1",
+        "media": [
+          {
+            "type": "image",
+            "description": "Public event details page showing event information, venue, date, and primary call to action for ticket purchase.",
+            "url": "assets/images/eztickets.mx/public-event-details.webp"
+          },
+          {
+            "type": "image",
+            "description": "Checkout summary view with selected tickets, totals, and Mercado Pago payment integration.",
+            "url": "assets/images/eztickets.mx/checkout-summary.webp"
+          },
+          {
+            "type": "image",
+            "description": "Administrator dashboard with quick access cards for artists, venues, events, users, purchases, and legal documents.",
+            "url": "assets/images/eztickets.mx/admin-dashboard.webp"
+          },
+          {
+            "type": "image",
+            "description": "Event management screen used to create and configure events, pricing, logistics, and sales availability.",
+            "url": "assets/images/eztickets.mx/admin-event-management.webp"
+          },
+          {
+            "type": "image",
+            "description": "Event metrics dashboard displaying ticket sales, validation totals, venue occupancy, and purchase records.",
+            "url": "assets/images/eztickets.mx/event-metrics.webp"
+          },
+          {
+            "type": "image",
+            "description": "QR scanning interface for receptionist staff to validate ticket access points in real time.",
+            "url": "assets/images/eztickets.mx/qr-validation.webp"
+          }
+        ]
+      },
+      {
+        "name": "Landing Page for Chiapas Events - Anytime Fitness Tuxtla",
+        "Project_Overview": "This project consisted of the design and implementation of a promotional landing page for Chiapas Events, developed for the company Anytime Fitness Tuxtla. The landing page was created to promote cultural, recreational, and sports events in the region, providing an attractive and modern interface for visitors.",
+        "description": "Development of a responsive landing page to showcase upcoming events in Chiapas. The site highlights event categories, advantages of participation, and includes a multimedia gallery. It was built with attention to visual design and user experience, ensuring accessibility across devices.",
+        "role": "Frontend Developer",
+        "technologies": {
+          "Frontend": ["React", "Vite", "Tailwind CSS"],
+          "Backend": [],
+          "Tools": ["ShadCN/UI", "Framer Motion", "Figma"],
+          "Project Management": ["GitHub"]
+        },
+        "start_date": "2025-04-11",
+        "end_date": "2025-04-14",
+        "responsibilities": [
+          "Design the structure and layout of the landing page based on the corporate branding.",
+          "Implement responsive design to ensure compatibility across desktop and mobile devices.",
+          "Integrate interactive components including carousel for featured events and animated transitions.",
+          "Optimize image assets for fast loading and better performance.",
+          "Implement modular and reusable UI components using Tailwind CSS and ShadCN/UI.",
+          "Coordinate with the client to adapt the site content to their communication objectives."
+        ],
+        "achievements": [
+          "Successful launch of a visually appealing and functional landing page.",
+          "Improved brand visibility for Anytime Fitness Tuxtla through online event promotion.",
+          "Responsive interface that adapts seamlessly to different devices.",
+          "Positive feedback from users due to its simplicity and ease of navigation."
+        ],
+        "client": "Anytime Fitness Tuxtla",
+        "team_size": 1,
+        "url": "https://chiapaseventos.com/",
+        "repository": "https://github.com/DarinelEscobar/Chiapas_Eventos.git",
+        "media": [
+          {
+            "type": "image",
+            "description": "Main landing page view.",
+            "url": "assets/images/chiapaseventos/main.webp"
+          },
+          {
+            "type": "image",
+            "description": "Mobile header preview.",
+            "url": "assets/images/chiapaseventos/mobile_header.webp"
+          },
+          {
+            "type": "image",
+            "description": "Secondary mobile layout image.",
+            "url": "assets/images/chiapaseventos/mobileimg2.webp"
+          },
+          {
+            "type": "image",
+            "description": "Mobile footer preview.",
+            "url": "assets/images/chiapaseventos/mobile_footer3.webp"
+          }
+        ]
+      },
+      {
+        "name": "AMIFIT Cobro App",
+        "Project_Overview": "This project focused on the development of a payment management web application for Anytime Fitness Tuxtla. The application enables gym members to pay their monthly fees, register passes, and purchase keyfobs through a secure online interface. It integrates Stripe for payment processing, supports QR code payment flows, and provides a responsive user interface tailored for mobile and desktop use.",
+        "description": "Development of a responsive payment application for Anytime Fitness members in Tuxtla. The platform allows users to register, pay monthly subscriptions, and handle keyfob purchases. Built with React and Stripe integration, it features a modular architecture and reusable components to simplify future maintenance and scaling.",
+        "role": "Full-stack Developer",
+        "technologies": {
+          "Frontend": ["React", "Tailwind CSS"],
+          "Backend": ["PHP", "CodeIgniter 4"],
+
+          "Tools": ["Stripe", "React-QR-Code", "Material-UI"],
+          "Project Management": ["GitHub"]
+        },
+        "start_date": "2025-04-05",
+        "end_date": "2025-05-30",
+        "responsibilities": [
+          "Design and implement payment workflows for monthly fees, passes, and keyfobs.",
+          "Integrate Stripe API for secure and reliable payment processing.",
+          "Implement QR code generation and scanning flow for user-friendly payment experience.",
+          "Develop modular UI components such as CardQR, SocioInfo, and Payment Summaries.",
+          "Refactor and maintain API endpoints for keyfob and monthly payment validation.",
+          "Ensure responsive and accessible interface across devices."
+        ],
+        "achievements": [
+          "Successful integration of Stripe with QR-based payment flow.",
+          "Deployment of a fully functional payment application in less than a week.",
+          "Improved efficiency in gym membership fee collection.",
+          "Simplified keyfob management and reduced administrative overhead."
+        ],
+        "client": "Anytime Fitness Tuxtla",
+        "team_size": 2,
+        "url": "https://cobro.amifit.mx/",
+        "repository": "https://github.com/DarinelEscobar/AMIFITCOBRO.git",
+        "media": [
+          {
+            "type": "image",
+            "description": "Main view of the AMIFIT Cobro application.",
+            "url": "assets/images/AMIFITCOBRO/mainview.webp"
+          },
+          {
+            "type": "image",
+            "description": "Registration section to sign up new members.",
+            "url": "assets/images/AMIFITCOBRO/inscribete.webp"
+          },
+          {
+            "type": "image",
+            "description": "Monthly fee payment page view.",
+            "url": "assets/images/AMIFITCOBRO/Mensualidad_view.webp"
+          },
+          {
+            "type": "image",
+            "description": "Monthly payment flow using Stripe integration.",
+            "url": "assets/images/AMIFITCOBRO/Payment-mensualidad.webp"
+          },
+          {
+            "type": "image",
+            "description": "Secondary overview of the platform.",
+            "url": "assets/images/AMIFITCOBRO/secondview.webp"
+          },
+          {
+            "type": "image",
+            "description": "Successful payment confirmation screen for monthly fee.",
+            "url": "assets/images/AMIFITCOBRO/sucess_pago_realisado_mensualidad.webp"
+          }
+        ]
+      },
+      {
+        "name": "AMIFIT App",
+        "Project_Overview": "This project delivers a membership and payment management system for Anytime Fitness Tuxtla. It centralizes keyfob sales, monthly fee payments, and inventory handling, integrating Stripe for online payments and email notifications for purchase confirmations. The backend is built on CodeIgniter 4 with structured controllers, models, and routes to ensure secure, maintainable operations.",
+        "description": "Development of a CodeIgniter 4 application to manage member operations: validating keys, processing monthly payments, handling standby payments during closures, and sending purchase confirmations. The interface uses Bootstrap for responsive views and supports Stripe payment links with verification and cancellation endpoints.",
+        "role": "Full-stack Developer",
+        "technologies": {
+          "Frontend": ["Bootstrap 5"],
+          "Backend": ["PHP", "CodeIgniter 4", "MySQL"],
+          "Tools": ["Stripe PHP", "PHPMailer", "Postman"],
+          "Project Management": ["GitHub"]
+        },
+        "start_date": "2025-04-02",
+        "end_date": "2025-05-14",
+        "responsibilities": [
+          "Implement Stripe payment flow: start, verify, and cancel payment endpoints.",
+          "Build MensualidadController for monthly fee validation, purchase, and email notifications.",
+          "Add PagosStandby model and logic to handle payments during gym closures.",
+          "Create keyfob routes and controllers with inventory validation and decrement.",
+          "Standardize JSON responses, error handling, and CORS headers.",
+          "Configure environment variables and refactor models for clarity and maintainability."
+        ],
+        "achievements": [
+          "Stripe integration with dynamic product concepts and standby handling.",
+          "Inventory support for multiple product types (KeyFob, Towels, Cord).",
+          "Automated PHPMailer confirmations for purchases.",
+          "Consistent API responses and improved developer ergonomics."
+        ],
+        "client": "Anytime Fitness Tuxtla",
+        "team_size": 2,
+        "url": "https://www.amifit.mx/",
+        "repository": "https://github.com/DarinelEscobar/amifit.git",
+        "media": [
+          {
+            "type": "image",
+            "description": "Main Login screen.",
+            "url": "assets/images/AmiFit/main_image.webp"
+          }
+        ]
+      },
+      {
+        "name": "AEROBALAM",
+        "Project_Overview": "This project consisted of developing a flight management and booking platform called AEROBALAM. It provides an administration dashboard for managing users, destinations, coupons, and flight schedules. The system includes a calendar view for flights, user management with roles, and coupon management with activation and deactivation features.",
+        "description": "Development of a CodeIgniter 4 web application for flight operations. The platform enables administrators to manage destinations, user accounts, coupons, and flight schedules. Integrated FullCalendar for flight scheduling, DataTables for user and destination management, and SweetAlert for enhanced user feedback. Bootstrap was applied to ensure responsive UI components.",
+        "role": "Full-stack Developer",
+        "technologies": {
+          "Frontend": ["Bootstrap 5", "FullCalendar.js", "DataTables", "SweetAlert2"],
+          "Backend": ["PHP", "CodeIgniter 4", "MySQL"],
+          "Tools": ["Composer", "PHPMailer"],
+          "Project Management": ["GitHub"]
+        },
+        "start_date": "2025-04-01",
+        "end_date": "2025-04-30",
+        "responsibilities": [
+          "Implement flight calendar using FullCalendar with schedule and passenger detail views.",
+          "Develop user management system with DataTables integration and CRUD features.",
+          "Build destinations management module with create, edit, activate, and deactivate options.",
+          "Integrate coupon management system with validation, activation, and deactivation flows.",
+          "Enhance dashboard UI with Bootstrap and interactive modals.",
+          "Configure controllers, models, and routes for clean API responses."
+        ],
+        "achievements": [
+          "Successful integration of flight calendar with real-time event details.",
+          "Full CRUD support for users, destinations, and coupons.",
+          "Improved administrator efficiency with responsive dashboard tools.",
+          "Deployed a functional flight booking management platform in one week."
+        ],
+        "client": "AEROBALAM",
+        "team_size": 2,
+        "url": "https://mostradordigital.shop/aerobalam",
+        "repository": "https://github.com/DarinelEscobar/AEROBALAM.git",
+        "media": [
+          {
+            "type": "image",
+            "description": "Main dashboard view of AEROBALAM.",
+            "url": "assets/images/AeroBalam/main_Aerobalam.webp"
+          },
+          {
+            "type": "image",
+            "description": "Ticket purchase interface.",
+            "url": "assets/images/AeroBalam/Aero_Buy_Tickets.webp"
+          }
+        ]
+      },
+      {
+        "name": "Puntos SaaS Backoffice Platform (web-puntos-v1)",
+        "Project_Overview": "Puntos SaaS is a multi-tenant loyalty platform for businesses that need digital cards, points accumulation, reward redemption, and subscription control. The backoffice web module centralizes Super Admin operations, company setup, and staff workflows with clear role boundaries and auditable operations.",
+        "description": "Development of the web backoffice for a loyalty SaaS product, including Super Admin dashboards, company onboarding, operational tabs for clients and points, and API-driven modules aligned with an OpenAPI contract.",
+        "role": "Full-stack Developer",
+        "technologies": {
+          "Frontend": [
+            "Laravel Blade",
+            "Livewire 3",
+            "Tailwind CSS 3",
+            "Alpine.js"
+          ],
+          "Backend": [
+            "Laravel 10",
+            "PHP",
+            "MySQL",
+            "Laravel Sanctum"
+          ],
+          "APIs & Documentation": [
+            "REST API",
+            "OpenAPI 3",
+            "L5 Swagger"
+          ],
+          "Testing": [
+            "Pest PHP"
+          ],
+          "Tools": [
+            "Vite",
+            "Sonner",
+            "Postman",
+            "GitHub"
+          ]
+        },
+        "start_date": "2026-02-05",
+        "end_date": "2026-03-06",
+        "responsibilities": [
+          "Implemented role-based dashboard flows for Super Admin, Company Admin, and Company Staff.",
+          "Built and refined core modules for plans, companies, status payments, and cross-company audit logs.",
+          "Developed company operations for client search, registration, earn, redeem, and admin-only adjust/reverse flows.",
+          "Aligned API contracts with modular OpenAPI documentation and standardized error envelopes.",
+          "Integrated a global notification system with Sonner for consistent UX feedback across critical actions.",
+          "Enforced tenant boundaries and company-context checks in operational endpoints.",
+          "Validated points expiry behavior through append-only ledger adjustments and scheduled processing."
+        ],
+        "achievements": [
+          "Delivered a functional MVP aligned with April 2026 convention goals and business scope.",
+          "Completed the Super Admin and Admin Company endpoint set documented in OpenAPI.",
+          "Consolidated reporting and operational visibility for company-level loyalty management.",
+          "Maintained append-only ledger consistency for earn, redeem, and expiry adjustments.",
+          "Reached stable integration readiness between backoffice and mobile client API flows."
+        ],
+        "client": "CYBAC - Puntos SaaS",
+        "team_size": 2,
+        "media": [
+          {
+            "type": "image",
+            "description": "Backoffice login screen for admin and staff users. Capture route: /login. View file: resources/views/livewire/auth/login.blade.php",
+            "url": "assets/images/PuntosSaaS-Web/login-view.webp"
+          },
+          {
+            "type": "image",
+            "description": "Super Admin metrics dashboard with global platform KPIs. Capture route: /dashboard/super-admin/metrics. View file: resources/views/pages/admin/super-admin/metrics.blade.php",
+            "url": "assets/images/PuntosSaaS-Web/super-admin-metrics.webp"
+          },
+          {
+            "type": "image",
+            "description": "Super Admin company management table with onboarding controls. Capture route: /dashboard/super-admin/companies. View file: resources/views/pages/admin/super-admin/companies.blade.php",
+            "url": "assets/images/PuntosSaaS-Web/super-admin-companies.webp"
+          },
+          {
+            "type": "image",
+            "description": "Status and payments screen for trial, active, and suspension operations. Capture route: /dashboard/super-admin/status-payments. View file: resources/views/pages/admin/super-admin/status-payments.blade.php",
+            "url": "assets/images/PuntosSaaS-Web/super-admin-status-payments.webp"
+          },
+          {
+            "type": "image",
+            "description": "Company Admin staff management tab. Capture route: /dashboard?tab=staff. View file: resources/views/livewire/admin-company/dashboard/tabs/staff.blade.php",
+            "url": "assets/images/PuntosSaaS-Web/company-staff-tab.webp"
+          },
+          {
+            "type": "image",
+            "description": "Company Admin active points rule configuration tab. Capture route: /dashboard?tab=rules. View file: resources/views/livewire/admin-company/dashboard/tabs/rules.blade.php",
+            "url": "assets/images/PuntosSaaS-Web/company-rules-tab.webp"
+          },
+          {
+            "type": "image",
+            "description": "Shared clients tab for searching memberships and client details. Capture route: /dashboard?tab=clients. View file: resources/views/pages/admin/company-shared/clients.blade.php",
+            "url": "assets/images/PuntosSaaS-Web/staff-clients-tab.webp"
+          },
+          {
+            "type": "image",
+            "description": "Shared operations tab for earn and redeem actions at cashier workflow. Capture route: /dashboard?tab=operations. View file: resources/views/pages/admin/company-shared/operations.blade.php",
+            "url": "assets/images/PuntosSaaS-Web/staff-operations-tab.webp"
+          }
+        ]
+      },
+      {
+        "name": "Puntos CYBAC Mobile Wallet (puntos_cybac_mobile)",
+        "Project_Overview": "This Flutter application provides the client-facing loyalty experience for Puntos SaaS. It includes magic-link authentication, session bootstrap, digital cards with QR, recent ledger entries, rewards per membership, and profile management, all wired to a versioned REST API.",
+        "description": "Development of a mobile wallet app for loyalty clients, focused on secure access, card visibility, and self-service consultation of points and rewards across memberships.",
+        "role": "Mobile Developer (Flutter)",
+        "technologies": {
+          "Mobile": [
+            "Flutter",
+            "Dart"
+          ],
+          "Architecture": [
+            "Feature-first modules",
+            "Use Cases",
+            "Repository pattern",
+            "Dependency Injection"
+          ],
+          "Security": [
+            "Magic-link auth",
+            "flutter_secure_storage"
+          ],
+          "UI": [
+            "Material Design",
+            "QR rendering",
+            "Hero animations"
+          ],
+          "Integrations": [
+            "REST API",
+            "Deep links"
+          ]
+        },
+        "start_date": "2026-02-11",
+        "end_date": "2026-03-06",
+        "responsibilities": [
+          "Implemented magic-link token consumption flow with robust error mapping for invalid, consumed, and expired links.",
+          "Built session bootstrap logic to restore authenticated context and preload cards/profile data.",
+          "Developed wallet-style card listing with pull-to-refresh, empty states, and card detail navigation.",
+          "Implemented card detail experience with flip animation, latest ledger section, and rewards section.",
+          "Connected profile module with active membership summary and secure logout flow.",
+          "Structured the app with a feature-first architecture and dependency wiring at a single composition root.",
+          "Integrated client endpoints for profile, cards, rewards, and latest ledger with reusable services/use cases."
+        ],
+        "achievements": [
+          "Completed client MVP connectivity for core endpoints consumed by the mobile app.",
+          "Delivered a stable token-based authentication flow using secure local storage.",
+          "Provided a clear wallet UX for multi-membership users with branded card rendering.",
+          "Improved maintainability through modular feature boundaries and use-case orchestration.",
+          "Reached functional parity with the client mobile scope defined in project specs."
+        ],
+        "client": "CYBAC - Puntos SaaS",
+        "team_size": 2,
+        "media": [
+          {
+            "type": "image",
+            "description": "Magic-link entry screen where users paste token or deep-link URL. Capture route: / (initial route without active session). View file: lib/features/auth/presentation/pages/magic_link_entry_page.dart",
+            "url": "assets/images/PuntosCybac-Mobile/magic-link-entry.webp"
+          },
+          {
+            "type": "image",
+            "description": "Session bootstrap loading screen that validates token and preloads data. Capture route: /bootstrap. View file: lib/features/home/presentation/pages/session_bootstrap_page.dart",
+            "url": "assets/images/PuntosCybac-Mobile/session-bootstrap.webp"
+          },
+          {
+            "type": "image",
+            "description": "Main wallet screen listing active cards (Tarjetas tab). Capture route: /main (Tab: Tarjetas). View file: lib/features/client_cards/presentation/pages/home_cards_page.dart",
+            "url": "assets/images/PuntosCybac-Mobile/home-cards-tab.webp"
+          },
+          {
+            "type": "image",
+            "description": "Card detail view with flip animation and QR side. Capture route: /card-detail. View file: lib/features/client_cards/presentation/pages/card_detail_page.dart",
+            "url": "assets/images/PuntosCybac-Mobile/card-detail-qr.webp"
+          },
+          {
+            "type": "image",
+            "description": "Card detail rewards section scoped to selected membership. Capture route: /card-detail (Section: Rewards). View file: lib/features/client_cards/presentation/pages/card_detail_page.dart",
+            "url": "assets/images/PuntosCybac-Mobile/card-detail-rewards.webp"
+          },
+          {
+            "type": "image",
+            "description": "Profile screen with client identity and active cards count. Capture route: /main (Tab: Perfil). View file: lib/features/profile/presentation/pages/profile_page.dart",
+            "url": "assets/images/PuntosCybac-Mobile/profile-tab.webp"
+          }
+        ]
+      },
+      {
+        "name": "Lavafy - Professional Car Wash Management Platform",
+        "project_overview": "Lavafy is a scalable, multi-tenant web application designed to streamline car wash services in Chiapas. It bridges the gap between car owners and professional washers through a seamless digital interface, managing appointments, payments, and workforce logistics in real-time.",
+        "description": "The platform is built on a robust Laravel 10 backend with a dynamic Livewire 3 frontend. It features a comprehensive Role-Based Access Control (RBAC) system catering to Administrators, Managers, Washers, and Clients. Key technical highlights include a custom appointment scheduling engine, integrated MercadoPago payment processing, a mobile-optimized dashboard for field operations, and real-time status tracking.",
+        "role": "Full-stack Developer",
+        "technologies": {
+          "frontend": [
+            "Laravel Blade",
+            "Livewire 3",
+            "TailwindCSS 3",
+            "Flowbite",
+            "Alpine.js"
+          ],
+          "backend": [
+            "Laravel 10",
+            "PHP 8.1",
+            "MySQL",
+            "MercadoPago SDK",
+            "Laravel Sanctum"
+          ],
+          "tools": [
+            "Vite",
+            "Composer",
+            "Git",
+            "Puppeteer",
+            "PestPHP"
+          ],
+          "project_management": [
+            "Agile Methodology",
+            "GitHub Issues"
+          ]
+        },
+        "responsibilities": [
+          "Architected and developed the full-stack solution using Laravel and Livewire, ensuring high performance and SEO optimization.",
+          "Implemented a complex RBAC system to securely manage distinct user workflows for Admins, Managers, and Washers.",
+          "Integrated the MercadoPago API for secure, real-time payment processing and webhook handling.",
+          "Designed and built a mobile-responsive washer dashboard to facilitate field operations and task management.",
+          "Developed a custom scheduling algorithm to manage washer availability, holidays, and service duration."
+        ],
+        "achievements": [
+          "Successfully launched a production-ready platform serving multiple user roles with distinct permissions.",
+          "Reduced appointment booking time by 40% through an intuitive UI and optimized backend logic.",
+          "Achieved 95% test coverage for critical payment and scheduling pathways using PestPHP.",
+          "Implemented a scalable database schema capable of handling high-volume concurrent bookings."
+        ],
+        "media": [
+          {
+            "type": "image",
+            "description": "Admin Dashboard - High-level overview of key metrics and recent activity.",
+            "url": "assets/images/Cybac-Lavafy/admin-dashboard.webp"
+          },
+          {
+            "type": "image",
+            "description": "Admin Reports - Detailed analytics and reporting tools for business insights.",
+            "url": "assets/images/Cybac-Lavafy/admin-reports.webp"
+          },
+          {
+            "type": "image",
+            "description": "Admin General Configuration - System settings and global preference management.",
+            "url": "assets/images/Cybac-Lavafy/admin-configuracion-general.webp"
+          },
+          {
+            "type": "image",
+            "description": "Main Client View - Responsive landing page and service selection interface.",
+            "url": "assets/images/Cybac-Lavafy/client-view.webp"
+          },
+          {
+            "type": "image",
+            "description": "Client Vehicle Management - Interface for users to manage their registered vehicles.",
+            "url": "assets/images/Cybac-Lavafy/client-mis-autos.webp"
+          },
+          {
+            "type": "image",
+            "description": "Mobile Login - Optimized authentication screen for mobile users.",
+            "url": "assets/images/Cybac-Lavafy/login-mobile.webp"
+          },
+          {
+            "type": "image",
+            "description": "Manager Dashboard - Dedicated interface for 'Encargados' to oversee operations.",
+            "url": "assets/images/Cybac-Lavafy/Encargado-dashboard.webp"
+          },
+          {
+            "type": "image",
+            "description": "Washer Dashboard - Mobile-friendly task management view for field staff.",
+            "url": "assets/images/Cybac-Lavafy/lavador-dashboard.webp"
+          }
+        ]
+      },
+      {
+        "name": "TuxVentas Marketplace Platform (web-tuxventa-v1)",
+        "Project_Overview": "TuxVentas is a role-based marketplace web application built to manage classified listings for products, services, and medicines. The platform combines a public catalog with seller and buyer workspaces, enabling category browsing, listing publication, image galleries, QR-based listing sharing, public Q&A, private conversations, mutual acceptance for contact reveal, reviews, moderation alerts, and automated lifecycle rules for listings and chats.",
+        "description": "Development of a Laravel 10 marketplace platform with a public catalog, seller dashboard, buyer conversation flows, and administrator moderation tools. The system allows users to publish listings, manage galleries and QR codes, answer public questions, negotiate privately, reveal contact details after mutual acceptance, close deals, submit reviews, and monitor alerts through an operational admin panel.",
+        "role": "Full-stack Developer",
+        "technologies": {
+          "Frontend": ["Laravel Blade", "Livewire 3", "Tailwind CSS", "Flowbite", "JavaScript", "Vite"],
+          "Backend": ["PHP 8.1", "Laravel 10", "Laravel Sanctum"],
+          "Database": ["MySQL"],
+          "APIs": ["RESTful APIs", "OpenAPI / Swagger"],
+          "Tools": ["Composer", "Git", "animejs", "qrcode"],
+          "Project Management": ["Bitbucket"]
+        },
+        "start_date": "2026-01-07",
+        "end_date": "2026-03-20",
+        "responsibilities": [
+          "Build the public marketplace catalog with search by title, category, and subcategory, plus listing detail pages with public questions and answers.",
+          "Develop the seller workspace to create listings, manage statuses, upload up to five images, regenerate QR codes, and answer public buyer questions.",
+          "Implement buyer and seller conversation flows with reusable threads, real-time style messaging, mutual acceptance, contact reveal, closure states, and retention windows.",
+          "Create the review and reputation workflow, including SELLER, BUYER, and SERVICE contexts with automatic low-rating alert creation for moderation.",
+          "Develop administrator modules for overview metrics, moderation alerts, listing status changes, user blocking and unblocking, and conversation inspection.",
+          "Model normalized category and subcategory catalogs for products, services, and medicines, exposing protected and public REST endpoints with Sanctum authentication.",
+          "Implement scheduled lifecycle rules to expire listings automatically and archive closed conversations after the configured retention period."
+        ],
+        "achievements": [
+          "Delivered a multi-role marketplace that unified public browsing, seller operations, buyer communication, and administrator moderation in one Laravel application.",
+          "Implemented a privacy-aware negotiation flow that reveals contact details only after both participants explicitly accept the deal.",
+          "Added automated review moderation by converting low-rating reviews into actionable admin alerts with assignment and resolution workflows.",
+          "Reduced manual maintenance through scheduler-driven expiration and retention commands for listings and closed conversations.",
+          "Supported multiple commercial domains through normalized category catalogs and reusable API presentation layers."
+        ],
+        "client": "TuxVentas",
+        "team_size": 4,
+        "repository": "https://bitbucket.org/cybac/web-tuxventa-v1",
+        "media": [
+          {
+            "type": "image",
+            "description": "Public marketplace catalog with search and filters by title, category, and subcategory. Capture route: /marketplace. View file: resources/views/pages/marketplace/index.blade.php",
+            "url": "assets/images/TuxVentas/public-marketplace-catalog.webp"
+          },
+          {
+            "type": "image",
+            "description": "Listing detail page with gallery, price, seller info, public questions, and CTA to start a conversation. Capture route: /marketplace/listings/{listingId}. View file: resources/views/pages/marketplace/show.blade.php",
+            "url": "assets/images/TuxVentas/public-listing-detail.webp"
+          },
+          {
+            "type": "image",
+            "description": "Seller dashboard for managing listings, statuses, activity stats, creation modal, gallery previews, and QR actions. Capture route: /marketplace/me/listings. View file: resources/views/pages/marketplace/me-listings.blade.php",
+            "url": "assets/images/TuxVentas/seller-listings-dashboard.webp"
+          },
+          {
+            "type": "image",
+            "description": "Conversation workspace for a listing with filters, message list, deal acceptance flow, and closure actions. Capture route: /marketplace/me/conversations?listing_id={listingId}. View file: resources/views/pages/marketplace/me-conversations.blade.php",
+            "url": "assets/images/TuxVentas/seller-conversation-workspace.webp"
+          },
+          {
+            "type": "image",
+            "description": "Buyer conversation history screen showing conversations started from marketplace listings. Capture route: /marketplace/me/buyer-conversations. View file: resources/views/pages/marketplace/my-buyer-conversations.blade.php",
+            "url": "assets/images/TuxVentas/buyer-conversations-list.webp"
+          },
+          {
+            "type": "image",
+            "description": "Administrator overview dashboard with high-level metrics for users, active listings, and pending alerts. Capture route: /dashboard?panel=overview. View file: resources/views/pages/admin.blade.php",
+            "url": "assets/images/TuxVentas/admin-overview-dashboard.webp"
+          },
+          {
+            "type": "image",
+            "description": "Alert moderation center with alert queue, filters, assignment actions, and review context inspection. Capture route: /dashboard?panel=alerts. View files: resources/views/pages/admin.blade.php and resources/views/livewire/admin/alerts-manager.blade.php",
+            "url": "assets/images/TuxVentas/admin-alerts-center.webp"
+          },
+          {
+            "type": "image",
+            "description": "Lifecycle operations panel for automatic listing expiration and conversation retention rules. Capture route: /dashboard?panel=lifecycle. View files: resources/views/pages/admin.blade.php and resources/views/livewire/admin/lifecycle-manager.blade.php",
+            "url": "assets/images/TuxVentas/admin-lifecycle-panel.webp"
+          }
+        ]
+      }
+
+
+
+
+
+
+    ]
+  }
+}
