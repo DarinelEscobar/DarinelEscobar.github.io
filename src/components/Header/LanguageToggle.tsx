@@ -26,9 +26,9 @@ const LanguageToggle: React.FC<LanguageToggleProps> = ({
 
   return (
     <div
-      className={`group relative inline-flex rounded-full border border-slate-200 bg-slate-100/95 p-1 shadow-sm backdrop-blur-sm dark:border-white/10 dark:bg-slate-900/70 ${className}`}
+      className={`group relative inline-flex items-center rounded-full border border-slate-200/90 bg-slate-100/95 p-[3px] shadow-[0_1px_2px_rgba(15,23,42,0.06)] dark:border-white/10 dark:bg-white/5 dark:shadow-none ${className}`}
     >
-      <span className="pointer-events-none absolute -top-9 left-1/2 hidden -translate-x-1/2 whitespace-nowrap rounded-full bg-slate-900 px-3 py-1 font-rob text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-white opacity-0 transition-all duration-200 md:block md:group-hover:-translate-y-1 md:group-hover:opacity-100 dark:bg-white dark:text-slate-900">
+      <span className="pointer-events-none absolute -top-8 left-1/2 hidden -translate-x-1/2 whitespace-nowrap rounded-full bg-slate-900 px-2.5 py-1 font-rob text-[0.58rem] font-semibold uppercase tracking-[0.18em] text-white opacity-0 transition-all duration-200 md:block md:group-hover:-translate-y-0.5 md:group-hover:opacity-100 dark:bg-white dark:text-slate-900">
         {sanitizedTooltipLabel}
       </span>
 
@@ -43,12 +43,12 @@ const LanguageToggle: React.FC<LanguageToggleProps> = ({
             aria-label={`${sanitizedTooltipLabel}: ${option === "en" ? "English" : "Spanish"}`}
             title={sanitizedTooltipLabel}
             onClick={() => setLanguage(option)}
-            className="relative rounded-full px-4 py-2 font-rob text-sm font-semibold uppercase tracking-[0.22em] transition-colors duration-200"
+            className="relative min-w-[3.2rem] rounded-full px-3 py-1.5 text-center font-rob text-[0.78rem] font-semibold uppercase tracking-[0.18em] transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-300/80 dark:focus-visible:ring-white/20"
           >
             {isActive && (
               <motion.span
                 layoutId="language-toggle-active"
-                className="absolute inset-0 rounded-full bg-white shadow-[0_6px_16px_rgba(15,23,42,0.10)] dark:bg-slate-800 dark:shadow-[0_8px_24px_rgba(2,6,23,0.45)]"
+                className="absolute inset-0 rounded-full bg-white shadow-[0_1px_3px_rgba(15,23,42,0.10)] dark:bg-white/10 dark:shadow-[0_1px_3px_rgba(2,6,23,0.35)]"
                 transition={{ type: "spring", stiffness: 380, damping: 30 }}
               />
             )}
@@ -56,8 +56,8 @@ const LanguageToggle: React.FC<LanguageToggleProps> = ({
             <span
               className={`relative z-10 transition-colors ${
                 isActive
-                  ? "text-slate-900 dark:text-white"
-                  : "text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200"
+                  ? "text-slate-800 dark:text-white"
+                  : "text-slate-500 hover:text-slate-700 dark:text-white/55 dark:hover:text-white/80"
               }`}
             >
               {languageLabels[option]}
