@@ -33,10 +33,17 @@ const HeaderMobile: React.FC<HeaderMobileProps> = ({
 
   return (
     <div
-      className="z-30 flex justify-between items-center bg-bla px-5 py-3 text-white text-sm transition-colors duration-500 ease-in-out"
+      className="relative z-30 flex justify-between items-center bg-bla px-5 py-3 text-white text-sm transition-colors duration-500 ease-in-out"
     >
       {/* Nombre corto */}
       <h1 className="font-rob font-bold text-dar text-lg">{short_name}</h1>
+
+      <LanguageToggle
+        language={language}
+        setLanguage={setLanguage}
+        tooltipLabel={ui.header.languageLabel}
+        className="absolute left-1/2 -translate-x-1/2 scale-[0.84] shadow-md sm:scale-90"
+      />
 
       {/* Botón para abrir/cerrar menú */}
       <button
@@ -51,10 +58,16 @@ const HeaderMobile: React.FC<HeaderMobileProps> = ({
           className="z-50 fixed inset-0 flex flex-col bg-whi text-white transition-colors duration-500 ease-in-out pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)] pl-[env(safe-area-inset-left)] pr-[env(safe-area-inset-right)]"
         >
           {/* Sección superior del menú (botón Close) */}
-          <div className="flex justify-between items-center px-5 py-4 border-gray-700 border-b w-full">
+          <div className="relative flex justify-between items-center px-5 py-4 border-gray-700 border-b w-full">
             <h1 className="font-rob font-bold text-dar text-lg">
               {short_name}
             </h1>
+            <LanguageToggle
+              language={language}
+              setLanguage={setLanguage}
+              tooltipLabel={ui.header.languageLabel}
+              className="absolute left-1/2 -translate-x-1/2 scale-[0.84] shadow-md sm:scale-90"
+            />
             <button
               onClick={toggleMenu}
               className="font-rob font-bold text-dar text-lg hover:underline"
@@ -89,11 +102,6 @@ const HeaderMobile: React.FC<HeaderMobileProps> = ({
               >
                 {isDarkMode ? ui.header.lightModeLabel : ui.header.darkModeLabel}
               </button>
-            </div>
-
-            <div>
-              <h2 className="mb-2 font-rob font-bold text-base">{ui.header.languageLabel}</h2>
-              <LanguageToggle language={language} setLanguage={setLanguage} />
             </div>
           </div>
 

@@ -57,14 +57,17 @@ const HeaderDesktop: React.FC<HeaderDesktopProps> = ({
   return (
     <motion.div
       ref={ref}
-      className="top-0 left-0 z-10 absolute flex justify-between bg-transparent px-5 py-3 w-full text-sm transition-colors duration-100 ease-in-out"
+      className="top-0 left-0 z-10 absolute flex items-start justify-between gap-6 bg-transparent px-5 py-3 w-full text-sm transition-colors duration-100 ease-in-out"
       initial="hidden"
       animate={controls}
       variants={staggerContainer}
     >
-      <InfoSection title={`${short_name}:`} content={rol} />
-      <InfoSection title={ui.header.locationLabel} content={`${location} (${formattedTime})`} />
-      <NavigationLinks navigationLabel={ui.header.navigationLabel} navigationLinks={ui.header.navigationLinks} />
+      <div className="flex items-start gap-8">
+        <InfoSection title={`${short_name}:`} content={rol} />
+        <InfoSection title={ui.header.locationLabel} content={`${location} (${formattedTime})`} />
+        <NavigationLinks navigationLabel={ui.header.navigationLabel} navigationLinks={ui.header.navigationLinks} />
+      </div>
+
       <ControlsSection
         isDarkMode={isDarkMode}
         toggleDarkMode={toggleDarkMode}
@@ -135,22 +138,22 @@ const ControlsSection: React.FC<ControlsSectionProps> = ({
   languageLabel,
 }) => {
   return (
-    <motion.div className="flex flex-col gap-2 text-left" variants={fadeIn}>
-      <div className="flex flex-col gap-0.5">
-        <h1 className="font-bold font-rob text-[0.89rem] text-dar">{themeLabel}</h1>
-        <button
-          type="button"
-          onClick={toggleDarkMode}
-          className="w-fit font-rob text-[0.89rem] text-dar underline"
-        >
-          {isDarkMode ? lightModeLabel : darkModeLabel}
-        </button>
-      </div>
+    <motion.div className="ml-auto flex items-center gap-3" variants={fadeIn}>
+      <button
+        type="button"
+        onClick={toggleDarkMode}
+        aria-label={themeLabel.replace(/:\s*$/, "")}
+        title={themeLabel.replace(/:\s*$/, "")}
+        className="rounded-full border border-dar/10 bg-whi/85 px-4 py-2 font-rob text-xs font-semibold uppercase tracking-[0.18em] text-dar shadow-sm backdrop-blur-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md dark:border-white/10 dark:bg-slate-900/70 dark:text-white"
+      >
+        {isDarkMode ? lightModeLabel : darkModeLabel}
+      </button>
 
-      <div className="flex flex-col gap-1">
-        <h1 className="font-bold font-rob text-[0.89rem] text-dar">{languageLabel}</h1>
-        <LanguageToggle language={language} setLanguage={setLanguage} />
-      </div>
+      <LanguageToggle
+        language={language}
+        setLanguage={setLanguage}
+        tooltipLabel={languageLabel}
+      />
     </motion.div>
   );
 };

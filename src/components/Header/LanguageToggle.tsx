@@ -6,6 +6,7 @@ interface LanguageToggleProps {
   language: Language;
   setLanguage: (language: Language) => void;
   className?: string;
+  tooltipLabel?: string;
 }
 
 const toggleOptions: Language[] = ["en", "es"];
@@ -19,11 +20,18 @@ const LanguageToggle: React.FC<LanguageToggleProps> = ({
   language,
   setLanguage,
   className = "",
+  tooltipLabel = "Language",
 }) => {
+  const sanitizedTooltipLabel = tooltipLabel.replace(/:\s*$/, "");
+
   return (
     <div
-      className={`inline-flex rounded-full border border-slate-200 bg-slate-100/95 p-1 shadow-sm backdrop-blur-sm dark:border-white/10 dark:bg-slate-900/70 ${className}`}
+      className={`group relative inline-flex rounded-full border border-slate-200 bg-slate-100/95 p-1 shadow-sm backdrop-blur-sm dark:border-white/10 dark:bg-slate-900/70 ${className}`}
     >
+      <span className="pointer-events-none absolute -top-9 left-1/2 hidden -translate-x-1/2 whitespace-nowrap rounded-full bg-slate-900 px-3 py-1 font-rob text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-white opacity-0 transition-all duration-200 md:block md:group-hover:-translate-y-1 md:group-hover:opacity-100 dark:bg-white dark:text-slate-900">
+        {sanitizedTooltipLabel}
+      </span>
+
       {toggleOptions.map((option) => {
         const isActive = option === language;
 
@@ -32,7 +40,8 @@ const LanguageToggle: React.FC<LanguageToggleProps> = ({
             key={option}
             type="button"
             aria-pressed={isActive}
-            aria-label={`Switch language to ${option === "en" ? "English" : "Spanish"}`}
+            aria-label={`${sanitizedTooltipLabel}: ${option === "en" ? "English" : "Spanish"}`}
+            title={sanitizedTooltipLabel}
             onClick={() => setLanguage(option)}
             className="relative rounded-full px-4 py-2 font-rob text-sm font-semibold uppercase tracking-[0.22em] transition-colors duration-200"
           >
