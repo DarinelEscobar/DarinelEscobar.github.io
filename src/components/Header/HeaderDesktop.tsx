@@ -135,21 +135,25 @@ const ControlsSection: React.FC<ControlsSectionProps> = ({
   languageLabel,
 }) => {
   return (
-    <motion.div className="flex flex-col gap-2 text-left" variants={fadeIn}>
+    <motion.div className="flex flex-col gap-1.5 text-left" variants={fadeIn}>
       <div className="flex flex-col gap-0.5">
         <h1 className="font-bold font-rob text-[0.89rem] text-dar">{themeLabel}</h1>
-        <button
-          type="button"
-          onClick={toggleDarkMode}
-          className="w-fit font-rob text-[0.89rem] text-dar underline"
-        >
-          {isDarkMode ? lightModeLabel : darkModeLabel}
-        </button>
-      </div>
+        <div className="flex items-center gap-3">
+          <button
+            type="button"
+            onClick={toggleDarkMode}
+            className="w-fit font-rob text-[0.89rem] text-dar underline"
+          >
+            {isDarkMode ? lightModeLabel : darkModeLabel}
+          </button>
 
-      <div className="flex flex-col gap-1">
-        <h1 className="font-bold font-rob text-[0.89rem] text-dar">{languageLabel}</h1>
-        <LanguageToggle language={language} setLanguage={setLanguage} />
+          <LanguageToggle
+            language={language}
+            setLanguage={setLanguage}
+            tooltipLabel={languageLabel}
+            className="shrink-0"
+          />
+        </div>
       </div>
     </motion.div>
   );
