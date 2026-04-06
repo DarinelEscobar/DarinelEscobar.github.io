@@ -3,6 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import { usePortfolioContent } from "@/lib/portfolioContent";
 
 // Variantes para cada celda
 const cellVariants = {
@@ -32,6 +33,8 @@ const letterVariants = {
 };
 
 const ContactGrid: React.FC = () => {
+  const { language } = usePortfolioContent();
+
   // Observador para repetir animaciones
   const { ref, inView } = useInView({
     threshold: 0.2,
@@ -53,37 +56,41 @@ const ContactGrid: React.FC = () => {
         />
       ))}
 
-      {/* Letra "M" (col 8, row 1) */}
-      <motion.div
-        variants={letterVariants}
-        initial="hidden"
-        animate={inView ? "show" : "hidden"}
-        whileHover="hover"
-        ref={ref}
-        className="flex items-center justify-center"
-        style={{
-          gridColumnStart: 8,
-          gridRowStart: 1,
-        }}
-      >
-        <h1 className="font-cor text-dar text-[8vw] leading-none">M</h1>
-      </motion.div>
+      {language === "en" && (
+        <>
+          {/* Letra "M" (col 8, row 1) */}
+          <motion.div
+            variants={letterVariants}
+            initial="hidden"
+            animate={inView ? "show" : "hidden"}
+            whileHover="hover"
+            ref={ref}
+            className="flex items-center justify-center"
+            style={{
+              gridColumnStart: 8,
+              gridRowStart: 1,
+            }}
+          >
+            <h1 className="font-cor text-dar text-[8vw] leading-none">M</h1>
+          </motion.div>
 
-      {/* Letra "E" (col 8, row 2) */}
-      <motion.div
-        variants={letterVariants}
-        initial="hidden"
-        animate={inView ? "show" : "hidden"}
-        whileHover="hover"
-        ref={ref}
-        className="flex items-center justify-center"
-        style={{
-          gridColumnStart: 8,
-          gridRowStart: 2,
-        }}
-      >
-        <h1 className="font-cor text-dar text-[8vw] leading-none">E</h1>
-      </motion.div>
+          {/* Letra "E" (col 8, row 2) */}
+          <motion.div
+            variants={letterVariants}
+            initial="hidden"
+            animate={inView ? "show" : "hidden"}
+            whileHover="hover"
+            ref={ref}
+            className="flex items-center justify-center"
+            style={{
+              gridColumnStart: 8,
+              gridRowStart: 2,
+            }}
+          >
+            <h1 className="font-cor text-dar text-[8vw] leading-none">E</h1>
+          </motion.div>
+        </>
+      )}
     </>
   );
 };

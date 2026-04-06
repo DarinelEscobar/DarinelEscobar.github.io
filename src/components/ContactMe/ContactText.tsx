@@ -31,26 +31,30 @@ const ContactText: React.FC = () => {
     threshold: 0.2,
     triggerOnce: false,
   });
+  const hasLongTitle = ui.contact.title.replace(/\s/g, "").length > 8;
+  const titleClassName = hasLongTitle
+    ? "custom-contactme custom-contactme--compact font-cor text-dar"
+    : "custom-contactme font-cor text-dar";
 
   return (
     <>
-      {/* "CONTACT" (col-start-2 col-span-5 row-start-2) */}
+      {/* Contact title */}
       <motion.div
         ref={ref}
         variants={containerVariants}
         initial="hidden"
         animate={inView ? "show" : "hidden"}
-        className="col-start-2 col-span-5 row-start-2 flex items-center justify-center"
+        className="col-start-2 col-span-5 row-start-2 flex items-center justify-center overflow-hidden px-4"
       >
         <motion.h1
           variants={itemVariants}
-          className="custom-contactme font-cor text-dar"
+          className={titleClassName}
         >
           {ui.contact.title}
         </motion.h1>
       </motion.div>
 
-      {/* "Let's get in touch ._." (col-start-2 col-span-2 row-start-3) */}
+      {/* Contact subtitle */}
       <motion.div
         ref={ref}
         variants={containerVariants}

@@ -124,11 +124,17 @@ html, body {
 }
 
 .custom-contactme {
-  font-size: 10vw;
-  line-height: 1;
+  font-size: clamp(5rem, 8.8vw, 10.5rem);
+  line-height: 0.9;
   white-space: nowrap;
   overflow: hidden;
   text-align: center;
+  max-width: 100%;
+}
+
+.custom-contactme--compact {
+  font-size: clamp(4.25rem, 6.6vw, 8.25rem);
+  letter-spacing: 0.015em;
 }
 
 .custom-contactmail {
