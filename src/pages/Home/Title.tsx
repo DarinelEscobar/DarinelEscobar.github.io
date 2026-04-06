@@ -38,17 +38,6 @@ const Title: React.FC = () => {
   const { ref, inView } = useInView({ threshold: 0.3, triggerOnce: false });
   const controls = useAnimation();
 
-  // Actualizamos la variable CSS --vh para que represente el alto real de la ventana
-  useEffect(() => {
-    const setVh = () => {
-      const vh = window.innerHeight * 0.01;
-      document.documentElement.style.setProperty('--vh', `${vh}px`);
-    };
-    setVh();
-    window.addEventListener('resize', setVh);
-    return () => window.removeEventListener('resize', setVh);
-  }, []);
-
   useEffect(() => {
     if (inView) {
       controls.start("visible");
@@ -60,8 +49,7 @@ const Title: React.FC = () => {
   return (
     <motion.section
       ref={ref}
-      // En lugar de h-screen usamos la variable --vh para calcular el alto real
-      className="flex flex-col justify-between bg-whi w-screen min-h-[calc(var(--vh,1vh)*100)] text-dar"
+      className="flex min-h-screen min-h-[100dvh] w-screen flex-col justify-between bg-whi text-dar"
       variants={variantsContainer}
       initial="hidden"
       animate={controls}

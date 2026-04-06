@@ -1,27 +1,48 @@
-import React, { useEffect, useRef } from "react";
+import React, { lazy, useEffect, useRef } from "react";
 import Header from "@/components/Header/Header";
-import Projects from "@/components/Projects/Projects";
 import MainContent from "./MainContent";
-import AboutMe from "./AboutMe";
-import Skills from "./Skills";
-import Title from "./Title";
-import ContactMe from "@/components/ContactMe/ContactMe";
+import DeferredSection from "@/components/DeferredSection";
 import SectionWrapper from "@/components/SectionWrapper";
 import { usePageWheelScroll } from "@/hooks/usePageWheelScroll";
+
+const AboutMe = lazy(() => import("./AboutMe"));
+const Projects = lazy(() => import("@/components/Projects/Projects"));
+const Skills = lazy(() => import("./Skills"));
+const ContactMe = lazy(() => import("@/components/ContactMe/ContactMe"));
+const Title = lazy(() => import("./Title"));
+
+const getSavedSectionIndex = () => {
+  if (typeof window === "undefined") {
+    return 0;
+  }
+
+  const savedIndex = window.localStorage.getItem("activeSection");
+  const parsedIndex = Number.parseInt(savedIndex ?? "0", 10);
+
+  if (Number.isNaN(parsedIndex)) {
+    return 0;
+  }
+
+  return Math.max(0, Math.min(5, parsedIndex));
+};
 
 const HomePage: React.FC = () => {
   const sectionRefs = useRef<HTMLDivElement[]>([]);
   const containerRef = useRef<HTMLElement | null>(null);
+  const savedSectionIndexRef = useRef(getSavedSectionIndex());
+  const savedSectionIndex = savedSectionIndexRef.current;
 
   useEffect(() => {
-    const savedIndex = localStorage.getItem("activeSection");
-    if (savedIndex && savedIndex !== "0") {
-      const idx = parseInt(savedIndex, 10);
-      if (!isNaN(idx) && sectionRefs.current[idx]) {
-        sectionRefs.current[idx].scrollIntoView({ behavior: "auto" });
-      }
+    if (savedSectionIndex === 0) {
+      return undefined;
     }
-  }, []);
+
+    const frameId = window.requestAnimationFrame(() => {
+      sectionRefs.current[savedSectionIndex]?.scrollIntoView({ behavior: "auto" });
+    });
+
+    return () => window.cancelAnimationFrame(frameId);
+  }, [savedSectionIndex]);
 
   // Normalize mouse wheel into smooth, page-by-page scroll
   usePageWheelScroll(
@@ -44,8 +65,7 @@ const HomePage: React.FC = () => {
   return (
     <main
       id="main-container"
-      // Se agrega pt-[env(safe-area-inset-top)] para que el contenido no inicie detrás del header sticky
-      className="pt-[env(safe-area-inset-top)] bg-whi w-[100vw] h-[100dvh] overflow-auto overscroll-y-contain text-dar transition-colors duration-100 ease-in-out scroll-smooth snap-mandatory snap-y Container"
+      className="Container h-[100dvh] w-screen overflow-auto overscroll-y-contain bg-whi pt-[env(safe-area-inset-top)] text-dar scroll-smooth snap-y snap-mandatory"
       style={{ scrollSnapType: "y mandatory" }}
       ref={(el) => {
         if (el) containerRef.current = el;
@@ -59,35 +79,35 @@ const HomePage: React.FC = () => {
         </div>
       </SectionWrapper>
 
-      <SectionWrapper index={1}>
+      <DeferredSection index={1} initiallyReady={savedSectionIndex >= 1}>
         <div ref={(el) => setSectionRef(el, 1)}>
           <AboutMe />
         </div>
-      </SectionWrapper>
+      </DeferredSection>
 
-      <SectionWrapper index={2}>
+      <DeferredSection index={2} initiallyReady={savedSectionIndex >= 2}>
         <div ref={(el) => setSectionRef(el, 2)}>
           <Projects />
         </div>
-      </SectionWrapper>
+      </DeferredSection>
 
-      <SectionWrapper index={3}>
+      <DeferredSection index={3} initiallyReady={savedSectionIndex >= 3}>
         <div ref={(el) => setSectionRef(el, 3)}>
           <Skills />
         </div>
-      </SectionWrapper>
+      </DeferredSection>
 
-      <SectionWrapper index={4}>
+      <DeferredSection index={4} initiallyReady={savedSectionIndex >= 4}>
         <div ref={(el) => setSectionRef(el, 4)}>
           <ContactMe />
         </div>
-      </SectionWrapper>
+      </DeferredSection>
 
-      <SectionWrapper index={5}>
+      <DeferredSection index={5} initiallyReady={savedSectionIndex >= 5}>
         <div ref={(el) => setSectionRef(el, 5)}>
           <Title />
         </div>
-      </SectionWrapper>
+      </DeferredSection>
     </main>
   );
 };

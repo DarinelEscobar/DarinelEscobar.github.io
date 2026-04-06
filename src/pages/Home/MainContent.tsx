@@ -24,8 +24,6 @@ const MainContent: React.FC = () => {
   const { ref, inView } = useInView({ threshold: 0.3, triggerOnce: false });
   const controls = useAnimation();
 
-  // Actualiza la variable CSS --vh para reflejar el alto real de la ventana
-  // Se elimina el cálculo manual de VH en favor de dvh CSS nativo
   useEffect(() => {
     if (inView) controls.start("visible");
     else controls.start("hidden");
@@ -34,8 +32,6 @@ const MainContent: React.FC = () => {
   return (
     <motion.section
       ref={ref}
-      // Se reemplaza h-screen por min-h con la variable --vh para que se adapte al alto real
-      // Se reemplaza el cálculo manual de vh por 100dvh para mejor soporte móvil
       className="flex flex-col justify-center md:justify-between items-center bg-whi w-screen min-h-[100dvh] text-dar gap-4 md:gap-0"
       variants={containerVariants}
       initial="visible"
