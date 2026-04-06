@@ -1,8 +1,9 @@
 // \src\components\ContactMe\ContactMe.tsx
 
-import React, { useState, useEffect } from "react";
+import React, { useMemo } from "react";
 import { FaWhatsapp, FaGithub, FaLinkedin } from "react-icons/fa";
 import { usePortfolioContent } from "@/lib/portfolioContent";
+import useMediaQuery from "@/hooks/useMediaQuery";
 
 // COMPONENTES
 import ContactGrid from "./ContactGrid";
@@ -14,6 +15,29 @@ interface Cell {
   row: number;
   col: number;
 }
+
+const TOTAL_ROWS = 5;
+const TOTAL_COLS = 8;
+
+const getRandomCell = (occupied: Cell[]): Cell => {
+  let position: Cell;
+  let attempts = 0;
+  const maxAttempts = 100;
+
+  do {
+    const row = Math.floor(Math.random() * TOTAL_ROWS) + 1;
+    const col = Math.floor(Math.random() * TOTAL_COLS) + 1;
+    position = { row, col };
+    attempts++;
+    if (attempts > maxAttempts) {
+      throw new Error("Unable to find free cells for contact icons.");
+    }
+  } while (
+    occupied.some((cell) => cell.row === position.row && cell.col === position.col)
+  );
+
+  return position;
+};
 
 const initialOccupiedCells: Cell[] = [
   { row: 1, col: 8 },
@@ -40,7 +64,7 @@ const MobileContact: React.FC = () => {
     ui,
   } = usePortfolioContent();
   return (
-    <section className="w-full min-h-screen bg-whi flex flex-col items-center justify-center p-6">
+    <section className="flex min-h-screen min-h-[100dvh] w-full flex-col items-center justify-center bg-whi p-6">
       <h1 className="font-cor text-3xl text-dar mb-6">{ui.contact.title}</h1>
       <h2 className="font-lat text-dar text-lg mb-4">
         {ui.contact.subtitle}
@@ -96,7 +120,7 @@ const TabletContact: React.FC = () => {
   } = usePortfolioContent();
 
   return (
-    <section className="w-full min-h-screen bg-whi flex items-center justify-center">
+    <section className="flex min-h-screen min-h-[100dvh] w-full items-center justify-center bg-whi">
       <div className="grid grid-cols-4 grid-rows-3 w-full h-full relative">
         <div className="col-span-4 row-span-1 flex flex-col items-center justify-center">
           <h1 className="font-cor text-dar text-5xl mb-2">{ui.contact.title}</h1>
@@ -160,40 +184,7 @@ const ContactMeDesktop: React.FC = () => {
     },
   } = usePortfolioContent();
 
-  const totalRows = 5;
-  const totalCols = 8;
-
-  const [iconPositions, setIconPositions] = useState<{
-    phone: Cell | null;
-    github: Cell | null;
-    linkedin: Cell | null;
-  }>({
-    phone: null,
-    github: null,
-    linkedin: null,
-  });
-
-  const getRandomCell = (occupied: Cell[]): Cell => {
-    let position: Cell;
-    let attempts = 0;
-    const maxAttempts = 100;
-
-    do {
-      const row = Math.floor(Math.random() * totalRows) + 1;
-      const col = Math.floor(Math.random() * totalCols) + 1;
-      position = { row, col };
-      attempts++;
-      if (attempts > maxAttempts) {
-        throw new Error("Unable to find free cells for contact icons.");
-      }
-    } while (
-      occupied.some((cell) => cell.row === position.row && cell.col === position.col)
-    );
-
-    return position;
-  };
-
-  useEffect(() => {
+  const iconPositions = useMemo(() => {
     try {
       const occupied = [...initialOccupiedCells];
 
@@ -206,22 +197,23 @@ const ContactMeDesktop: React.FC = () => {
       const linkedinPos = getRandomCell(occupied);
       occupied.push(linkedinPos);
 
-      setIconPositions({
+      return {
         phone: phonePos,
         github: githubPos,
         linkedin: linkedinPos,
-      });
+      };
     } catch (error) {
       console.error(error);
+      return null;
     }
   }, []);
 
-  if (!iconPositions.phone || !iconPositions.github || !iconPositions.linkedin) {
+  if (!iconPositions) {
     return null;
   }
 
   return (
-    <section className="h-screen w-screen bg-whi flex items-center justify-center">
+    <section className="flex min-h-screen h-[100dvh] w-screen items-center justify-center bg-whi">
       <div className="grid grid-cols-8 grid-rows-5 w-full h-full relative">
         {/* Grilla de celdas + letras M/E */}
         <ContactGrid />
@@ -233,17 +225,20 @@ const ContactMeDesktop: React.FC = () => {
         <ContactIcon
           Icon={FaWhatsapp}
           href={`https://wa.me/${phone.replace(/\D/g, "")}`}
-          position={iconPositions.phone!}
+          ariaLabel="WhatsApp"
+          position={iconPositions.phone}
         />
         <ContactIcon
           Icon={FaGithub}
           href={github}
-          position={iconPositions.github!}
+          ariaLabel="GitHub"
+          position={iconPositions.github}
         />
         <ContactIcon
           Icon={FaLinkedin}
           href={linkedin}
-          position={iconPositions.linkedin!}
+          ariaLabel="LinkedIn"
+          position={iconPositions.linkedin}
         />
 
         {/* Email al final */}
@@ -262,24 +257,18 @@ const ContactMeDesktop: React.FC = () => {
 
 // =============== CONTACTME PRINCIPAL ===============
 const ContactMe: React.FC = () => {
-  return (
-    <>
-      {/* MOBILE */}
-      <div className="block sm:hidden">
-        <MobileContact />
-      </div>
+  const isTablet = useMediaQuery("(min-width: 640px)");
+  const isDesktop = useMediaQuery("(min-width: 768px)");
 
-      {/* TABLET */}
-      <div className="hidden sm:block md:hidden">
-        <TabletContact />
-      </div>
+  if (isDesktop) {
+    return <ContactMeDesktop />;
+  }
 
-      {/* DESKTOP */}
-      <div className="hidden md:block">
-        <ContactMeDesktop />
-      </div>
-    </>
-  );
+  if (isTablet) {
+    return <TabletContact />;
+  }
+
+  return <MobileContact />;
 };
 
 export default ContactMe;

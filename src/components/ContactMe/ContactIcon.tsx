@@ -7,6 +7,7 @@ import { useInView } from "react-intersection-observer";
 
 interface ContactIconProps {
   Icon: IconType;
+  ariaLabel?: string;
   href?: string;
   position: {
     row: number;
@@ -25,7 +26,7 @@ const iconVariants = {
   },
 };
 
-const ContactIcon: React.FC<ContactIconProps> = ({ Icon, href, position }) => {
+const ContactIcon: React.FC<ContactIconProps> = ({ Icon, href, position, ariaLabel }) => {
   const { ref, inView } = useInView({
     threshold: 0.2,
     triggerOnce: false,
@@ -51,6 +52,7 @@ const ContactIcon: React.FC<ContactIconProps> = ({ Icon, href, position }) => {
           href={href}
           target="_blank"
           rel="noopener noreferrer"
+          aria-label={ariaLabel}
           className="flex items-center justify-center"
         >
           <Icon className="text-3xl text-dar" />

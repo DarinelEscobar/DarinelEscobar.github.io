@@ -5,9 +5,9 @@ import { useInView } from "react-intersection-observer";
 import type { Language } from "@/content/portfolio/types";
 import { usePortfolioContent } from "@/lib/portfolioContent";
 import LanguageToggle from "./LanguageToggle";
+import CurrentTime from "./CurrentTime";
 
 interface HeaderDesktopProps {
-  formattedTime: string;
   toggleDarkMode: () => void;
   isDarkMode: boolean;
   language: Language;
@@ -30,7 +30,6 @@ const staggerContainer = {
 };
 
 const HeaderDesktop: React.FC<HeaderDesktopProps> = ({
-  formattedTime,
   toggleDarkMode,
   isDarkMode,
   language,
@@ -49,21 +48,26 @@ const HeaderDesktop: React.FC<HeaderDesktopProps> = ({
   useEffect(() => {
     if (inView) {
       controls.start("visible");
-    } else {
-      controls.start("hidden");
     }
   }, [inView, controls]);
 
   return (
     <motion.div
       ref={ref}
-      className="top-0 left-0 z-10 absolute flex justify-between bg-transparent px-5 py-3 w-full text-sm transition-colors duration-100 ease-in-out"
+      className="theme-transition absolute left-0 top-0 z-10 flex w-full justify-between bg-transparent px-5 py-3 text-sm"
       initial="hidden"
       animate={controls}
       variants={staggerContainer}
     >
       <InfoSection title={`${short_name}:`} content={rol} />
-      <InfoSection title={ui.header.locationLabel} content={`${location} (${formattedTime})`} />
+      <InfoSection
+        title={ui.header.locationLabel}
+        content={
+          <>
+            {location} (<CurrentTime locale={ui.locale.time} />)
+          </>
+        }
+      />
       <NavigationLinks navigationLabel={ui.header.navigationLabel} navigationLinks={ui.header.navigationLinks} />
       <ControlsSection
         isDarkMode={isDarkMode}
@@ -81,7 +85,7 @@ const HeaderDesktop: React.FC<HeaderDesktopProps> = ({
 
 interface InfoSectionProps {
   title: string;
-  content: string;
+  content: React.ReactNode;
 }
 
 const InfoSection: React.FC<InfoSectionProps> = ({ title, content }) => (

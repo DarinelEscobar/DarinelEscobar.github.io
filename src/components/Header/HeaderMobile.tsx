@@ -4,13 +4,13 @@ import { ArrowUpRight } from "lucide-react";
 import type { Language } from "@/content/portfolio/types";
 import { usePortfolioContent } from "@/lib/portfolioContent";
 import LanguageToggle from "./LanguageToggle";
+import CurrentTime from "./CurrentTime";
 
 interface HeaderMobileProps {
   isMenuOpen: boolean;
   toggleMenu: () => void;
   toggleDarkMode: () => void;
   isDarkMode: boolean;
-  formattedTime: string;
   language: Language;
   setLanguage: (language: Language) => void;
 }
@@ -20,7 +20,6 @@ const HeaderMobile: React.FC<HeaderMobileProps> = ({
   toggleMenu,
   toggleDarkMode,
   isDarkMode,
-  formattedTime,
   language,
   setLanguage,
 }) => {
@@ -33,7 +32,7 @@ const HeaderMobile: React.FC<HeaderMobileProps> = ({
 
   return (
     <div
-      className="z-30 flex justify-between items-center bg-bla px-5 py-3 text-white text-sm transition-colors duration-500 ease-in-out"
+      className="theme-transition z-30 flex items-center justify-between bg-bla px-5 py-3 text-sm text-white"
     >
       {/* Nombre corto */}
       <h1 className="font-rob font-bold text-dar text-lg">{short_name}</h1>
@@ -48,7 +47,7 @@ const HeaderMobile: React.FC<HeaderMobileProps> = ({
 
       {isMenuOpen && (
         <div
-          className="z-50 fixed inset-0 flex flex-col bg-whi text-white transition-colors duration-500 ease-in-out pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)] pl-[env(safe-area-inset-left)] pr-[env(safe-area-inset-right)]"
+          className="theme-transition fixed inset-0 z-50 flex flex-col bg-whi pb-[env(safe-area-inset-bottom)] pl-[env(safe-area-inset-left)] pr-[env(safe-area-inset-right)] pt-[env(safe-area-inset-top)] text-white"
         >
           {/* Sección superior del menú (botón Close) */}
           <div className="flex justify-between items-center px-5 py-4 border-gray-700 border-b w-full">
@@ -75,7 +74,7 @@ const HeaderMobile: React.FC<HeaderMobileProps> = ({
             <div>
               <h2 className="font-rob font-bold text-base">{ui.header.locationLabel}</h2>
               <p className="font-lat text-5dar text-sm">
-                {location} ({formattedTime})
+                {location} (<CurrentTime locale={ui.locale.time} />)
               </p>
             </div>
 
@@ -83,13 +82,13 @@ const HeaderMobile: React.FC<HeaderMobileProps> = ({
             <div>
               <h2 className="font-rob font-bold text-base">{ui.header.themeLabel}</h2>
               <div className="mt-2 flex flex-wrap items-center gap-2.5">
-                <button
-                  type="button"
-                  onClick={toggleDarkMode}
-                  className="font-lat text-5dar text-sm underline"
-                >
-                  {isDarkMode ? ui.header.lightModeLabel : ui.header.darkModeLabel}
-                </button>
+              <button
+                type="button"
+                onClick={toggleDarkMode}
+                className="theme-transition font-lat text-5dar text-sm underline"
+              >
+                {isDarkMode ? ui.header.lightModeLabel : ui.header.darkModeLabel}
+              </button>
 
                 <LanguageToggle
                   language={language}

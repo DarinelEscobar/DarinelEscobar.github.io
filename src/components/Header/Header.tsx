@@ -2,18 +2,14 @@ import React, { useState } from "react";
 import HeaderMobile from "./HeaderMobile";
 import HeaderDesktop from "./HeaderDesktop";
 import useDarkMode from "@/hooks/useDarkMode";
-import useCurrentTime from "@/hooks/useCurrentTime";
 import useMediaQuery from "@/hooks/useMediaQuery";
 import useLanguage from "@/hooks/useLanguage";
-import { usePortfolioContent } from "@/lib/portfolioContent";
 
 const Header: React.FC = () => {
   const { isDarkMode, toggleDarkMode } = useDarkMode();
   const { language, setLanguage } = useLanguage();
-  const { ui } = usePortfolioContent();
-  const formattedTime = useCurrentTime(ui.locale.time);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const isMobile = useMediaQuery("(max-width: 768px)");
+  const isMobile = useMediaQuery("(max-width: 767px)");
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -28,13 +24,11 @@ const Header: React.FC = () => {
           toggleMenu={toggleMenu}
           toggleDarkMode={toggleDarkMode}
           isDarkMode={isDarkMode}
-          formattedTime={formattedTime}
           language={language}
           setLanguage={setLanguage}
         />
       ) : (
         <HeaderDesktop
-          formattedTime={formattedTime}
           toggleDarkMode={toggleDarkMode}
           isDarkMode={isDarkMode}
           language={language}
