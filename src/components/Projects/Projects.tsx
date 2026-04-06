@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { Suspense, lazy, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import type { ProjectData } from "@/content/portfolio/types";
 import { usePortfolioContent } from "@/lib/portfolioContent";
@@ -7,9 +7,10 @@ import "./Projects.css";
 
 import ProjectCard from "./ProjectCard";
 import ProjectNavigation from "./ProjectNavigation";
-import DetailsProjects from "../DetailsProjects/DetailsProjects";
 
 import { formatDate } from "./dateUtils";
+
+const DetailsProjects = lazy(() => import("../DetailsProjects/DetailsProjects"));
 
 const Projects: React.FC = () => {
   const {
@@ -33,16 +34,6 @@ const Projects: React.FC = () => {
   const media = currentProject.media ?? [];
 
   const { ref, inView } = useInView({ threshold: 0.35, triggerOnce: false });
-
-  useEffect(() => {
-    const setVh = () => {
-      const vh = window.innerHeight * 0.01;
-      document.documentElement.style.setProperty("--vh", `${vh}px`);
-    };
-    setVh();
-    window.addEventListener("resize", setVh);
-    return () => window.removeEventListener("resize", setVh);
-  }, []);
 
   const startDate = currentProject.start_date ? formatDate(currentProject.start_date, ui.locale.date) : "";
   const endDate = currentProject.end_date ? formatDate(currentProject.end_date, ui.locale.date) : "";
@@ -74,7 +65,7 @@ const Projects: React.FC = () => {
   return (
     <div
       ref={ref}
-      className="relative flex flex-col justify-center items-center bg-whi px-4 sm:px-6 py-8 lg:py-0 w-screen min-h-[calc(var(--vh,1vh)*100)]"
+      className="relative flex min-h-screen min-h-[100dvh] w-screen flex-col items-center justify-center bg-whi px-4 py-8 sm:px-6 lg:py-0"
     >
       <ProjectCard
         key={currentProjectIndex}
@@ -99,11 +90,13 @@ const Projects: React.FC = () => {
       )}
 
       {expandedProjectIndex !== null && (
-        <DetailsProjects
-          projects={projects}
-          projectIndex={expandedProjectIndex}
-          onClose={handleCloseDetails}
-        />
+        <Suspense fallback={<div className="fixed inset-0 z-50 bg-black/70" />}>
+          <DetailsProjects
+            projects={projects}
+            projectIndex={expandedProjectIndex}
+            onClose={handleCloseDetails}
+          />
+        </Suspense>
       )}
     </div>
   );
