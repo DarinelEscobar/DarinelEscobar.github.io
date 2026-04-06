@@ -23,7 +23,7 @@ interface ProjectCardProps {
 const descriptionPanelClass = [
   "rounded-xl border p-4 font-lat text-base leading-relaxed backdrop-blur-md",
   "bg-white/60 text-dar border-black/10 shadow-[0_12px_28px_rgba(15,23,42,0.12)]",
-  "dark:bg-black/25 dark:text-whi dark:border-white/[0.12] dark:shadow-[0_14px_30px_rgba(0,0,0,0.38)]",
+  "dark:bg-black/25 dark:border-white/[0.12] dark:shadow-[0_14px_30px_rgba(0,0,0,0.38)]",
 ].join(" ");
 
 // Variantes para el contenedor principal (stagger)
@@ -153,7 +153,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
               {currentProject.role}
             </motion.p>
 
-            <motion.h2 variants={itemVariants} className="max-w-2xl font-cor font-bold text-4xl leading-tight text-dar dark:text-whi">
+            <motion.h2 variants={itemVariants} className="max-w-2xl font-cor font-bold text-4xl leading-tight text-dar">
               {currentProject.name}
             </motion.h2>
 

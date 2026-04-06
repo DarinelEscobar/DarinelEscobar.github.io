@@ -237,7 +237,7 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({
               aria-label={projects.previousImageLabel}
               variant="ghost"
               size="lg"
-              className="bg-white/90 hover:bg-white text-dar dark:text-whi dark:hover:bg-gray-900 dark:bg-gray-900/90 shadow-xl shadow-black/[0.15] dark:shadow-black/50 p-3 rounded-full hover:scale-105 transition-transform"
+              className="bg-white/90 hover:bg-white text-dar dark:hover:bg-gray-900 dark:bg-gray-900/90 shadow-xl shadow-black/[0.15] dark:shadow-black/50 p-3 rounded-full hover:scale-105 transition-transform"
               onClick={prevImage}
             >
               <ChevronLeft className="w-8 h-8" />
@@ -246,7 +246,7 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({
               aria-label={projects.nextImageLabel}
               variant="ghost"
               size="lg"
-              className="bg-white/90 hover:bg-white text-dar dark:text-whi dark:hover:bg-gray-900 dark:bg-gray-900/90 shadow-xl shadow-black/[0.15] dark:shadow-black/50 p-3 rounded-full hover:scale-105 transition-transform"
+              className="bg-white/90 hover:bg-white text-dar dark:hover:bg-gray-900 dark:bg-gray-900/90 shadow-xl shadow-black/[0.15] dark:shadow-black/50 p-3 rounded-full hover:scale-105 transition-transform"
               onClick={nextImage}
             >
               <ChevronRight className="w-8 h-8" />

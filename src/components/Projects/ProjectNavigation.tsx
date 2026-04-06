@@ -44,7 +44,7 @@ const ProjectNavigation: React.FC<ProjectNavigationProps> = ({
         variants={itemVariants}
         onClick={handlePrevProject}
         disabled={disablePrev}
-        className="bg-white/[0.85] hover:bg-white text-dar dark:text-whi dark:hover:bg-white/20 dark:bg-white/10 shadow-sm shadow-black/10 dark:shadow-black/40 disabled:opacity-50 p-2 rounded-full transition-colors"
+        className="bg-white/[0.85] hover:bg-white text-dar dark:hover:bg-white/20 dark:bg-white/10 shadow-sm shadow-black/10 dark:shadow-black/40 disabled:opacity-50 p-2 rounded-full transition-colors"
       >
         <ChevronLeft />
       </motion.button>
@@ -52,7 +52,7 @@ const ProjectNavigation: React.FC<ProjectNavigationProps> = ({
       <motion.button
         variants={itemVariants}
         onClick={onExpandProject}
-        className="bg-white/[0.85] hover:bg-white text-dar dark:text-whi dark:hover:bg-white/20 dark:bg-white/10 shadow-sm shadow-black/10 dark:shadow-black/40 p-2 rounded-full transition-colors"
+        className="bg-white/[0.85] hover:bg-white text-dar dark:hover:bg-white/20 dark:bg-white/10 shadow-sm shadow-black/10 dark:shadow-black/40 p-2 rounded-full transition-colors"
       >
         <Maximize2 />
       </motion.button>
@@ -61,7 +61,7 @@ const ProjectNavigation: React.FC<ProjectNavigationProps> = ({
         variants={itemVariants}
         onClick={handleNextProject}
         disabled={disableNext}
-        className="bg-white/[0.85] hover:bg-white text-dar dark:text-whi dark:hover:bg-white/20 dark:bg-white/10 shadow-sm shadow-black/10 dark:shadow-black/40 disabled:opacity-50 p-2 rounded-full transition-colors"
+        className="bg-white/[0.85] hover:bg-white text-dar dark:hover:bg-white/20 dark:bg-white/10 shadow-sm shadow-black/10 dark:shadow-black/40 disabled:opacity-50 p-2 rounded-full transition-colors"
       >
         <ChevronRight />
       </motion.button>

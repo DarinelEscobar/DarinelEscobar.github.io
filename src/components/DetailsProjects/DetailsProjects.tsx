@@ -111,12 +111,12 @@ const DetailsProjects: React.FC<DetailsProjectsProps> = ({
       <div ref={contentRef} className="absolute w-full min-h-full">
         <button
           onClick={onClose}
-          className="top-4 right-4 z-50 fixed bg-white/90 hover:bg-white text-dar dark:text-whi dark:hover:bg-gray-700 dark:bg-gray-800/[0.85] shadow-lg shadow-black/[0.15] dark:shadow-black/50 border border-black/5 dark:border-white/10 p-2 rounded-full transition-colors"
+          className="top-4 right-4 z-50 fixed bg-white/90 hover:bg-white text-dar dark:hover:bg-gray-700 dark:bg-gray-800/[0.85] shadow-lg shadow-black/[0.15] dark:shadow-black/50 border border-black/5 dark:border-white/10 p-2 rounded-full transition-colors"
         >
           <X className="w-5 h-5" />
         </button>
 
-        <div className="bg-whi min-h-screen text-dar dark:text-whi">
+        <div className="bg-whi min-h-screen text-dar">
           <HeroSection project={project} />
 
           <section className="px-4 py-24">
