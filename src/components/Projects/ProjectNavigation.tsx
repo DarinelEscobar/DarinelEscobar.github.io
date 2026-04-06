@@ -35,7 +35,7 @@ const ProjectNavigation: React.FC<ProjectNavigationProps> = ({
       variants={containerVariants}
       className="
         z-50 inline-flex items-center space-x-3
-        bg-gray-200/30 dark:bg-gray-700/40 shadow-lg backdrop-blur-sm px-3 py-2 rounded-full
+        bg-gray-200/[0.35] dark:bg-gray-700/[0.45] shadow-lg shadow-black/10 dark:shadow-black/40 backdrop-blur-sm px-3 py-2 rounded-full
         fixed left-1/2 -translate-x-1/2 bottom-[calc(env(safe-area-inset-bottom)+8px)]
         md:absolute md:bottom-[calc(2rem+env(safe-area-inset-bottom))] md:left-1/2 md:-translate-x-1/2
       "
@@ -44,7 +44,7 @@ const ProjectNavigation: React.FC<ProjectNavigationProps> = ({
         variants={itemVariants}
         onClick={handlePrevProject}
         disabled={disablePrev}
-        className="bg-white/80 hover:bg-white dark:hover:bg-white/20 dark:bg-white/10 disabled:opacity-50 p-2 rounded-full transition-colors"
+        className="bg-white/[0.85] hover:bg-white text-dar dark:text-whi dark:hover:bg-white/20 dark:bg-white/10 shadow-sm shadow-black/10 dark:shadow-black/40 disabled:opacity-50 p-2 rounded-full transition-colors"
       >
         <ChevronLeft />
       </motion.button>
@@ -52,7 +52,7 @@ const ProjectNavigation: React.FC<ProjectNavigationProps> = ({
       <motion.button
         variants={itemVariants}
         onClick={onExpandProject}
-        className="bg-white/80 hover:bg-white dark:hover:bg-white/20 dark:bg-white/10 p-2 rounded-full transition-colors"
+        className="bg-white/[0.85] hover:bg-white text-dar dark:text-whi dark:hover:bg-white/20 dark:bg-white/10 shadow-sm shadow-black/10 dark:shadow-black/40 p-2 rounded-full transition-colors"
       >
         <Maximize2 />
       </motion.button>
@@ -61,7 +61,7 @@ const ProjectNavigation: React.FC<ProjectNavigationProps> = ({
         variants={itemVariants}
         onClick={handleNextProject}
         disabled={disableNext}
-        className="bg-white/80 hover:bg-white dark:hover:bg-white/20 dark:bg-white/10 disabled:opacity-50 p-2 rounded-full transition-colors"
+        className="bg-white/[0.85] hover:bg-white text-dar dark:text-whi dark:hover:bg-white/20 dark:bg-white/10 shadow-sm shadow-black/10 dark:shadow-black/40 disabled:opacity-50 p-2 rounded-full transition-colors"
       >
         <ChevronRight />
       </motion.button>
