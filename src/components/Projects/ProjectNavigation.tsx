@@ -1,4 +1,3 @@
-// ✅ Corrected: src/components/Projects/ProjectNavigation.tsx
 import React from "react";
 import { ChevronLeft, ChevronRight, Maximize2 } from "lucide-react";
 import { motion } from "framer-motion";
@@ -13,12 +12,12 @@ interface ProjectNavigationProps {
 
 const containerVariants = {
   hidden: { opacity: 0 },
-  visible: { opacity: 1 }
+  visible: { opacity: 1 },
 };
 
 const itemVariants = {
   hidden: { opacity: 0, y: 10 },
-  visible: { opacity: 1, y: 0 }
+  visible: { opacity: 1, y: 0 },
 };
 
 const ProjectNavigation: React.FC<ProjectNavigationProps> = ({
@@ -34,9 +33,8 @@ const ProjectNavigation: React.FC<ProjectNavigationProps> = ({
       animate="visible"
       variants={containerVariants}
       className="
-        z-50 inline-flex items-center space-x-3
-        bg-gray-200/30 dark:bg-gray-700/40 shadow-lg backdrop-blur-sm px-3 py-2 rounded-full
-        fixed left-1/2 -translate-x-1/2 bottom-[calc(env(safe-area-inset-bottom)+8px)]
+        fixed left-1/2 bottom-[calc(env(safe-area-inset-bottom)+8px)] z-50 inline-flex -translate-x-1/2 items-center space-x-3 rounded-full bg-gray-200/[0.35] px-3 py-2 shadow-lg shadow-black/10 backdrop-blur-sm
+        dark:bg-gray-700/[0.45] dark:shadow-black/40
         md:absolute md:bottom-[calc(2rem+env(safe-area-inset-bottom))] md:left-1/2 md:-translate-x-1/2
       "
     >
@@ -44,7 +42,7 @@ const ProjectNavigation: React.FC<ProjectNavigationProps> = ({
         variants={itemVariants}
         onClick={handlePrevProject}
         disabled={disablePrev}
-        className="bg-white/80 hover:bg-white dark:hover:bg-white/20 dark:bg-white/10 disabled:opacity-50 p-2 rounded-full transition-colors"
+        className="rounded-full bg-white/[0.85] p-2 text-dar shadow-sm shadow-black/10 transition-colors disabled:opacity-50 hover:bg-white dark:bg-white/10 dark:shadow-black/40 dark:hover:bg-white/20"
       >
         <ChevronLeft />
       </motion.button>
@@ -52,7 +50,7 @@ const ProjectNavigation: React.FC<ProjectNavigationProps> = ({
       <motion.button
         variants={itemVariants}
         onClick={onExpandProject}
-        className="bg-white/80 hover:bg-white dark:hover:bg-white/20 dark:bg-white/10 p-2 rounded-full transition-colors"
+        className="rounded-full bg-white/[0.85] p-2 text-dar shadow-sm shadow-black/10 transition-colors hover:bg-white dark:bg-white/10 dark:shadow-black/40 dark:hover:bg-white/20"
       >
         <Maximize2 />
       </motion.button>
@@ -61,7 +59,7 @@ const ProjectNavigation: React.FC<ProjectNavigationProps> = ({
         variants={itemVariants}
         onClick={handleNextProject}
         disabled={disableNext}
-        className="bg-white/80 hover:bg-white dark:hover:bg-white/20 dark:bg-white/10 disabled:opacity-50 p-2 rounded-full transition-colors"
+        className="rounded-full bg-white/[0.85] p-2 text-dar shadow-sm shadow-black/10 transition-colors disabled:opacity-50 hover:bg-white dark:bg-white/10 dark:shadow-black/40 dark:hover:bg-white/20"
       >
         <ChevronRight />
       </motion.button>

@@ -103,24 +103,24 @@ const DetailsProjects: React.FC<DetailsProjectsProps> = ({
   return (
     <motion.div
       ref={scrollContainerRef}
-      className="z-50 fixed inset-0 bg-black/70 overflow-auto"
+      className="fixed inset-0 z-50 overflow-auto bg-black/70"
       variants={modalVariants}
       initial="hidden"
       animate="visible"
     >
-      <div ref={contentRef} className="absolute w-full min-h-full">
+      <div ref={contentRef} className="absolute min-h-full w-full">
         <button
           onClick={onClose}
-          className="top-4 right-4 z-50 fixed bg-white/90 hover:bg-white dark:hover:bg-gray-700 dark:bg-gray-800/80 shadow p-2 rounded-full transition-colors"
+          className="fixed right-4 top-4 z-50 rounded-full border border-black/5 bg-white/90 p-2 text-dar shadow-lg shadow-black/[0.15] transition-colors hover:bg-white dark:border-white/10 dark:bg-gray-800/[0.85] dark:shadow-black/50 dark:hover:bg-gray-700"
         >
-          <X className="w-5 h-5 text-dark dark:text-whi" />
+          <X className="h-5 w-5" />
         </button>
 
-        <div className="bg-whi min-h-screen text-dar">
+        <div className="min-h-screen bg-whi text-dar">
           <HeroSection project={project} />
 
           <section className="px-4 py-24">
-            <div className="gap-12 grid lg:grid-cols-3 mx-auto container">
+            <div className="container mx-auto grid gap-12 lg:grid-cols-3">
               <ProjectDetails
                 project={{
                   ...project,

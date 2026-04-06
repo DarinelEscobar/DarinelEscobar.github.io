@@ -100,27 +100,26 @@
 }
 
 html, body {
-  @apply w-full h-full overflow-x-visible m-0 p-0 bg-whi; /* Asegura que sticky funcione */
+  @apply m-0 h-full w-full overflow-x-visible bg-whi p-0;
 }
-
 
 #root {
-  @apply relative; /* No uses overflow-x-hidden aquí */
+  @apply relative;
 }
-
-
-
 
 @layer base {
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
   }
+
   *::-webkit-scrollbar {
     display: none;
   }
+
   * {
     -ms-overflow-style: none;
     scrollbar-width: none;
@@ -132,7 +131,8 @@ html, body {
     background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
     color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
     border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-    fill 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    fill 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .custom-title {
@@ -144,7 +144,7 @@ html, body {
 }
 
 .custom-paragraph {
-  font-size: 4vw; /* Ajusta según el tamaño del título */
+  font-size: 4vw;
   text-align: center;
   margin-top: 1rem;
   line-height: 1.2;

@@ -34,7 +34,6 @@ const galleryVariants = {
   },
 };
 
-// Contenedor para la lista de miniaturas, usa stagger
 const thumbnailsContainer = {
   hidden: {},
   visible: {
@@ -44,7 +43,6 @@ const thumbnailsContainer = {
   },
 };
 
-// Animación de cada thumbnail
 const thumbnailItem = {
   hidden: { y: 20, opacity: 0, scale: 0.9 },
   visible: {
@@ -153,16 +151,16 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({
       viewport={{ once: false, amount: 0.1 }}
     >
       <div className="space-y-6 mx-auto container">
-        <h2 className="mb-8 font-bold text-gray-800 dark:text-gray-100 text-3xl text-center">
+        <h2 className="mb-8 text-center text-3xl font-bold text-gray-800 dark:text-gray-100">
           {projects.multimediaMaterialLabel}
         </h2>
 
         <div className="group relative mx-auto max-w-6xl" {...handlers}>
           <div
             ref={setContainerRef}
-            className={`relative bg-gray-100 dark:bg-gray-900 border-gray-300 dark:border-gray-600/50 shadow-xl border rounded-xl ${
+            className={`relative flex items-center justify-center overflow-hidden rounded-xl border border-gray-300 bg-gray-100 shadow-xl dark:border-gray-600/50 dark:bg-gray-900 ${
               isFullscreen ? "h-[90vh] w-[95vw]" : "max-h-[80vh]"
-            } flex items-center justify-center overflow-hidden`}
+            }`}
           >
             <AnimatePresence mode="wait">
               <motion.div
@@ -171,18 +169,17 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 1.02 }}
                 transition={{ duration: 0.3 }}
-                className="relative flex justify-center items-center w-full h-full"
+                className="relative flex h-full w-full items-center justify-center"
               >
                 {isLoading && (
-                  <div className="absolute inset-0 flex justify-center items-center bg-gray-100 dark:bg-gray-900">
-                    <Loader2 className="w-12 h-12 text-blue-500 animate-spin" />
+                  <div className="absolute inset-0 flex items-center justify-center bg-gray-100 dark:bg-gray-900">
+                    <Loader2 className="h-12 w-12 animate-spin text-blue-500" />
                   </div>
                 )}
 
                 <img
                   src={getAssetImage(media[currentImageIndex].url)}
                   alt={media[currentImageIndex].description || projects.multimediaMaterialLabel}
-                  /* Optimization for specific fav icon */
                   {...(media[currentImageIndex].url.includes("fav-400.webp")
                     ? {
                         width: 383,
@@ -191,83 +188,79 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({
                         decoding: "async",
                       }
                     : {})}
-                  className={`${
+                  className={`transition-opacity duration-300 ${
                     isLoading ? "opacity-0" : "opacity-100"
-                  } transition-opacity duration-300`}
+                  }`}
                   style={{
                     ...calculateImagePosition(),
                     objectFit: "contain",
                   }}
                 />
 
-                {/* Texto/Dimensiones sobre la imagen */}
-                <div className="right-0 bottom-0 left-0 absolute bg-gradient-to-t from-black/90 via-black/70 to-transparent px-6 pt-16 pb-4 pointer-events-none">
-                  <p className="drop-shadow-lg font-medium text-white/90 text-lg">
+                <div className="pointer-events-none absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/70 to-transparent px-6 pb-4 pt-16">
+                  <p className="text-lg font-medium text-white/90 drop-shadow-lg">
                     {media[currentImageIndex].description}
                   </p>
                   {imageDimensions && (
-                    <p className="mt-1 text-white/60 text-sm">
-                      {imageDimensions.width}×{imageDimensions.height}px
+                    <p className="mt-1 text-sm text-white/60">
+                      {imageDimensions.width}x{imageDimensions.height}px
                     </p>
                   )}
                 </div>
               </motion.div>
             </AnimatePresence>
 
-            {/* Botón para fullscreen */}
-            <div className="top-4 right-4 z-10 absolute flex gap-2">
+            <div className="absolute right-4 top-4 z-10 flex gap-2">
               <Button
                 variant="ghost"
                 size="sm"
-                className="bg-black/30 hover:bg-black/40 backdrop-blur-sm text-white/90 hover:text-white"
+                className="bg-black/30 text-white/90 backdrop-blur-sm hover:bg-black/40 hover:text-white"
                 onClick={toggleFullscreen}
               >
                 {isFullscreen ? (
-                  <Minimize className="w-5 h-5" />
+                  <Minimize className="h-5 w-5" />
                 ) : (
-                  <Expand className="w-5 h-5" />
+                  <Expand className="h-5 w-5" />
                 )}
               </Button>
             </div>
           </div>
 
-          {/* Navigation Controls */}
-          <div className="top-1/2 z-10 absolute flex justify-between px-4 w-full -translate-y-1/2">
+          <div className="absolute top-1/2 z-10 flex w-full -translate-y-1/2 justify-between px-4">
             <Button
               aria-label={projects.previousImageLabel}
               variant="ghost"
               size="lg"
-              className="bg-white/90 hover:bg-white dark:hover:bg-gray-900 dark:bg-gray-900/90 shadow-xl p-3 rounded-full hover:scale-105 transition-transform"
+              className="rounded-full bg-white/90 p-3 text-dar shadow-xl shadow-black/[0.15] transition-transform hover:scale-105 hover:bg-white dark:bg-gray-900/90 dark:shadow-black/50 dark:hover:bg-gray-900"
               onClick={prevImage}
             >
-              <ChevronLeft className="w-8 h-8" />
+              <ChevronLeft className="h-8 w-8" />
             </Button>
             <Button
               aria-label={projects.nextImageLabel}
               variant="ghost"
               size="lg"
-              className="bg-white/90 hover:bg-white dark:hover:bg-gray-900 dark:bg-gray-900/90 shadow-xl p-3 rounded-full hover:scale-105 transition-transform"
+              className="rounded-full bg-white/90 p-3 text-dar shadow-xl shadow-black/[0.15] transition-transform hover:scale-105 hover:bg-white dark:bg-gray-900/90 dark:shadow-black/50 dark:hover:bg-gray-900"
               onClick={nextImage}
             >
-              <ChevronRight className="w-8 h-8" />
+              <ChevronRight className="h-8 w-8" />
             </Button>
           </div>
 
-          {/* Progress Indicators */}
-          <div className="bottom-4 left-1/2 z-10 absolute flex items-center gap-3 bg-black/30 dark:bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full -translate-x-1/2">
-            <span className="font-medium text-white text-sm">
+          <div className="absolute bottom-4 left-1/2 z-10 flex -translate-x-1/2 items-center gap-3 rounded-full bg-black/30 px-4 py-2 backdrop-blur-sm dark:bg-white/20">
+            <span className="text-sm font-medium text-white">
               {currentImageIndex + 1} / {media.length}
             </span>
-            <div className="bg-white/30 w-px h-4" />
+            <div className="h-4 w-px bg-white/30" />
             <div className="flex gap-1.5">
               {media.map((_, index) => (
                 <button
                   key={index}
                   onClick={() => setCurrentImageIndex(index)}
-                  className={`w-2.5 h-2.5 rounded-full transition-all ${
+                  className={`h-2.5 w-2.5 rounded-full transition-all ${
                     index === currentImageIndex
-                      ? "bg-blue-500 scale-125"
-                      : "bg-white/50 hover:bg-white/70 scale-100"
+                      ? "scale-125 bg-blue-500"
+                      : "scale-100 bg-white/50 hover:bg-white/70"
                   }`}
                 />
               ))}
@@ -275,9 +268,8 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({
           </div>
         </div>
 
-        {/* Thumbnail Grid con stagger */}
         <motion.div
-          className="gap-3 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 px-4"
+          className="grid grid-cols-2 gap-3 px-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5"
           variants={thumbnailsContainer}
           initial="hidden"
           whileInView="visible"
@@ -288,18 +280,18 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({
               key={index}
               className={`relative cursor-pointer overflow-hidden rounded-lg border-2 transition-all duration-300 ${
                 index === currentImageIndex
-                  ? "border-blue-500 scale-105 z-10"
+                  ? "z-10 scale-105 border-blue-500"
                   : "border-transparent hover:border-blue-300"
               }`}
               variants={thumbnailItem}
               whileHover={{ scale: 1.05, rotateZ: 0.5 }}
               onClick={() => setCurrentImageIndex(index)}
             >
-              <div className="relative bg-gray-100 dark:bg-gray-900 aspect-square">
+              <div className="relative aspect-square bg-gray-100 dark:bg-gray-900">
                 <img
                   src={getAssetImage(mediaItem.url)}
                   alt={mediaItem.description || `${projects.multimediaMaterialLabel} ${index + 1}`}
-                  className="absolute inset-0 w-full h-full object-cover"
+                  className="absolute inset-0 h-full w-full object-cover"
                 />
                 {index === currentImageIndex && (
                   <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px]" />
@@ -312,10 +304,10 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({
 
       {isFullscreen && (
         <button
-          className="top-6 right-6 z-50 absolute text-white/90 hover:text-white"
+          className="absolute right-6 top-6 z-50 text-white/90 hover:text-white"
           onClick={toggleFullscreen}
         >
-          <Minimize className="w-8 h-8" />
+          <Minimize className="h-8 w-8" />
         </button>
       )}
     </motion.section>

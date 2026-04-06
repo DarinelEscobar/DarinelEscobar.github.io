@@ -22,7 +22,12 @@ interface ProjectCardProps {
   setCurrentImageIndex: React.Dispatch<React.SetStateAction<number>>;
 }
 
-// Variantes para el contenedor principal (stagger)
+const descriptionPanelClass = [
+  "rounded-xl border p-4 font-lat text-base leading-relaxed backdrop-blur-md",
+  "bg-white/60 text-dar border-black/10 shadow-[0_12px_28px_rgba(15,23,42,0.12)]",
+  "dark:bg-black/25 dark:border-white/[0.12] dark:shadow-[0_14px_30px_rgba(0,0,0,0.38)]",
+].join(" ");
+
 const containerVariants = {
   hidden: {
     opacity: 0,
@@ -30,14 +35,12 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      // cada hijo se animará de forma escalonada
       staggerChildren: 0.1,
       delayChildren: 0.2,
     },
   },
 };
 
-// Variantes para cada ítem
 const itemVariants = {
   hidden: {
     y: 50,
@@ -69,7 +72,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   const controls = useAnimation();
   const { ref, inView } = useInView({
     threshold: 0.1,
-    triggerOnce: false, // vuelve a animar al reentrar
+    triggerOnce: false,
   });
 
   useEffect(() => {
@@ -80,6 +83,23 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   const imageSource = media[currentImageIndex]
     ? getProjectCardImageSource(media[currentImageIndex].url, currentImageIndex === 0)
     : null;
+
+  const handleImageError = (event: React.SyntheticEvent<HTMLImageElement>) => {
+    if (!imageSource) {
+      event.currentTarget.style.display = "none";
+      return;
+    }
+
+    if (event.currentTarget.dataset.fallbackApplied === "true") {
+      event.currentTarget.style.display = "none";
+      return;
+    }
+
+    event.currentTarget.dataset.fallbackApplied = "true";
+    event.currentTarget.src =
+      imageSource.srcSet?.split(",").pop()?.trim().split(" ")[0] ?? imageSource.src;
+    event.currentTarget.removeAttribute("srcset");
+  };
 
   const renderIndicators = () =>
     media.length > 1 ? (
@@ -92,7 +112,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             className={`h-2 w-2 rounded-full transition-colors ${
               index === currentImageIndex
                 ? "bg-blue-500 dark:bg-blue-400"
-                : "bg-gray-300"
+                : "bg-gray-300 dark:bg-gray-500"
             }`}
             onClick={() => setCurrentImageIndex(index)}
             onMouseEnter={isDesktop ? () => setCurrentImageIndex(index) : undefined}
@@ -107,93 +127,65 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
       initial="hidden"
       animate={controls}
       variants={containerVariants}
-      className="flex items-center justify-center w-full lg:w-[90%]"
+      className="flex w-full items-center justify-center lg:w-[90%]"
     >
-      <div className="card relative mb-16 w-full overflow-hidden lg:mb-24 lg:h-[80vh] lg:overflow-visible">
-        {isDesktop ? (
-          <div className="absolute left-8 top-1/4 z-10 w-1/2 space-y-4 text-dar">
+      <div className="card relative mb-16 w-full overflow-hidden lg:mb-24 lg:min-h-[80vh]">
+        <div className="flex min-h-full flex-col gap-6 px-6 py-6 lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1.08fr)] lg:items-center lg:gap-10 lg:px-8 lg:py-12 xl:gap-14 xl:px-10 xl:py-16">
+          <div className="z-10 min-w-0 space-y-4 text-dar">
             {(startDate || endDate) && (
-              <motion.span variants={itemVariants} className="font-rob text-sm text-gray-500 dark:text-gray-400">
+              <motion.span
+                variants={itemVariants}
+                className="block font-rob text-xs text-gray-500 dark:text-gray-400 lg:text-sm"
+              >
                 {[startDate, endDate].filter(Boolean).join(" - ")}
               </motion.span>
             )}
 
-            <motion.p variants={itemVariants} className="font-rob text-xs font-bold uppercase tracking-[0.2em] text-blue-500 dark:text-blue-400 sm:text-sm">
+            <motion.p
+              variants={itemVariants}
+              className="font-rob text-xs font-bold uppercase tracking-[0.2em] text-blue-500 dark:text-blue-400 sm:text-sm"
+            >
               {currentProject.role}
             </motion.p>
 
-            <motion.h2 variants={itemVariants} className="font-cor text-4xl font-bold leading-tight">
+            <motion.h2
+              variants={itemVariants}
+              className="max-w-2xl font-cor text-2xl font-bold leading-tight text-dar sm:text-3xl lg:text-4xl"
+            >
               {currentProject.name}
             </motion.h2>
 
-            <motion.p
-              variants={itemVariants}
-              className="rounded-md border border-gray-600 bg-gray-400/20 p-4 font-lat text-base text-dar shadow-sm dark:text-whi"
-            >
+            <motion.p variants={itemVariants} className={descriptionPanelClass}>
               {currentProject.description}
             </motion.p>
 
             {renderIndicators()}
           </div>
-        ) : (
-          <div className="flex flex-col space-y-4 p-6 text-dar dark:text-gray-100">
-            {(startDate || endDate) && (
-              <motion.span variants={itemVariants} className="font-rob text-xs text-gray-500 dark:text-gray-400">
-                {[startDate, endDate].filter(Boolean).join(" - ")}
-              </motion.span>
+
+          <motion.div
+            variants={itemVariants}
+            className="card mt-2 h-[300px] w-full justify-self-end overflow-hidden sm:h-[400px] lg:mt-0 lg:h-[clamp(22rem,58vh,34rem)] lg:max-w-[52rem]"
+          >
+            {media.length > 0 && imageSource ? (
+              <img
+                src={imageSource.src}
+                srcSet={imageSource.srcSet}
+                sizes={imageSource.srcSet ? "(max-width: 1023px) 92vw, 55vw" : undefined}
+                alt={media[currentImageIndex].description || projects.multimediaMaterialLabel}
+                className="h-full w-full rounded-xl border-b border-gray-200/30 object-cover dark:border-gray-600"
+                loading="lazy"
+                decoding="async"
+                onError={handleImageError}
+              />
+            ) : (
+              <div className="flex h-full w-full items-center justify-center rounded-xl bg-gray-200 dark:bg-gray-700">
+                <p className="text-gray-500 dark:text-gray-300">
+                  {projects.noImagesAvailableLabel}
+                </p>
+              </div>
             )}
-
-            <motion.p variants={itemVariants} className="font-rob text-xs font-bold uppercase tracking-[0.2em] text-blue-500 dark:text-blue-400 sm:text-sm">
-              {currentProject.role}
-            </motion.p>
-
-            <motion.h2 variants={itemVariants} className="font-cor text-2xl font-bold leading-tight sm:text-3xl">
-              {currentProject.name}
-            </motion.h2>
-
-            <motion.p
-              variants={itemVariants}
-              className="rounded-md border border-gray-300/30 bg-gray-400/20 p-4 font-lat text-base text-dar shadow-sm dark:border-gray-600"
-            >
-              {currentProject.description}
-            </motion.p>
-
-            {renderIndicators()}
-          </div>
-        )}
-
-        <motion.div
-          variants={itemVariants}
-          className="card mt-6 h-[300px] w-full overflow-hidden lg:absolute lg:right-0 lg:top-1/4 lg:mt-0 lg:h-[60%] lg:w-[55%] lg:pl-9 sm:h-[400px]"
-        >
-          {media.length > 0 && imageSource ? (
-            <img
-              src={imageSource.src}
-              srcSet={imageSource.srcSet}
-              sizes={imageSource.srcSet ? "(max-width: 1023px) 92vw, 55vw" : undefined}
-              alt={media[currentImageIndex].description || projects.multimediaMaterialLabel}
-              className="h-full w-full rounded-xl border-b border-gray-200/30 object-cover dark:border-gray-600"
-              loading="lazy"
-              decoding="async"
-              onError={(event) => {
-                if (event.currentTarget.dataset.fallbackApplied === "true") {
-                  event.currentTarget.style.display = "none";
-                  return;
-                }
-
-                event.currentTarget.dataset.fallbackApplied = "true";
-                event.currentTarget.src = imageSource.srcSet?.split(",").pop()?.trim().split(" ")[0] ?? imageSource.src;
-                event.currentTarget.removeAttribute("srcset");
-              }}
-            />
-          ) : (
-            <div className="flex h-full w-full items-center justify-center rounded-xl bg-gray-200 dark:bg-gray-700">
-              <p className="text-gray-500 dark:text-gray-300">
-                {projects.noImagesAvailableLabel}
-              </p>
-            </div>
-          )}
-        </motion.div>
+          </motion.div>
+        </div>
       </div>
     </motion.div>
   );

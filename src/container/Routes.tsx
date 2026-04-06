@@ -2,14 +2,13 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import React, { Suspense, lazy } from "react";
 
-// Lazy load the components
 const HomePage = lazy(() => import("@/pages/Home/HomePage"));
 const Contact = lazy(() => import("@/pages/Contact/Contact"));
 const Project = lazy(() => import("@/pages/Project/Project"));
 
 const LoadingFallback = () => (
-  <div className="flex items-center justify-center min-h-screen bg-whi dark:bg-dar text-dar dark:text-whi">
-    <div className="w-8 h-8 border-4 border-blue-500 rounded-full border-t-transparent animate-spin"></div>
+  <div className="flex min-h-screen items-center justify-center bg-whi text-dar">
+    <div className="h-8 w-8 animate-spin rounded-full border-4 border-blue-500 border-t-transparent" />
   </div>
 );
 
