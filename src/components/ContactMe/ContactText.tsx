@@ -3,6 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import { usePortfolioContent } from "@/lib/portfolioContent";
 
 // Variantes de animación para contenedor e ítems
 const containerVariants = {
@@ -25,6 +26,7 @@ const itemVariants = {
 };
 
 const ContactText: React.FC = () => {
+  const { ui } = usePortfolioContent();
   const { ref, inView } = useInView({
     threshold: 0.2,
     triggerOnce: false,
@@ -44,7 +46,7 @@ const ContactText: React.FC = () => {
           variants={itemVariants}
           className="custom-contactme font-cor text-dar"
         >
-          CONTACT
+          {ui.contact.title}
         </motion.h1>
       </motion.div>
 
@@ -60,7 +62,7 @@ const ContactText: React.FC = () => {
           variants={itemVariants}
           className="custom-contactmail font-lat text-dar"
         >
-          Let&apos;s get in touch ._.
+          {ui.contact.subtitle}
         </motion.h2>
       </motion.div>
     </>

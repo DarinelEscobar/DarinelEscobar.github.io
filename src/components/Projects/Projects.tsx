@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
-import dataExperience from "@data/experience.json";
-import dataProjects from "@data/projects.json";
+import type { ProjectData } from "@/content/portfolio/types";
+import { usePortfolioContent } from "@/lib/portfolioContent";
 
 import "./Projects.css";
 
@@ -12,19 +12,25 @@ import DetailsProjects from "../DetailsProjects/DetailsProjects";
 import { formatDate } from "./dateUtils";
 
 const Projects: React.FC = () => {
+  const {
+    projects,
+    ui,
+  } = usePortfolioContent();
   const [currentProjectIndex, setCurrentProjectIndex] = useState(0);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [direction, setDirection] = useState(1);
   const [expandedProjectIndex, setExpandedProjectIndex] = useState<number | null>(null);
-
-  // Unify projects from both sources
-  const experienceProjects = dataExperience.experience.projects || [];
-  const personalProjects = dataProjects.projects.personal_projects || [];
-  const mergedProjects = [...experienceProjects, ...personalProjects];
-
-  // Prevent errors when accessing undefined indexes
-  const currentProject = mergedProjects[currentProjectIndex] || {};
-  const media = currentProject.media || [];
+  const fallbackProject: ProjectData = {
+    name: "",
+    Project_Overview: "",
+    description: "",
+    role: "",
+    responsibilities: [],
+    achievements: [],
+    media: [],
+  };
+  const currentProject = projects[currentProjectIndex] ?? fallbackProject;
+  const media = currentProject.media ?? [];
 
   const { ref, inView } = useInView({ threshold: 0.35, triggerOnce: false });
 
@@ -38,8 +44,8 @@ const Projects: React.FC = () => {
     return () => window.removeEventListener("resize", setVh);
   }, []);
 
-  const startDate = currentProject.start_date ? formatDate(currentProject.start_date) : "";
-  const endDate = currentProject.end_date ? formatDate(currentProject.end_date) : "";
+  const startDate = currentProject.start_date ? formatDate(currentProject.start_date, ui.locale.date) : "";
+  const endDate = currentProject.end_date ? formatDate(currentProject.end_date, ui.locale.date) : "";
 
   const handlePrevProject = () => {
     if (currentProjectIndex > 0) {
@@ -50,7 +56,7 @@ const Projects: React.FC = () => {
   };
 
   const handleNextProject = () => {
-    if (currentProjectIndex < mergedProjects.length - 1) {
+    if (currentProjectIndex < projects.length - 1) {
       setDirection(1);
       setCurrentImageIndex(0);
       setCurrentProjectIndex((prev) => prev + 1);
@@ -82,19 +88,19 @@ const Projects: React.FC = () => {
         setCurrentImageIndex={setCurrentImageIndex}
       />
 
-      {inView && (
+      {inView && projects.length > 0 && (
         <ProjectNavigation
           handlePrevProject={handlePrevProject}
           handleNextProject={handleNextProject}
           disablePrev={currentProjectIndex === 0}
-          disableNext={currentProjectIndex === mergedProjects.length - 1}
+          disableNext={projects.length === 0 || currentProjectIndex === projects.length - 1}
           onExpandProject={() => handleExpandProject(currentProjectIndex)}
         />
       )}
 
       {expandedProjectIndex !== null && (
         <DetailsProjects
-          projects={mergedProjects} // Ensure DetailsProjects gets the unified data
+          projects={projects}
           projectIndex={expandedProjectIndex}
           onClose={handleCloseDetails}
         />

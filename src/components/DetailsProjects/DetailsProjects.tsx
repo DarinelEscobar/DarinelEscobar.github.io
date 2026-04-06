@@ -1,34 +1,15 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { X } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
+import type { ProjectData } from "@/content/portfolio/types";
 import HeroSection from "./HeroSection";
 import ProjectDetails from "./ProjectDetails";
 import TechnicalSidebar from "./TechnicalSidebar";
 import MediaGallery from "./MediaGallery";
 import ScrollIndicator from "./ScrollIndicator";
-import { AnimatePresence, motion } from "framer-motion";
-
-interface Project {
-  name: string;
-  Project_Overview: string;
-  description: string;
-  role: string;
-  start_date: string;
-  end_date: string;
-  client: string;
-  team_size: number;
-  url?: string;
-  repository?: string;
-  responsibilities?: string[];
-  achievements?: string[];
-  media?: {
-    type: string;
-    url: string;
-    description?: string;
-  }[];
-}
 
 interface DetailsProjectsProps {
-  projects: Project[];
+  projects: ProjectData[];
   projectIndex: number;
   onClose: () => void;
 }
@@ -51,7 +32,6 @@ const DetailsProjects: React.FC<DetailsProjectsProps> = ({
   const contentRef = useRef<HTMLDivElement | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [showScrollHint, setShowScrollHint] = useState(false);
-  const project = projects[projectIndex];
 
   const updateScrollHint = useCallback(() => {
     const container = scrollContainerRef.current;
@@ -114,9 +94,11 @@ const DetailsProjects: React.FC<DetailsProjectsProps> = ({
     setCurrentImageIndex(0);
   }, [projectIndex]);
 
-  if (!project) {
+  if (projectIndex < 0 || projectIndex >= projects.length) {
     return null;
   }
+
+  const project = projects[projectIndex];
 
   return (
     <motion.div

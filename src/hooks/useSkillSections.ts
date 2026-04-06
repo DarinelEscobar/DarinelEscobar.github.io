@@ -10,6 +10,7 @@ import {
   HeartHandshake,
   Speech,
   Award,
+  type LucideIcon,
 } from "lucide-react";
 import {
   SiPython,
@@ -37,11 +38,10 @@ import {
   FaQuestion,
 } from "react-icons/fa";
 import { GiEagleEmblem, GiCactus, GiFuji, GiInfo } from "react-icons/gi";
-
-import data from "@data/data.json";
+import { usePortfolioContent } from "@/lib/portfolioContent";
 
 // Map for Lucide icons
-const lucideMap: Record<string, React.FC<React.SVGProps<SVGSVGElement>>> = {
+const lucideMap: Record<string, LucideIcon> = {
   code: Code,
   Code: Code,
   cloud: Cloud,
@@ -103,7 +103,7 @@ function getIcon(iconName: string, library: string): React.ReactNode {
   switch (library.toLowerCase()) {
     case "lucide-react": {
       const LucideIcon = lucideMap[iconName] || Code;
-      return React.createElement(LucideIcon as React.ForwardRefExoticComponent<any>, { className: "w-5 h-5" });
+      return React.createElement(LucideIcon, { className: "w-5 h-5" });
     }
     case "fa": {
       const FaIcon = faMap[iconName] || FaQuestion;
@@ -121,12 +121,8 @@ function getIcon(iconName: string, library: string): React.ReactNode {
     }
 
     default:
-      return React.createElement(Code as React.ForwardRefExoticComponent<any>, { className: "w-5 h-5" });
+      return React.createElement(Code, { className: "w-5 h-5" });
   }
-}
-
-function formatSectionTitle(key: string): string {
-  return key.replace(/_/g, " ").replace(/\b\w/g, (char) => char.toUpperCase());
 }
 
 function truncate(text: string, max: number): string {
@@ -160,6 +156,7 @@ interface CombinedSection {
 }
 
 export interface SkillSection {
+  id: string;
   title: string;
   icon: React.ReactNode;
   color: string;
@@ -167,9 +164,13 @@ export interface SkillSection {
 }
 
 export default function useSkillSections(): SkillSection[] {
+  const {
+    resume,
+    ui: { home },
+  } = usePortfolioContent();
   const combinedSections: Record<string, CombinedSection> = {
-    ...data.resume.Skills_Technologies,
-    certifications: data.resume.certifications,
+    ...resume.Skills_Technologies,
+    certifications: resume.certifications,
   };
 
   return Object.keys(combinedSections).map((key) => {
@@ -201,11 +202,11 @@ export default function useSkillSections(): SkillSection[] {
     }));
 
     return {
-      title: truncate(formatSectionTitle(key), 24),
+      id: key,
+      title: truncate(home.skills.sectionTitles[key] ?? key, 24),
       icon: getIcon(secIcon.name, secIcon.library),
       color: secIcon.color,
       skills: finalSkills,
     };
   });
 }
-

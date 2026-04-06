@@ -44,7 +44,7 @@ export function usePageWheelScroll(
       };
 
       // Temporarily disable scroll-snap to avoid fighting the animation
-      const prevSnap = (el.style as any).scrollSnapType;
+      const prevSnap = el.style.scrollSnapType;
       el.style.scrollSnapType = "none";
 
       return new Promise<void>((resolve) => {

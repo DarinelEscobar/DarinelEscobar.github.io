@@ -1,7 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
-import data from "@data/data.json";
+import type { Language } from "@/content/portfolio/types";
+import { usePortfolioContent } from "@/lib/portfolioContent";
+import LanguageToggle from "./LanguageToggle";
 
 interface HeaderMobileProps {
   isMenuOpen: boolean;
@@ -9,6 +11,8 @@ interface HeaderMobileProps {
   toggleDarkMode: () => void;
   isDarkMode: boolean;
   formattedTime: string;
+  language: Language;
+  setLanguage: (language: Language) => void;
 }
 
 const HeaderMobile: React.FC<HeaderMobileProps> = ({
@@ -17,8 +21,15 @@ const HeaderMobile: React.FC<HeaderMobileProps> = ({
   toggleDarkMode,
   isDarkMode,
   formattedTime,
+  language,
+  setLanguage,
 }) => {
-  const { short_name, rol, location } = data.resume.personal_info;
+  const {
+    resume: {
+      personal_info: { short_name, rol, location },
+    },
+    ui,
+  } = usePortfolioContent();
 
   return (
     <div
@@ -32,7 +43,7 @@ const HeaderMobile: React.FC<HeaderMobileProps> = ({
         onClick={toggleMenu}
         className="font-rob font-bold text-dar text-lg"
       >
-        {isMenuOpen ? "Close" : "Menu"}
+        {isMenuOpen ? ui.header.closeLabel : ui.header.menuLabel}
       </button>
 
       {isMenuOpen && (
@@ -48,7 +59,7 @@ const HeaderMobile: React.FC<HeaderMobileProps> = ({
               onClick={toggleMenu}
               className="font-rob font-bold text-dar text-lg hover:underline"
             >
-              Close
+              {ui.header.closeLabel}
             </button>
           </div>
 
@@ -62,7 +73,7 @@ const HeaderMobile: React.FC<HeaderMobileProps> = ({
 
             {/* Info: Location + hora */}
             <div>
-              <h2 className="font-rob font-bold text-base">Location:</h2>
+              <h2 className="font-rob font-bold text-base">{ui.header.locationLabel}</h2>
               <p className="font-lat text-5dar text-sm">
                 {location} ({formattedTime})
               </p>
@@ -70,21 +81,36 @@ const HeaderMobile: React.FC<HeaderMobileProps> = ({
 
             {/* Toggle de tema */}
             <div>
-              <h2 className="font-rob font-bold text-base">Theme:</h2>
-              <button
-                onClick={toggleDarkMode}
-                className="font-lat text-5dar text-sm underline"
-              >
-                {isDarkMode ? "Light Mode" : "Dark Mode"}
-              </button>
+              <h2 className="font-rob font-bold text-base">{ui.header.themeLabel}</h2>
+              <div className="mt-2 flex flex-wrap items-center gap-2.5">
+                <button
+                  type="button"
+                  onClick={toggleDarkMode}
+                  className="font-lat text-5dar text-sm underline"
+                >
+                  {isDarkMode ? ui.header.lightModeLabel : ui.header.darkModeLabel}
+                </button>
+
+                <LanguageToggle
+                  language={language}
+                  setLanguage={setLanguage}
+                  tooltipLabel={ui.header.languageLabel}
+                />
+              </div>
             </div>
           </div>
 
           {/* NAVEGACIÓN (enlaces) */}
           <div className="flex flex-col gap-6 mt-auto px-5 pb-10 text-dar">
-            <MobileLink to="/" indexNumber="01" label="Index" />
-            <MobileLink to="/Contact" indexNumber="02" label="Contact" />
-            <MobileLink to="/Project" indexNumber="03" label="Projects" />
+            {ui.header.navigationLinks.map((link, index) => (
+              <MobileLink
+                key={link.to}
+                to={link.to}
+                indexNumber={String(index + 1).padStart(2, "0")}
+                label={link.label}
+                onNavigate={toggleMenu}
+              />
+            ))}
             {/* <MobileLink to="/Archive" indexNumber="03" label="Archive" /> */}
           </div>
         </div>
@@ -97,13 +123,17 @@ interface MobileLinkProps {
   to: string;
   indexNumber: string;
   label: string;
+  onNavigate: () => void;
 }
 
-const MobileLink: React.FC<MobileLinkProps> = ({ to, indexNumber, label }) => (
+const MobileLink: React.FC<MobileLinkProps> = ({ to, indexNumber, label, onNavigate }) => (
   <Link
     to={to}
     className="flex justify-between items-center pb-4 border-gray-700 border-b font-bold text-xl"
-    onClick={() => window.scrollTo(0, 0)}
+    onClick={() => {
+      onNavigate();
+      window.scrollTo(0, 0);
+    }}
   >
     <div className="flex items-center gap-3">
       <span className="font-extrabold text-2xl">{indexNumber}</span> {label}

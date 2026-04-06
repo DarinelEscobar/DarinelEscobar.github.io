@@ -1,7 +1,7 @@
 // src/components/Header/hooks/useCurrentTime.ts
 import { useState, useEffect } from "react";
 
-const useCurrentTime = () => {
+const useCurrentTime = (locale = "en-US") => {
   const [currentTime, setCurrentTime] = useState(() => new Date());
 
   useEffect(() => {
@@ -12,7 +12,7 @@ const useCurrentTime = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const formattedTime = currentTime.toLocaleTimeString("en-US", {
+  const formattedTime = currentTime.toLocaleTimeString(locale, {
     hour: "2-digit",
     minute: "2-digit",
     second: "2-digit",

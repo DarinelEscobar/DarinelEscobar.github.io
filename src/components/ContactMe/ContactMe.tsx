@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { FaWhatsapp, FaGithub, FaLinkedin } from "react-icons/fa";
-import data from "@data/data.json";
+import { usePortfolioContent } from "@/lib/portfolioContent";
 
 // COMPONENTES
 import ContactGrid from "./ContactGrid";
@@ -15,14 +15,35 @@ interface Cell {
   col: number;
 }
 
+const initialOccupiedCells: Cell[] = [
+  { row: 1, col: 8 },
+  { row: 2, col: 8 },
+  { row: 2, col: 2 },
+  { row: 2, col: 3 },
+  { row: 2, col: 4 },
+  { row: 2, col: 5 },
+  { row: 2, col: 6 },
+  { row: 3, col: 2 },
+  { row: 3, col: 3 },
+  { row: 3, col: 4 },
+  { row: 4, col: 6 },
+  { row: 4, col: 7 },
+  { row: 4, col: 8 },
+];
+
 // ================== MOBILE ==================
 const MobileContact: React.FC = () => {
-  const { email, phone, linkedin, github } = data.resume.personal_info;
+  const {
+    resume: {
+      personal_info: { email, phone, linkedin, github },
+    },
+    ui,
+  } = usePortfolioContent();
   return (
     <section className="w-full min-h-screen bg-whi flex flex-col items-center justify-center p-6">
-      <h1 className="font-cor text-3xl text-dar mb-6">CONTACT</h1>
+      <h1 className="font-cor text-3xl text-dar mb-6">{ui.contact.title}</h1>
       <h2 className="font-lat text-dar text-lg mb-4">
-        Let&apos;s get in touch ._.
+        {ui.contact.subtitle}
       </h2>
 
       <div className="flex items-center justify-center gap-6 mb-4">
@@ -67,15 +88,20 @@ const MobileContact: React.FC = () => {
 
 // ================== TABLET ==================
 const TabletContact: React.FC = () => {
-  const { email, phone, linkedin, github } = data.resume.personal_info;
+  const {
+    resume: {
+      personal_info: { email, phone, linkedin, github },
+    },
+    ui,
+  } = usePortfolioContent();
 
   return (
     <section className="w-full min-h-screen bg-whi flex items-center justify-center">
       <div className="grid grid-cols-4 grid-rows-3 w-full h-full relative">
         <div className="col-span-4 row-span-1 flex flex-col items-center justify-center">
-          <h1 className="font-cor text-dar text-5xl mb-2">CONTACT</h1>
+          <h1 className="font-cor text-dar text-5xl mb-2">{ui.contact.title}</h1>
           <h2 className="font-lat text-dar text-xl">
-            Let&apos;s get in touch ._.
+            {ui.contact.subtitle}
           </h2>
         </div>
 
@@ -128,24 +154,11 @@ const TabletContact: React.FC = () => {
 
 // ================== DESKTOP ==================
 const ContactMeDesktop: React.FC = () => {
-  const { email, phone, linkedin, github } = data.resume.personal_info;
-
-  // Ocupadas: M/E y otras celdas
-  const initialOccupiedCells: Cell[] = [
-    { row: 1, col: 8 },
-    { row: 2, col: 8 },
-    { row: 2, col: 2 },
-    { row: 2, col: 3 },
-    { row: 2, col: 4 },
-    { row: 2, col: 5 },
-    { row: 2, col: 6 },
-    { row: 3, col: 2 },
-    { row: 3, col: 3 },
-    { row: 3, col: 4 },
-    { row: 4, col: 6 },
-    { row: 4, col: 7 },
-    { row: 4, col: 8 },
-  ];
+  const {
+    resume: {
+      personal_info: { email, phone, linkedin, github },
+    },
+  } = usePortfolioContent();
 
   const totalRows = 5;
   const totalCols = 8;
@@ -171,7 +184,7 @@ const ContactMeDesktop: React.FC = () => {
       position = { row, col };
       attempts++;
       if (attempts > maxAttempts) {
-        throw new Error("No se pudieron encontrar celdas libres para los íconos.");
+        throw new Error("Unable to find free cells for contact icons.");
       }
     } while (
       occupied.some((cell) => cell.row === position.row && cell.col === position.col)

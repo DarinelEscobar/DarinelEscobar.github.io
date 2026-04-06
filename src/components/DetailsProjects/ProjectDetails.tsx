@@ -2,16 +2,11 @@ import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { CheckCircle, Trophy, ArrowUpRight, Star } from "lucide-react";
 import { motion } from "framer-motion";
-
-interface Project {
-  Project_Overview: string;
-  description: string;
-  responsibilities: string[];
-  achievements: string[];
-}
+import type { ProjectData } from "@/content/portfolio/types";
+import { usePortfolioContent } from "@/lib/portfolioContent";
 
 interface ProjectDetailsProps {
-  project: Project;
+  project: Pick<ProjectData, "Project_Overview" | "responsibilities" | "achievements">;
 }
 
 // Variantes globales para el contenedor principal
@@ -57,6 +52,10 @@ const cardItem = {
 };
 
 const ProjectDetails: React.FC<ProjectDetailsProps> = ({ project }) => {
+  const {
+    ui: { projects },
+  } = usePortfolioContent();
+
   return (
     <motion.div
       className="space-y-16 lg:col-span-2"
@@ -72,7 +71,7 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({ project }) => {
             <ArrowUpRight className="w-6 h-6 text-blue-500" />
           </div>
           <h2 className="font-cor font-bold text-dar text-3xl tracking-tight">
-            Project Overview
+            {projects.projectOverviewLabel}
           </h2>
         </div>
         <p className="max-w-3xl font-lat text-dar text-lg leading-relaxed">
@@ -81,94 +80,98 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({ project }) => {
       </section>
 
       {/* Responsabilidades Clave */}
-      <motion.section
-        className="space-y-6"
-        variants={listVariants}
-      >
-        <div className="flex items-center gap-3">
-          <div className="flex justify-center items-center bg-green-500/10 p-2 rounded-full">
-            <CheckCircle className="w-6 h-6 text-green-500" />
-          </div>
-          <h3 className="font-cor font-semibold text-dar text-2xl tracking-tight">
-            Key Responsibilities
-          </h3>
-        </div>
-
-        <motion.div
-          className="flex flex-col gap-6"
-          variants={listVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: false, amount: 0.2 }}
-        >
-          {project.responsibilities.map((resp, index) => (
-            <motion.div
-              key={index}
-              variants={cardItem}
-              whileHover={{ scale: 1.03, rotateZ: 1 }}
-            >
-              <Card
-                className="hover:shadow-md border border-5dar dark:border-5dar/30 dark:bg-white/5 transition-shadow duration-300"
-              >
-                <CardContent className="flex flex-col gap-4 p-6">
-                  <div className="flex items-start gap-3">
-                    <div className="flex justify-center items-center bg-blue-500/10 p-3 rounded-lg">
-                      <CheckCircle className="w-6 h-6 text-blue-500" />
-                    </div>
-                    <p className="font-rob text-dar text-lg leading-relaxed">
-                      {resp}
-                    </p>
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
-        </motion.div>
-      </motion.section>
-
-      {/* Logros Destacados */}
-      <motion.section
-        className="space-y-6"
-        variants={listVariants}
-      >
-        <div className="flex items-center gap-3">
-          <div className="flex justify-center items-center bg-yellow-500/10 p-2 rounded-full">
-            <Trophy className="w-6 h-6 text-yellow-500" />
-          </div>
-          <h3 className="font-cor font-semibold text-dar text-2xl tracking-tight">
-            Notable Achievements
-          </h3>
-        </div>
-
-        <motion.div
+      {project.responsibilities.length > 0 && (
+        <motion.section
           className="space-y-6"
           variants={listVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: false, amount: 0.2 }}
         >
-          {project.achievements.map((achievement, index) => (
-            <motion.div
-              key={index}
-              variants={cardItem}
-              whileHover={{ scale: 1.03, rotateZ: 1 }}
-            >
-              <Card
-                className="bg-gradient-to-r from-whi/5 to-transparent hover:shadow-md border border-5whi dark:border-5dar/30 border-blue-500/50 border-l-4 transition-shadow duration-300 dark:bg-white/5"
+          <div className="flex items-center gap-3">
+            <div className="flex justify-center items-center bg-green-500/10 p-2 rounded-full">
+              <CheckCircle className="w-6 h-6 text-green-500" />
+            </div>
+            <h3 className="font-cor font-semibold text-dar text-2xl tracking-tight">
+              {projects.keyResponsibilitiesLabel}
+            </h3>
+          </div>
+
+          <motion.div
+            className="flex flex-col gap-6"
+            variants={listVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, amount: 0.2 }}
+          >
+            {project.responsibilities.map((resp, index) => (
+              <motion.div
+                key={index}
+                variants={cardItem}
+                whileHover={{ scale: 1.03, rotateZ: 1 }}
               >
-                <CardContent className="flex items-start gap-4 p-6">
-                  <div className="flex justify-center items-center bg-yellow-500/10 p-2 rounded-full">
-                    <Star className="w-5 h-5 text-yellow-500" />
-                  </div>
-                  <p className="font-lat text-dar text-lg leading-relaxed">
-                    {achievement}
-                  </p>
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
-        </motion.div>
-      </motion.section>
+                <Card
+                  className="hover:shadow-md border border-5dar dark:border-5dar/30 dark:bg-white/5 transition-shadow duration-300"
+                >
+                  <CardContent className="flex flex-col gap-4 p-6">
+                    <div className="flex items-start gap-3">
+                      <div className="flex justify-center items-center bg-blue-500/10 p-3 rounded-lg">
+                        <CheckCircle className="w-6 h-6 text-blue-500" />
+                      </div>
+                      <p className="font-rob text-dar text-lg leading-relaxed">
+                        {resp}
+                      </p>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </motion.div>
+        </motion.section>
+      )}
+
+      {/* Logros Destacados */}
+      {project.achievements.length > 0 && (
+        <motion.section
+          className="space-y-6"
+          variants={listVariants}
+        >
+          <div className="flex items-center gap-3">
+            <div className="flex justify-center items-center bg-yellow-500/10 p-2 rounded-full">
+              <Trophy className="w-6 h-6 text-yellow-500" />
+            </div>
+            <h3 className="font-cor font-semibold text-dar text-2xl tracking-tight">
+              {projects.notableAchievementsLabel}
+            </h3>
+          </div>
+
+          <motion.div
+            className="space-y-6"
+            variants={listVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, amount: 0.2 }}
+          >
+            {project.achievements.map((achievement, index) => (
+              <motion.div
+                key={index}
+                variants={cardItem}
+                whileHover={{ scale: 1.03, rotateZ: 1 }}
+              >
+                <Card
+                  className="bg-gradient-to-r from-whi/5 to-transparent hover:shadow-md border border-5whi dark:border-5dar/30 border-blue-500/50 border-l-4 transition-shadow duration-300 dark:bg-white/5"
+                >
+                  <CardContent className="flex items-start gap-4 p-6">
+                    <div className="flex justify-center items-center bg-yellow-500/10 p-2 rounded-full">
+                      <Star className="w-5 h-5 text-yellow-500" />
+                    </div>
+                    <p className="font-lat text-dar text-lg leading-relaxed">
+                      {achievement}
+                    </p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </motion.div>
+        </motion.section>
+      )}
     </motion.div>
   );
 };

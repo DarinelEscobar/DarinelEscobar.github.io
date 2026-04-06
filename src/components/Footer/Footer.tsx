@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { FaEnvelope, FaLinkedin, FaGithub, FaWhatsapp } from 'react-icons/fa';
 import { ChevronUp } from 'lucide-react';
-import data from "@data/data.json";
 import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import { usePortfolioContent } from "@/lib/portfolioContent";
 
 const footerVariants = {
   hidden: { opacity: 0, y: 30 },
@@ -11,7 +11,12 @@ const footerVariants = {
 };
 
 const Footer: React.FC = () => {
-  const { short_name, email, linkedin, github, phone } = data.resume.personal_info;
+  const {
+    resume: {
+      personal_info: { short_name, email, linkedin, github, phone },
+    },
+    ui,
+  } = usePortfolioContent();
   const controls = useAnimation();
   const { ref, inView } = useInView({ threshold: 0.3, triggerOnce: false });
 
@@ -51,7 +56,7 @@ const Footer: React.FC = () => {
             onClick={scrollToTop}
             className="flex items-center gap-1 text-[0.89rem] text-dar hover:underline"
           >
-            Top <ChevronUp size={16} />
+            {ui.footer.topLabel} <ChevronUp size={16} />
           </a>
         </div>
 
@@ -78,23 +83,23 @@ const Footer: React.FC = () => {
       {/* DESKTOP VERSION */}
       <div className="hidden md:flex justify-between">
         <div className="text-left">
-          <h1 className="font-rob font-bold text-[0.89rem] text-dar">Copyright:</h1>
+          <h1 className="font-rob font-bold text-[0.89rem] text-dar">{ui.footer.copyrightLabel}</h1>
           <p className="flex items-center gap-1 text-[0.89rem] text-dar">&copy; 2024</p>
         </div>
 
         <div className="text-left">
-          <h1 className="font-rob font-bold text-[0.89rem] text-dar">Quick Jump:</h1>
+          <h1 className="font-rob font-bold text-[0.89rem] text-dar">{ui.footer.quickJumpLabel}</h1>
           <a
             href="#top"
             onClick={scrollToTop}
             className="flex items-center gap-1 text-[0.89rem] text-dar hover:underline"
           >
-            Ascend to Top <ChevronUp size={16} />
+            {ui.footer.ascendLabel} <ChevronUp size={16} />
           </a>
         </div>
 
         <div className="text-left">
-          <h1 className="font-rob font-bold text-[0.89rem] text-dar">Contact Info:</h1>
+          <h1 className="font-rob font-bold text-[0.89rem] text-dar">{ui.footer.contactInfoLabel}</h1>
           <p className="flex items-center gap-2 text-[0.89rem] text-dar">
             <a href={`mailto:${email}`} className="flex items-center gap-1 hover:underline" aria-label="Email">
               <FaEnvelope />
@@ -112,7 +117,7 @@ const Footer: React.FC = () => {
         </div>
 
         <div className="text-left">
-          <h1 className="font-rob font-bold text-[0.89rem] text-dar">Crafted & Aesthetic by:</h1>
+          <h1 className="font-rob font-bold text-[0.89rem] text-dar">{ui.footer.craftedByLabel}</h1>
           <p className="flex items-center gap-1 text-[0.89rem] text-dar">{short_name}</p>
         </div>
       </div>
