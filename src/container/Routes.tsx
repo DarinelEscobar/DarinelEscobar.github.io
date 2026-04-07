@@ -1,8 +1,8 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
-import React, { Suspense, lazy } from "react";
+import React, { Suspense, lazy, useEffect, useRef } from "react";
+import HomePage from "@/pages/Home/HomePage";
 
-const HomePage = lazy(() => import("@/pages/Home/HomePage"));
 const Contact = lazy(() => import("@/pages/Contact/Contact"));
 const Project = lazy(() => import("@/pages/Project/Project"));
 
@@ -14,6 +14,11 @@ const LoadingFallback = () => (
 
 export default function AppRoutes() {
   const location = useLocation();
+  const isFirstRenderRef = useRef(true);
+
+  useEffect(() => {
+    isFirstRenderRef.current = false;
+  }, []);
 
   const pageVariants = {
     initial: { opacity: 0, x: 50 },
@@ -36,54 +41,33 @@ export default function AppRoutes() {
     exit: { opacity: 0, x: -50 },
   };
 
+  const renderAnimatedPage = (page: React.ReactNode, useFallback = false) => {
+    const animatedPage = (
+      <motion.div
+        variants={pageVariants}
+        initial={isFirstRenderRef.current ? false : "initial"}
+        animate="animate"
+        exit="exit"
+        transition={{ duration: 0.5 }}
+      >
+        {page}
+      </motion.div>
+    );
+
+    if (!useFallback) {
+      return animatedPage;
+    }
+
+    return <Suspense fallback={<LoadingFallback />}>{animatedPage}</Suspense>;
+  };
+
   return (
     <AnimatePresence initial={false} mode="wait">
-      <Suspense fallback={<LoadingFallback />}>
-        <Routes location={location} key={location.pathname}>
-          <Route
-            path="/"
-            element={
-              <motion.div
-                variants={pageVariants}
-                initial="initial"
-                animate="animate"
-                exit="exit"
-                transition={{ duration: 0.5 }}
-              >
-                <HomePage />
-              </motion.div>
-            }
-          />
-          <Route
-            path="/Contact"
-            element={
-              <motion.div
-                variants={pageVariants}
-                initial="initial"
-                animate="animate"
-                exit="exit"
-                transition={{ duration: 0.5 }}
-              >
-                <Contact />
-              </motion.div>
-            }
-          />
-          <Route
-            path="/Project"
-            element={
-              <motion.div
-                variants={pageVariants}
-                initial="initial"
-                animate="animate"
-                exit="exit"
-                transition={{ duration: 0.5 }}
-              >
-                <Project />
-              </motion.div>
-            }
-          />
-        </Routes>
-      </Suspense>
+      <Routes location={location} key={location.pathname}>
+        <Route path="/" element={renderAnimatedPage(<HomePage />)} />
+        <Route path="/Contact" element={renderAnimatedPage(<Contact />, true)} />
+        <Route path="/Project" element={renderAnimatedPage(<Project />, true)} />
+      </Routes>
     </AnimatePresence>
   );
 }
