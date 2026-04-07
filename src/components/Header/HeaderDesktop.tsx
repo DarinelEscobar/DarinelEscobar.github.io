@@ -141,7 +141,15 @@ const ControlsSection: React.FC<ControlsSectionProps> = ({
   return (
     <motion.div className="flex flex-col gap-1.5 text-left" variants={fadeIn}>
       <div className="flex flex-col gap-0.5">
-        <h1 className="font-bold font-rob text-[0.89rem] text-dar">{themeLabel}</h1>
+        <div className="flex items-center justify-between gap-3">
+          <h1 className="font-bold font-rob text-[0.89rem] text-dar">{themeLabel}</h1>
+          <LanguageToggle
+            language={language}
+            setLanguage={setLanguage}
+            tooltipLabel={languageLabel}
+            className="shrink-0"
+          />
+        </div>
         <div className="flex items-center gap-2.5">
           <button
             type="button"
@@ -150,13 +158,6 @@ const ControlsSection: React.FC<ControlsSectionProps> = ({
           >
             {isDarkMode ? lightModeLabel : darkModeLabel}
           </button>
-
-          <LanguageToggle
-            language={language}
-            setLanguage={setLanguage}
-            tooltipLabel={languageLabel}
-            className="shrink-0"
-          />
         </div>
       </div>
     </motion.div>

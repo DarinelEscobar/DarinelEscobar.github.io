@@ -80,21 +80,22 @@ const HeaderMobile: React.FC<HeaderMobileProps> = ({
 
             {/* Toggle de tema */}
             <div>
-              <h2 className="font-rob font-bold text-base">{ui.header.themeLabel}</h2>
-              <div className="mt-2 flex flex-wrap items-center gap-2.5">
-              <button
-                type="button"
-                onClick={toggleDarkMode}
-                className="theme-transition font-lat text-5dar text-sm underline"
-              >
-                {isDarkMode ? ui.header.lightModeLabel : ui.header.darkModeLabel}
-              </button>
-
+              <div className="flex items-center justify-between gap-3">
+                <h2 className="font-rob font-bold text-base">{ui.header.themeLabel}</h2>
                 <LanguageToggle
                   language={language}
                   setLanguage={setLanguage}
                   tooltipLabel={ui.header.languageLabel}
                 />
+              </div>
+              <div className="mt-2 flex flex-wrap items-center gap-2.5">
+                <button
+                  type="button"
+                  onClick={toggleDarkMode}
+                  className="theme-transition font-lat text-5dar text-sm underline"
+                >
+                  {isDarkMode ? ui.header.lightModeLabel : ui.header.darkModeLabel}
+                </button>
               </div>
             </div>
           </div>
