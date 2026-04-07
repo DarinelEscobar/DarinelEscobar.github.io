@@ -31,12 +31,18 @@ const Footer: React.FC = () => {
   const scrollToTop = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     const mainContainer = document.getElementById('main-container');
-    if (mainContainer) {
+    if (mainContainer && mainContainer.scrollHeight > mainContainer.clientHeight + 1) {
       mainContainer.scrollTo({
         top: 0,
         behavior: 'smooth'
       });
+      return;
     }
+
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
   };
 
   return (

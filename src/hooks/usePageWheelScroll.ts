@@ -1,6 +1,7 @@
 import React from "react";
 
 type Options = {
+  enabled?: boolean;
   interceptTouchpad?: boolean; // if true, intercept all wheel deltas
   pixelThreshold?: number; // threshold to treat pixel-delta as chunky
   animationMs?: number; // duration to lock wheel inputs while animating
@@ -18,6 +19,7 @@ export function usePageWheelScroll(
   options: Options = {}
 ) {
   const {
+    enabled = true,
     interceptTouchpad = false,
     pixelThreshold = 60,
     animationMs = 700,
@@ -72,6 +74,8 @@ export function usePageWheelScroll(
   );
 
   React.useEffect(() => {
+    if (!enabled) return;
+
     const el = containerRef.current;
     if (!el) return;
 
@@ -155,5 +159,5 @@ export function usePageWheelScroll(
       el.removeEventListener("wheel", handleWheel as EventListener);
       window.removeEventListener("resize", updateViewport);
     };
-  }, [containerRef, sectionRefs, interceptTouchpad, pixelThreshold, animationMs, animateTo, backStrength]);
+  }, [containerRef, sectionRefs, enabled, interceptTouchpad, pixelThreshold, animationMs, animateTo, backStrength]);
 }

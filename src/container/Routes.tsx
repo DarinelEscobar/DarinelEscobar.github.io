@@ -31,8 +31,10 @@ export default function AppRoutes() {
           const savedIndex = localStorage.getItem("activeSection");
           if (!savedIndex && location.pathname === "/") {
             const mainContainer = document.getElementById("main-container");
-            if (mainContainer) {
+            if (mainContainer && mainContainer.scrollHeight > mainContainer.clientHeight + 1) {
               mainContainer.scrollTo(0, 0);
+            } else {
+              window.scrollTo({ top: 0, behavior: "auto" });
             }
           }
         },

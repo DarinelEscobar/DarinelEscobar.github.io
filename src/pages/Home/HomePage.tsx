@@ -3,6 +3,7 @@ import Header from "@/components/Header/Header";
 import MainContent from "./MainContent";
 import DeferredSection from "@/components/DeferredSection";
 import SectionWrapper from "@/components/SectionWrapper";
+import useMediaQuery from "@/hooks/useMediaQuery";
 import { usePageWheelScroll } from "@/hooks/usePageWheelScroll";
 
 const AboutMe = lazy(() => import("./AboutMe"));
@@ -31,6 +32,7 @@ const HomePage: React.FC = () => {
   const containerRef = useRef<HTMLElement | null>(null);
   const savedSectionIndexRef = useRef(getSavedSectionIndex());
   const savedSectionIndex = savedSectionIndexRef.current;
+  const isDesktop = useMediaQuery("(min-width: 768px)");
 
   useEffect(() => {
     if (savedSectionIndex === 0) {
@@ -49,6 +51,7 @@ const HomePage: React.FC = () => {
     containerRef as React.RefObject<HTMLElement>,
     sectionRefs as unknown as React.MutableRefObject<HTMLElement[]>,
     {
+      enabled: isDesktop,
       interceptTouchpad: false,
       pixelThreshold: 60,
       animationMs: 500,
@@ -65,8 +68,11 @@ const HomePage: React.FC = () => {
   return (
     <main
       id="main-container"
-      className="Container h-[100dvh] w-screen overflow-auto overscroll-y-contain bg-whi pt-[env(safe-area-inset-top)] text-dar scroll-smooth snap-y snap-mandatory"
-      style={{ scrollSnapType: "y mandatory" }}
+      className={`Container w-screen bg-whi pt-[env(safe-area-inset-top)] text-dar ${
+        isDesktop
+          ? "h-[100dvh] overflow-auto overscroll-y-contain scroll-smooth snap-y snap-mandatory"
+          : "min-h-screen overflow-visible"
+      }`}
       ref={(el) => {
         if (el) containerRef.current = el;
       }}
