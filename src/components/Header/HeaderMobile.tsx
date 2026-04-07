@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 import type { Language } from "@/content/portfolio/types";
-import { usePortfolioContent } from "@/lib/portfolioContent";
+import { useResumeContent, useUiCopy } from "@/lib/portfolioContent";
 import LanguageToggle from "./LanguageToggle";
 import CurrentTime from "./CurrentTime";
 
@@ -24,11 +24,9 @@ const HeaderMobile: React.FC<HeaderMobileProps> = ({
   setLanguage,
 }) => {
   const {
-    resume: {
-      personal_info: { short_name, rol, location },
-    },
-    ui,
-  } = usePortfolioContent();
+    personal_info: { short_name, rol, location },
+  } = useResumeContent();
+  const ui = useUiCopy();
 
   return (
     <div

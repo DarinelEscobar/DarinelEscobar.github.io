@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import type { Language } from "@/content/portfolio/types";
-import { usePortfolioContent } from "@/lib/portfolioContent";
+import { useResumeContent, useUiCopy } from "@/lib/portfolioContent";
 import LanguageToggle from "./LanguageToggle";
 import CurrentTime from "./CurrentTime";
 
@@ -36,11 +36,9 @@ const HeaderDesktop: React.FC<HeaderDesktopProps> = ({
   setLanguage,
 }) => {
   const {
-    resume: {
-      personal_info: { short_name, rol, location },
-    },
-    ui,
-  } = usePortfolioContent();
+    personal_info: { short_name, rol, location },
+  } = useResumeContent();
+  const ui = useUiCopy();
 
   const controls = useAnimation();
   const { ref, inView } = useInView({ threshold: 0.3, triggerOnce: true });

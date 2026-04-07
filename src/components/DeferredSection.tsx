@@ -15,7 +15,7 @@ const DeferredSection: React.FC<DeferredSectionProps> = ({
 }) => {
   const [isReady, setIsReady] = useState(initiallyReady);
   const { ref, inView } = useInView({
-    rootMargin: "100% 0px",
+    rootMargin: "25% 0px",
     triggerOnce: true,
   });
 

@@ -1,13 +1,11 @@
 import React from "react";
 import img from "../../assets/images/me.webp";
-import { usePortfolioContent } from "@/lib/portfolioContent";
+import { useResumeContent } from "@/lib/portfolioContent";
 
 const MainContent: React.FC = () => {
   const {
-    resume: {
-      personal_info: { short_name },
-    },
-  } = usePortfolioContent();
+    personal_info: { short_name },
+  } = useResumeContent();
 
   return (
     <section className="flex flex-col justify-center md:justify-between items-center bg-whi w-screen min-h-[100dvh] text-dar gap-4 md:gap-0">
