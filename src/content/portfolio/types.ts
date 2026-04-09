@@ -62,6 +62,13 @@ export interface ProjectMedia {
   description?: string;
 }
 
+export interface ProjectQuickView {
+  summary: string;
+  impact_label?: string;
+  stack_highlights: string[];
+  preview_variant?: string;
+}
+
 export interface ProjectData {
   name: string;
   Project_Overview: string;
@@ -77,6 +84,7 @@ export interface ProjectData {
   url?: string;
   repository?: string;
   media: ProjectMedia[];
+  quick_view?: ProjectQuickView;
 }
 
 export interface PortfolioLink {
@@ -143,6 +151,15 @@ export interface UiCopy {
   projects: {
     exploreProjectLabel: string;
     viewRepositoryLabel: string;
+    viewModeLabel: string;
+    simplifiedViewLabel: string;
+    detailedViewLabel: string;
+    yearColumnLabel: string;
+    projectColumnLabel: string;
+    previewColumnLabel: string;
+    actionColumnLabel: string;
+    openProjectDetailsLabel: string;
+    noProjectsAvailableLabel: string;
     noImageAvailableLabel: string;
     noImagesAvailableLabel: string;
     projectOverviewLabel: string;

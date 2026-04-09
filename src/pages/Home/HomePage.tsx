@@ -93,7 +93,7 @@ const HomePage: React.FC = () => {
 
       <DeferredSection index={2} initiallyReady={savedSectionIndex >= 2}>
         <div ref={(el) => setSectionRef(el, 2)}>
-          <Projects />
+          <Projects layoutMode="section" />
         </div>
       </DeferredSection>
 

@@ -35,6 +35,12 @@
         "team_size": 6,
         "url": "https://plataforma.ieppd.chiapas.gob.mx/coepes/react/",
         "repository": "https://github.com/DarinelEscobar/COEPES_public.git",
+        "quick_view": {
+          "summary": "Public platform that helps students compare academic programs, review admission details, and scan educational options quickly.",
+          "impact_label": "1,000+ programs",
+          "stack_highlights": ["React", "Tailwind CSS", "CodeIgniter 4"],
+          "preview_variant": "education"
+        },
         "media": [
           {
             "type": "image",
@@ -103,6 +109,12 @@
         "team_size": 6,
         "url": "https://plataforma.ieppd.chiapas.gob.mx/coepes/login/",
         "repository": "https://github.com/DarinelEscobar/coepes.git",
+        "quick_view": {
+          "summary": "Administrative system for managing institutional data, academic programs, and reporting workflows with a clearer back-office experience.",
+          "impact_label": "Admin + stats",
+          "stack_highlights": ["CodeIgniter 4", "MySQL", "Bootstrap"],
+          "preview_variant": "admin"
+        },
         "media": [
           {
             "type": "image",
@@ -171,6 +183,12 @@
         "team_size": 1,
         "url": "https://eztickets.mx/",
         "repository": "https://bitbucket.org/cybac/web-ez-tickets-v1",
+        "quick_view": {
+          "summary": "Ticketing platform covering public event discovery, seat selection, checkout, QR issuance, and live access validation.",
+          "impact_label": "Payments + QR",
+          "stack_highlights": ["Laravel 10", "Livewire 3", "Mercado Pago"],
+          "preview_variant": "ticketing"
+        },
         "media": [
           {
             "type": "image",
@@ -235,6 +253,12 @@
         "team_size": 1,
         "url": "https://chiapaseventos.com/",
         "repository": "https://github.com/DarinelEscobar/Chiapas_Eventos.git",
+        "quick_view": {
+          "summary": "Promotional landing page designed for quick scanning, responsive browsing, and fast campaign launch.",
+          "impact_label": "Fast launch",
+          "stack_highlights": ["React", "Tailwind CSS", "Framer Motion"],
+          "preview_variant": "landing"
+        },
         "media": [
           {
             "type": "image",
@@ -290,6 +314,12 @@
         "team_size": 2,
         "url": "https://cobro.amifit.mx/",
         "repository": "https://github.com/DarinelEscobar/AMIFITCOBRO.git",
+        "quick_view": {
+          "summary": "Payment flow for gym members covering registrations, subscriptions, keyfobs, Stripe checkout, and QR-assisted interactions.",
+          "impact_label": "Payment flow",
+          "stack_highlights": ["React", "Stripe", "CodeIgniter 4"],
+          "preview_variant": "payments"
+        },
         "media": [
           {
             "type": "image",
@@ -354,6 +384,12 @@
         "team_size": 2,
         "url": "https://www.amifit.mx/",
         "repository": "https://github.com/DarinelEscobar/amifit.git",
+        "quick_view": {
+          "summary": "Operational app for gym memberships, recurring payments, keyfob inventory, and purchase notifications.",
+          "impact_label": "Gym ops",
+          "stack_highlights": ["CodeIgniter 4", "Stripe PHP", "Bootstrap 5"],
+          "preview_variant": "operations"
+        },
         "media": [
           {
             "type": "image",
@@ -393,6 +429,12 @@
         "team_size": 2,
         "url": "https://mostradordigital.shop/aerobalam",
         "repository": "https://github.com/DarinelEscobar/AEROBALAM.git",
+        "quick_view": {
+          "summary": "Flight operations platform for routes, schedules, ticket sales, and administration workflows in one interface.",
+          "impact_label": "Booking flow",
+          "stack_highlights": ["CodeIgniter 4", "FullCalendar", "MySQL"],
+          "preview_variant": "aviation"
+        },
         "media": [
           {
             "type": "image",
@@ -451,6 +493,12 @@
           "Achieved 95% test coverage for critical payment and scheduling pathways using PestPHP.",
           "Implemented a scalable database schema capable of handling high-volume concurrent bookings."
         ],
+        "quick_view": {
+          "summary": "Multi-role car wash platform for bookings, staff operations, appointment scheduling, and integrated payments.",
+          "impact_label": "Bookings + payments",
+          "stack_highlights": ["Laravel 10", "Livewire 3", "MercadoPago"],
+          "preview_variant": "automotive"
+        },
         "media": [
           {
             "type": "image",

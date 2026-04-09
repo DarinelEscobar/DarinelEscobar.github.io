@@ -27,6 +27,12 @@
         "team_size": 1,
         "url": "https://darinelescobar.github.io/",
         "repository": "https://github.com/DarinelEscobar/DarinelEscobar.github.io.git",
+        "quick_view": {
+          "summary": "Portafolio responsivo para presentar proyectos, stack tecnico y contacto con una lectura rapida para reclutadores.",
+          "impact_label": "Marca personal",
+          "stack_highlights": ["React", "Tailwind CSS", "Framer Motion"],
+          "preview_variant": "portfolio"
+        },
         "media": [
           {
             "type": "image",
@@ -62,6 +68,12 @@
         "team_size": 1,
         "url": "N/A",
         "repository": "https://github.com/DarinelEscobar/ChatGPT-SmartNavbar.git",
+        "quick_view": {
+          "summary": "Extension de Chrome para buscar, ordenar y reutilizar prompts con un flujo mas rapido dentro de ChatGPT.",
+          "impact_label": "Flujo con prompts",
+          "stack_highlights": ["JavaScript", "Chrome APIs", "Tailwind CSS"],
+          "preview_variant": "extension"
+        },
         "media": [
           {
             "type": "image",

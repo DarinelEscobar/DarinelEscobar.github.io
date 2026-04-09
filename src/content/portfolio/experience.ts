@@ -33,6 +33,11 @@ const spanishTranslations: Record<string, ProjectTranslation> = {
       "Mayor visibilidad para estudiantes sobre la variedad de opciones educativas disponibles en Chiapas.",
       "Desarrollo de un sistema intuitivo para comparar programas lado a lado y facilitar decisiones informadas.",
     ],
+    quick_view: {
+      summary:
+        "Plataforma publica para comparar programas academicos, revisar admisiones y explorar opciones educativas con lectura rapida.",
+      impact_label: "1,000+ programas",
+    },
     mediaDescriptions: [
       "Seccion de favoritos donde los usuarios pueden guardar programas preferidos.",
       "Vista del programa universitario mostrada en modo oscuro.",
@@ -75,6 +80,11 @@ const spanishTranslations: Record<string, ProjectTranslation> = {
       "Mayor participacion institucional, con universidades actualizando activamente la informacion de sus programas.",
       "Incremento relevante en la adopcion de la plataforma y en el uso por parte de estudiantes.",
     ],
+    quick_view: {
+      summary:
+        "Sistema administrativo para gestionar instituciones, programas y estadisticas con un back office mas claro y operativo.",
+      impact_label: "Admin + stats",
+    },
     mediaDescriptions: [
       "Pantalla de inicio de sesion de la plataforma con funciones de autenticacion.",
       "Panel de estadisticas generales con actividad de usuarios y metricas del sistema.",
@@ -112,6 +122,11 @@ const spanishTranslations: Record<string, ProjectTranslation> = {
       "Inclusion de logica automatica para expiracion y liberacion de reservas, recuperando inventario y evitando asientos bloqueados por pagos incompletos.",
       "Capacidad de operar escenarios de alta demanda mediante fila virtual y monitoreo de trafico.",
     ],
+    quick_view: {
+      summary:
+        "Plataforma de ticketing con catalogo publico, compra por asientos, checkout, boletos QR y validacion en accesos.",
+      impact_label: "Pagos + QR",
+    },
     mediaDescriptions: [
       "Pagina publica de detalle de evento con informacion, recinto, fecha y llamada principal para comprar boletos.",
       "Vista de resumen de checkout con boletos seleccionados, totales e integracion de pago con Mercado Pago.",
@@ -148,6 +163,11 @@ const spanishTranslations: Record<string, ProjectTranslation> = {
       "Interfaz responsiva que se adapta con fluidez a distintos dispositivos.",
       "Retroalimentacion positiva de usuarios por su simplicidad y facilidad de navegacion.",
     ],
+    quick_view: {
+      summary:
+        "Landing promocional pensada para escaneo rapido, navegacion responsiva y lanzamiento veloz de campanas.",
+      impact_label: "Lanzamiento rapido",
+    },
     mediaDescriptions: [
       "Vista principal de la landing page.",
       "Vista previa del header en mobile.",
@@ -181,6 +201,11 @@ const spanishTranslations: Record<string, ProjectTranslation> = {
       "Mayor eficiencia en el cobro de membresias del gimnasio.",
       "Simplificacion en la gestion de keyfobs y menor carga administrativa.",
     ],
+    quick_view: {
+      summary:
+        "App de cobro para socios con pagos de mensualidad, compra de keyfobs, Stripe y flujos guiados con QR.",
+      impact_label: "Flujo de pago",
+    },
     mediaDescriptions: [
       "Vista principal de la aplicacion AMIFIT Cobro.",
       "Seccion de registro para alta de nuevos miembros.",
@@ -216,6 +241,11 @@ const spanishTranslations: Record<string, ProjectTranslation> = {
       "Confirmaciones automticas por correo usando PHPMailer.",
       "Respuestas API consistentes y mejor experiencia para desarrollo y soporte.",
     ],
+    quick_view: {
+      summary:
+        "Sistema operativo para membresias, cobros, inventario de keyfobs y notificaciones de compra del gimnasio.",
+      impact_label: "Operacion gym",
+    },
     mediaDescriptions: ["Pantalla principal de inicio de sesion."],
   },
   AEROBALAM: {
@@ -244,6 +274,11 @@ const spanishTranslations: Record<string, ProjectTranslation> = {
       "Mayor eficiencia administrativa gracias a herramientas responsivas dentro del dashboard.",
       "Despliegue de una plataforma funcional para gestion de reservas aereas en una semana.",
     ],
+    quick_view: {
+      summary:
+        "Plataforma de vuelos para gestionar rutas, horarios, cupones y flujo de compra desde una sola interfaz.",
+      impact_label: "Flujo de reserva",
+    },
     mediaDescriptions: ["Vista principal del dashboard de AEROBALAM.", "Interfaz de compra de boletos."],
   },
   "Lavafy - Professional Car Wash Management Platform": {
@@ -271,6 +306,11 @@ const spanishTranslations: Record<string, ProjectTranslation> = {
       "95% de cobertura en rutas criticas de pagos y agenda mediante PestPHP.",
       "Implementacion de un esquema de base de datos escalable capaz de soportar reservas concurrentes de alto volumen.",
     ],
+    quick_view: {
+      summary:
+        "Plataforma multirol para reservas de lavado, operacion del personal, agenda y cobros integrados en tiempo real.",
+      impact_label: "Reservas + pagos",
+    },
     mediaDescriptions: [
       "Dashboard administrativo con una vista general de metricas clave y actividad reciente.",
       "Modulo de reportes administrativos con herramientas de analitica para el negocio.",

@@ -7,7 +7,7 @@ const Project: React.FC = () => {
   return (
    <main className="relative bg-whi text-dar scroll-smooth">
   <Header />
-  <Projects/>
+  <Projects layoutMode="page" />
 </main>
 
   );

@@ -26,6 +26,11 @@ const englishTranslations: Record<string, ProjectTranslation> = {
       "The modular structure enabled future content updates without friction.",
       "Delivered a fully responsive experience with strong performance on mobile devices.",
     ],
+    quick_view: {
+      summary:
+        "Responsive portfolio built to present projects, technical strengths, and contact paths in a recruiter-friendly scan.",
+      impact_label: "Personal brand",
+    },
     mediaDescriptions: ["Main portfolio section with a modern visual design."],
   },
   "ChatGPT-SmartNavbar": {
@@ -50,6 +55,11 @@ const englishTranslations: Record<string, ProjectTranslation> = {
       "Implemented a flexible search system that supports incomplete words and multiple fragments.",
       "Added automatic preference persistence to make continued use smoother.",
     ],
+    quick_view: {
+      summary:
+        "Chrome extension that speeds up prompt retrieval, organization, and reuse directly inside ChatGPT.",
+      impact_label: "Prompt workflow",
+    },
     client: "Personal Project",
     mediaDescriptions: ["Main extension view showing the smart navigation bar."],
   },
