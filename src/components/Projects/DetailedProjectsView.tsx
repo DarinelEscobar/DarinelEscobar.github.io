@@ -19,6 +19,7 @@ interface DetailedProjectsViewProps {
   onNextProject: () => void;
   onExpandProject: () => void;
   setCurrentImageIndex: React.Dispatch<React.SetStateAction<number>>;
+  extraControls?: React.ReactNode;
 }
 
 const DetailedProjectsView: React.FC<DetailedProjectsViewProps> = ({
@@ -34,6 +35,7 @@ const DetailedProjectsView: React.FC<DetailedProjectsViewProps> = ({
   onNextProject,
   onExpandProject,
   setCurrentImageIndex,
+  extraControls,
 }) => {
   const media = currentProject.media ?? [];
   const { ref, inView } = useInView({ threshold: 0.35, triggerOnce: false });
@@ -65,6 +67,7 @@ const DetailedProjectsView: React.FC<DetailedProjectsViewProps> = ({
           disablePrev={currentProjectIndex === 0}
           disableNext={projectsLength === 0 || currentProjectIndex === projectsLength - 1}
           onExpandProject={onExpandProject}
+          extraControls={extraControls}
         />
       )}
     </div>

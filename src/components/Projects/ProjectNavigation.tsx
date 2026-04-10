@@ -8,6 +8,7 @@ interface ProjectNavigationProps {
   disablePrev: boolean;
   disableNext: boolean;
   onExpandProject: () => void;
+  extraControls?: React.ReactNode;
 }
 
 const containerVariants = {
@@ -26,6 +27,7 @@ const ProjectNavigation: React.FC<ProjectNavigationProps> = ({
   disablePrev,
   disableNext,
   onExpandProject,
+  extraControls,
 }) => {
   return (
     <motion.div
@@ -33,11 +35,13 @@ const ProjectNavigation: React.FC<ProjectNavigationProps> = ({
       animate="visible"
       variants={containerVariants}
       className="
-        fixed left-1/2 bottom-[calc(env(safe-area-inset-bottom)+8px)] z-50 inline-flex -translate-x-1/2 items-center space-x-3 rounded-full bg-gray-200/[0.35] px-3 py-2 shadow-lg shadow-black/10 backdrop-blur-sm
+        fixed left-1/2 bottom-[calc(env(safe-area-inset-bottom)+8px)] z-50 inline-flex -translate-x-1/2 items-center gap-2 rounded-full bg-gray-200/[0.35] px-3 py-2 shadow-lg shadow-black/10 backdrop-blur-sm
         dark:bg-gray-700/[0.45] dark:shadow-black/40
         md:absolute md:bottom-[calc(2rem+env(safe-area-inset-bottom))] md:left-1/2 md:-translate-x-1/2
       "
     >
+      {extraControls}
+
       <motion.button
         variants={itemVariants}
         onClick={handlePrevProject}

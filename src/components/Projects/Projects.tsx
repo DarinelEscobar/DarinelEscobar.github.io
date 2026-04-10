@@ -15,6 +15,9 @@ import {
 
 const DetailsProjects = lazy(() => import("../DetailsProjects/DetailsProjects"));
 
+const floatingControlsClassName =
+  "fixed left-1/2 bottom-[calc(env(safe-area-inset-bottom)+8px)] z-50 inline-flex -translate-x-1/2 items-center rounded-full bg-gray-200/[0.35] px-3 py-2 shadow-lg shadow-black/10 backdrop-blur-sm dark:bg-gray-700/[0.45] dark:shadow-black/40 md:absolute md:bottom-[calc(2rem+env(safe-area-inset-bottom))] md:left-1/2 md:-translate-x-1/2";
+
 interface ProjectsProps {
   layoutMode?: ProjectsLayoutMode;
 }
@@ -111,7 +114,6 @@ const Projects: React.FC<ProjectsProps> = ({ layoutMode = "page" }) => {
 
   const viewToggle = (
     <ProjectsViewToggle
-      label={ui.projects.viewModeLabel}
       simplifiedLabel={ui.projects.simplifiedViewLabel}
       detailedLabel={ui.projects.detailedViewLabel}
       value={viewMode}
@@ -124,17 +126,13 @@ const Projects: React.FC<ProjectsProps> = ({ layoutMode = "page" }) => {
       {viewMode === "simplified" ? (
         <div
           className={cn(
-            "mx-auto w-full max-w-[1560px] px-4 pb-8 pt-24 sm:px-6 lg:px-8",
+            "mx-auto w-full max-w-[1560px] px-4 pb-24 pt-24 sm:px-6 sm:pb-28 lg:px-8",
             layoutMode === "section" ? "min-h-screen min-h-[100dvh] lg:py-24" : "min-h-screen"
           )}
         >
-          <div className="mb-5 flex justify-end">
-            {viewToggle}
-          </div>
-
           <div
             className={cn(
-              "w-full",
+              "w-full pb-20 sm:pb-16",
               layoutMode === "section" &&
                 "max-h-[min(72vh,52rem)] overflow-y-auto rounded-[2.25rem] pr-1 sm:pr-2"
             )}
@@ -146,6 +144,10 @@ const Projects: React.FC<ProjectsProps> = ({ layoutMode = "page" }) => {
               onOpenProject={handleOpenProject}
             />
           </div>
+
+          <div className={floatingControlsClassName}>
+            {viewToggle}
+          </div>
         </div>
       ) : (
         <div
@@ -154,10 +156,6 @@ const Projects: React.FC<ProjectsProps> = ({ layoutMode = "page" }) => {
             layoutMode === "page" ? "lg:py-8" : "lg:py-0"
           )}
         >
-          <div className="relative z-20 mb-5 flex w-full max-w-[1560px] justify-end">
-            {viewToggle}
-          </div>
-
           <DetailedProjectsView
             layoutMode={layoutMode}
             currentProject={currentProject}
@@ -171,6 +169,7 @@ const Projects: React.FC<ProjectsProps> = ({ layoutMode = "page" }) => {
             onNextProject={handleNextProject}
             onExpandProject={() => handleOpenProject(currentProjectIndex)}
             setCurrentImageIndex={setCurrentImageIndex}
+            extraControls={viewToggle}
           />
         </div>
       )}
