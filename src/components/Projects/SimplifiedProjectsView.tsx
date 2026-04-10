@@ -30,6 +30,9 @@ const desktopRowVariants = {
   }),
 };
 
+const YEAR_CELL_OVERLAP = 82;
+const HEADER_SIDE_OVERLAP = 18;
+
 function MetaRow({ project }: { project: ProjectData }) {
   const stackHighlights = getQuickStackHighlights(project);
 
@@ -70,84 +73,121 @@ function DesktopProjectsTable({
 }) {
   return (
     <div className="hidden md:block">
-      <div className="overflow-hidden rounded-[2rem] border border-black/12 bg-white/70 shadow-[0_24px_60px_rgba(15,23,42,0.08)] backdrop-blur-md dark:border-white/10 dark:bg-black/20 dark:shadow-[0_30px_70px_rgba(0,0,0,0.3)]">
-        <div className="sticky top-0 z-10 grid border-b border-black/10 bg-[rgba(242,238,230,0.95)] font-rob text-[11px] uppercase tracking-[0.22em] text-black/45 backdrop-blur-md md:grid-cols-[172px_minmax(0,1fr)] dark:border-white/10 dark:bg-[rgba(20,20,20,0.94)] dark:text-white/45">
-          <div className="border-r border-black/10 p-5 dark:border-white/10">{copy.yearColumnLabel}</div>
-          <div className="grid minmax-0 grid-cols-[minmax(0,1fr)_230px_156px]">
-            <div className="border-r border-black/10 p-5 dark:border-white/10">
+      <div className="overflow-hidden rounded-[2rem] border border-black/12 bg-[rgba(247,244,238,0.78)] shadow-[0_24px_60px_rgba(15,23,42,0.08)] backdrop-blur-md dark:border-white/10 dark:bg-[rgba(22,22,22,0.75)] dark:shadow-[0_30px_70px_rgba(0,0,0,0.3)]">
+        <div className="sticky top-0 z-20 bg-[rgba(242,238,230,0.95)] font-rob text-[11px] uppercase tracking-[0.22em] text-black/45 backdrop-blur-md dark:bg-[rgba(20,20,20,0.94)] dark:text-white/45">
+          <div className="grid grid-cols-[144px_minmax(0,1fr)_220px]">
+            <div
+              className="relative z-10 flex min-h-[56px] items-end border-b border-r border-black/10 bg-[rgba(242,238,230,0.98)] px-4 py-3 dark:border-white/10 dark:bg-[rgba(20,20,20,0.98)]"
+              style={{
+                marginRight: `-${HEADER_SIDE_OVERLAP}px`,
+                paddingRight: `calc(1rem + ${HEADER_SIDE_OVERLAP}px)`,
+              }}
+            >
+              {copy.yearColumnLabel}
+            </div>
+            <div
+              className="flex min-h-[56px] items-end border-b border-black/10 px-4 py-3 dark:border-white/10"
+              style={{
+                paddingLeft: `calc(1rem + ${HEADER_SIDE_OVERLAP}px)`,
+                paddingRight: `calc(1rem + ${HEADER_SIDE_OVERLAP}px)`,
+              }}
+            >
               {copy.projectColumnLabel}
             </div>
-            <div className="border-r border-black/10 p-5 dark:border-white/10">
+            <div
+              className="relative z-10 flex min-h-[56px] items-end border-b border-l border-black/10 bg-[rgba(242,238,230,0.98)] px-4 py-3 dark:border-white/10 dark:bg-[rgba(20,20,20,0.98)]"
+              style={{
+                marginLeft: `-${HEADER_SIDE_OVERLAP}px`,
+                paddingLeft: `calc(1rem + ${HEADER_SIDE_OVERLAP}px)`,
+              }}
+            >
               {copy.previewColumnLabel}
             </div>
-            <div className="p-5">{copy.actionColumnLabel}</div>
           </div>
         </div>
 
-        {groupedProjects.map(([year, yearProjects]) => (
+        {groupedProjects.map(([year, yearProjects], yearGroupIndex) => (
           <section
             key={year}
-            className="grid border-b border-black/10 last:border-b-0 md:grid-cols-[172px_minmax(0,1fr)] dark:border-white/10"
+            className="grid border-b border-black/10 last:border-b-0 md:grid-cols-[144px_minmax(0,1fr)_220px] dark:border-white/10"
           >
-            <div className="border-r border-black/10 p-6 dark:border-white/10">
-              <span className="font-cor text-5xl leading-none text-dar lg:text-6xl">{year}</span>
+            <div
+              className={cn(
+                "relative z-10 flex items-start border-r border-black/10 bg-[rgba(247,244,238,0.96)] px-5 py-6 dark:border-white/10 dark:bg-[rgba(22,22,22,0.96)]",
+                yearGroupIndex > 0 && "border-t border-black/10 dark:border-white/10",
+              )}
+              style={{
+                gridRow: `span ${yearProjects.length}`,
+                marginTop: yearGroupIndex === 0 ? 0 : -YEAR_CELL_OVERLAP,
+                height:
+                  yearGroupIndex === 0 ? "100%" : `calc(100% + ${YEAR_CELL_OVERLAP}px)`,
+              }}
+            >
+              <span className="font-cor text-5xl leading-none text-dar lg:text-[3.4rem]">{year}</span>
             </div>
 
-            <div>
-              {yearProjects.map((project) => {
+            {yearProjects.map((project, rowIndex) => {
                 const projectIndex = allProjects.indexOf(project);
                 const dateLabel = getProjectDateLabel(project, dateLocale);
+                const rowBorderClass =
+                  rowIndex === yearProjects.length - 1 ? "" : "border-b border-black/10 dark:border-white/10";
 
                 return (
-                  <motion.article
-                    key={`${year}-${project.name}`}
-                    custom={projectIndex}
-                    initial="hidden"
-                    animate="visible"
-                    variants={desktopRowVariants}
-                    className="grid border-b border-black/10 last:border-b-0 md:grid-cols-[minmax(0,1fr)_230px_156px] dark:border-white/10"
-                  >
-                    <div className="p-6">
-                      <div className="space-y-3">
-                        <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-                          <p className="font-rob text-[11px] uppercase tracking-[0.22em] text-black/45 dark:text-white/45">
-                            {project.role}
-                          </p>
-                          {dateLabel ? (
-                            <p className="font-rob text-[11px] uppercase tracking-[0.18em] text-black/38 dark:text-white/38">
-                              {dateLabel}
+                  <React.Fragment key={`${year}-${project.name}`}>
+                    <motion.div
+                      custom={projectIndex}
+                      initial="hidden"
+                      animate="visible"
+                      variants={desktopRowVariants}
+                      className={cn("p-5 lg:p-6", rowBorderClass)}
+                    >
+                      <div className="space-y-4">
+                        <div className="flex flex-wrap items-center justify-between gap-3">
+                          <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+                            <p className="font-rob text-[11px] uppercase tracking-[0.22em] text-black/45 dark:text-white/45">
+                              {project.role}
                             </p>
-                          ) : null}
+                            {dateLabel ? (
+                              <p className="font-rob text-[11px] uppercase tracking-[0.18em] text-black/38 dark:text-white/38">
+                                {dateLabel}
+                              </p>
+                            ) : null}
+                          </div>
+                          <button
+                            type="button"
+                            className="inline-flex items-center gap-2 font-rob text-[11px] uppercase tracking-[0.18em] text-black/55 transition-colors hover:text-dar dark:text-white/55 dark:hover:text-white"
+                            onClick={() => onOpenProject(projectIndex)}
+                          >
+                            {copy.openProjectDetailsLabel}
+                            <ArrowUpRight className="h-4 w-4" />
+                          </button>
                         </div>
-                        <h3 className="font-cor text-4xl leading-none text-dar lg:text-5xl">
+
+                        <h3 className="font-cor text-[2.6rem] leading-[0.94] text-dar lg:text-[3.1rem]">
                           {project.name}
                         </h3>
-                        <p className="max-w-3xl font-lat text-sm leading-6 text-black/68 dark:text-white/68">
+                        <p className="max-w-4xl font-lat text-sm leading-6 text-black/68 dark:text-white/68">
                           {getQuickSummary(project)}
                         </p>
                       </div>
 
                       <MetaRow project={project} />
-                    </div>
+                    </motion.div>
 
-                    <div className="border-l border-black/10 p-4 dark:border-white/10">
-                      <ProjectQuickPreview project={project} className="h-full" />
+                    <div
+                      className={cn(
+                        "flex items-center border-l border-black/10 p-3 dark:border-white/10",
+                        rowBorderClass,
+                      )}
+                    >
+                      <ProjectQuickPreview
+                        project={project}
+                        className="h-[120px] min-h-[120px] w-full"
+                      />
                     </div>
-
-                    <div className="border-l border-black/10 p-4 dark:border-white/10">
-                      <button
-                        type="button"
-                        className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-black/12 bg-white/70 px-4 py-3 font-rob text-xs uppercase tracking-[0.18em] text-dar transition-colors hover:bg-dar hover:text-whi dark:border-white/10 dark:bg-white/[0.05] dark:text-whi dark:hover:bg-white dark:hover:text-black"
-                        onClick={() => onOpenProject(projectIndex)}
-                      >
-                        {copy.openProjectDetailsLabel}
-                        <ArrowUpRight className="h-4 w-4" />
-                      </button>
-                    </div>
-                  </motion.article>
+                  </React.Fragment>
                 );
               })}
-            </div>
           </section>
         ))}
       </div>
