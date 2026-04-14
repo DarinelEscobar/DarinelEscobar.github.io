@@ -24,6 +24,23 @@ import {
   SiTailwindcss,
   SiPostman,
   SiCodio,
+  SiPhp,
+  SiLivewire,
+  SiVite,
+  SiFramer,
+  SiShadcnui,
+  SiGithub,
+  SiBitbucket,
+  SiJira,
+  SiSwagger,
+  SiOpenapiinitiative,
+  SiComposer,
+  SiStripe,
+  SiMercadopago,
+  SiTypescript,
+  SiCplusplus,
+  SiC,
+  SiJenkins,
 } from "react-icons/si";
 import {
   FaAws,
@@ -35,6 +52,8 @@ import {
   FaFigma,
   FaLightbulb,
   FaClock,
+  FaCodeBranch,
+  FaUsers,
   FaQuestion,
 } from "react-icons/fa";
 import { GiEagleEmblem, GiCactus, GiFuji, GiInfo } from "react-icons/gi";
@@ -77,6 +96,23 @@ const siMap: Record<string, React.ComponentType<{ className?: string }>> = {
   SiTailwindcss,
   SiPostman,
   SiCodio,
+  SiPhp,
+  SiLivewire,
+  SiVite,
+  SiFramer,
+  SiShadcnui,
+  SiGithub,
+  SiBitbucket,
+  SiJira,
+  SiSwagger,
+  SiOpenapiinitiative,
+  SiComposer,
+  SiStripe,
+  SiMercadopago,
+  SiTypescript,
+  SiCplusplus,
+  SiC,
+  SiJenkins,
 };
 
 const faMap: Record<string, React.ComponentType<{ className?: string }>> = {
@@ -89,6 +125,8 @@ const faMap: Record<string, React.ComponentType<{ className?: string }>> = {
   FaFigma,
   FaLightbulb,
   FaClock,
+  FaCodeBranch,
+  FaUsers,
   FaQuestion,
 };
 

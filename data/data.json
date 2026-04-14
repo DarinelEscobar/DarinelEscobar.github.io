@@ -19,8 +19,12 @@
   "technical_skills": {
     "section_icon": { "name": "code", "library": "lucide-react", "color": "#3B82F6" },
     "skills": [
+      { "name": "TypeScript", "icon": "SiTypescript", "library": "si", "color": "#3178C6" },
+      { "name": "PHP", "icon": "SiPhp", "library": "si", "color": "#777BB4" },
       { "name": "Python", "icon": "SiPython", "library": "si", "color": "#306998" },
       { "name": "JavaScript", "icon": "SiJavascript", "library": "si", "color": "#F7DF1E" },
+      { "name": "C++", "icon": "SiCplusplus", "library": "si", "color": "#00599C" },
+      { "name": "C", "icon": "SiC", "library": "si", "color": "#A8B9CC" },
       { "name": "SQL", "icon": "SiMysql", "library": "si", "color": "#4479A1" },
       { "name": "AWS", "icon": "FaAws", "library": "fa", "color": "#FF9900" }
     ]
@@ -31,7 +35,8 @@
     "skills": [
       { "name": "Docker", "icon": "FaDocker", "library": "fa", "color": "#2496ED" },
       { "name": "AWS", "icon": "FaAws", "library": "fa", "color": "#FF9900" },
-      { "name": "Git", "icon": "FaGit", "library": "fa", "color": "#F05032" }
+      { "name": "Git", "icon": "FaGit", "library": "fa", "color": "#F05032" },
+      { "name": "Jenkins", "icon": "SiJenkins", "library": "si", "color": "#D24939" }
     ]
   },
   "databases": {
@@ -53,6 +58,7 @@
     "skills": [
       { "name": "Node.js", "icon": "FaNode", "library": "fa", "color": "#339933" },
       { "name": "Laravel", "icon": "SiLaravel", "library": "si", "color": "#FF2D20" },
+      { "name": "Livewire", "icon": "SiLivewire", "library": "si", "color": "#FB70A9" },
       { "name": "CodeIgniter", "icon": "SiCodeigniter", "library": "si", "color": "#DD4814" },
       { "name": "RabbitMQ", "icon": "SiRabbitmq", "library": "si", "color": "#FF6600" }
     ]
@@ -61,7 +67,10 @@
     "section_icon": { "name": "LayoutPanelLeft", "library": "lucide-react", "color": "#06B6D4" },
     "skills": [
       { "name": "React", "icon": "FaReact", "library": "fa", "color": "#61DAFB" },
+      { "name": "Vite", "icon": "SiVite", "library": "si", "color": "#646CFF" },
       { "name": "Tailwind CSS", "icon": "SiTailwindcss", "library": "si", "color": "#06B6D4" },
+      { "name": "Framer Motion", "icon": "SiFramer", "library": "si", "color": "#0055FF" },
+      { "name": "ShadCN/UI", "icon": "SiShadcnui", "library": "si", "color": "#111827" },
       { "name": "Bootstrap", "icon": "FaBootstrap", "library": "fa", "color": "#7952B3" },
       { "name": "Figma", "icon": "FaFigma", "library": "fa", "color": "#F24E1E" }
     ]
@@ -69,14 +78,24 @@
   "tools": {
     "section_icon": { "name": "PocketKnife", "library": "lucide-react", "color": "#DC2626" },
     "skills": [
-      { "name": "Postman", "icon": "SiPostman", "library": "si", "color": "#FF6C37" }
+      { "name": "Postman", "icon": "SiPostman", "library": "si", "color": "#FF6C37" },
+      { "name": "GitHub", "icon": "SiGithub", "library": "si", "color": "#181717" },
+      { "name": "Bitbucket", "icon": "SiBitbucket", "library": "si", "color": "#0052CC" },
+      { "name": "Jira", "icon": "SiJira", "library": "si", "color": "#0052CC" },
+      { "name": "SwaggerHub", "icon": "SiSwagger", "library": "si", "color": "#85EA2D" },
+      { "name": "OpenAPI", "icon": "SiOpenapiinitiative", "library": "si", "color": "#6BA539" },
+      { "name": "Composer", "icon": "SiComposer", "library": "si", "color": "#885630" },
+      { "name": "Stripe", "icon": "SiStripe", "library": "si", "color": "#635BFF" },
+      { "name": "Mercado Pago", "icon": "SiMercadopago", "library": "si", "color": "#00B1EA" }
     ]
   },
   "soft_skills": {
     "section_icon": { "name": "HeartHandshake", "library": "lucide-react", "color": "#FACC15" },
     "skills": [
       { "name": "Problem Solving", "icon": "FaLightbulb", "library": "fa", "color": "#FCD34D" },
-      { "name": "Time Management", "icon": "FaClock", "library": "fa", "color": "#4B5563" }
+      { "name": "Time Management", "icon": "FaClock", "library": "fa", "color": "#4B5563" },
+      { "name": "Adaptability", "icon": "FaCodeBranch", "library": "fa", "color": "#10B981" },
+      { "name": "Teamwork", "icon": "FaUsers", "library": "fa", "color": "#2563EB" }
     ]
   },
   "languages": {
