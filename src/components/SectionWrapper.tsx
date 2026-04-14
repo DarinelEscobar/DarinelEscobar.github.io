@@ -4,9 +4,10 @@ import { useInView } from "react-intersection-observer";
 interface SectionWrapperProps {
   children: React.ReactNode;
   index: number;
+  sectionRef?: (element: HTMLElement | null) => void;
 }
 
-const SectionWrapper: React.FC<SectionWrapperProps> = ({ children, index }) => {
+const SectionWrapper: React.FC<SectionWrapperProps> = ({ children, index, sectionRef }) => {
   const { ref, inView } = useInView({
     threshold: 0.8,
     triggerOnce: false,
@@ -18,10 +19,18 @@ const SectionWrapper: React.FC<SectionWrapperProps> = ({ children, index }) => {
     }
   }, [inView, index]);
 
+  const setRefs = React.useCallback(
+    (element: HTMLElement | null) => {
+      ref(element);
+      sectionRef?.(element);
+    },
+    [ref, sectionRef]
+  );
+
   return (
     <section
-      ref={ref}
-      className="relative flex min-h-screen min-h-[100dvh] w-full snap-start snap-always items-center justify-center overflow-x-hidden"
+      ref={setRefs}
+      className="relative flex min-h-screen min-h-[100dvh] w-full items-center justify-center overflow-x-hidden"
     >
       {children}
     </section>
