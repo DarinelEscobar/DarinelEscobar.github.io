@@ -10,6 +10,24 @@ const Skills: React.FC = () => {
   const {
     ui: { home },
   } = usePortfolioContent()
+  const sectionOrder = [
+    "technical_skills",
+    "devOps",
+    "databases",
+    "mobile_development",
+    "backend_development",
+    "frontend_development",
+    "tools",
+    "languages",
+    "certifications",
+    "soft_skills",
+  ]
+  const orderedSections = [...skillSections].sort((sectionA, sectionB) => {
+    const indexA = sectionOrder.indexOf(sectionA.id)
+    const indexB = sectionOrder.indexOf(sectionB.id)
+
+    return (indexA === -1 ? Number.MAX_SAFE_INTEGER : indexA) - (indexB === -1 ? Number.MAX_SAFE_INTEGER : indexB)
+  })
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -28,32 +46,37 @@ const Skills: React.FC = () => {
 
   // Configuration for specific grid spans to create the "Bento" look
   const getSpanClass = (sectionId: string) => {
+    if (sectionId === "tools") {
+      return "md:col-span-2 xl:col-span-2"
+    }
+
     if (
       sectionId === "technical_skills" ||
       sectionId === "frontend_development" ||
       sectionId === "backend_development"
     ) {
-      return "md:col-span-2 lg:col-span-2"
+      return "md:col-span-2 xl:col-span-2"
     }
+
     return "col-span-1"
   }
 
   return (
     // Restored original background hierarchy
-    <div className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden bg-gradient-radial from-white via-[#ECECEC] to-[#DCDCDC] px-4 py-8 dark:from-[#1F1F1F] dark:via-[#2C2C2C] dark:to-[#3B3B3B] md:px-8 lg:py-4">
+    <div className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden bg-gradient-radial from-white via-[#ECECEC] to-[#DCDCDC] px-4 py-6 dark:from-[#1F1F1F] dark:via-[#2C2C2C] dark:to-[#3B3B3B] md:min-h-[calc(100dvh-4.5rem)] md:px-6 md:py-4">
 
       {/* Decorative background elements can remain but subtle or removed if they clash with original BG. Keeping them off for "fit in single screen" cleanness or subtle.
           The user asked to keep original hierarchy, usually implies the main gradient. I will omit the 'blobs' to strictly follow 'original color hierarchy' and 'professional' look. */}
 
-      <div className="z-10 w-full max-w-7xl">
+      <div className="z-10 flex w-full max-w-[1280px] flex-col md:max-h-[calc(100dvh-5rem)]">
         {/* Compact Header */}
-        <div className="mb-6 flex flex-col items-center justify-between gap-4 md:mb-8 md:flex-row">
+        <div className="mb-5 flex flex-col items-center justify-between gap-3 md:mb-6 md:flex-row">
           <div className="text-center md:text-left">
             <motion.h2
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white md:text-4xl"
+              className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white md:text-[2.5rem]"
             >
               {home.skills.titlePrefix}{" "}
               <span className="text-blue-600 dark:text-blue-400">{home.skills.titleHighlight}</span>
@@ -83,9 +106,9 @@ const Skills: React.FC = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="grid auto-rows-min grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4"
+          className="grid auto-rows-min grid-cols-1 content-start gap-4 overflow-y-auto pr-1 md:grid-cols-3 xl:grid-cols-4"
         >
-          {skillSections.map((section, index) => {
+          {orderedSections.map((section, index) => {
             const spanClass = getSpanClass(section.id)
 
             return (
@@ -95,7 +118,7 @@ const Skills: React.FC = () => {
                 whileHover={{ y: -4, scale: 1.01 }}
                 className={cn(
                   // Adjusted card background to match original hierarchy: more opaque to stand out against the gradient, or glass
-                  "group relative overflow-hidden rounded-2xl border border-gray-200/50 bg-white/60 p-4 shadow-sm backdrop-blur-md transition-all duration-300 hover:shadow-lg dark:border-gray-700/50 dark:bg-gray-800/60 dark:shadow-black/30",
+                  "group relative overflow-hidden rounded-[1.7rem] border border-gray-200/50 bg-white/60 p-4 shadow-sm backdrop-blur-md transition-all duration-300 hover:shadow-lg dark:border-gray-700/50 dark:bg-gray-800/60 dark:shadow-black/30 md:p-4",
                   spanClass
                 )}
               >
@@ -109,14 +132,14 @@ const Skills: React.FC = () => {
                   {/* Card Header */}
                   <div className="flex items-center gap-3">
                     <div
-                      className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white/80 text-xl shadow-sm dark:bg-gray-700/80"
+                      className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white/80 text-lg shadow-sm dark:bg-gray-700/80"
                       style={{ color: section.color }}
                     >
                       {React.cloneElement(section.icon as React.ReactElement, {
-                        className: "h-5 w-5",
+                        className: "h-5.5 w-5.5",
                       })}
                     </div>
-                    <h3 className="font-semibold text-gray-800 dark:text-gray-200">
+                    <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200">
                       {section.title}
                     </h3>
                   </div>
