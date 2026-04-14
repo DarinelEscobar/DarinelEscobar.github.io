@@ -57,7 +57,9 @@
     "section_icon": { "name": "server", "library": "lucide-react", "color": "#8B5CF6" },
     "skills": [
       { "name": "Node.js", "icon": "FaNode", "library": "fa", "color": "#339933" },
+      { "name": "Express.js", "icon": "SiExpress", "library": "si", "color": "#000000" },
       { "name": "Laravel", "icon": "SiLaravel", "library": "si", "color": "#FF2D20" },
+      { "name": "Laravel Sanctum", "icon": "FaShieldAlt", "library": "fa", "color": "#DC2626" },
       { "name": "Livewire", "icon": "SiLivewire", "library": "si", "color": "#FB70A9" },
       { "name": "CodeIgniter", "icon": "SiCodeigniter", "library": "si", "color": "#DD4814" },
       { "name": "RabbitMQ", "icon": "SiRabbitmq", "library": "si", "color": "#FF6600" }
@@ -67,8 +69,12 @@
     "section_icon": { "name": "LayoutPanelLeft", "library": "lucide-react", "color": "#06B6D4" },
     "skills": [
       { "name": "React", "icon": "FaReact", "library": "fa", "color": "#61DAFB" },
+      { "name": "Next.js", "icon": "SiNextdotjs", "library": "si", "color": "#111111" },
+      { "name": "Angular", "icon": "SiAngular", "library": "si", "color": "#DD0031" },
       { "name": "Vite", "icon": "SiVite", "library": "si", "color": "#646CFF" },
       { "name": "Tailwind CSS", "icon": "SiTailwindcss", "library": "si", "color": "#06B6D4" },
+      { "name": "Flowbite", "icon": "SiTailwindcss", "library": "si", "color": "#38BDF8" },
+      { "name": "RxJS", "icon": "FaProjectDiagram", "library": "fa", "color": "#B7178C" },
       { "name": "Framer Motion", "icon": "SiFramer", "library": "si", "color": "#0055FF" },
       { "name": "ShadCN/UI", "icon": "SiShadcnui", "library": "si", "color": "#111827" },
       { "name": "Bootstrap", "icon": "FaBootstrap", "library": "fa", "color": "#7952B3" },
@@ -79,6 +85,10 @@
     "section_icon": { "name": "PocketKnife", "library": "lucide-react", "color": "#DC2626" },
     "skills": [
       { "name": "Postman", "icon": "SiPostman", "library": "si", "color": "#FF6C37" },
+      { "name": "Axios", "icon": "SiAxios", "library": "si", "color": "#5A29E4" },
+      { "name": "Pest", "icon": "FaVial", "library": "fa", "color": "#22C55E" },
+      { "name": "Jest", "icon": "SiJest", "library": "si", "color": "#C21325" },
+      { "name": "Vitest", "icon": "SiVitest", "library": "si", "color": "#6E9F18" },
       { "name": "GitHub", "icon": "SiGithub", "library": "si", "color": "#181717" },
       { "name": "Bitbucket", "icon": "SiBitbucket", "library": "si", "color": "#0052CC" },
       { "name": "Jira", "icon": "SiJira", "library": "si", "color": "#0052CC" },
