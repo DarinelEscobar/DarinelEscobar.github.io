@@ -38,7 +38,7 @@ const Projects: React.FC<ProjectsProps> = ({ layoutMode = "page" }) => {
           className={cn(
             "w-full",
             layoutMode === "section" &&
-              "max-h-[min(72vh,52rem)] overflow-y-auto rounded-[2rem]"
+              "rounded-[2rem] md:max-h-[min(72vh,52rem)] md:overflow-y-auto"
           )}
         >
           <SimplifiedProjectsView
