@@ -1,12 +1,6 @@
 import type { ProjectData } from "@/content/portfolio/types";
 
 export type ProjectsLayoutMode = "section" | "page";
-export type ProjectsViewMode = "simplified" | "detailed";
-
-export const PROJECTS_VIEW_STORAGE_KEYS: Record<ProjectsLayoutMode, string> = {
-  section: "projects_view_home",
-  page: "projects_view_project",
-};
 
 export function getProjectYear(project: ProjectData): string {
   const dateCandidate = project.end_date ?? project.start_date;

@@ -12,8 +12,8 @@ import {
   Wallet,
 } from "lucide-react";
 import type { ProjectData } from "@/content/portfolio/types";
+import { getAssetImage } from "@/lib/assetImages";
 import { cn } from "@/lib/utils";
-import { getProjectAssetImage } from "./imageUtils";
 
 interface ProjectQuickPreviewProps {
   project: ProjectData;
@@ -320,7 +320,7 @@ const ProjectQuickPreview: React.FC<ProjectQuickPreviewProps> = ({ project, clas
   const [imageFailed, setImageFailed] = useState(false);
   const firstMedia = project.media[0];
   const previewVariant = project.quick_view?.preview_variant;
-  const imageSource = !previewVariant && firstMedia?.url ? getProjectAssetImage(firstMedia.url) : "";
+  const imageSource = !previewVariant && firstMedia?.url ? getAssetImage(firstMedia.url) : "";
 
   if (!previewVariant && imageSource && !imageFailed) {
     return (
