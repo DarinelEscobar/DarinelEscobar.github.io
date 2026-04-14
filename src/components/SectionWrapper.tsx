@@ -5,11 +5,19 @@ interface SectionWrapperProps {
   children: React.ReactNode;
   index: number;
   sectionRef?: (element: HTMLElement | null) => void;
+  fullHeight?: boolean;
+  className?: string;
 }
 
-const SectionWrapper: React.FC<SectionWrapperProps> = ({ children, index, sectionRef }) => {
+const SectionWrapper: React.FC<SectionWrapperProps> = ({
+  children,
+  index,
+  sectionRef,
+  fullHeight = true,
+  className = "",
+}) => {
   const { ref, inView } = useInView({
-    threshold: 0.8,
+    threshold: 0.45,
     triggerOnce: false,
   });
 
@@ -30,7 +38,9 @@ const SectionWrapper: React.FC<SectionWrapperProps> = ({ children, index, sectio
   return (
     <section
       ref={setRefs}
-      className="relative flex min-h-screen min-h-[100dvh] w-full items-center justify-center overflow-x-hidden"
+      className={`relative flex w-full items-center justify-center overflow-x-hidden ${
+        fullHeight ? "min-h-screen min-h-[100dvh]" : ""
+      } ${className}`}
     >
       {children}
     </section>

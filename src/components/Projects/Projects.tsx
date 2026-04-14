@@ -31,14 +31,13 @@ const Projects: React.FC<ProjectsProps> = ({ layoutMode = "page" }) => {
       <div
         className={cn(
           "mx-auto w-full max-w-[1740px] px-2 pb-8 pt-24 sm:px-3 lg:px-4",
-          layoutMode === "section" ? "min-h-screen min-h-[100dvh] lg:py-24" : "min-h-screen"
+          layoutMode === "section" ? "py-8 lg:py-24" : "min-h-screen"
         )}
       >
         <div
           className={cn(
             "w-full",
-            layoutMode === "section" &&
-              "rounded-[2rem] md:max-h-[min(72vh,52rem)] md:overflow-y-auto"
+            layoutMode === "section" && "rounded-[2rem]"
           )}
         >
           <SimplifiedProjectsView

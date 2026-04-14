@@ -8,9 +8,11 @@ type Options = {
   wheelCooldownMs?: number;
   snapDelayMs?: number;
   triggerLine?: number;
+  freeScrollIndices?: number[];
 };
 
 type SectionPosition = {
+  index: number;
   top: number;
   bottom: number;
 };
@@ -19,9 +21,11 @@ const SCROLL_EDGE_THRESHOLD = 1;
 
 function getSectionPositions(sectionRefs: React.MutableRefObject<HTMLElement[]>) {
   return sectionRefs.current
-    .filter((section): section is HTMLElement => Boolean(section))
+    .map((section, index) => ({ section, index }))
+    .filter((entry): entry is { section: HTMLElement; index: number } => Boolean(entry.section))
     .map(
-      (section): SectionPosition => ({
+      ({ section, index }): SectionPosition => ({
+        index,
         top: section.offsetTop,
         bottom: section.offsetTop + section.offsetHeight,
       })
@@ -91,7 +95,8 @@ function resolveSnapTarget(
   scrollTop: number,
   sections: SectionPosition[],
   direction: 1 | -1 | 0,
-  triggerLine: number
+  triggerLine: number,
+  freeScrollIndices: number[]
 ) {
   if (sections.length === 0) {
     return null;
@@ -99,10 +104,18 @@ function resolveSnapTarget(
 
   const sectionIndex = getSectionRangeIndex(scrollTop, sections);
   const currentSection = sections[sectionIndex];
+  if (freeScrollIndices.includes(currentSection.index)) {
+    return null;
+  }
+
   const previousSection = sections[sectionIndex - 1];
   const nextSection = sections[sectionIndex + 1];
 
   if (direction > 0 && nextSection) {
+    if (freeScrollIndices.includes(nextSection.index)) {
+      return currentSection.top;
+    }
+
     const gap = Math.max(1, nextSection.top - currentSection.top);
     const progress = (scrollTop - currentSection.top) / gap;
 
@@ -110,6 +123,10 @@ function resolveSnapTarget(
   }
 
   if (direction < 0 && previousSection) {
+    if (freeScrollIndices.includes(previousSection.index)) {
+      return currentSection.top;
+    }
+
     const gap = Math.max(1, currentSection.top - previousSection.top);
     const progress = (scrollTop - previousSection.top) / gap;
 
@@ -138,6 +155,7 @@ export function usePageWheelScroll(
     wheelCooldownMs = 260,
     snapDelayMs = 140,
     triggerLine = 0.35,
+    freeScrollIndices = [],
   } = options;
 
   const isAnimatingRef = React.useRef(false);
@@ -225,6 +243,10 @@ export function usePageWheelScroll(
       }
 
       const currentIndex = getSectionRangeIndex(container.scrollTop, sections);
+      if (freeScrollIndices.includes(sections[currentIndex].index)) {
+        return;
+      }
+
       const nextIndex = Math.max(
         0,
         Math.min(sections.length - 1, currentIndex + (direction > 0 ? 1 : -1))
@@ -253,7 +275,8 @@ export function usePageWheelScroll(
           container.scrollTop,
           sections,
           lastDirectionRef.current,
-          triggerLine
+          triggerLine,
+          freeScrollIndices
         );
 
         if (targetTop === null || Math.abs(targetTop - container.scrollTop) < 2) {
@@ -281,6 +304,16 @@ export function usePageWheelScroll(
 
       const direction = Math.sign(event.deltaY) as 1 | -1 | 0;
       if (!direction) {
+        return;
+      }
+
+      const sections = getSectionPositions(sectionRefs);
+      if (sections.length === 0) {
+        return;
+      }
+
+      const currentIndex = getSectionRangeIndex(container.scrollTop, sections);
+      if (freeScrollIndices.includes(sections[currentIndex].index)) {
         return;
       }
 
@@ -328,6 +361,7 @@ export function usePageWheelScroll(
     enabled,
     interceptTouchpad,
     pixelThreshold,
+    freeScrollIndices,
     sectionRefs,
     snapDelayMs,
     triggerLine,

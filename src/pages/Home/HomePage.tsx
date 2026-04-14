@@ -58,6 +58,7 @@ const HomePage: React.FC = () => {
       wheelCooldownMs: 260,
       snapDelayMs: 140,
       triggerLine: 0.35,
+      freeScrollIndices: [2],
     }
   );
 
@@ -97,6 +98,8 @@ const HomePage: React.FC = () => {
         index={2}
         initiallyReady={savedSectionIndex >= 2}
         sectionRef={(el) => setSectionRef(el, 2)}
+        fullHeight={false}
+        className="items-start"
       >
         <Projects layoutMode="section" />
       </DeferredSection>

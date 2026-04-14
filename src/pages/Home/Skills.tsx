@@ -40,7 +40,7 @@ const Skills: React.FC = () => {
 
   return (
     // Restored original background hierarchy
-    <div className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden bg-gradient-radial from-white via-[#ECECEC] to-[#DCDCDC] px-4 py-8 dark:from-[#1F1F1F] dark:via-[#2C2C2C] dark:to-[#3B3B3B] md:px-8 lg:py-4">
+    <div className="relative flex min-h-screen w-full flex-col items-center justify-start overflow-hidden bg-gradient-radial from-white via-[#ECECEC] to-[#DCDCDC] px-4 py-20 dark:from-[#1F1F1F] dark:via-[#2C2C2C] dark:to-[#3B3B3B] md:px-8 lg:py-24">
 
       {/* Decorative background elements can remain but subtle or removed if they clash with original BG. Keeping them off for "fit in single screen" cleanness or subtle.
           The user asked to keep original hierarchy, usually implies the main gradient. I will omit the 'blobs' to strictly follow 'original color hierarchy' and 'professional' look. */}
