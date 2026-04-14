@@ -320,9 +320,9 @@ const ProjectQuickPreview: React.FC<ProjectQuickPreviewProps> = ({ project, clas
   const [imageFailed, setImageFailed] = useState(false);
   const firstMedia = project.media[0];
   const previewVariant = project.quick_view?.preview_variant;
-  const imageSource = !previewVariant && firstMedia?.url ? getAssetImage(firstMedia.url) : "";
+  const imageSource = firstMedia?.url ? getAssetImage(firstMedia.url) : "";
 
-  if (!previewVariant && imageSource && !imageFailed) {
+  if (imageSource && !imageFailed) {
     return (
       <div className={cn(shellClassName, "h-full min-h-[132px]", className)}>
         <img
