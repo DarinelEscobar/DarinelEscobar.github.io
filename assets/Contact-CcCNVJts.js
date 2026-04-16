@@ -1,0 +1,1 @@
+import{j as t,H as r}from"./index-CMAX7H0H.js";import s from"./ContactMe-CexOItgs.js";import"./index-D24uSIvL.js";const m=()=>t.jsxs("main",{className:"relative bg-whi  scroll-smooth text-dar",children:[t.jsx(r,{}),t.jsx(s,{})]});export{m as default};
