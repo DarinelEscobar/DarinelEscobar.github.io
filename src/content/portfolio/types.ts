@@ -69,7 +69,10 @@ export interface ProjectQuickView {
   preview_variant?: string;
 }
 
+export type ProjectSource = "experience" | "personal";
+
 export interface ProjectData {
+  source: ProjectSource;
   name: string;
   Project_Overview: string;
   description: string;
@@ -151,9 +154,9 @@ export interface UiCopy {
   projects: {
     exploreProjectLabel: string;
     viewRepositoryLabel: string;
-    viewModeLabel: string;
-    simplifiedViewLabel: string;
-    detailedViewLabel: string;
+    allProjectsFilterLabel: string;
+    realExperienceFilterLabel: string;
+    personalProjectBadgeLabel: string;
     yearColumnLabel: string;
     projectColumnLabel: string;
     previewColumnLabel: string;

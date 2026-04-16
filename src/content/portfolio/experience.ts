@@ -366,6 +366,6 @@ const spanishTranslations: Record<string, ProjectTranslation> = {
 };
 
 export const experienceContent: Record<Language, ProjectData[]> = {
-  en: buildProjects(experienceProjects),
-  es: buildProjects(experienceProjects, spanishTranslations),
+  en: buildProjects(experienceProjects, {}, "experience"),
+  es: buildProjects(experienceProjects, spanishTranslations, "experience"),
 };

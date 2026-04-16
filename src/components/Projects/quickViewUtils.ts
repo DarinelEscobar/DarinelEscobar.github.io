@@ -1,6 +1,7 @@
 import type { ProjectData } from "@/content/portfolio/types";
 
 export type ProjectsLayoutMode = "section" | "page";
+export type ProjectsSourceFilterMode = "all" | "experience";
 
 export function getProjectYear(project: ProjectData): string {
   const dateCandidate = project.end_date ?? project.start_date;
@@ -18,6 +19,17 @@ export function getQuickSummary(project: ProjectData): string {
 
 export function getQuickStackHighlights(project: ProjectData): string[] {
   return project.quick_view?.stack_highlights ?? [];
+}
+
+export function filterProjectsBySource(
+  projects: ProjectData[],
+  filterMode: ProjectsSourceFilterMode
+): ProjectData[] {
+  if (filterMode === "all") {
+    return projects;
+  }
+
+  return projects.filter((project) => project.source === "experience");
 }
 
 export function groupProjectsByYear(projects: ProjectData[]) {

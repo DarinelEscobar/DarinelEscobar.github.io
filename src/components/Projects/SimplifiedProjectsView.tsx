@@ -16,6 +16,10 @@ interface SimplifiedProjectsViewProps {
 
 const chipClassName =
   "inline-flex items-center rounded-full border border-black/12 bg-black/[0.03] px-3 py-1 font-rob text-[11px] uppercase tracking-[0.16em] text-black/60 dark:border-white/10 dark:bg-white/[0.05] dark:text-white/65";
+const companyChipClassName =
+  "inline-flex items-center rounded-full border border-black/15 bg-dar px-3 py-1 font-rob text-[11px] uppercase tracking-[0.18em] text-whi dark:border-white/15 dark:bg-white dark:text-black";
+const personalChipClassName =
+  "inline-flex items-center rounded-full border border-amber-500/30 bg-amber-500/12 px-3 py-1 font-rob text-[11px] uppercase tracking-[0.18em] text-amber-800 dark:border-amber-300/25 dark:bg-amber-300/10 dark:text-amber-200";
 
 const desktopRowVariants = {
   hidden: { opacity: 0, x: 24 },
@@ -38,7 +42,6 @@ function MetaRow({ project }: { project: ProjectData }) {
 
   return (
     <div className="mt-4 flex flex-wrap gap-2">
-      {project.client ? <span className={chipClassName}>{project.client}</span> : null}
       {project.quick_view?.impact_label ? (
         <span className={chipClassName}>{project.quick_view.impact_label}</span>
       ) : null}
@@ -56,6 +59,50 @@ function getProjectDateLabel(project: ProjectData, dateLocale: string): string {
   const endDate = project.end_date ? formatDate(project.end_date, dateLocale) : "";
 
   return [startDate, endDate].filter(Boolean).join(" - ");
+}
+
+function ProjectIdentityTag({
+  project,
+  copy,
+}: {
+  project: ProjectData;
+  copy: UiCopy["projects"];
+}) {
+  if (project.source === "personal") {
+    return <span className={personalChipClassName}>{copy.personalProjectBadgeLabel}</span>;
+  }
+
+  if (!project.client) {
+    return null;
+  }
+
+  return <span className={companyChipClassName}>{project.client}</span>;
+}
+
+function ProjectHeaderMeta({
+  project,
+  copy,
+  dateLabel,
+}: {
+  project: ProjectData;
+  copy: UiCopy["projects"];
+  dateLabel: string;
+}) {
+  return (
+    <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+      <ProjectIdentityTag project={project} copy={copy} />
+
+      <p className="font-rob text-[11px] uppercase tracking-[0.22em] text-black/45 dark:text-white/45">
+        {project.role}
+      </p>
+
+      {dateLabel ? (
+        <p className="font-rob text-[11px] uppercase tracking-[0.18em] text-black/38 dark:text-white/38">
+          {dateLabel}
+        </p>
+      ) : null}
+    </div>
+  );
 }
 
 function DesktopProjectsTable({
@@ -143,16 +190,7 @@ function DesktopProjectsTable({
                     >
                       <div className="space-y-4">
                         <div className="flex flex-wrap items-center justify-between gap-3">
-                          <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-                            <p className="font-rob text-[11px] uppercase tracking-[0.22em] text-black/45 dark:text-white/45">
-                              {project.role}
-                            </p>
-                            {dateLabel ? (
-                              <p className="font-rob text-[11px] uppercase tracking-[0.18em] text-black/38 dark:text-white/38">
-                                {dateLabel}
-                              </p>
-                            ) : null}
-                          </div>
+                          <ProjectHeaderMeta project={project} copy={copy} dateLabel={dateLabel} />
                           <button
                             type="button"
                             className="inline-flex items-center gap-2 font-rob text-[11px] uppercase tracking-[0.18em] text-black/55 transition-colors hover:text-dar dark:text-white/55 dark:hover:text-white"
@@ -233,16 +271,7 @@ function MobileProjectsTable({
                   className="space-y-4 p-5"
                 >
                   <div className="space-y-2">
-                    <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-                      <p className="font-rob text-[11px] uppercase tracking-[0.2em] text-black/45 dark:text-white/45">
-                        {project.role}
-                      </p>
-                      {dateLabel ? (
-                        <p className="font-rob text-[11px] uppercase tracking-[0.18em] text-black/38 dark:text-white/38">
-                          {dateLabel}
-                        </p>
-                      ) : null}
-                    </div>
+                    <ProjectHeaderMeta project={project} copy={copy} dateLabel={dateLabel} />
                     <h3 className="font-cor text-3xl leading-none text-dar">{project.name}</h3>
                     <p className="font-lat text-sm leading-6 text-black/68 dark:text-white/68">
                       {getQuickSummary(project)}

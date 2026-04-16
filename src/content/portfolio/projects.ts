@@ -86,6 +86,6 @@ const spanishTranslations: Record<string, ProjectTranslation> = {
 };
 
 export const personalProjectsContent: Record<Language, ProjectData[]> = {
-  en: buildProjects(personalProjects, englishTranslations),
-  es: buildProjects(personalProjects, spanishTranslations),
+  en: buildProjects(personalProjects, englishTranslations, "personal"),
+  es: buildProjects(personalProjects, spanishTranslations, "personal"),
 };

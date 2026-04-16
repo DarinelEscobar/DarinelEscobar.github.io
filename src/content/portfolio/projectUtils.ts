@@ -1,4 +1,4 @@
-import type { ProjectData, ProjectMedia, ProjectQuickView } from "./types";
+import type { ProjectData, ProjectMedia, ProjectQuickView, ProjectSource } from "./types";
 
 interface RawProjectData {
   name: string;
@@ -90,13 +90,15 @@ function normalizeQuickView(
 
 export function buildProjects(
   rawProjects: RawProjectData[],
-  translations: Record<string, ProjectTranslation> = {}
+  translations: Record<string, ProjectTranslation> = {},
+  source: ProjectSource
 ): ProjectData[] {
   return rawProjects.map((project) => {
     const translatedProject = translations[project.name];
     const technologies = translatedProject?.technologies ?? project.technologies;
 
     return {
+      source,
       name: project.name,
       Project_Overview:
         translatedProject?.Project_Overview ??
