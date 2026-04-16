@@ -75,8 +75,8 @@ export const uiCopy: Record<Language, UiCopy> = {
     projects: {
       exploreProjectLabel: "Explore Project",
       viewRepositoryLabel: "View Repository",
-      allProjectsFilterLabel: "All Projects",
-      realExperienceFilterLabel: "Real Experience",
+      allProjectsFilterLabel: "Full Portfolio",
+      realExperienceFilterLabel: "Professional Work",
       personalProjectBadgeLabel: "Personal",
       yearColumnLabel: "Year",
       projectColumnLabel: "Project",
@@ -181,8 +181,8 @@ export const uiCopy: Record<Language, UiCopy> = {
     projects: {
       exploreProjectLabel: "Explorar proyecto",
       viewRepositoryLabel: "Ver repositorio",
-      allProjectsFilterLabel: "Todos los proyectos",
-      realExperienceFilterLabel: "Experiencia real",
+      allProjectsFilterLabel: "Portafolio completo",
+      realExperienceFilterLabel: "Trabajo profesional",
       personalProjectBadgeLabel: "Personal",
       yearColumnLabel: "Ano",
       projectColumnLabel: "Proyecto",
