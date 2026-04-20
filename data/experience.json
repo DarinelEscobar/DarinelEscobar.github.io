@@ -450,6 +450,7 @@
       },
       {
         "name": "Lavafy - Professional Car Wash Management Platform",
+        "url": "https://lavafy.com.mx/",
         "project_overview": "Lavafy is a scalable, multi-tenant web application designed to streamline car wash services in Chiapas. It bridges the gap between car owners and professional washers through a seamless digital interface, managing appointments, payments, and workforce logistics in real-time.",
         "description": "The platform is built on a robust Laravel 10 backend with a dynamic Livewire 3 frontend. It features a comprehensive Role-Based Access Control (RBAC) system catering to Administrators, Managers, Washers, and Clients. Key technical highlights include a custom appointment scheduling engine, integrated MercadoPago payment processing, a mobile-optimized dashboard for field operations, and real-time status tracking.",
         "role": "Full-stack Developer",
