@@ -542,6 +542,40 @@
             "url": "assets/images/Cybac-Lavafy/lavador-dashboard.webp"
           }
         ]
+      },
+      {
+        "name": "FLEX App - CYBAC Puntos Mobile",
+        "Project_Overview": "Mobile app for the FLEX loyalty flow focused on digital cards, rewards, profile access, and mobile session handling.",
+        "description": "Simple Flutter mobile application documented with the repository reference and a hidden easter egg that activates when the app detects 3 fingers pressed for 4 seconds.",
+        "role": "Mobile Developer",
+        "technologies": {
+          "Frontend": ["Flutter", "Dart", "Material 3"],
+          "Backend": ["REST API"],
+          "Tools": ["GitHub", "CodeGraph"],
+          "Project Management": ["GitHub"]
+        },
+        "start_date": "2026-06-01",
+        "end_date": "2026-06-14",
+        "responsibilities": [
+          "Implement Flutter mobile screens and app bootstrap wiring.",
+          "Connect reward, profile, and session flows to backend services.",
+          "Document and integrate a hidden digital identity easter egg for the app."
+        ],
+        "achievements": [
+          "Delivered a documented mobile app entry for the portfolio.",
+          "Integrated a global easter egg triggered by 3 fingers held for 4 seconds."
+        ],
+        "client": "CYBAC / FLEX",
+        "team_size": 1,
+        "url": "",
+        "repository": "https://github.com/DarinelEscobar/puntos-cybac-mobile.git",
+        "quick_view": {
+          "summary": "Flutter mobile app for loyalty points, digital card access, rewards, and hidden app identity interaction.",
+          "impact_label": "Flutter mobile",
+          "stack_highlights": ["Flutter", "Dart", "REST API"],
+          "preview_variant": "mobile"
+        },
+        "media": []
       }
 
 
