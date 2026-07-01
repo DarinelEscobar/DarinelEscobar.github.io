@@ -1,73 +1,55 @@
-import React, { useEffect } from "react";
+import React from "react";
+import { Link } from "react-router-dom";
+import { motion, useReducedMotion } from "framer-motion";
 import Footer from "@/components/Footer/Footer";
 import { usePortfolioContent } from "@/lib/portfolioContent";
-
-import { motion, useAnimation } from "framer-motion";
-import { useInView } from "react-intersection-observer";
-
-const variantsContainer = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.2,
-    },
-  },
-};
-
-const variantsChild = {
-  hidden: { opacity: 0, y: 50 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.6,
-      type: "spring",
-      stiffness: 120,
-      damping: 14,
-    },
-  },
-};
 
 const Title: React.FC = () => {
   const {
     resume: {
-      personal_info: { short_name, rol },
+      personal_info: { email },
     },
+    ui: { closing },
   } = usePortfolioContent();
-  const { ref, inView } = useInView({ threshold: 0.3, triggerOnce: false });
-  const controls = useAnimation();
-
-  useEffect(() => {
-    if (inView) {
-      controls.start("visible");
-    } else {
-      controls.start("hidden");
-    }
-  }, [inView, controls]);
+  const reduceMotion = useReducedMotion();
 
   return (
-    <motion.section
-      ref={ref}
-      className="flex min-h-screen min-h-[100dvh] w-screen flex-col justify-between bg-whi text-dar"
-      variants={variantsContainer}
-      initial="hidden"
-      animate={controls}
-    >
-      <motion.div className="flex flex-col flex-grow justify-center items-center">
-        <motion.h1 className="custom-title font-cor" variants={variantsChild}>
-          {short_name}
-        </motion.h1>
-        <motion.p className="custom-paragraph font-cor" variants={variantsChild}>
-          {rol}
-        </motion.p>
+    <section className="flex min-h-screen min-h-[100dvh] w-full flex-col justify-between bg-whi px-5 pt-24 text-dar sm:px-8 lg:px-12">
+      <motion.div
+        className="mx-auto flex w-full max-w-[1080px] flex-1 flex-col items-center justify-center py-16 text-center"
+        initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.35 }}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+      >
+        <p className="font-rob text-xs font-bold text-[rgb(var(--cobalt))]">
+          {closing.eyebrow}
+        </p>
+        <h2 className="mt-5 max-w-4xl font-lat text-4xl font-bold leading-[1.02] tracking-tight text-dar sm:text-6xl lg:text-7xl">
+          {closing.title}
+        </h2>
+        <p className="mt-5 max-w-2xl font-lat text-lg leading-8 text-dar/70">
+          {closing.body}
+        </p>
+
+        <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+          <a
+            href={`mailto:${email}`}
+            className="inline-flex items-center justify-center rounded-full bg-[rgb(var(--cobalt))] px-6 py-3 font-rob text-sm font-bold text-white shadow-[0_18px_44px_rgba(37,99,235,0.28)] transition-transform duration-300 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-[rgb(var(--cobalt))] focus:ring-offset-2 focus:ring-offset-whi active:translate-y-0"
+          >
+            {closing.primaryCta}
+          </a>
+          <Link
+            to="/Project"
+            className="inline-flex items-center justify-center rounded-full border border-dar/15 px-6 py-3 font-rob text-sm font-bold text-dar transition-colors duration-300 hover:border-[rgb(var(--cobalt))] hover:text-[rgb(var(--cobalt))] focus:outline-none focus:ring-2 focus:ring-[rgb(var(--cobalt))] focus:ring-offset-2 focus:ring-offset-whi"
+          >
+            {closing.secondaryCta}
+          </Link>
+        </div>
       </motion.div>
 
-      {/* Footer */}
-      <motion.div variants={variantsChild}>
-        <Footer />
-      </motion.div>
-    </motion.section>
+      <Footer />
+    </section>
   );
 };
 

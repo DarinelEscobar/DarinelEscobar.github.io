@@ -11,7 +11,7 @@ interface ProjectsSourceFilterProps {
 }
 
 const baseButtonClass =
-  "rounded-full px-3 py-2 font-rob text-[11px] uppercase tracking-[0.16em] transition-colors sm:px-4";
+  "rounded-full px-3 py-2 font-rob text-xs font-bold transition-colors sm:px-4";
 
 const ProjectsSourceFilter: React.FC<ProjectsSourceFilterProps> = ({
   allProjectsLabel,
@@ -33,8 +33,8 @@ const ProjectsSourceFilter: React.FC<ProjectsSourceFilterProps> = ({
         className={cn(
           baseButtonClass,
           value === "all"
-            ? "bg-white text-dar shadow-sm shadow-black/10 dark:bg-white dark:text-black"
-            : "text-dar/75 hover:bg-white/[0.65] dark:text-whi/72 dark:hover:bg-white/[0.08]"
+            ? "bg-[rgb(var(--cobalt))] text-white shadow-sm shadow-black/10"
+            : "text-dar/75 hover:bg-white/[0.65] hover:text-[rgb(var(--cobalt))] dark:text-whi/72 dark:hover:bg-white/[0.08]"
         )}
         onClick={() => onChange("all")}
       >
@@ -47,8 +47,8 @@ const ProjectsSourceFilter: React.FC<ProjectsSourceFilterProps> = ({
         className={cn(
           baseButtonClass,
           value === "experience"
-            ? "bg-white text-dar shadow-sm shadow-black/10 dark:bg-white dark:text-black"
-            : "text-dar/75 hover:bg-white/[0.65] dark:text-whi/72 dark:hover:bg-white/[0.08]"
+            ? "bg-[rgb(var(--cobalt))] text-white shadow-sm shadow-black/10"
+            : "text-dar/75 hover:bg-white/[0.65] hover:text-[rgb(var(--cobalt))] dark:text-whi/72 dark:hover:bg-white/[0.08]"
         )}
         onClick={() => onChange("experience")}
       >

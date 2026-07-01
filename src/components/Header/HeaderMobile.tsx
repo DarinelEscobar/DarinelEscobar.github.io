@@ -4,7 +4,6 @@ import { ArrowUpRight } from "lucide-react";
 import type { Language } from "@/content/portfolio/types";
 import { useResumeContent, useUiCopy } from "@/lib/portfolioContent";
 import LanguageToggle from "./LanguageToggle";
-import CurrentTime from "./CurrentTime";
 
 interface HeaderMobileProps {
   isMenuOpen: boolean;
@@ -24,93 +23,70 @@ const HeaderMobile: React.FC<HeaderMobileProps> = ({
   setLanguage,
 }) => {
   const {
-    personal_info: { short_name, rol, location },
+    personal_info: { short_name, rol },
   } = useResumeContent();
   const ui = useUiCopy();
 
   return (
-    <div
-      className="theme-transition z-30 flex items-center justify-between bg-bla px-5 py-3 text-sm text-white"
-    >
-      {/* Nombre corto */}
-      <h1 className="font-rob font-bold text-dar text-lg">{short_name}</h1>
+    <div className="theme-transition z-30 mx-3 mt-3 flex h-14 items-center justify-between rounded-full border border-dar/10 bg-whi/88 px-4 text-sm shadow-[0_14px_36px_rgba(15,23,42,0.1)] backdrop-blur-xl dark:border-white/10">
+      <Link to="/" className="font-rob text-sm font-bold text-dar">
+        {short_name}
+      </Link>
 
-      {/* Botón para abrir/cerrar menú */}
       <button
+        type="button"
         onClick={toggleMenu}
-        className="font-rob font-bold text-dar text-lg"
+        className="font-rob text-sm font-bold text-dar transition-colors hover:text-[rgb(var(--cobalt))]"
       >
         {isMenuOpen ? ui.header.closeLabel : ui.header.menuLabel}
       </button>
 
       {isMenuOpen && (
-        <div
-          className="theme-transition fixed inset-0 z-50 flex flex-col bg-whi pb-[env(safe-area-inset-bottom)] pl-[env(safe-area-inset-left)] pr-[env(safe-area-inset-right)] pt-[env(safe-area-inset-top)] text-white"
-        >
-          {/* Sección superior del menú (botón Close) */}
-          <div className="flex justify-between items-center px-5 py-4 border-gray-700 border-b w-full">
-            <h1 className="font-rob font-bold text-dar text-lg">
-              {short_name}
-            </h1>
+        <div className="theme-transition fixed inset-0 z-50 flex flex-col bg-whi px-5 pb-[env(safe-area-inset-bottom)] pt-[env(safe-area-inset-top)] text-dar">
+          <div className="flex items-center justify-between border-b border-dar/10 py-5 dark:border-white/10">
+            <div>
+              <p className="font-rob text-sm font-bold text-dar">{short_name}</p>
+              <p className="font-lat text-sm text-dar/55">{rol}</p>
+            </div>
             <button
+              type="button"
               onClick={toggleMenu}
-              className="font-rob font-bold text-dar text-lg hover:underline"
+              className="font-rob text-sm font-bold text-dar transition-colors hover:text-[rgb(var(--cobalt))]"
             >
               {ui.header.closeLabel}
             </button>
           </div>
 
-          {/* CONTENIDO PRINCIPAL DEL MENÚ */}
-          <div className="flex flex-col justify-start items-start gap-6 mt-4 px-5 text-dar">
-            {/* Info: Nombre corto + rol */}
+          <div className="mt-8 flex items-center justify-between rounded-2xl border border-dar/10 bg-white/45 p-4 dark:border-white/10 dark:bg-white/[0.04]">
             <div>
-              <h2 className="font-rob font-bold text-xl">{short_name}</h2>
-              <p className="font-lat text-5dar text-base">{rol}</p>
-            </div>
-
-            {/* Info: Location + hora */}
-            <div>
-              <h2 className="font-rob font-bold text-base">{ui.header.locationLabel}</h2>
-              <p className="font-lat text-5dar text-sm">
-                {location} (<CurrentTime locale={ui.locale.time} />)
+              <p className="font-rob text-xs font-bold text-dar/55">
+                {ui.header.themeLabel}
               </p>
+              <button
+                type="button"
+                onClick={toggleDarkMode}
+                className="mt-2 font-lat text-sm font-bold text-dar transition-colors hover:text-[rgb(var(--cobalt))]"
+              >
+                {isDarkMode ? ui.header.lightModeLabel : ui.header.darkModeLabel}
+              </button>
             </div>
-
-            {/* Toggle de tema */}
-            <div>
-              <div className="flex items-center justify-between gap-3">
-                <h2 className="font-rob font-bold text-base">{ui.header.themeLabel}</h2>
-                <LanguageToggle
-                  language={language}
-                  setLanguage={setLanguage}
-                  tooltipLabel={ui.header.languageLabel}
-                />
-              </div>
-              <div className="mt-2 flex flex-wrap items-center gap-2.5">
-                <button
-                  type="button"
-                  onClick={toggleDarkMode}
-                  className="theme-transition font-lat text-5dar text-sm underline"
-                >
-                  {isDarkMode ? ui.header.lightModeLabel : ui.header.darkModeLabel}
-                </button>
-              </div>
-            </div>
+            <LanguageToggle
+              language={language}
+              setLanguage={setLanguage}
+              tooltipLabel={ui.header.languageLabel}
+            />
           </div>
 
-          {/* NAVEGACIÓN (enlaces) */}
-          <div className="flex flex-col gap-6 mt-auto px-5 pb-10 text-dar">
-            {ui.header.navigationLinks.map((link, index) => (
+          <nav className="mt-auto flex flex-col gap-4 pb-10">
+            {ui.header.navigationLinks.map((link) => (
               <MobileLink
                 key={link.to}
                 to={link.to}
-                indexNumber={String(index + 1).padStart(2, "0")}
                 label={link.label}
                 onNavigate={toggleMenu}
               />
             ))}
-            {/* <MobileLink to="/Archive" indexNumber="03" label="Archive" /> */}
-          </div>
+          </nav>
         </div>
       )}
     </div>
@@ -119,24 +95,21 @@ const HeaderMobile: React.FC<HeaderMobileProps> = ({
 
 interface MobileLinkProps {
   to: string;
-  indexNumber: string;
   label: string;
   onNavigate: () => void;
 }
 
-const MobileLink: React.FC<MobileLinkProps> = ({ to, indexNumber, label, onNavigate }) => (
+const MobileLink: React.FC<MobileLinkProps> = ({ to, label, onNavigate }) => (
   <Link
     to={to}
-    className="flex justify-between items-center pb-4 border-gray-700 border-b font-bold text-xl"
+    className="flex items-center justify-between rounded-2xl border border-dar/10 bg-white/45 px-5 py-4 font-rob text-xl font-bold text-dar transition-colors hover:border-[rgb(var(--cobalt))] hover:text-[rgb(var(--cobalt))] dark:border-white/10 dark:bg-white/[0.04]"
     onClick={() => {
       onNavigate();
       window.scrollTo(0, 0);
     }}
   >
-    <div className="flex items-center gap-3">
-      <span className="font-extrabold text-2xl">{indexNumber}</span> {label}
-    </div>
-    <ArrowUpRight size={20} className="text-5dar" />
+    {label}
+    <ArrowUpRight size={20} className="text-current" />
   </Link>
 );
 

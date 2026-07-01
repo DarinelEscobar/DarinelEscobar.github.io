@@ -8,7 +8,7 @@ const Project = lazy(() => import("@/pages/Project/Project"));
 
 const LoadingFallback = () => (
   <div className="flex min-h-screen items-center justify-center bg-whi text-dar">
-    <div className="h-8 w-8 animate-spin rounded-full border-4 border-blue-500 border-t-transparent" />
+    <div className="h-8 w-8 animate-spin rounded-full border-4 border-[rgb(var(--cobalt))] border-t-transparent" />
   </div>
 );
 

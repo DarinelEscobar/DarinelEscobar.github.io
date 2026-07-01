@@ -173,7 +173,7 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({
               >
                 {isLoading && (
                   <div className="absolute inset-0 flex items-center justify-center bg-gray-100 dark:bg-gray-900">
-                    <Loader2 className="h-12 w-12 animate-spin text-blue-500" />
+                    <Loader2 className="h-12 w-12 animate-spin text-[rgb(var(--cobalt))]" />
                   </div>
                 )}
 
@@ -259,7 +259,7 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({
                   onClick={() => setCurrentImageIndex(index)}
                   className={`h-2.5 w-2.5 rounded-full transition-all ${
                     index === currentImageIndex
-                      ? "scale-125 bg-blue-500"
+                      ? "scale-125 bg-[rgb(var(--cobalt))]"
                       : "scale-100 bg-white/50 hover:bg-white/70"
                   }`}
                 />
@@ -280,8 +280,8 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({
               key={index}
               className={`relative cursor-pointer overflow-hidden rounded-lg border-2 transition-all duration-300 ${
                 index === currentImageIndex
-                  ? "z-10 scale-105 border-blue-500"
-                  : "border-transparent hover:border-blue-300"
+                  ? "z-10 scale-105 border-[rgb(var(--cobalt))]"
+                  : "border-transparent hover:border-[rgba(var(--cobalt),0.45)]"
               }`}
               variants={thumbnailItem}
               whileHover={{ scale: 1.05, rotateZ: 0.5 }}

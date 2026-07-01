@@ -113,24 +113,22 @@ export interface UiCopy {
     navigationLinks: PortfolioLink[];
   };
   home: {
+    hero: {
+      eyebrow: string;
+      headline: string;
+      highlight: string;
+      body: string;
+      primaryCta: string;
+      secondaryCta: string;
+    };
     about: {
-      line1Prefix: string;
-      line1Highlight: string;
-      line1Suffix: string;
-      line2Prefix: string;
-      line2Highlight: string;
-      line2Suffix: string;
-      line3Prefix: string;
-      line3Highlight: string;
-      line3Suffix: string;
-      line4Prefix: string;
-      line4Highlight: string;
-      line4Suffix: string;
-      notePrefix: string;
-      noteHighlightOne: string;
-      noteMiddle: string;
-      noteHighlightTwo: string;
-      noteSuffix: string;
+      eyebrow: string;
+      title: string;
+      body: string;
+      highlights: Array<{
+        title: string;
+        body: string;
+      }>;
     };
     skills: {
       titlePrefix: string;
@@ -142,6 +140,20 @@ export interface UiCopy {
   contact: {
     title: string;
     subtitle: string;
+    body: string;
+    actions: {
+      email: string;
+      whatsapp: string;
+      github: string;
+      linkedin: string;
+    };
+  };
+  closing: {
+    eyebrow: string;
+    title: string;
+    body: string;
+    primaryCta: string;
+    secondaryCta: string;
   };
   footer: {
     topLabel: string;

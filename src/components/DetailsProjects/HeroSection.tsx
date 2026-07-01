@@ -49,20 +49,20 @@ const HeroSection: React.FC<HeroSectionProps> = ({ project }) => {
 
   return (
     <motion.section
-      className="flex items-center px-4 py-24 min-h-[50vh]"
+      className="flex min-h-[50vh] items-center px-5 py-24 sm:px-8 lg:px-12"
       variants={containerVariants}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: false, amount: 0.2 }}
     >
-      <div className="flex lg:flex-row flex-col items-center gap-12 mx-auto container">
+      <div className="mx-auto flex w-full max-w-[1320px] flex-col items-center gap-12 lg:flex-row">
         {/* Información principal del proyecto */}
         <motion.div
           className="space-y-8 w-full lg:w-1/2"
           variants={childVariants}
         >
           <motion.h1
-            className="font-cor font-bold text-dar text-4xl md:text-5xl leading-tight"
+            className="font-lat text-4xl font-bold leading-tight tracking-tight text-dar md:text-5xl"
             variants={childVariants}
           >
             {project.name}
@@ -82,7 +82,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ project }) => {
             {project.url && (
               <Button
                 size="lg"
-                className="bg-blue-500 hover:bg-blue-600 dark:hover:bg-blue-700 dark:bg-blue-600 px-8 py-6 w-full sm:w-auto text-whi text-lg"
+                className="w-full bg-[rgb(var(--cobalt))] px-8 py-6 text-lg text-white hover:bg-[rgb(var(--cobalt))] sm:w-auto"
                 onClick={() => window.open(project.url, "_blank")}
               >
                 {projects.exploreProjectLabel}
@@ -91,7 +91,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ project }) => {
             {project.repository && (
               <Button
                 size="lg"
-                className="flex items-center gap-2 bg-dar hover:bg-5dar dark:hover:bg-gray-700 dark:bg-gray-800 px-8 py-6 w-full sm:w-auto text-whi text-lg"
+                className="flex w-full items-center gap-2 bg-dar px-8 py-6 text-lg text-whi hover:bg-dar/85 dark:bg-white/10 dark:hover:bg-white/15 sm:w-auto"
                 onClick={() => window.open(project.repository, "_blank")}
               >
                 {projects.viewRepositoryLabel}
@@ -107,7 +107,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ project }) => {
           variants={childVariants}
           whileHover={{ scale: 1.02, rotateZ: 0.5 }}
         >
-          <div className="shadow-2xl border border-5whi dark:border-5dar rounded-xl overflow-hidden">
+          <div className="overflow-hidden rounded-2xl border border-dar/10 shadow-[0_24px_70px_rgba(15,23,42,0.16)] dark:border-white/10">
             {project.media && project.media.length > 0 ? (
               <motion.img
                 src={getAssetImage(project.media[0].url)}

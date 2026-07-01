@@ -67,14 +67,12 @@ const DetailsProjects: React.FC<DetailsProjectsProps> = ({
 
     updateScrollHint();
 
-    const handleScroll = () => updateScrollHint();
     const frameId = window.requestAnimationFrame(updateScrollHint);
     const resizeObserver =
       typeof ResizeObserver !== "undefined"
         ? new ResizeObserver(() => updateScrollHint())
         : null;
 
-    container.addEventListener("scroll", handleScroll, { passive: true });
     window.addEventListener("resize", updateScrollHint);
     resizeObserver?.observe(container);
 
@@ -84,7 +82,6 @@ const DetailsProjects: React.FC<DetailsProjectsProps> = ({
 
     return () => {
       window.cancelAnimationFrame(frameId);
-      container.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", updateScrollHint);
       resizeObserver?.disconnect();
     };
@@ -103,7 +100,8 @@ const DetailsProjects: React.FC<DetailsProjectsProps> = ({
   return (
     <motion.div
       ref={scrollContainerRef}
-      className="fixed inset-0 z-50 overflow-auto bg-black/70"
+      className="fixed inset-0 z-50 overflow-auto bg-slate-950/72"
+      onScroll={updateScrollHint}
       variants={modalVariants}
       initial="hidden"
       animate="visible"
@@ -111,7 +109,7 @@ const DetailsProjects: React.FC<DetailsProjectsProps> = ({
       <div ref={contentRef} className="absolute min-h-full w-full">
         <button
           onClick={onClose}
-          className="fixed right-4 top-4 z-50 rounded-full border border-black/5 bg-white/90 p-2 text-dar shadow-lg shadow-black/[0.15] transition-colors hover:bg-white dark:border-white/10 dark:bg-gray-800/[0.85] dark:shadow-black/50 dark:hover:bg-gray-700"
+          className="fixed right-4 top-4 z-50 rounded-full border border-dar/10 bg-whi/92 p-2 text-dar shadow-[0_16px_44px_rgba(15,23,42,0.16)] backdrop-blur-md transition-colors hover:text-[rgb(var(--cobalt))] dark:border-white/10"
         >
           <X className="h-5 w-5" />
         </button>
@@ -119,8 +117,8 @@ const DetailsProjects: React.FC<DetailsProjectsProps> = ({
         <div className="min-h-screen bg-whi text-dar">
           <HeroSection project={project} />
 
-          <section className="px-4 py-24">
-            <div className="container mx-auto grid gap-12 lg:grid-cols-3">
+          <section className="px-5 py-24 sm:px-8 lg:px-12">
+            <div className="mx-auto grid max-w-[1320px] gap-12 lg:grid-cols-3">
               <ProjectDetails
                 project={{
                   ...project,

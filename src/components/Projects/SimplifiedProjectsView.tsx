@@ -15,11 +15,11 @@ interface SimplifiedProjectsViewProps {
 }
 
 const chipClassName =
-  "inline-flex items-center rounded-full border border-black/12 bg-black/[0.03] px-3 py-1 font-rob text-[11px] uppercase tracking-[0.16em] text-black/60 dark:border-white/10 dark:bg-white/[0.05] dark:text-white/65";
+  "inline-flex items-center rounded-full border border-dar/10 bg-white/55 px-3 py-1 font-rob text-xs font-bold text-dar/62 dark:border-white/10 dark:bg-white/[0.05] dark:text-white/65";
 const companyChipClassName =
-  "inline-flex items-center rounded-full border border-black/15 bg-dar px-3 py-1 font-rob text-[11px] uppercase tracking-[0.18em] text-whi dark:border-white/15 dark:bg-white dark:text-black";
+  "inline-flex items-center rounded-full border border-dar/15 bg-dar px-3 py-1 font-rob text-xs font-bold text-whi dark:border-white/15 dark:bg-white dark:text-black";
 const personalChipClassName =
-  "inline-flex items-center rounded-full border border-amber-500/30 bg-amber-500/12 px-3 py-1 font-rob text-[11px] uppercase tracking-[0.18em] text-amber-800 dark:border-amber-300/25 dark:bg-amber-300/10 dark:text-amber-200";
+  "inline-flex items-center rounded-full border border-[rgba(var(--cobalt),0.32)] bg-[rgba(var(--cobalt),0.1)] px-3 py-1 font-rob text-xs font-bold text-[rgb(var(--cobalt))]";
 
 const desktopRowVariants = {
   hidden: { opacity: 0, x: 24 },
@@ -92,12 +92,12 @@ function ProjectHeaderMeta({
     <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
       <ProjectIdentityTag project={project} copy={copy} />
 
-      <p className="font-rob text-[11px] uppercase tracking-[0.22em] text-black/45 dark:text-white/45">
+      <p className="font-rob text-xs font-bold text-black/45 dark:text-white/45">
         {project.role}
       </p>
 
       {dateLabel ? (
-        <p className="font-rob text-[11px] uppercase tracking-[0.18em] text-black/38 dark:text-white/38">
+        <p className="font-rob text-xs text-black/38 dark:text-white/38">
           {dateLabel}
         </p>
       ) : null}
@@ -120,11 +120,11 @@ function DesktopProjectsTable({
 }) {
   return (
     <div className="hidden md:block">
-      <div className="overflow-hidden rounded-[2rem] border border-black/12 bg-[rgba(247,244,238,0.78)] shadow-[0_24px_60px_rgba(15,23,42,0.08)] backdrop-blur-md dark:border-white/10 dark:bg-[rgba(22,22,22,0.75)] dark:shadow-[0_30px_70px_rgba(0,0,0,0.3)]">
-        <div className="sticky top-0 z-20 bg-[rgba(242,238,230,0.95)] font-rob text-[11px] uppercase tracking-[0.22em] text-black/45 backdrop-blur-md dark:bg-[rgba(20,20,20,0.94)] dark:text-white/45">
+      <div className="overflow-hidden rounded-[2rem] border border-dar/10 bg-white/52 shadow-[0_24px_60px_rgba(15,23,42,0.08)] backdrop-blur-md dark:border-white/10 dark:bg-white/[0.04] dark:shadow-[0_30px_70px_rgba(0,0,0,0.3)]">
+        <div className="sticky top-0 z-20 bg-whi/92 font-rob text-xs font-bold text-black/45 backdrop-blur-md dark:text-white/45">
           <div className="grid grid-cols-[144px_minmax(0,1fr)_220px]">
             <div
-              className="relative z-10 flex min-h-[56px] items-end border-b border-r border-black/10 bg-[rgba(242,238,230,0.98)] px-4 py-3 dark:border-white/10 dark:bg-[rgba(20,20,20,0.98)]"
+              className="relative z-10 flex min-h-[56px] items-end border-b border-r border-dar/10 bg-whi/95 px-4 py-3 dark:border-white/10"
               style={{
                 marginRight: `-${HEADER_SIDE_OVERLAP}px`,
                 paddingRight: `calc(1rem + ${HEADER_SIDE_OVERLAP}px)`,
@@ -133,7 +133,7 @@ function DesktopProjectsTable({
               {copy.yearColumnLabel}
             </div>
             <div
-              className="flex min-h-[56px] items-end border-b border-black/10 px-4 py-3 dark:border-white/10"
+              className="flex min-h-[56px] items-end border-b border-dar/10 px-4 py-3 dark:border-white/10"
               style={{
                 paddingLeft: `calc(1rem + ${HEADER_SIDE_OVERLAP}px)`,
                 paddingRight: `calc(1rem + ${HEADER_SIDE_OVERLAP}px)`,
@@ -142,7 +142,7 @@ function DesktopProjectsTable({
               {copy.projectColumnLabel}
             </div>
             <div
-              className="relative z-10 flex min-h-[56px] items-end border-b border-l border-black/10 bg-[rgba(242,238,230,0.98)] px-4 py-3 dark:border-white/10 dark:bg-[rgba(20,20,20,0.98)]"
+              className="relative z-10 flex min-h-[56px] items-end border-b border-l border-dar/10 bg-whi/95 px-4 py-3 dark:border-white/10"
               style={{
                 marginLeft: `-${HEADER_SIDE_OVERLAP}px`,
                 paddingLeft: `calc(1rem + ${HEADER_SIDE_OVERLAP}px)`,
@@ -156,12 +156,12 @@ function DesktopProjectsTable({
         {groupedProjects.map(([year, yearProjects], yearGroupIndex) => (
           <section
             key={year}
-            className="grid border-b border-black/10 last:border-b-0 md:grid-cols-[144px_minmax(0,1fr)_220px] dark:border-white/10"
+            className="grid border-b border-dar/10 last:border-b-0 md:grid-cols-[144px_minmax(0,1fr)_220px] dark:border-white/10"
           >
             <div
               className={cn(
-                "relative z-10 flex items-start border-r border-black/10 bg-[rgba(247,244,238,0.96)] px-5 py-6 dark:border-white/10 dark:bg-[rgba(22,22,22,0.96)]",
-                yearGroupIndex > 0 && "border-t border-black/10 dark:border-white/10",
+                "relative z-10 flex items-start border-r border-dar/10 bg-whi/80 px-5 py-6 dark:border-white/10",
+                yearGroupIndex > 0 && "border-t border-dar/10 dark:border-white/10",
               )}
               style={{
                 gridRow: `span ${yearProjects.length}`,
@@ -170,14 +170,14 @@ function DesktopProjectsTable({
                   yearGroupIndex === 0 ? "100%" : `calc(100% + ${YEAR_CELL_OVERLAP}px)`,
               }}
             >
-              <span className="font-cor text-5xl leading-none text-dar lg:text-[3.4rem]">{year}</span>
+              <span className="font-rob text-4xl font-bold leading-none text-dar lg:text-5xl">{year}</span>
             </div>
 
             {yearProjects.map((project, rowIndex) => {
                 const projectIndex = allProjects.indexOf(project);
                 const dateLabel = getProjectDateLabel(project, dateLocale);
                 const rowBorderClass =
-                  rowIndex === yearProjects.length - 1 ? "" : "border-b border-black/10 dark:border-white/10";
+                  rowIndex === yearProjects.length - 1 ? "" : "border-b border-dar/10 dark:border-white/10";
 
                 return (
                   <React.Fragment key={`${year}-${project.name}`}>
@@ -193,7 +193,7 @@ function DesktopProjectsTable({
                           <ProjectHeaderMeta project={project} copy={copy} dateLabel={dateLabel} />
                           <button
                             type="button"
-                            className="inline-flex items-center gap-2 font-rob text-[11px] uppercase tracking-[0.18em] text-black/55 transition-colors hover:text-dar dark:text-white/55 dark:hover:text-white"
+                            className="inline-flex items-center gap-2 rounded-full border border-dar/10 px-3 py-2 font-rob text-xs font-bold text-black/55 transition-colors hover:border-[rgb(var(--cobalt))] hover:text-[rgb(var(--cobalt))] dark:border-white/10 dark:text-white/55 dark:hover:text-white"
                             onClick={() => onOpenProject(projectIndex)}
                           >
                             {copy.openProjectDetailsLabel}
@@ -201,7 +201,7 @@ function DesktopProjectsTable({
                           </button>
                         </div>
 
-                        <h3 className="font-cor text-[2.6rem] leading-[0.94] text-dar lg:text-[3.1rem]">
+                        <h3 className="font-lat text-[2.2rem] font-bold leading-[0.98] tracking-tight text-dar lg:text-[2.65rem]">
                           {project.name}
                         </h3>
                         <p className="max-w-4xl font-lat text-sm leading-6 text-black/68 dark:text-white/68">
@@ -214,7 +214,7 @@ function DesktopProjectsTable({
 
                     <div
                       className={cn(
-                        "flex items-center border-l border-black/10 p-3 dark:border-white/10",
+                        "flex items-center border-l border-dar/10 p-3 dark:border-white/10",
                         rowBorderClass,
                       )}
                     >
@@ -251,10 +251,10 @@ function MobileProjectsTable({
       {groupedProjects.map(([year, yearProjects]) => (
         <section
           key={year}
-          className="overflow-hidden rounded-[1.75rem] border border-black/12 bg-white/70 shadow-[0_18px_40px_rgba(15,23,42,0.08)] backdrop-blur-md dark:border-white/10 dark:bg-black/20 dark:shadow-[0_20px_46px_rgba(0,0,0,0.28)]"
+          className="overflow-hidden rounded-[1.75rem] border border-dar/10 bg-white/58 shadow-[0_18px_40px_rgba(15,23,42,0.08)] backdrop-blur-md dark:border-white/10 dark:bg-white/[0.04] dark:shadow-[0_20px_46px_rgba(0,0,0,0.28)]"
         >
-          <div className="border-b border-black/10 px-5 py-4 dark:border-white/10">
-            <span className="font-cor text-4xl leading-none text-dar">{year}</span>
+          <div className="border-b border-dar/10 px-5 py-4 dark:border-white/10">
+            <span className="font-rob text-3xl font-bold leading-none text-dar">{year}</span>
           </div>
 
           <div className="divide-y divide-black/10 dark:divide-white/10">
@@ -272,7 +272,7 @@ function MobileProjectsTable({
                 >
                   <div className="space-y-2">
                     <ProjectHeaderMeta project={project} copy={copy} dateLabel={dateLabel} />
-                    <h3 className="font-cor text-3xl leading-none text-dar">{project.name}</h3>
+                    <h3 className="font-lat text-3xl font-bold leading-none tracking-tight text-dar">{project.name}</h3>
                     <p className="font-lat text-sm leading-6 text-black/68 dark:text-white/68">
                       {getQuickSummary(project)}
                     </p>
@@ -284,7 +284,7 @@ function MobileProjectsTable({
 
                   <button
                     type="button"
-                    className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-black/12 bg-white/70 px-4 py-3 font-rob text-xs uppercase tracking-[0.18em] text-dar transition-colors hover:bg-dar hover:text-whi dark:border-white/10 dark:bg-white/[0.05] dark:text-whi dark:hover:bg-white dark:hover:text-black"
+                    className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-dar/10 bg-white/70 px-4 py-3 font-rob text-xs font-bold text-dar transition-colors hover:border-[rgb(var(--cobalt))] hover:text-[rgb(var(--cobalt))] dark:border-white/10 dark:bg-white/[0.05] dark:text-whi dark:hover:bg-white dark:hover:text-black"
                     onClick={() => onOpenProject(projectIndex)}
                   >
                     {copy.openProjectDetailsLabel}
@@ -308,7 +308,7 @@ const SimplifiedProjectsView: React.FC<SimplifiedProjectsViewProps> = ({
 }) => {
   if (projects.length === 0) {
     return (
-      <div className="rounded-[1.75rem] border border-dashed border-black/12 bg-white/60 px-6 py-12 text-center font-lat text-base text-black/68 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/68">
+      <div className="rounded-[1.75rem] border border-dashed border-dar/15 bg-white/60 px-6 py-12 text-center font-lat text-base text-black/68 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/68">
         {copy.noProjectsAvailableLabel}
       </div>
     );

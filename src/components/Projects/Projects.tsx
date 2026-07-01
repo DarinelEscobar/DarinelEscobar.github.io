@@ -12,7 +12,7 @@ import {
 
 const DetailsProjects = lazy(() => import("../DetailsProjects/DetailsProjects"));
 const floatingControlsClassName =
-  "fixed left-1/2 bottom-[calc(env(safe-area-inset-bottom)+12px)] z-40 inline-flex -translate-x-1/2 items-center rounded-full bg-gray-200/[0.35] px-3 py-2 shadow-lg shadow-black/10 backdrop-blur-sm dark:bg-gray-700/[0.45] dark:shadow-black/40";
+  "fixed left-1/2 bottom-[calc(env(safe-area-inset-bottom)+12px)] z-40 inline-flex -translate-x-1/2 items-center rounded-full border border-dar/10 bg-whi/85 px-3 py-2 shadow-[0_16px_44px_rgba(15,23,42,0.12)] backdrop-blur-xl dark:border-white/10 dark:shadow-black/40";
 
 interface ProjectsProps {
   layoutMode?: ProjectsLayoutMode;
@@ -44,7 +44,7 @@ const Projects: React.FC<ProjectsProps> = ({ layoutMode = "page" }) => {
     <div ref={ref} className="relative w-full bg-whi text-dar">
       <div
         className={cn(
-          "mx-auto w-full max-w-[1740px] px-2 pb-24 pt-24 sm:px-3 sm:pb-28 lg:px-4",
+          "mx-auto w-full max-w-[1500px] px-5 pb-24 pt-24 sm:px-8 sm:pb-28 lg:px-12",
           layoutMode === "section" ? "py-8 lg:py-24" : "min-h-screen"
         )}
       >

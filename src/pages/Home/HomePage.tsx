@@ -71,7 +71,7 @@ const HomePage: React.FC = () => {
   return (
     <main
       id="main-container"
-      className={`Container w-screen bg-whi pt-[env(safe-area-inset-top)] text-dar ${
+      className={`Container w-full bg-whi pt-[env(safe-area-inset-top)] text-dar ${
         isDesktop
           ? "h-[100dvh] overflow-auto overscroll-y-contain"
           : "min-h-screen overflow-visible"

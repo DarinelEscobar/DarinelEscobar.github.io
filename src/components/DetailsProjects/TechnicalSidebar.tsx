@@ -124,9 +124,9 @@ const TechnicalSidebar: React.FC<TechnicalSidebarProps> = ({ project }) => {
       whileInView="visible"
       viewport={{ once: false, amount: 0.2 }}
     >
-      <Card className="top-0 sticky bg-whi dark:bg-white/5 shadow-lg border border-5whi dark:border-5dar/30">
+      <Card className="sticky top-0 border border-dar/10 bg-white/52 shadow-[0_18px_48px_rgba(15,23,42,0.08)] dark:border-white/10 dark:bg-white/[0.04]">
         <CardHeader className="pb-4">
-          <CardTitle className="font-cor text-dar text-2xl">
+          <CardTitle className="font-lat text-2xl font-bold text-dar">
             {projects.technicalDetailsLabel}
           </CardTitle>
         </CardHeader>
@@ -142,7 +142,7 @@ const TechnicalSidebar: React.FC<TechnicalSidebarProps> = ({ project }) => {
           >
             {project.client && (
               <motion.div className="flex items-center gap-4" variants={sidebarItem}>
-                <Building className="w-6 h-6 text-blue-500" />
+                <Building className="h-6 w-6 text-[rgb(var(--cobalt))]" />
                 <div>
                   <p className="text-5dar text-sm">{projects.clientLabel}</p>
                   <p className="font-rob font-medium text-lg">{project.client}</p>
@@ -152,7 +152,7 @@ const TechnicalSidebar: React.FC<TechnicalSidebarProps> = ({ project }) => {
 
             {duration && (
               <motion.div className="flex items-center gap-4" variants={sidebarItem}>
-                <Calendar className="w-6 h-6 text-blue-500" />
+                <Calendar className="h-6 w-6 text-[rgb(var(--cobalt))]" />
                 <div>
                   <p className="text-5dar text-sm">{projects.durationLabel}</p>
                   <p className="font-rob font-medium text-lg">{duration}</p>
@@ -162,7 +162,7 @@ const TechnicalSidebar: React.FC<TechnicalSidebarProps> = ({ project }) => {
 
             {typeof project.team_size === "number" && (
               <motion.div className="flex items-center gap-4" variants={sidebarItem}>
-                <Users className="w-6 h-6 text-blue-500" />
+                <Users className="h-6 w-6 text-[rgb(var(--cobalt))]" />
                 <div>
                   <p className="text-5dar text-sm">{projects.teamLabel}</p>
                   <p className="font-rob font-medium text-lg">
@@ -174,7 +174,7 @@ const TechnicalSidebar: React.FC<TechnicalSidebarProps> = ({ project }) => {
             )}
 
             <motion.div className="flex items-center gap-4" variants={sidebarItem}>
-              <Briefcase className="w-6 h-6 text-blue-500" />
+              <Briefcase className="h-6 w-6 text-[rgb(var(--cobalt))]" />
               <div>
                 <p className="text-5dar text-sm">{projects.roleLabel}</p>
                 <p className="font-rob font-medium text-lg">{project.role}</p>
@@ -192,7 +192,7 @@ const TechnicalSidebar: React.FC<TechnicalSidebarProps> = ({ project }) => {
               viewport={{ once: false, amount: 0.2 }}
             >
               <motion.h4
-                className="font-cor font-semibold text-dar text-lg"
+                className="font-lat text-lg font-semibold text-dar"
                 variants={sidebarItem}
               >
                 {projects.technologyStackLabel}
@@ -213,7 +213,7 @@ const TechnicalSidebar: React.FC<TechnicalSidebarProps> = ({ project }) => {
                           >
                             <Badge
                               variant="outline"
-                              className="hover:bg-blue-500/5 px-3 py-1.5 border-blue-500/20 font-rob font-medium text-dar text-sm"
+                              className="border-[rgba(var(--cobalt),0.24)] px-3 py-1.5 font-rob text-sm font-medium text-dar hover:bg-[rgba(var(--cobalt),0.08)]"
                             >
                               {tech}
                             </Badge>

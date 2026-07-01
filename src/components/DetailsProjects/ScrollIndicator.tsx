@@ -5,13 +5,13 @@ import { motion, useScroll, useTransform } from "framer-motion";
 interface ScrollIndicatorProps {
   containerRef: React.RefObject<HTMLDivElement | null>;
   onClick: () => void;
-  text?: string;
+  ariaLabel?: string;
 }
 
 const ScrollIndicator: React.FC<ScrollIndicatorProps> = ({
   containerRef,
   onClick,
-  text = "Scroll to continue",
+  ariaLabel = "Continue",
 }) => {
   const { scrollY } = useScroll({ container: containerRef });
 
@@ -21,15 +21,11 @@ const ScrollIndicator: React.FC<ScrollIndicatorProps> = ({
   return (
     <motion.button
       type="button"
-      aria-label={text}
+      aria-label={ariaLabel}
       onClick={onClick}
       style={{ opacity, y }}
       className="fixed bottom-6 left-1/2 z-40 flex -translate-x-1/2 flex-col items-center gap-2 text-dar/60 drop-shadow-[0_2px_12px_rgba(255,255,255,0.32)] transition-colors hover:text-dar/85 dark:drop-shadow-[0_2px_16px_rgba(0,0,0,0.78)]"
     >
-      <span className="font-rob text-[11px] uppercase tracking-[0.34em]">
-        {text}
-      </span>
-
       <div className="flex flex-col items-center">
         <motion.div
           animate={{ y: [0, 6, 0] }}

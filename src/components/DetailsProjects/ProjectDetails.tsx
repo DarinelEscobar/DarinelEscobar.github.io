@@ -67,10 +67,10 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({ project }) => {
       {/* Visión General del Proyecto */}
       <section className="space-y-6">
         <div className="flex items-center gap-3">
-          <div className="flex justify-center items-center bg-blue-500/10 p-2 rounded-full">
-            <ArrowUpRight className="w-6 h-6 text-blue-500" />
+          <div className="flex justify-center items-center rounded-full bg-[rgba(var(--cobalt),0.1)] p-2">
+            <ArrowUpRight className="h-6 w-6 text-[rgb(var(--cobalt))]" />
           </div>
-          <h2 className="font-cor font-bold text-dar text-3xl tracking-tight">
+          <h2 className="font-lat text-3xl font-bold tracking-tight text-dar">
             {projects.projectOverviewLabel}
           </h2>
         </div>
@@ -86,10 +86,10 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({ project }) => {
           variants={listVariants}
         >
           <div className="flex items-center gap-3">
-            <div className="flex justify-center items-center bg-green-500/10 p-2 rounded-full">
-              <CheckCircle className="w-6 h-6 text-green-500" />
+            <div className="flex justify-center items-center rounded-full bg-[rgba(var(--cobalt),0.1)] p-2">
+              <CheckCircle className="h-6 w-6 text-[rgb(var(--cobalt))]" />
             </div>
-            <h3 className="font-cor font-semibold text-dar text-2xl tracking-tight">
+            <h3 className="font-lat text-2xl font-semibold tracking-tight text-dar">
               {projects.keyResponsibilitiesLabel}
             </h3>
           </div>
@@ -108,12 +108,12 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({ project }) => {
                 whileHover={{ scale: 1.03, rotateZ: 1 }}
               >
                 <Card
-                  className="hover:shadow-md border border-5dar dark:border-5dar/30 dark:bg-white/5 transition-shadow duration-300"
+                  className="border border-dar/10 bg-white/50 transition-shadow duration-300 hover:shadow-md dark:border-white/10 dark:bg-white/[0.04]"
                 >
                   <CardContent className="flex flex-col gap-4 p-6">
                     <div className="flex items-start gap-3">
-                      <div className="flex justify-center items-center bg-blue-500/10 p-3 rounded-lg">
-                        <CheckCircle className="w-6 h-6 text-blue-500" />
+                      <div className="flex justify-center items-center rounded-lg bg-[rgba(var(--cobalt),0.1)] p-3">
+                        <CheckCircle className="h-6 w-6 text-[rgb(var(--cobalt))]" />
                       </div>
                       <p className="font-rob text-dar text-lg leading-relaxed">
                         {resp}
@@ -134,10 +134,10 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({ project }) => {
           variants={listVariants}
         >
           <div className="flex items-center gap-3">
-            <div className="flex justify-center items-center bg-yellow-500/10 p-2 rounded-full">
-              <Trophy className="w-6 h-6 text-yellow-500" />
+            <div className="flex justify-center items-center rounded-full bg-[rgba(var(--cobalt),0.1)] p-2">
+              <Trophy className="h-6 w-6 text-[rgb(var(--cobalt))]" />
             </div>
-            <h3 className="font-cor font-semibold text-dar text-2xl tracking-tight">
+            <h3 className="font-lat text-2xl font-semibold tracking-tight text-dar">
               {projects.notableAchievementsLabel}
             </h3>
           </div>
@@ -156,11 +156,11 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({ project }) => {
                 whileHover={{ scale: 1.03, rotateZ: 1 }}
               >
                 <Card
-                  className="bg-gradient-to-r from-whi/5 to-transparent hover:shadow-md border border-5whi dark:border-5dar/30 border-blue-500/50 border-l-4 transition-shadow duration-300 dark:bg-white/5"
+                  className="border border-l-4 border-dar/10 border-l-[rgb(var(--cobalt))] bg-white/50 transition-shadow duration-300 hover:shadow-md dark:border-white/10 dark:border-l-[rgb(var(--cobalt))] dark:bg-white/[0.04]"
                 >
                   <CardContent className="flex items-start gap-4 p-6">
-                    <div className="flex justify-center items-center bg-yellow-500/10 p-2 rounded-full">
-                      <Star className="w-5 h-5 text-yellow-500" />
+                    <div className="flex justify-center items-center rounded-full bg-[rgba(var(--cobalt),0.1)] p-2">
+                      <Star className="h-5 w-5 text-[rgb(var(--cobalt))]" />
                     </div>
                     <p className="font-lat text-dar text-lg leading-relaxed">
                       {achievement}

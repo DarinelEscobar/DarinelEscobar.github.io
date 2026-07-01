@@ -21,7 +21,7 @@ interface ProjectQuickPreviewProps {
 }
 
 const shellClassName =
-  "relative overflow-hidden rounded-[1.25rem] border border-black/12 bg-[linear-gradient(180deg,rgba(255,255,255,0.96),rgba(241,237,230,0.92))] p-3 shadow-[0_16px_40px_rgba(15,23,42,0.08)] dark:border-white/10 dark:bg-[linear-gradient(180deg,rgba(32,31,28,0.96),rgba(18,18,18,0.92))] dark:shadow-[0_18px_44px_rgba(0,0,0,0.32)]";
+  "relative overflow-hidden rounded-[1.25rem] border border-dar/10 bg-white/82 p-3 shadow-[0_16px_40px_rgba(15,23,42,0.08)] dark:border-white/10 dark:bg-white/[0.05] dark:shadow-[0_18px_44px_rgba(0,0,0,0.32)]";
 
 const blockClassName =
   "rounded-lg border border-black/10 bg-white/65 dark:border-white/10 dark:bg-white/[0.05]";
@@ -31,7 +31,7 @@ const lineClassName = "rounded-full border border-black/10 dark:border-white/10"
 function PreviewChrome({ children, icon: Icon }: { children: React.ReactNode; icon: React.ElementType }) {
   return (
     <div className={cn(shellClassName, "h-full min-h-[132px]")}>
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(59,130,246,0.14),transparent_42%),radial-gradient(circle_at_bottom_right,rgba(15,23,42,0.12),transparent_36%)] dark:bg-[radial-gradient(circle_at_top_left,rgba(96,165,250,0.18),transparent_38%),radial-gradient(circle_at_bottom_right,rgba(255,255,255,0.08),transparent_34%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(var(--cobalt),0.14),transparent_42%),radial-gradient(circle_at_bottom_right,rgba(15,23,42,0.1),transparent_36%)] dark:bg-[radial-gradient(circle_at_top_left,rgba(var(--cobalt),0.18),transparent_38%),radial-gradient(circle_at_bottom_right,rgba(255,255,255,0.08),transparent_34%)]" />
 
       <div className="relative flex h-full flex-col">
         <div className="mb-3 flex items-center justify-between">

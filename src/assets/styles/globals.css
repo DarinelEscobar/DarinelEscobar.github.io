@@ -36,10 +36,12 @@
 
 @layer base {
   :root {
-    --whi: 236, 235, 235;
-    --5whi: 236, 235, 235, 0.5;
-    --dar: 22, 19, 16;
-    --5dar: 22, 19, 16, 0.5;
+    --whi: 245, 247, 250;
+    --5whi: 245, 247, 250, 0.5;
+    --dar: 15, 23, 42;
+    --5dar: 15, 23, 42, 0.5;
+    --cobalt: 37, 99, 235;
+    --cobalt-soft: 219, 234, 254;
     --background: 0 0% 100%;
     --foreground: 240 10% 3.9%;
     --border: 240 5.9% 90%;
@@ -66,10 +68,12 @@
   }
 
   .dark {
-    --whi: 22, 19, 16;
-    --5whi: 22, 19, 16, 0.5;
-    --dar: 236, 235, 235;
-    --5dar: 236, 235, 235, 0.5;
+    --whi: 12, 16, 24;
+    --5whi: 12, 16, 24, 0.5;
+    --dar: 241, 245, 249;
+    --5dar: 241, 245, 249, 0.5;
+    --cobalt: 96, 165, 250;
+    --cobalt-soft: 30, 58, 138;
     --background: 240 10% 3.9%;
     --foreground: 0 0% 98%;
     --border: 240 3.7% 15.9%;
@@ -100,7 +104,7 @@
 }
 
 html, body {
-  @apply m-0 h-full w-full overflow-x-visible bg-whi p-0;
+  @apply m-0 h-full w-full overflow-x-hidden bg-whi p-0;
 }
 
 #root {
