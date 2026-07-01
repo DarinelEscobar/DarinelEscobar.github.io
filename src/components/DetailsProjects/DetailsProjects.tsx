@@ -1,7 +1,8 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { X } from "lucide-react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import type { ProjectData } from "@/content/portfolio/types";
+import { modalPanel } from "@/lib/motionPresets";
 import HeroSection from "./HeroSection";
 import ProjectDetails from "./ProjectDetails";
 import TechnicalSidebar from "./TechnicalSidebar";
@@ -14,15 +15,6 @@ interface DetailsProjectsProps {
   onClose: () => void;
 }
 
-const modalVariants = {
-  hidden: { opacity: 0, scale: 0.85 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: { duration: 0.5, ease: "easeOut" },
-  },
-};
-
 const DetailsProjects: React.FC<DetailsProjectsProps> = ({
   projects,
   projectIndex,
@@ -32,6 +24,7 @@ const DetailsProjects: React.FC<DetailsProjectsProps> = ({
   const contentRef = useRef<HTMLDivElement | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [showScrollHint, setShowScrollHint] = useState(false);
+  const reduceMotion = useReducedMotion();
 
   const updateScrollHint = useCallback(() => {
     const container = scrollContainerRef.current;
@@ -100,13 +93,14 @@ const DetailsProjects: React.FC<DetailsProjectsProps> = ({
   return (
     <motion.div
       ref={scrollContainerRef}
-      className="fixed inset-0 z-50 overflow-auto bg-slate-950/72"
+      className="h-full overflow-auto"
       onScroll={updateScrollHint}
-      variants={modalVariants}
-      initial="hidden"
+      variants={modalPanel}
+      initial={reduceMotion ? false : "hidden"}
       animate="visible"
+      exit={reduceMotion ? undefined : "exit"}
     >
-      <div ref={contentRef} className="absolute min-h-full w-full">
+      <div ref={contentRef} className="relative min-h-full w-full">
         <button
           onClick={onClose}
           className="fixed right-4 top-4 z-50 rounded-full border border-dar/10 bg-whi/92 p-2 text-dar shadow-[0_16px_44px_rgba(15,23,42,0.16)] backdrop-blur-md transition-colors hover:text-[rgb(var(--cobalt))] dark:border-white/10"

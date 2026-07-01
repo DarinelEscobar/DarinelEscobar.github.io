@@ -1,6 +1,7 @@
 import React from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { usePortfolioContent } from "@/lib/portfolioContent";
+import { getDelay, getRevealProps } from "@/lib/motionPresets";
 
 const AboutMe: React.FC = () => {
   const {
@@ -9,19 +10,11 @@ const AboutMe: React.FC = () => {
     },
   } = usePortfolioContent();
   const reduceMotion = useReducedMotion();
-  const reveal = reduceMotion
-    ? {}
-    : {
-        initial: { opacity: 0, y: 24 },
-        whileInView: { opacity: 1, y: 0 },
-        viewport: { once: true, amount: 0.35 },
-        transition: { duration: 0.55, ease: [0.16, 1, 0.3, 1] },
-      };
 
   return (
     <section className="relative flex min-h-screen min-h-[100dvh] items-center overflow-hidden bg-whi px-5 py-24 text-dar sm:px-8 lg:px-12">
       <div className="mx-auto grid w-full max-w-[1320px] gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-end">
-        <motion.div className="space-y-5" {...reveal}>
+        <motion.div className="space-y-5" {...getRevealProps(reduceMotion)}>
           <p className="font-rob text-xs font-bold text-[rgb(var(--cobalt))]">
             {about.eyebrow}
           </p>
@@ -30,7 +23,7 @@ const AboutMe: React.FC = () => {
           </h2>
         </motion.div>
 
-        <motion.div className="space-y-8" {...reveal}>
+        <motion.div className="space-y-8" {...getRevealProps(reduceMotion, 0.04)}>
           <p className="max-w-3xl font-lat text-lg leading-8 text-dar/72 lg:text-xl">
             {about.body}
           </p>
@@ -43,7 +36,7 @@ const AboutMe: React.FC = () => {
                 initial={reduceMotion ? false : { opacity: 0, y: 18 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.35 }}
-                transition={{ duration: 0.45, delay: index * 0.06, ease: "easeOut" }}
+                transition={{ duration: 0.45, delay: getDelay(index, 0.05), ease: "easeOut" }}
               >
                 <div className="mb-5 h-1 w-10 rounded-full bg-[rgb(var(--cobalt))]" />
                 <h3 className="font-rob text-sm font-bold text-dar">

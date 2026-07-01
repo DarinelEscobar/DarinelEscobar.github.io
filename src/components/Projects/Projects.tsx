@@ -1,7 +1,9 @@
 import React, { Suspense, lazy, useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { usePortfolioContent } from "@/lib/portfolioContent";
 import { cn } from "@/lib/utils";
+import { modalOverlay } from "@/lib/motionPresets";
 import ProjectsSourceFilter from "./ProjectsSourceFilter";
 import SimplifiedProjectsView from "./SimplifiedProjectsView";
 import {
@@ -12,7 +14,7 @@ import {
 
 const DetailsProjects = lazy(() => import("../DetailsProjects/DetailsProjects"));
 const floatingControlsClassName =
-  "fixed left-1/2 bottom-[calc(env(safe-area-inset-bottom)+12px)] z-40 inline-flex -translate-x-1/2 items-center rounded-full border border-dar/10 bg-whi/85 px-3 py-2 shadow-[0_16px_44px_rgba(15,23,42,0.12)] backdrop-blur-xl dark:border-white/10 dark:shadow-black/40";
+  "fixed left-1/2 bottom-[calc(env(safe-area-inset-bottom)+12px)] z-40 inline-flex items-center rounded-full border border-dar/10 bg-whi/85 px-3 py-2 shadow-[0_16px_44px_rgba(15,23,42,0.12)] backdrop-blur-xl dark:border-white/10 dark:shadow-black/40";
 
 interface ProjectsProps {
   layoutMode?: ProjectsLayoutMode;
@@ -20,6 +22,7 @@ interface ProjectsProps {
 
 const Projects: React.FC<ProjectsProps> = ({ layoutMode = "page" }) => {
   const { projects, ui } = usePortfolioContent();
+  const reduceMotion = useReducedMotion();
   const { ref, inView } = useInView({
     threshold: 0,
     rootMargin: "-15% 0px -15% 0px",
@@ -58,26 +61,45 @@ const Projects: React.FC<ProjectsProps> = ({ layoutMode = "page" }) => {
         </div>
       </div>
 
-      {inView ? (
-        <div className={floatingControlsClassName}>
-          <ProjectsSourceFilter
-            allProjectsLabel={ui.projects.allProjectsFilterLabel}
-            realExperienceLabel={ui.projects.realExperienceFilterLabel}
-            value={sourceFilter}
-            onChange={setSourceFilter}
-          />
-        </div>
-      ) : null}
+      <AnimatePresence>
+        {inView ? (
+          <motion.div
+            className={floatingControlsClassName}
+            initial={reduceMotion ? false : { opacity: 0, y: 10, x: "-50%" }}
+            animate={{ opacity: 1, y: 0, x: "-50%" }}
+            exit={reduceMotion ? undefined : { opacity: 0, y: 10, x: "-50%" }}
+            transition={{ duration: 0.24, ease: "easeOut" }}
+          >
+            <ProjectsSourceFilter
+              allProjectsLabel={ui.projects.allProjectsFilterLabel}
+              realExperienceLabel={ui.projects.realExperienceFilterLabel}
+              value={sourceFilter}
+              onChange={setSourceFilter}
+            />
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
 
-      {expandedProjectIndex !== null && (
-        <Suspense fallback={<div className="fixed inset-0 z-50 bg-black/70" />}>
-          <DetailsProjects
-            projects={visibleProjects}
-            projectIndex={expandedProjectIndex}
-            onClose={handleCloseDetails}
-          />
-        </Suspense>
-      )}
+      <AnimatePresence>
+        {expandedProjectIndex !== null ? (
+          <motion.div
+            key="project-details-shell"
+            className="fixed inset-0 z-50 bg-slate-950/72"
+            variants={modalOverlay}
+            initial={reduceMotion ? false : "hidden"}
+            animate="visible"
+            exit={reduceMotion ? undefined : "exit"}
+          >
+            <Suspense fallback={<div className="h-full w-full bg-slate-950/72" />}>
+              <DetailsProjects
+                projects={visibleProjects}
+                projectIndex={expandedProjectIndex}
+                onClose={handleCloseDetails}
+              />
+            </Suspense>
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
     </div>
   );
 };

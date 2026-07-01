@@ -8,10 +8,11 @@ import {
   Loader2,
 } from "lucide-react";
 import { getAssetImage } from "./utils";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { useSwipeable } from "react-swipeable";
 import { useHotkeys } from "react-hotkeys-hook";
 import { usePortfolioContent } from "@/lib/portfolioContent";
+import { smoothTransition } from "@/lib/motionPresets";
 
 interface MediaItem {
   url: string;
@@ -25,12 +26,11 @@ interface MediaGalleryProps {
 }
 
 const galleryVariants = {
-  hidden: { opacity: 0, y: 50, scale: 0.9 },
+  hidden: { opacity: 0, y: 18 },
   visible: {
     opacity: 1,
     y: 0,
-    scale: 1,
-    transition: { duration: 0.6, delay: 0.1, ease: "easeOut" },
+    transition: smoothTransition,
   },
 };
 
@@ -44,16 +44,11 @@ const thumbnailsContainer = {
 };
 
 const thumbnailItem = {
-  hidden: { y: 20, opacity: 0, scale: 0.9 },
+  hidden: { y: 12, opacity: 0 },
   visible: {
     y: 0,
     opacity: 1,
-    scale: 1,
-    transition: {
-      type: "spring",
-      stiffness: 120,
-      damping: 14,
-    },
+    transition: smoothTransition,
   },
 };
 
@@ -65,6 +60,7 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({
   const {
     ui: { projects },
   } = usePortfolioContent();
+  const reduceMotion = useReducedMotion();
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [imageDimensions, setImageDimensions] = useState<{
@@ -146,9 +142,9 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({
           : "bg-transparent relative"
       }`}
       variants={galleryVariants}
-      initial="hidden"
+      initial={reduceMotion ? false : "hidden"}
       whileInView="visible"
-      viewport={{ once: false, amount: 0.1 }}
+      viewport={{ once: true, amount: 0.1 }}
     >
       <div className="space-y-6 mx-auto container">
         <h2 className="mb-8 text-center text-3xl font-bold text-gray-800 dark:text-gray-100">
@@ -165,9 +161,9 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentImageIndex}
-                initial={{ opacity: 0, scale: 0.98 }}
+                initial={reduceMotion ? false : { opacity: 0, scale: 0.99 }}
                 animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 1.02 }}
+                exit={reduceMotion ? undefined : { opacity: 0, scale: 1.01 }}
                 transition={{ duration: 0.3 }}
                 className="relative flex h-full w-full items-center justify-center"
               >
@@ -271,9 +267,9 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({
         <motion.div
           className="grid grid-cols-2 gap-3 px-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5"
           variants={thumbnailsContainer}
-          initial="hidden"
+          initial={reduceMotion ? false : "hidden"}
           whileInView="visible"
-          viewport={{ once: false, amount: 0.2 }}
+          viewport={{ once: true, amount: 0.2 }}
         >
           {media.map((mediaItem, index) => (
             <motion.div
@@ -284,7 +280,7 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({
                   : "border-transparent hover:border-[rgba(var(--cobalt),0.45)]"
               }`}
               variants={thumbnailItem}
-              whileHover={{ scale: 1.05, rotateZ: 0.5 }}
+              whileHover={reduceMotion ? undefined : { y: -2, scale: 1.02 }}
               onClick={() => setCurrentImageIndex(index)}
             >
               <div className="relative aspect-square bg-gray-100 dark:bg-gray-900">

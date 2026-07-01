@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import type { Language } from "@/content/portfolio/types";
 import { useResumeContent, useUiCopy } from "@/lib/portfolioContent";
 import { cn } from "@/lib/utils";
+import { navActivePillTransition } from "@/lib/motionPresets";
 import LanguageToggle from "./LanguageToggle";
 
 interface HeaderDesktopProps {
@@ -46,13 +47,20 @@ const HeaderDesktop: React.FC<HeaderDesktopProps> = ({
               key={link.to}
               to={link.to}
               className={cn(
-                "rounded-full px-4 py-2 font-rob text-xs font-bold transition-colors",
+                "relative overflow-hidden rounded-full px-4 py-2 font-rob text-xs font-bold transition-colors",
                 isActive
-                  ? "bg-[rgb(var(--cobalt))] text-white"
+                  ? "text-white"
                   : "text-dar/62 hover:text-[rgb(var(--cobalt))]",
               )}
             >
-              {link.label}
+              {isActive && (
+                <motion.span
+                  layoutId="main-nav-active-pill"
+                  className="absolute inset-0 rounded-full bg-[rgb(var(--cobalt))]"
+                  transition={navActivePillTransition}
+                />
+              )}
+              <span className="relative z-10">{link.label}</span>
             </Link>
           );
         })}

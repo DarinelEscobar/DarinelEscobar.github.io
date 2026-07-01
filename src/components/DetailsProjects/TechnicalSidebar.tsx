@@ -2,54 +2,23 @@ import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Building, Calendar, Users, Briefcase } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import type { ProjectData } from "@/content/portfolio/types";
 import { usePortfolioContent } from "@/lib/portfolioContent";
+import { revealUp, staggerContainer, staggerItem } from "@/lib/motionPresets";
 
 interface TechnicalSidebarProps {
   project: Pick<ProjectData, "start_date" | "end_date" | "client" | "team_size" | "role" | "technologies">;
 }
 
 // Variantes para contenedor principal
-const sidebarVariants = {
-  hidden: { opacity: 0, rotateX: 15, scale: 0.9 },
-  visible: {
-    opacity: 1,
-    rotateX: 0,
-    scale: 1,
-    transition: {
-      duration: 0.6,
-      ease: "easeOut",
-      delay: 0.2,
-      staggerChildren: 0.08,
-    },
-  },
-};
+const sidebarVariants = revealUp;
 
 // Cada ítem en la barra lateral
-const sidebarItem = {
-  hidden: { y: 20, opacity: 0 },
-  visible: {
-    y: 0,
-    opacity: 1,
-    transition: {
-      type: "spring",
-      damping: 15,
-      stiffness: 120,
-    },
-  },
-};
+const sidebarItem = staggerItem;
 
 // Para animar cada badge
-const badgeItem = {
-  hidden: { scale: 0.8, rotateY: 90, opacity: 0 },
-  visible: {
-    scale: 1,
-    rotateY: 0,
-    opacity: 1,
-    transition: { type: "spring", damping: 12, stiffness: 120 },
-  },
-};
+const badgeItem = staggerItem;
 
 const calculateDuration = (
   start: string,
@@ -106,6 +75,7 @@ const TechnicalSidebar: React.FC<TechnicalSidebarProps> = ({ project }) => {
   const {
     ui: { locale, projects },
   } = usePortfolioContent();
+  const reduceMotion = useReducedMotion();
   const duration = project.start_date && project.end_date
     ? calculateDuration(project.start_date, project.end_date, locale.duration, {
         monthSingular: projects.monthSingular,
@@ -120,9 +90,9 @@ const TechnicalSidebar: React.FC<TechnicalSidebarProps> = ({ project }) => {
     <motion.div
       className="lg:col-span-1"
       variants={sidebarVariants}
-      initial="hidden"
+      initial={reduceMotion ? false : "hidden"}
       whileInView="visible"
-      viewport={{ once: false, amount: 0.2 }}
+      viewport={{ once: true, amount: 0.2 }}
     >
       <Card className="sticky top-0 border border-dar/10 bg-white/52 shadow-[0_18px_48px_rgba(15,23,42,0.08)] dark:border-white/10 dark:bg-white/[0.04]">
         <CardHeader className="pb-4">
@@ -135,10 +105,10 @@ const TechnicalSidebar: React.FC<TechnicalSidebarProps> = ({ project }) => {
           {/* Contenedor con stagger en sus hijos */}
           <motion.div
             className="space-y-6"
-            variants={sidebarVariants}
-            initial="hidden"
+            variants={staggerContainer}
+            initial={reduceMotion ? false : "hidden"}
             whileInView="visible"
-            viewport={{ once: false, amount: 0.2 }}
+            viewport={{ once: true, amount: 0.2 }}
           >
             {project.client && (
               <motion.div className="flex items-center gap-4" variants={sidebarItem}>
@@ -186,10 +156,10 @@ const TechnicalSidebar: React.FC<TechnicalSidebarProps> = ({ project }) => {
           {project.technologies && Object.keys(project.technologies).length > 0 && (
             <motion.div
               className="space-y-4"
-              variants={sidebarVariants}
-              initial="hidden"
+              variants={staggerContainer}
+              initial={reduceMotion ? false : "hidden"}
               whileInView="visible"
-              viewport={{ once: false, amount: 0.2 }}
+              viewport={{ once: true, amount: 0.2 }}
             >
               <motion.h4
                 className="font-lat text-lg font-semibold text-dar"
@@ -209,7 +179,7 @@ const TechnicalSidebar: React.FC<TechnicalSidebarProps> = ({ project }) => {
                           <motion.div
                             key={tech}
                             variants={badgeItem}
-                            whileHover={{ rotateY: 180, scale: 1.1 }}
+                            whileHover={reduceMotion ? undefined : { y: -2, scale: 1.03 }}
                           >
                             <Badge
                               variant="outline"

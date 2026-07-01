@@ -2,82 +2,52 @@ import React from "react";
 import { ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { getAssetImage } from "./utils";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import type { ProjectData } from "@/content/portfolio/types";
 import { usePortfolioContent } from "@/lib/portfolioContent";
+import { revealScale, staggerContainer, staggerItem } from "@/lib/motionPresets";
 
 interface HeroSectionProps {
   project: ProjectData;
 }
 
-// Contenedor para animación escalonada (cada hijo se revelará en cadena)
-const containerVariants = {
-  hidden: { opacity: 0, rotateX: 15, scale: 0.9 },
-  visible: {
-    opacity: 1,
-    rotateX: 0,
-    scale: 1,
-    transition: {
-      type: "spring",
-      damping: 14,
-      stiffness: 90,
-      // Animaciones hijas escalonadas
-      staggerChildren: 0.12,
-      delayChildren: 0.2,
-    },
-  },
-};
-
-// Cada elemento hijo con un suave movimiento “spring”
-const childVariants = {
-  hidden: { y: 40, opacity: 0 },
-  visible: {
-    y: 0,
-    opacity: 1,
-    transition: {
-      type: "spring",
-      damping: 15,
-      stiffness: 100,
-    },
-  },
-};
-
 const HeroSection: React.FC<HeroSectionProps> = ({ project }) => {
   const {
     ui: { projects },
   } = usePortfolioContent();
+  const reduceMotion = useReducedMotion();
 
   return (
     <motion.section
       className="flex min-h-[50vh] items-center px-5 py-24 sm:px-8 lg:px-12"
-      variants={containerVariants}
-      initial="hidden"
+      variants={staggerContainer}
+      initial={reduceMotion ? false : "hidden"}
       whileInView="visible"
-      viewport={{ once: false, amount: 0.2 }}
+      viewport={{ once: true, amount: 0.2 }}
     >
       <div className="mx-auto flex w-full max-w-[1320px] flex-col items-center gap-12 lg:flex-row">
         {/* Información principal del proyecto */}
         <motion.div
           className="space-y-8 w-full lg:w-1/2"
-          variants={childVariants}
+          variants={staggerItem}
         >
           <motion.h1
             className="font-lat text-4xl font-bold leading-tight tracking-tight text-dar md:text-5xl"
-            variants={childVariants}
+            variants={staggerItem}
           >
             {project.name}
           </motion.h1>
 
           <motion.p
             className="font-lat text-dar text-lg md:text-xl leading-relaxed"
-            variants={childVariants}
+            variants={staggerItem}
           >
             {project.description}
           </motion.p>
 
           <motion.div
             className="flex sm:flex-row flex-col gap-4"
-            variants={childVariants}
+            variants={staggerItem}
           >
             {project.url && (
               <Button
@@ -104,8 +74,8 @@ const HeroSection: React.FC<HeroSectionProps> = ({ project }) => {
         {/* Imagen principal del proyecto */}
         <motion.div
           className="group relative w-full lg:w-1/2"
-          variants={childVariants}
-          whileHover={{ scale: 1.02, rotateZ: 0.5 }}
+          variants={revealScale}
+          whileHover={reduceMotion ? undefined : { scale: 1.01 }}
         >
           <div className="overflow-hidden rounded-2xl border border-dar/10 shadow-[0_24px_70px_rgba(15,23,42,0.16)] dark:border-white/10">
             {project.media && project.media.length > 0 ? (

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { motion, useReducedMotion } from "framer-motion";
 import img from "../../assets/images/me.webp";
 import { usePortfolioContent } from "@/lib/portfolioContent";
+import { getRevealProps, revealScale } from "@/lib/motionPresets";
 
 const MainContent: React.FC = () => {
   const {
@@ -15,14 +16,6 @@ const MainContent: React.FC = () => {
   } = usePortfolioContent();
   const reduceMotion = useReducedMotion();
 
-  const reveal = reduceMotion
-    ? {}
-    : {
-        initial: { opacity: 0, y: 22 },
-        animate: { opacity: 1, y: 0 },
-        transition: { duration: 0.62, ease: [0.16, 1, 0.3, 1] },
-      };
-
   return (
     <section className="relative flex min-h-[100dvh] w-full items-center overflow-hidden bg-whi px-5 py-24 text-dar sm:px-8 lg:px-12">
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[rgba(var(--cobalt),0.55)] to-transparent" />
@@ -31,7 +24,7 @@ const MainContent: React.FC = () => {
         <motion.div
           className="w-full min-w-0 space-y-7"
           style={{ maxWidth: "min(48rem, calc(100vw - 2.5rem))" }}
-          {...reveal}
+          {...getRevealProps(reduceMotion, 0, 20)}
         >
           <p className="font-rob text-xs font-bold text-[rgb(var(--cobalt))]">
             {hero.eyebrow}
@@ -66,11 +59,11 @@ const MainContent: React.FC = () => {
         <motion.div
           className="relative mx-auto w-full max-w-[min(100%,440px)] lg:ml-auto"
           {...(reduceMotion
-            ? {}
+            ? { initial: false }
             : {
-                initial: { opacity: 0, scale: 0.96 },
-                animate: { opacity: 1, scale: 1 },
-                transition: { duration: 0.7, delay: 0.12, ease: [0.16, 1, 0.3, 1] },
+                variants: revealScale,
+                initial: "hidden",
+                animate: "visible",
               })}
         >
           <div className="absolute inset-0 rounded-[2rem] border border-dar/10 bg-white/45 shadow-[0_30px_80px_rgba(15,23,42,0.12)] dark:border-white/10 dark:bg-white/[0.04] sm:-inset-5" />

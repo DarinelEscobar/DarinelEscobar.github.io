@@ -2,6 +2,7 @@ import React from "react";
 import { FaEnvelope, FaGithub, FaLinkedin, FaWhatsapp } from "react-icons/fa";
 import { motion, useReducedMotion } from "framer-motion";
 import { usePortfolioContent } from "@/lib/portfolioContent";
+import { getDelay, getRevealProps } from "@/lib/motionPresets";
 
 const ContactMe: React.FC = () => {
   const {
@@ -48,10 +49,7 @@ const ContactMe: React.FC = () => {
       <div className="mx-auto grid w-full max-w-[1320px] gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
         <motion.div
           className="max-w-2xl space-y-6"
-          initial={reduceMotion ? false : { opacity: 0, y: 22 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.35 }}
-          transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+          {...getRevealProps(reduceMotion)}
         >
           <h2 className="font-lat text-4xl font-bold leading-[1.02] tracking-tight text-dar sm:text-5xl lg:text-6xl">
             {ui.contact.title}
@@ -77,7 +75,7 @@ const ContactMe: React.FC = () => {
               initial={reduceMotion ? false : { opacity: 0, y: 18 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.45, delay: index * 0.05, ease: "easeOut" }}
+              transition={{ duration: 0.45, delay: getDelay(index, 0.04), ease: "easeOut" }}
               aria-label={label}
             >
               <div className="flex items-start justify-between gap-4">

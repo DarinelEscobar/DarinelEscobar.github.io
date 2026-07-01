@@ -1,8 +1,9 @@
 import React from "react";
 import { ArrowUpRight } from "lucide-react";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import type { ProjectData, UiCopy } from "@/content/portfolio/types";
 import { cn } from "@/lib/utils";
+import { getDelay } from "@/lib/motionPresets";
 import ProjectQuickPreview from "./ProjectQuickPreview";
 import { formatDate } from "./dateUtils";
 import { getQuickStackHighlights, getQuickSummary, groupProjectsByYear } from "./quickViewUtils";
@@ -22,12 +23,12 @@ const personalChipClassName =
   "inline-flex items-center rounded-full border border-[rgba(var(--cobalt),0.32)] bg-[rgba(var(--cobalt),0.1)] px-3 py-1 font-rob text-xs font-bold text-[rgb(var(--cobalt))]";
 
 const desktopRowVariants = {
-  hidden: { opacity: 0, x: 24 },
+  hidden: { opacity: 0, y: 10 },
   visible: (index: number) => ({
     opacity: 1,
-    x: 0,
+    y: 0,
     transition: {
-      delay: index * 0.04,
+      delay: getDelay(index, 0.025),
       duration: 0.32,
       ease: "easeOut",
     },
@@ -111,12 +112,14 @@ function DesktopProjectsTable({
   copy,
   dateLocale,
   onOpenProject,
+  reduceMotion,
 }: {
   groupedProjects: Array<[string, ProjectData[]]>;
   allProjects: ProjectData[];
   copy: UiCopy["projects"];
   dateLocale: string;
   onOpenProject: (projectIndex: number) => void;
+  reduceMotion: boolean | null;
 }) {
   return (
     <div className="hidden md:block">
@@ -183,7 +186,7 @@ function DesktopProjectsTable({
                   <React.Fragment key={`${year}-${project.name}`}>
                     <motion.div
                       custom={projectIndex}
-                      initial="hidden"
+                      initial={reduceMotion ? false : "hidden"}
                       animate="visible"
                       variants={desktopRowVariants}
                       className={cn("p-5 lg:p-6", rowBorderClass)}
@@ -239,12 +242,14 @@ function MobileProjectsTable({
   copy,
   dateLocale,
   onOpenProject,
+  reduceMotion,
 }: {
   groupedProjects: Array<[string, ProjectData[]]>;
   allProjects: ProjectData[];
   copy: UiCopy["projects"];
   dateLocale: string;
   onOpenProject: (projectIndex: number) => void;
+  reduceMotion: boolean | null;
 }) {
   return (
     <div className="space-y-4 md:hidden">
@@ -265,9 +270,9 @@ function MobileProjectsTable({
               return (
                 <motion.article
                   key={`${year}-${project.name}`}
-                  initial={{ opacity: 0, y: 18 }}
+                  initial={reduceMotion ? false : { opacity: 0, y: 14 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.05, duration: 0.28, ease: "easeOut" }}
+                  transition={{ delay: getDelay(index, 0.03), duration: 0.28, ease: "easeOut" }}
                   className="space-y-4 p-5"
                 >
                   <div className="space-y-2">
@@ -306,6 +311,8 @@ const SimplifiedProjectsView: React.FC<SimplifiedProjectsViewProps> = ({
   dateLocale,
   onOpenProject,
 }) => {
+  const reduceMotion = useReducedMotion();
+
   if (projects.length === 0) {
     return (
       <div className="rounded-[1.75rem] border border-dashed border-dar/15 bg-white/60 px-6 py-12 text-center font-lat text-base text-black/68 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/68">
@@ -315,24 +322,37 @@ const SimplifiedProjectsView: React.FC<SimplifiedProjectsViewProps> = ({
   }
 
   const groupedProjects = groupProjectsByYear(projects);
+  const projectsKey = projects.map((project) => project.name).join("|");
 
   return (
     <div className={cn("w-full")}>
-      <DesktopProjectsTable
-        groupedProjects={groupedProjects}
-        allProjects={projects}
-        copy={copy}
-        dateLocale={dateLocale}
-        onOpenProject={onOpenProject}
-      />
+      <AnimatePresence mode="wait" initial={false}>
+        <motion.div
+          key={projectsKey}
+          initial={reduceMotion ? false : { opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={reduceMotion ? undefined : { opacity: 0, y: -6 }}
+          transition={{ duration: 0.24, ease: "easeOut" }}
+        >
+          <DesktopProjectsTable
+            groupedProjects={groupedProjects}
+            allProjects={projects}
+            copy={copy}
+            dateLocale={dateLocale}
+            onOpenProject={onOpenProject}
+            reduceMotion={reduceMotion}
+          />
 
-      <MobileProjectsTable
-        groupedProjects={groupedProjects}
-        allProjects={projects}
-        copy={copy}
-        dateLocale={dateLocale}
-        onOpenProject={onOpenProject}
-      />
+          <MobileProjectsTable
+            groupedProjects={groupedProjects}
+            allProjects={projects}
+            copy={copy}
+            dateLocale={dateLocale}
+            onOpenProject={onOpenProject}
+            reduceMotion={reduceMotion}
+          />
+        </motion.div>
+      </AnimatePresence>
     </div>
   );
 };

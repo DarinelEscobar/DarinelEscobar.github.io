@@ -1,68 +1,28 @@
 import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { CheckCircle, Trophy, ArrowUpRight, Star } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import type { ProjectData } from "@/content/portfolio/types";
 import { usePortfolioContent } from "@/lib/portfolioContent";
+import { revealUp, staggerContainer, staggerItem } from "@/lib/motionPresets";
 
 interface ProjectDetailsProps {
   project: Pick<ProjectData, "Project_Overview" | "responsibilities" | "achievements">;
 }
 
-// Variantes globales para el contenedor principal
-const detailsVariants = {
-  hidden: { opacity: 0, rotateX: 15, scale: 0.9 },
-  visible: {
-    opacity: 1,
-    rotateX: 0,
-    scale: 1,
-    transition: {
-      duration: 0.6,
-      type: "spring",
-      damping: 14,
-      stiffness: 90,
-      delay: 0.1,
-      staggerChildren: 0.1, // Para animar secciones/hijos
-    },
-  },
-};
-
-// Para cada bloque (responsibilities y achievements) haremos un “spring” normal
-const listVariants = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-};
-
-// Variantes de cada Card en la lista
-const cardItem = {
-  hidden: { y: 20, opacity: 0 },
-  visible: {
-    y: 0,
-    opacity: 1,
-    transition: {
-      type: "spring",
-      damping: 15,
-      stiffness: 100,
-    },
-  },
-};
-
 const ProjectDetails: React.FC<ProjectDetailsProps> = ({ project }) => {
   const {
     ui: { projects },
   } = usePortfolioContent();
+  const reduceMotion = useReducedMotion();
 
   return (
     <motion.div
       className="space-y-16 lg:col-span-2"
-      variants={detailsVariants}
-      initial="hidden"
+      variants={revealUp}
+      initial={reduceMotion ? false : "hidden"}
       whileInView="visible"
-      viewport={{ once: false, amount: 0.2 }}
+      viewport={{ once: true, amount: 0.2 }}
     >
       {/* Visión General del Proyecto */}
       <section className="space-y-6">
@@ -83,7 +43,7 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({ project }) => {
       {project.responsibilities.length > 0 && (
         <motion.section
           className="space-y-6"
-          variants={listVariants}
+          variants={staggerContainer}
         >
           <div className="flex items-center gap-3">
             <div className="flex justify-center items-center rounded-full bg-[rgba(var(--cobalt),0.1)] p-2">
@@ -96,16 +56,16 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({ project }) => {
 
           <motion.div
             className="flex flex-col gap-6"
-            variants={listVariants}
-            initial="hidden"
+            variants={staggerContainer}
+            initial={reduceMotion ? false : "hidden"}
             whileInView="visible"
-            viewport={{ once: false, amount: 0.2 }}
+            viewport={{ once: true, amount: 0.2 }}
           >
             {project.responsibilities.map((resp, index) => (
               <motion.div
                 key={index}
-                variants={cardItem}
-                whileHover={{ scale: 1.03, rotateZ: 1 }}
+                variants={staggerItem}
+                whileHover={reduceMotion ? undefined : { y: -2, scale: 1.01 }}
               >
                 <Card
                   className="border border-dar/10 bg-white/50 transition-shadow duration-300 hover:shadow-md dark:border-white/10 dark:bg-white/[0.04]"
@@ -131,7 +91,7 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({ project }) => {
       {project.achievements.length > 0 && (
         <motion.section
           className="space-y-6"
-          variants={listVariants}
+          variants={staggerContainer}
         >
           <div className="flex items-center gap-3">
             <div className="flex justify-center items-center rounded-full bg-[rgba(var(--cobalt),0.1)] p-2">
@@ -144,16 +104,16 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({ project }) => {
 
           <motion.div
             className="space-y-6"
-            variants={listVariants}
-            initial="hidden"
+            variants={staggerContainer}
+            initial={reduceMotion ? false : "hidden"}
             whileInView="visible"
-            viewport={{ once: false, amount: 0.2 }}
+            viewport={{ once: true, amount: 0.2 }}
           >
             {project.achievements.map((achievement, index) => (
               <motion.div
                 key={index}
-                variants={cardItem}
-                whileHover={{ scale: 1.03, rotateZ: 1 }}
+                variants={staggerItem}
+                whileHover={reduceMotion ? undefined : { y: -2, scale: 1.01 }}
               >
                 <Card
                   className="border border-l-4 border-dar/10 border-l-[rgb(var(--cobalt))] bg-white/50 transition-shadow duration-300 hover:shadow-md dark:border-white/10 dark:border-l-[rgb(var(--cobalt))] dark:bg-white/[0.04]"

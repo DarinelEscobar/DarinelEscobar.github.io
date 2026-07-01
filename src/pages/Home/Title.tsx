@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { motion, useReducedMotion } from "framer-motion";
 import Footer from "@/components/Footer/Footer";
 import { usePortfolioContent } from "@/lib/portfolioContent";
+import { getRevealProps } from "@/lib/motionPresets";
 
 const Title: React.FC = () => {
   const {
@@ -17,10 +18,7 @@ const Title: React.FC = () => {
     <section className="flex min-h-screen min-h-[100dvh] w-full flex-col justify-between bg-whi px-5 pt-24 text-dar sm:px-8 lg:px-12">
       <motion.div
         className="mx-auto flex w-full max-w-[1080px] flex-1 flex-col items-center justify-center py-16 text-center"
-        initial={reduceMotion ? false : { opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.35 }}
-        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        {...getRevealProps(reduceMotion)}
       >
         <p className="font-rob text-xs font-bold text-[rgb(var(--cobalt))]">
           {closing.eyebrow}

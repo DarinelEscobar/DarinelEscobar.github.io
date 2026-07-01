@@ -4,6 +4,7 @@ import useSkillSections from "@/hooks/useSkillSections";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { usePortfolioContent } from "@/lib/portfolioContent";
+import { getDelay, getRevealProps } from "@/lib/motionPresets";
 
 const sectionOrder = [
   "technical_skills",
@@ -53,10 +54,7 @@ const Skills: React.FC = () => {
         <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div className="max-w-2xl space-y-3">
             <motion.h2
-              initial={reduceMotion ? false : { opacity: 0, y: 18 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.4 }}
-              transition={{ duration: 0.45, ease: "easeOut" }}
+              {...getRevealProps(reduceMotion)}
               className="font-lat text-4xl font-bold leading-none tracking-tight text-dar sm:text-5xl"
             >
               {home.skills.titlePrefix}{" "}
@@ -79,7 +77,7 @@ const Skills: React.FC = () => {
               initial={reduceMotion ? false : { opacity: 0, y: 18 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.25 }}
-              transition={{ duration: 0.42, delay: index * 0.035, ease: "easeOut" }}
+              transition={{ duration: 0.42, delay: getDelay(index, 0.025), ease: "easeOut" }}
               className={cn(
                 "group relative overflow-hidden rounded-2xl border border-dar/10 bg-white/55 p-4 shadow-[0_14px_36px_rgba(15,23,42,0.06)] backdrop-blur-md transition-colors duration-300 hover:border-[rgba(var(--cobalt),0.42)] dark:border-white/10 dark:bg-white/[0.04]",
                 getSpanClass(section.id),

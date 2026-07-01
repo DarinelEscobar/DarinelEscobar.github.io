@@ -1,5 +1,7 @@
 import React from "react";
+import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { navActivePillTransition } from "@/lib/motionPresets";
 import type { ProjectsSourceFilterMode } from "./quickViewUtils";
 
 interface ProjectsSourceFilterProps {
@@ -11,7 +13,7 @@ interface ProjectsSourceFilterProps {
 }
 
 const baseButtonClass =
-  "rounded-full px-3 py-2 font-rob text-xs font-bold transition-colors sm:px-4";
+  "relative overflow-hidden rounded-full px-3 py-2 font-rob text-xs font-bold transition-colors sm:px-4";
 
 const ProjectsSourceFilter: React.FC<ProjectsSourceFilterProps> = ({
   allProjectsLabel,
@@ -33,12 +35,19 @@ const ProjectsSourceFilter: React.FC<ProjectsSourceFilterProps> = ({
         className={cn(
           baseButtonClass,
           value === "all"
-            ? "bg-[rgb(var(--cobalt))] text-white shadow-sm shadow-black/10"
+            ? "text-white"
             : "text-dar/75 hover:bg-white/[0.65] hover:text-[rgb(var(--cobalt))] dark:text-whi/72 dark:hover:bg-white/[0.08]"
         )}
         onClick={() => onChange("all")}
       >
-        {allProjectsLabel}
+        {value === "all" && (
+          <motion.span
+            layoutId="projects-filter-active-pill"
+            className="absolute inset-0 rounded-full bg-[rgb(var(--cobalt))] shadow-sm shadow-black/10"
+            transition={navActivePillTransition}
+          />
+        )}
+        <span className="relative z-10">{allProjectsLabel}</span>
       </button>
 
       <button
@@ -47,12 +56,19 @@ const ProjectsSourceFilter: React.FC<ProjectsSourceFilterProps> = ({
         className={cn(
           baseButtonClass,
           value === "experience"
-            ? "bg-[rgb(var(--cobalt))] text-white shadow-sm shadow-black/10"
+            ? "text-white"
             : "text-dar/75 hover:bg-white/[0.65] hover:text-[rgb(var(--cobalt))] dark:text-whi/72 dark:hover:bg-white/[0.08]"
         )}
         onClick={() => onChange("experience")}
       >
-        {realExperienceLabel}
+        {value === "experience" && (
+          <motion.span
+            layoutId="projects-filter-active-pill"
+            className="absolute inset-0 rounded-full bg-[rgb(var(--cobalt))] shadow-sm shadow-black/10"
+            transition={navActivePillTransition}
+          />
+        )}
+        <span className="relative z-10">{realExperienceLabel}</span>
       </button>
     </div>
   );
