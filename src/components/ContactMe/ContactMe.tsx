@@ -1,5 +1,5 @@
 import React from "react";
-import { FaEnvelope, FaGithub, FaLinkedin, FaWhatsapp } from "react-icons/fa";
+import { Github, Linkedin, Mail, MessageCircle } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 import { usePortfolioContent } from "@/lib/portfolioContent";
 import { getDelay, getRevealProps } from "@/lib/motionPresets";
@@ -18,28 +18,28 @@ const ContactMe: React.FC = () => {
       label: ui.contact.actions.email,
       value: email,
       href: `mailto:${email}`,
-      Icon: FaEnvelope,
+      Icon: Mail,
       external: false,
     },
     {
       label: ui.contact.actions.whatsapp,
       value: phone,
       href: whatsappUrl,
-      Icon: FaWhatsapp,
+      Icon: MessageCircle,
       external: true,
     },
     {
       label: ui.contact.actions.github,
       value: "github.com",
       href: github,
-      Icon: FaGithub,
+      Icon: Github,
       external: true,
     },
     {
       label: ui.contact.actions.linkedin,
       value: "linkedin.com",
       href: linkedin,
-      Icon: FaLinkedin,
+      Icon: Linkedin,
       external: true,
     },
   ];

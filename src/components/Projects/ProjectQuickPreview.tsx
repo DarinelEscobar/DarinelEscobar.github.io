@@ -12,7 +12,7 @@ import {
   Wallet,
 } from "lucide-react";
 import type { ProjectData } from "@/content/portfolio/types";
-import { getAssetImage } from "@/lib/assetImages";
+import { useAssetImage } from "@/lib/assetImages";
 import { cn } from "@/lib/utils";
 
 interface ProjectQuickPreviewProps {
@@ -320,9 +320,21 @@ const ProjectQuickPreview: React.FC<ProjectQuickPreviewProps> = ({ project, clas
   const [imageFailed, setImageFailed] = useState(false);
   const firstMedia = project.media[0];
   const previewVariant = project.quick_view?.preview_variant;
-  const imageSource = firstMedia?.url ? getAssetImage(firstMedia.url) : "";
+  const {
+    src: imageSource,
+    isLoading,
+    hasError,
+  } = useAssetImage(firstMedia?.url);
 
-  if (imageSource && !imageFailed) {
+  if (isLoading && firstMedia?.url && !imageFailed) {
+    return (
+      <div className={cn(shellClassName, "h-full min-h-[132px]", className)} aria-busy="true">
+        <div className="h-full min-h-[132px] w-full animate-pulse rounded-[0.9rem] bg-dar/[0.06] dark:bg-white/[0.08]" />
+      </div>
+    );
+  }
+
+  if (imageSource && !imageFailed && !hasError) {
     return (
       <div className={cn(shellClassName, "h-full min-h-[132px]", className)}>
         <img

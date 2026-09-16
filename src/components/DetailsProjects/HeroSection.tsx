@@ -1,7 +1,7 @@
 import React from "react";
 import { ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { getAssetImage } from "./utils";
+import { useAssetImage } from "./utils";
 import { motion, useReducedMotion } from "framer-motion";
 import type { ProjectData } from "@/content/portfolio/types";
 import { usePortfolioContent } from "@/lib/portfolioContent";
@@ -16,6 +16,12 @@ const HeroSection: React.FC<HeroSectionProps> = ({ project }) => {
     ui: { projects },
   } = usePortfolioContent();
   const reduceMotion = useReducedMotion();
+  const firstMedia = project.media?.[0];
+  const {
+    src: heroImageSrc,
+    isLoading: isHeroImageLoading,
+    hasError: hasHeroImageError,
+  } = useAssetImage(firstMedia?.url);
 
   return (
     <motion.section
@@ -78,17 +84,24 @@ const HeroSection: React.FC<HeroSectionProps> = ({ project }) => {
           whileHover={reduceMotion ? undefined : { scale: 1.01 }}
         >
           <div className="overflow-hidden rounded-2xl border border-dar/10 shadow-[0_24px_70px_rgba(15,23,42,0.16)] dark:border-white/10">
-            {project.media && project.media.length > 0 ? (
+            {heroImageSrc && !hasHeroImageError ? (
               <motion.img
-                src={getAssetImage(project.media[0].url)}
-                alt={project.media[0].description || projects.multimediaMaterialLabel}
+                src={heroImageSrc}
+                alt={firstMedia?.description || projects.multimediaMaterialLabel}
                 width={800}
                 height={500}
                 className="object-cover group-hover:scale-105 transition-transform duration-300"
+                loading="lazy"
+                decoding="async"
               />
             ) : (
-              <div className="flex justify-center items-center bg-5whi dark:bg-5dar w-full h-full">
-                <p className="text-5dar dark:text-5whi">{projects.noImageAvailableLabel}</p>
+              <div
+                className="flex min-h-[320px] w-full items-center justify-center bg-whi text-dar/62 dark:bg-white/[0.04]"
+                aria-busy={isHeroImageLoading}
+              >
+                <p className="font-lat text-sm">
+                  {isHeroImageLoading ? projects.multimediaMaterialLabel : projects.noImageAvailableLabel}
+                </p>
               </div>
             )}
           </div>

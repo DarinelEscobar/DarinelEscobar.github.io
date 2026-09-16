@@ -1,6 +1,5 @@
 import React from "react";
-import { FaEnvelope, FaGithub, FaLinkedin, FaWhatsapp } from "react-icons/fa";
-import { ChevronUp } from "lucide-react";
+import { ChevronUp, Github, Linkedin, Mail, MessageCircle } from "lucide-react";
 import { usePortfolioContent } from "@/lib/portfolioContent";
 
 const Footer: React.FC = () => {
@@ -38,7 +37,7 @@ const Footer: React.FC = () => {
             className="rounded-full p-2 text-dar/70 transition-colors hover:bg-dar/5 hover:text-[rgb(var(--cobalt))]"
             aria-label="Email"
           >
-            <FaEnvelope />
+            <Mail className="h-4 w-4" />
           </a>
           <a
             href={linkedin}
@@ -47,7 +46,7 @@ const Footer: React.FC = () => {
             className="rounded-full p-2 text-dar/70 transition-colors hover:bg-dar/5 hover:text-[rgb(var(--cobalt))]"
             aria-label="LinkedIn"
           >
-            <FaLinkedin />
+            <Linkedin className="h-4 w-4" />
           </a>
           <a
             href={github}
@@ -56,7 +55,7 @@ const Footer: React.FC = () => {
             className="rounded-full p-2 text-dar/70 transition-colors hover:bg-dar/5 hover:text-[rgb(var(--cobalt))]"
             aria-label="GitHub"
           >
-            <FaGithub />
+            <Github className="h-4 w-4" />
           </a>
           <a
             href={`https://wa.me/${phone.replace(/\D/g, "")}`}
@@ -65,7 +64,7 @@ const Footer: React.FC = () => {
             className="rounded-full p-2 text-dar/70 transition-colors hover:bg-dar/5 hover:text-[rgb(var(--cobalt))]"
             aria-label="WhatsApp"
           >
-            <FaWhatsapp />
+            <MessageCircle className="h-4 w-4" />
           </a>
           <button
             type="button"

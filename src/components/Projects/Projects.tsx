@@ -1,4 +1,4 @@
-import React, { Suspense, lazy, useState } from "react";
+import React, { Suspense, lazy, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { usePortfolioContent } from "@/lib/portfolioContent";
@@ -14,7 +14,9 @@ import {
 
 const DetailsProjects = lazy(() => import("../DetailsProjects/DetailsProjects"));
 const floatingControlsClassName =
-  "fixed left-1/2 bottom-[calc(env(safe-area-inset-bottom)+12px)] z-40 inline-flex items-center rounded-full border border-dar/10 bg-whi/85 px-3 py-2 shadow-[0_16px_44px_rgba(15,23,42,0.12)] backdrop-blur-xl dark:border-white/10 dark:shadow-black/40";
+  "fixed left-1/2 bottom-[calc(env(safe-area-inset-bottom)+12px)] z-40 hidden items-center rounded-full border border-dar/10 bg-whi/85 px-3 py-2 shadow-[0_16px_44px_rgba(15,23,42,0.12)] backdrop-blur-xl dark:border-white/10 dark:shadow-black/40 md:inline-flex";
+const mobileControlsClassName =
+  "mb-5 inline-flex items-center rounded-full border border-dar/10 bg-whi/85 px-3 py-2 shadow-[0_16px_44px_rgba(15,23,42,0.08)] backdrop-blur-xl dark:border-white/10 dark:shadow-black/30 md:hidden";
 
 interface ProjectsProps {
   layoutMode?: ProjectsLayoutMode;
@@ -29,18 +31,24 @@ const Projects: React.FC<ProjectsProps> = ({ layoutMode = "page" }) => {
   });
   const [sourceFilter, setSourceFilter] = useState<ProjectsSourceFilterMode>("all");
   const [expandedProjectIndex, setExpandedProjectIndex] = useState<number | null>(null);
+  const projectTriggerRef = useRef<HTMLElement | null>(null);
   const visibleProjects = filterProjectsBySource(projects, sourceFilter);
 
-  const handleOpenProject = (projectIndex: number) => {
+  const handleOpenProject = (projectIndex: number, triggerElement?: HTMLElement | null) => {
     if (projectIndex < 0 || projectIndex >= visibleProjects.length) {
       return;
     }
 
+    projectTriggerRef.current = triggerElement ?? null;
     setExpandedProjectIndex(projectIndex);
   };
 
   const handleCloseDetails = () => {
     setExpandedProjectIndex(null);
+    window.requestAnimationFrame(() => {
+      projectTriggerRef.current?.focus();
+      projectTriggerRef.current = null;
+    });
   };
 
   return (
@@ -52,6 +60,17 @@ const Projects: React.FC<ProjectsProps> = ({ layoutMode = "page" }) => {
         )}
       >
         <div className={cn("w-full", layoutMode === "section" && "rounded-[2rem]")}>
+          <div className="flex justify-center">
+            <div className={mobileControlsClassName}>
+              <ProjectsSourceFilter
+                allProjectsLabel={ui.projects.allProjectsFilterLabel}
+                realExperienceLabel={ui.projects.realExperienceFilterLabel}
+                value={sourceFilter}
+                onChange={setSourceFilter}
+              />
+            </div>
+          </div>
+
           <SimplifiedProjectsView
             projects={visibleProjects}
             copy={ui.projects}

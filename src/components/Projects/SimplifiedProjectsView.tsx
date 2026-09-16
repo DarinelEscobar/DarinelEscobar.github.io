@@ -12,7 +12,7 @@ interface SimplifiedProjectsViewProps {
   projects: ProjectData[];
   copy: UiCopy["projects"];
   dateLocale: string;
-  onOpenProject: (projectIndex: number) => void;
+  onOpenProject: (projectIndex: number, triggerElement?: HTMLElement | null) => void;
 }
 
 const chipClassName =
@@ -118,7 +118,7 @@ function DesktopProjectsTable({
   allProjects: ProjectData[];
   copy: UiCopy["projects"];
   dateLocale: string;
-  onOpenProject: (projectIndex: number) => void;
+  onOpenProject: (projectIndex: number, triggerElement?: HTMLElement | null) => void;
   reduceMotion: boolean | null;
 }) {
   return (
@@ -197,7 +197,7 @@ function DesktopProjectsTable({
                           <button
                             type="button"
                             className="inline-flex items-center gap-2 rounded-full border border-dar/10 px-3 py-2 font-rob text-xs font-bold text-black/55 transition-colors hover:border-[rgb(var(--cobalt))] hover:text-[rgb(var(--cobalt))] dark:border-white/10 dark:text-white/55 dark:hover:text-white"
-                            onClick={() => onOpenProject(projectIndex)}
+                            onClick={(event) => onOpenProject(projectIndex, event.currentTarget)}
                           >
                             {copy.openProjectDetailsLabel}
                             <ArrowUpRight className="h-4 w-4" />
@@ -248,7 +248,7 @@ function MobileProjectsTable({
   allProjects: ProjectData[];
   copy: UiCopy["projects"];
   dateLocale: string;
-  onOpenProject: (projectIndex: number) => void;
+  onOpenProject: (projectIndex: number, triggerElement?: HTMLElement | null) => void;
   reduceMotion: boolean | null;
 }) {
   return (
@@ -290,7 +290,7 @@ function MobileProjectsTable({
                   <button
                     type="button"
                     className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-dar/10 bg-white/70 px-4 py-3 font-rob text-xs font-bold text-dar transition-colors hover:border-[rgb(var(--cobalt))] hover:text-[rgb(var(--cobalt))] dark:border-white/10 dark:bg-white/[0.05] dark:text-whi dark:hover:bg-white dark:hover:text-black"
-                    onClick={() => onOpenProject(projectIndex)}
+                    onClick={(event) => onOpenProject(projectIndex, event.currentTarget)}
                   >
                     {copy.openProjectDetailsLabel}
                     <ArrowUpRight className="h-4 w-4" />

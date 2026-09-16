@@ -7,7 +7,7 @@ import {
   Minimize,
   Loader2,
 } from "lucide-react";
-import { getAssetImage } from "./utils";
+import { useAssetImage } from "./utils";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { useSwipeable } from "react-swipeable";
 import { useHotkeys } from "react-hotkeys-hook";
@@ -52,6 +52,68 @@ const thumbnailItem = {
   },
 };
 
+interface GalleryThumbnailProps {
+  mediaItem: MediaItem;
+  index: number;
+  isSelected: boolean;
+  label: string;
+  reduceMotion: boolean | null;
+  onSelect: (index: number) => void;
+}
+
+function GalleryThumbnail({
+  mediaItem,
+  index,
+  isSelected,
+  label,
+  reduceMotion,
+  onSelect,
+}: GalleryThumbnailProps) {
+  const { src, isLoading, hasError } = useAssetImage(mediaItem.url);
+
+  return (
+    <motion.button
+      type="button"
+      className={`relative cursor-pointer overflow-hidden rounded-lg border-2 transition-all duration-300 ${
+        isSelected
+          ? "z-10 scale-105 border-[rgb(var(--cobalt))]"
+          : "border-transparent hover:border-[rgba(var(--cobalt),0.45)]"
+      }`}
+      variants={thumbnailItem}
+      whileHover={reduceMotion ? undefined : { y: -2, scale: 1.02 }}
+      onClick={() => onSelect(index)}
+      aria-label={`${label} ${index + 1}`}
+      aria-pressed={isSelected}
+    >
+      <span className="relative block aspect-square bg-gray-100 dark:bg-gray-900">
+        {src && !hasError ? (
+          <img
+            src={src}
+            alt={mediaItem.description || `${label} ${index + 1}`}
+            className="absolute inset-0 h-full w-full object-cover"
+            loading="lazy"
+            decoding="async"
+          />
+        ) : (
+          <span
+            className="absolute inset-0 block animate-pulse bg-dar/[0.06] dark:bg-white/[0.08]"
+            aria-hidden="true"
+          />
+        )}
+        {isLoading ? (
+          <span
+            className="absolute inset-0 flex items-center justify-center text-[rgb(var(--cobalt))]"
+            aria-hidden="true"
+          >
+            <Loader2 className="h-5 w-5 animate-spin" />
+          </span>
+        ) : null}
+        {isSelected && <span className="absolute inset-0 bg-black/40 backdrop-blur-[2px]" />}
+      </span>
+    </motion.button>
+  );
+}
+
 const MediaGallery: React.FC<MediaGalleryProps> = ({
   media,
   currentImageIndex,
@@ -62,12 +124,17 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({
   } = usePortfolioContent();
   const reduceMotion = useReducedMotion();
   const [isFullscreen, setIsFullscreen] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
   const [imageDimensions, setImageDimensions] = useState<{
     width: number;
     height: number;
   } | null>(null);
   const [containerRef, setContainerRef] = useState<HTMLDivElement | null>(null);
+  const currentMedia = media[currentImageIndex];
+  const {
+    src: currentImageSrc,
+    isLoading: isCurrentImageLoading,
+    hasError: hasCurrentImageError,
+  } = useAssetImage(currentMedia?.url);
 
   const calculateImagePosition = useCallback(() => {
     if (!containerRef || !imageDimensions) return {};
@@ -87,12 +154,10 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({
   }, [containerRef, imageDimensions]);
 
   const nextImage = useCallback(() => {
-    setIsLoading(true);
     setCurrentImageIndex((currentImageIndex + 1) % media.length);
   }, [currentImageIndex, media.length, setCurrentImageIndex]);
 
   const prevImage = useCallback(() => {
-    setIsLoading(true);
     setCurrentImageIndex(
       (currentImageIndex - 1 + media.length) % media.length
     );
@@ -110,25 +175,42 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({
   useHotkeys("esc", () => setIsFullscreen(false));
 
   useEffect(() => {
-    document.body.style.overflow = isFullscreen ? "hidden" : "";
+    if (!isFullscreen) {
+      return undefined;
+    }
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
 
     return () => {
-      document.body.style.overflow = "";
+      document.body.style.overflow = previousOverflow;
     };
   }, [isFullscreen]);
 
   useEffect(() => {
+    if (!currentImageSrc) {
+      setImageDimensions(null);
+      return undefined;
+    }
+
+    let isCurrent = true;
     const img = new Image();
-    img.src = getAssetImage(media[currentImageIndex].url);
+    img.src = currentImageSrc;
     img.onload = () => {
-      setIsLoading(false);
-      setImageDimensions({ width: img.width, height: img.height });
+      if (isCurrent) {
+        setImageDimensions({ width: img.width, height: img.height });
+      }
     };
     img.onerror = () => {
-      setIsLoading(false);
-      setImageDimensions(null);
+      if (isCurrent) {
+        setImageDimensions(null);
+      }
     };
-  }, [currentImageIndex, media]);
+
+    return () => {
+      isCurrent = false;
+    };
+  }, [currentImageSrc]);
 
   const toggleFullscreen = () => {
     setIsFullscreen((currentValue) => !currentValue);
@@ -167,35 +249,41 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({
                 transition={{ duration: 0.3 }}
                 className="relative flex h-full w-full items-center justify-center"
               >
-                {isLoading && (
+                {isCurrentImageLoading && (
                   <div className="absolute inset-0 flex items-center justify-center bg-gray-100 dark:bg-gray-900">
                     <Loader2 className="h-12 w-12 animate-spin text-[rgb(var(--cobalt))]" />
                   </div>
                 )}
 
-                <img
-                  src={getAssetImage(media[currentImageIndex].url)}
-                  alt={media[currentImageIndex].description || projects.multimediaMaterialLabel}
-                  {...(media[currentImageIndex].url.includes("fav-400.webp")
-                    ? {
-                        width: 383,
-                        height: 295,
-                        loading: "lazy",
-                        decoding: "async",
-                      }
-                    : {})}
-                  className={`transition-opacity duration-300 ${
-                    isLoading ? "opacity-0" : "opacity-100"
-                  }`}
-                  style={{
-                    ...calculateImagePosition(),
-                    objectFit: "contain",
-                  }}
-                />
+                {currentImageSrc && !hasCurrentImageError ? (
+                  <img
+                    src={currentImageSrc}
+                    alt={currentMedia.description || projects.multimediaMaterialLabel}
+                    {...(currentMedia.url.includes("fav-400.webp")
+                      ? {
+                          width: 383,
+                          height: 295,
+                        }
+                      : {})}
+                    loading="lazy"
+                    decoding="async"
+                    className={`transition-opacity duration-300 ${
+                      isCurrentImageLoading ? "opacity-0" : "opacity-100"
+                    }`}
+                    style={{
+                      ...calculateImagePosition(),
+                      objectFit: "contain",
+                    }}
+                  />
+                ) : (
+                  <div className="flex min-h-[320px] w-full items-center justify-center bg-gray-100 px-6 text-center text-sm text-dar/62 dark:bg-gray-900 dark:text-white/68">
+                    {isCurrentImageLoading ? projects.multimediaMaterialLabel : projects.noImageAvailableLabel}
+                  </div>
+                )}
 
                 <div className="pointer-events-none absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/70 to-transparent px-6 pb-4 pt-16">
                   <p className="text-lg font-medium text-white/90 drop-shadow-lg">
-                    {media[currentImageIndex].description}
+                    {currentMedia.description}
                   </p>
                   {imageDimensions && (
                     <p className="mt-1 text-sm text-white/60">
@@ -212,6 +300,7 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({
                 size="sm"
                 className="bg-black/30 text-white/90 backdrop-blur-sm hover:bg-black/40 hover:text-white"
                 onClick={toggleFullscreen}
+                aria-label={isFullscreen ? projects.exitFullscreenLabel : projects.enterFullscreenLabel}
               >
                 {isFullscreen ? (
                   <Minimize className="h-5 w-5" />
@@ -251,8 +340,11 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({
             <div className="flex gap-1.5">
               {media.map((_, index) => (
                 <button
+                  type="button"
                   key={index}
                   onClick={() => setCurrentImageIndex(index)}
+                  aria-label={`${projects.selectMediaLabel} ${index + 1}`}
+                  aria-pressed={index === currentImageIndex}
                   className={`h-2.5 w-2.5 rounded-full transition-all ${
                     index === currentImageIndex
                       ? "scale-125 bg-[rgb(var(--cobalt))]"
@@ -272,28 +364,15 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({
           viewport={{ once: true, amount: 0.2 }}
         >
           {media.map((mediaItem, index) => (
-            <motion.div
-              key={index}
-              className={`relative cursor-pointer overflow-hidden rounded-lg border-2 transition-all duration-300 ${
-                index === currentImageIndex
-                  ? "z-10 scale-105 border-[rgb(var(--cobalt))]"
-                  : "border-transparent hover:border-[rgba(var(--cobalt),0.45)]"
-              }`}
-              variants={thumbnailItem}
-              whileHover={reduceMotion ? undefined : { y: -2, scale: 1.02 }}
-              onClick={() => setCurrentImageIndex(index)}
-            >
-              <div className="relative aspect-square bg-gray-100 dark:bg-gray-900">
-                <img
-                  src={getAssetImage(mediaItem.url)}
-                  alt={mediaItem.description || `${projects.multimediaMaterialLabel} ${index + 1}`}
-                  className="absolute inset-0 h-full w-full object-cover"
-                />
-                {index === currentImageIndex && (
-                  <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px]" />
-                )}
-              </div>
-            </motion.div>
+            <GalleryThumbnail
+              key={`${mediaItem.url}-${index}`}
+              mediaItem={mediaItem}
+              index={index}
+              isSelected={index === currentImageIndex}
+              label={projects.selectMediaLabel}
+              reduceMotion={reduceMotion}
+              onSelect={setCurrentImageIndex}
+            />
           ))}
         </motion.div>
       </div>
@@ -302,6 +381,8 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({
         <button
           className="absolute right-6 top-6 z-50 text-white/90 hover:text-white"
           onClick={toggleFullscreen}
+          aria-label={projects.exitFullscreenLabel}
+          type="button"
         >
           <Minimize className="h-8 w-8" />
         </button>

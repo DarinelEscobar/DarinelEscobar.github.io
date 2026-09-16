@@ -187,6 +187,10 @@ export interface UiCopy {
     roleLabel: string;
     technologyStackLabel: string;
     multimediaMaterialLabel: string;
+    closeProjectDetailsLabel: string;
+    enterFullscreenLabel: string;
+    exitFullscreenLabel: string;
+    selectMediaLabel: string;
     previousImageLabel: string;
     nextImageLabel: string;
     teamMemberSingular: string;
