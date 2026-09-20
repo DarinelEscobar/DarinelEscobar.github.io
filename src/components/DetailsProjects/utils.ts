@@ -1,1 +1,1 @@
-export { getAssetImage } from "@/lib/assetImages";
+export { getAssetImage, loadAssetImage, useAssetImage } from "@/lib/assetImages";

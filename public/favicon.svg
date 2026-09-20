@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title>Darinel Escobar</title>
+  <rect width="64" height="64" rx="16" fill="#0f172a"/>
+  <path d="M16 15h13c11 0 19 7 19 17s-8 17-19 17H16V15Zm10 10v14h3c5 0 9-3 9-7s-4-7-9-7h-3Z" fill="#f8fafc"/>
+  <path d="M44 17h5v30h-5z" fill="#2563eb"/>
+</svg>
