@@ -1,12 +1,12 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { X } from "lucide-react";
-import { AnimatePresence, motion } from "framer-motion";
 import type { ProjectData } from "@/content/portfolio/types";
+import { usePresentationCopy } from "@/lib/portfolioContent";
+import useModalDialog from "@/hooks/useModalDialog";
 import HeroSection from "./HeroSection";
 import ProjectDetails from "./ProjectDetails";
 import TechnicalSidebar from "./TechnicalSidebar";
 import MediaGallery from "./MediaGallery";
-import ScrollIndicator from "./ScrollIndicator";
 
 interface DetailsProjectsProps {
   projects: ProjectData[];
@@ -14,144 +14,29 @@ interface DetailsProjectsProps {
   onClose: () => void;
 }
 
-const modalVariants = {
-  hidden: { opacity: 0, scale: 0.85 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: { duration: 0.5, ease: "easeOut" },
-  },
-};
-
-const DetailsProjects: React.FC<DetailsProjectsProps> = ({
-  projects,
-  projectIndex,
-  onClose,
-}) => {
-  const scrollContainerRef = useRef<HTMLDivElement | null>(null);
-  const contentRef = useRef<HTMLDivElement | null>(null);
+export default function DetailsProjects({ projects, projectIndex, onClose }: DetailsProjectsProps) {
+  const ref = useRef<HTMLDialogElement>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [showScrollHint, setShowScrollHint] = useState(false);
-
-  const updateScrollHint = useCallback(() => {
-    const container = scrollContainerRef.current;
-    if (!container) return;
-
-    const overflowDistance = container.scrollHeight - container.clientHeight;
-    const hasOverflow = overflowDistance > 32;
-    const hasMoreBelow = overflowDistance - container.scrollTop > 32;
-    const shouldShowHint = hasOverflow && container.scrollTop < 220 && hasMoreBelow;
-
-    setShowScrollHint((previousValue) =>
-      previousValue === shouldShowHint ? previousValue : shouldShowHint
-    );
-  }, []);
-
-  const handleScrollHintClick = () => {
-    const container = scrollContainerRef.current;
-    if (!container) return;
-
-    container.scrollTo({
-      top: Math.min(
-        container.scrollTop + Math.max(container.clientHeight * 0.65, 320),
-        container.scrollHeight
-      ),
-      behavior: "smooth",
-    });
-  };
-
-  useEffect(() => {
-    const container = scrollContainerRef.current;
-    const content = contentRef.current;
-    if (!container) return;
-
-    updateScrollHint();
-
-    const handleScroll = () => updateScrollHint();
-    const frameId = window.requestAnimationFrame(updateScrollHint);
-    const resizeObserver =
-      typeof ResizeObserver !== "undefined"
-        ? new ResizeObserver(() => updateScrollHint())
-        : null;
-
-    container.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("resize", updateScrollHint);
-    resizeObserver?.observe(container);
-
-    if (content) {
-      resizeObserver?.observe(content);
-    }
-
-    return () => {
-      window.cancelAnimationFrame(frameId);
-      container.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", updateScrollHint);
-      resizeObserver?.disconnect();
-    };
-  }, [projectIndex, updateScrollHint]);
-
-  useEffect(() => {
-    setCurrentImageIndex(0);
-  }, [projectIndex]);
-
-  if (projectIndex < 0 || projectIndex >= projects.length) {
-    return null;
-  }
-
+  const copy = usePresentationCopy();
+  useModalDialog(ref);
   const project = projects[projectIndex];
-
+  if (!project) return null;
   return (
-    <motion.div
-      ref={scrollContainerRef}
-      className="fixed inset-0 z-50 overflow-auto bg-black/70"
-      variants={modalVariants}
-      initial="hidden"
-      animate="visible"
-    >
-      <div ref={contentRef} className="absolute min-h-full w-full">
-        <button
-          onClick={onClose}
-          className="fixed right-4 top-4 z-50 rounded-full border border-black/5 bg-white/90 p-2 text-dar shadow-lg shadow-black/[0.15] transition-colors hover:bg-white dark:border-white/10 dark:bg-gray-800/[0.85] dark:shadow-black/50 dark:hover:bg-gray-700"
-        >
-          <X className="h-5 w-5" />
-        </button>
-
-        <div className="min-h-screen bg-whi text-dar">
-          <HeroSection project={project} />
-
-          <section className="px-4 py-24">
-            <div className="container mx-auto grid gap-12 lg:grid-cols-3">
-              <ProjectDetails
-                project={{
-                  ...project,
-                  responsibilities: project.responsibilities || [],
-                  achievements: project.achievements || [],
-                }}
-              />
-              <TechnicalSidebar project={project} />
-            </div>
-          </section>
-
-          {project.media && project.media.length > 0 && (
-            <MediaGallery
-              media={project.media}
-              currentImageIndex={currentImageIndex}
-              setCurrentImageIndex={setCurrentImageIndex}
-            />
-          )}
-        </div>
+    <dialog ref={ref} className="project-dialog" aria-labelledby="project-detail-title"
+      onCancel={(event) => { if (event.target === event.currentTarget) { event.preventDefault(); onClose(); } }}
+      onClick={(event) => { if (event.target === event.currentTarget) onClose(); }}>
+      <div className="project-dialog-bar">
+        <span>{project.source === "experience" ? copy.professional : copy.personal}</span>
+        <button type="button" className="icon-button" aria-label={copy.close} onClick={onClose}><X size={22} /></button>
       </div>
-
-      <AnimatePresence>
-        {showScrollHint && (
-          <ScrollIndicator
-            containerRef={scrollContainerRef}
-            onClick={handleScrollHintClick}
-          />
-        )}
-      </AnimatePresence>
-    </motion.div>
+      <div className="project-dialog-content">
+        <HeroSection project={project} />
+        <div className="project-detail-layout">
+          <ProjectDetails project={project} />
+          <TechnicalSidebar project={project} />
+        </div>
+        {project.media.length > 0 && <MediaGallery media={project.media} currentImageIndex={currentImageIndex} setCurrentImageIndex={setCurrentImageIndex} />}
+      </div>
+    </dialog>
   );
-};
-
-export default DetailsProjects;
+}

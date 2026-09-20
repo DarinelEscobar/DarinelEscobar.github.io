@@ -6,7 +6,7 @@ interface RawProjectData {
   project_overview?: string;
   description: string;
   role: string;
-  technologies?: Record<string, string[]>;
+  technologies?: Record<string, string[] | undefined>;
   start_date?: string;
   end_date?: string;
   responsibilities?: string[];
@@ -95,7 +95,12 @@ export function buildProjects(
 ): ProjectData[] {
   return rawProjects.map((project) => {
     const translatedProject = translations[project.name];
-    const technologies = translatedProject?.technologies ?? project.technologies;
+    const rawTechnologies = translatedProject?.technologies ?? project.technologies;
+    const technologies = rawTechnologies
+      ? Object.fromEntries(
+          Object.entries(rawTechnologies).filter((entry): entry is [string, string[]] => Array.isArray(entry[1]))
+        )
+      : undefined;
 
     return {
       source,

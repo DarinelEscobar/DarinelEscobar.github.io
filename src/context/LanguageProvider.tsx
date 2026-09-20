@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useMemo, useState } from "react";
 import type { Language } from "@/content/portfolio/types";
 
-interface LanguageContextValue {
+export interface LanguageContextValue {
   language: Language;
   setLanguage: (language: Language) => void;
   toggleLanguage: () => void;

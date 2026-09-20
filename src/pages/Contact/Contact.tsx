@@ -1,16 +1,5 @@
-// src/pages/Home/Contact.tsx
-import React from 'react';
-import Header from '@/components/Header/Header';
-import ContactMe from '@/components/ContactMe/ContactMe';
+import ContactMe from "@/components/ContactMe/ContactMe";
 
-const Contact: React.FC = () => {
-  return (
-   <main className="relative bg-whi  scroll-smooth text-dar">
-  <Header />
-  <ContactMe />
-</main>
-
-  );
-};
-
-export default Contact;
+export default function Contact() {
+  return <main id="main-content" tabIndex={-1}><ContactMe standalone /></main>;
+}

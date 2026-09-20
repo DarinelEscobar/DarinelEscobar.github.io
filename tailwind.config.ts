@@ -17,9 +17,9 @@ const config: Config = {
     extend: {
       colors: {
 
-        whi: "rgb(var(--whi))",
+        whi: "rgb(var(--whi) / <alpha-value>)",
         "5whi": "rgba(var(--5whi))",
-        dar: "rgb(var(--dar))",
+        dar: "rgb(var(--dar) / <alpha-value>)",
         "5dar": "rgba(var(--5dar))",
 
 

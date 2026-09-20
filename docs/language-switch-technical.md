@@ -22,7 +22,7 @@ The language switch does not change routes, URLs, or router behavior. It only ch
 
 - No `i18next` or third-party i18n dependency was added.
 - Language state is global and persisted in `localStorage`.
-- Components should not import localized JSON or copy directly when they can consume `usePortfolioContent()`.
+- Components consume localized data through `usePortfolioContent()` and presentation copy through `usePresentationCopy()`.
 - The source of truth for language is the `LanguageProvider`.
 - Locale-sensitive formatting uses language-specific locale values from UI copy, not hardcoded values inside components.
 
@@ -30,32 +30,32 @@ The language switch does not change routes, URLs, or router behavior. It only ch
 
 Core state:
 
-- [src/context/LanguageProvider.tsx](/mnt/c/Users/Cybac/.codex/worktrees/9020/DarinelEscobar.github.io/src/context/LanguageProvider.tsx)
-- [src/hooks/useLanguage.ts](/mnt/c/Users/Cybac/.codex/worktrees/9020/DarinelEscobar.github.io/src/hooks/useLanguage.ts)
-- [src/main.tsx](/mnt/c/Users/Cybac/.codex/worktrees/9020/DarinelEscobar.github.io/src/main.tsx)
+- [src/context/LanguageProvider.tsx](../src/context/LanguageProvider.tsx)
+- [src/hooks/useLanguage.ts](../src/hooks/useLanguage.ts)
+- [src/main.tsx](../src/main.tsx)
 
 Localized content resolution:
 
-- [src/lib/portfolioContent.ts](/mnt/c/Users/Cybac/.codex/worktrees/9020/DarinelEscobar.github.io/src/lib/portfolioContent.ts)
-- [src/content/portfolio/types.ts](/mnt/c/Users/Cybac/.codex/worktrees/9020/DarinelEscobar.github.io/src/content/portfolio/types.ts)
-- [src/content/portfolio/ui.ts](/mnt/c/Users/Cybac/.codex/worktrees/9020/DarinelEscobar.github.io/src/content/portfolio/ui.ts)
-- [src/content/portfolio/resume.ts](/mnt/c/Users/Cybac/.codex/worktrees/9020/DarinelEscobar.github.io/src/content/portfolio/resume.ts)
-- [src/content/portfolio/experience.ts](/mnt/c/Users/Cybac/.codex/worktrees/9020/DarinelEscobar.github.io/src/content/portfolio/experience.ts)
-- [src/content/portfolio/projects.ts](/mnt/c/Users/Cybac/.codex/worktrees/9020/DarinelEscobar.github.io/src/content/portfolio/projects.ts)
+- [src/lib/portfolioContent.ts](../src/lib/portfolioContent.ts)
+- [src/content/portfolio/types.ts](../src/content/portfolio/types.ts)
+- [src/content/portfolio/ui.ts](../src/content/portfolio/ui.ts)
+- [src/content/portfolio/resume.ts](../src/content/portfolio/resume.ts)
+- [src/content/portfolio/experience.ts](../src/content/portfolio/experience.ts)
+- [src/content/portfolio/projects.ts](../src/content/portfolio/projects.ts)
 
 UI integration:
 
-- [src/components/Header/Header.tsx](/mnt/c/Users/Cybac/.codex/worktrees/9020/DarinelEscobar.github.io/src/components/Header/Header.tsx)
-- [src/components/Header/LanguageToggle.tsx](/mnt/c/Users/Cybac/.codex/worktrees/9020/DarinelEscobar.github.io/src/components/Header/LanguageToggle.tsx)
-- [src/hooks/useCurrentTime.ts](/mnt/c/Users/Cybac/.codex/worktrees/9020/DarinelEscobar.github.io/src/hooks/useCurrentTime.ts)
-- [src/components/Projects/dateUtils.ts](/mnt/c/Users/Cybac/.codex/worktrees/9020/DarinelEscobar.github.io/src/components/Projects/dateUtils.ts)
-- [src/components/DetailsProjects/TechnicalSidebar.tsx](/mnt/c/Users/Cybac/.codex/worktrees/9020/DarinelEscobar.github.io/src/components/DetailsProjects/TechnicalSidebar.tsx)
+- [src/components/Header/Header.tsx](../src/components/Header/Header.tsx)
+- [src/components/Header/LanguageToggle.tsx](../src/components/Header/LanguageToggle.tsx)
+- [src/hooks/useCurrentTime.ts](../src/hooks/useCurrentTime.ts)
+- [src/components/Projects/dateUtils.ts](../src/components/Projects/dateUtils.ts)
+- [src/components/DetailsProjects/TechnicalSidebar.tsx](../src/components/DetailsProjects/TechnicalSidebar.tsx)
 
 ## Runtime Flow
 
 ### 1. App bootstrap
 
-The app is wrapped in `LanguageProvider` at startup in [src/main.tsx](/mnt/c/Users/Cybac/.codex/worktrees/9020/DarinelEscobar.github.io/src/main.tsx).
+The app is wrapped in `LanguageProvider` at startup in [src/main.tsx](../src/main.tsx).
 
 This makes the language state available to the whole React tree before the router renders the app.
 
@@ -67,7 +67,7 @@ This makes the language state available to the whole React tree before the route
 2. Falls back to `"en"` if there is no valid stored value
 3. Exposes the active language through React context
 
-The initialization logic lives in `getInitialLanguage()` inside [src/context/LanguageProvider.tsx](/mnt/c/Users/Cybac/.codex/worktrees/9020/DarinelEscobar.github.io/src/context/LanguageProvider.tsx).
+The initialization logic lives in `getInitialLanguage()` inside [src/context/LanguageProvider.tsx](../src/context/LanguageProvider.tsx).
 
 Behavior:
 
@@ -82,11 +82,11 @@ When `language` changes, the provider updates:
 - `document.documentElement.lang`
 - `localStorage["language"]`
 
-That effect also lives in [src/context/LanguageProvider.tsx](/mnt/c/Users/Cybac/.codex/worktrees/9020/DarinelEscobar.github.io/src/context/LanguageProvider.tsx).
+That effect also lives in [src/context/LanguageProvider.tsx](../src/context/LanguageProvider.tsx).
 
 ### 4. Consumer access
 
-Components read language state through [src/hooks/useLanguage.ts](/mnt/c/Users/Cybac/.codex/worktrees/9020/DarinelEscobar.github.io/src/hooks/useLanguage.ts), which is a thin wrapper around the provider context.
+Components read language state through [src/hooks/useLanguage.ts](../src/hooks/useLanguage.ts), which is a thin wrapper around the provider context.
 
 The exposed API is:
 
@@ -100,7 +100,7 @@ The exposed API is:
 
 ### `usePortfolioContent()`
 
-The main integration point is [src/lib/portfolioContent.ts](/mnt/c/Users/Cybac/.codex/worktrees/9020/DarinelEscobar.github.io/src/lib/portfolioContent.ts).
+The main integration point is [src/lib/portfolioContent.ts](../src/lib/portfolioContent.ts).
 
 It centralizes language-based content resolution.
 
@@ -115,6 +115,11 @@ It centralizes language-based content resolution.
 This keeps most UI components unaware of the underlying storage format.
 
 ### `getPortfolioContent(language)`
+
+Presentation copy for the hero, filters, gallery and contact actions lives in
+`src/content/portfolio/presentation.ts`. `usePresentationCopy()` in
+`src/lib/portfolioContent.ts` reads the same language context. Both locales
+share a checked key set, and switching languages preserves the selected project.
 
 `getPortfolioContent(language)` is the pure function version used by the hook.
 
@@ -133,7 +138,7 @@ projects: [...experienceContent[language], ...personalProjectsContent[language]]
 
 ## Localized Data Shape
 
-The shared content contracts live in [src/content/portfolio/types.ts](/mnt/c/Users/Cybac/.codex/worktrees/9020/DarinelEscobar.github.io/src/content/portfolio/types.ts).
+The shared content contracts live in [src/content/portfolio/types.ts](../src/content/portfolio/types.ts).
 
 Important types:
 
@@ -149,24 +154,24 @@ If `en` and `es` drift structurally, components may compile but fail at runtime 
 
 ## Header Integration
 
-The header wiring lives in [src/components/Header/Header.tsx](/mnt/c/Users/Cybac/.codex/worktrees/9020/DarinelEscobar.github.io/src/components/Header/Header.tsx).
+The header wiring lives in [src/components/Header/Header.tsx](../src/components/Header/Header.tsx).
 
 That component:
 
 - gets `language` and `setLanguage` from `useLanguage()`
 - gets `ui` from `usePortfolioContent()`
-- passes the current locale to `useCurrentTime(ui.locale.time)`
-- passes `language` and `setLanguage` to desktop/mobile header variants
+- renders shared desktop navigation and a native mobile navigation dialog
+- passes `language` and `setLanguage` to the shared language toggle
 
 ### `LanguageToggle`
 
-The visible switch lives in [src/components/Header/LanguageToggle.tsx](/mnt/c/Users/Cybac/.codex/worktrees/9020/DarinelEscobar.github.io/src/components/Header/LanguageToggle.tsx).
+The visible switch lives in [src/components/Header/LanguageToggle.tsx](../src/components/Header/LanguageToggle.tsx).
 
 Current behavior:
 
-- renders a simple text switch for `EN` and `ES`
-- uses `aria-pressed` for the active option
-- uses `tooltipLabel` for `aria-label` and `title`
+- renders the destination language as `EN` or `ES`
+- describes the destination language in `aria-label` and `title`
+- remains keyboard accessible with a visible focus ring
 - receives `language` and `setLanguage` as props
 - has no local source of truth
 
@@ -178,7 +183,9 @@ The language switch also affects formatting, not only static strings.
 
 ### Current time
 
-[src/hooks/useCurrentTime.ts](/mnt/c/Users/Cybac/.codex/worktrees/9020/DarinelEscobar.github.io/src/hooks/useCurrentTime.ts) formats the live clock using:
+The redesigned header does not display a clock. This helper remains available for legacy components.
+
+[src/hooks/useCurrentTime.ts](../src/hooks/useCurrentTime.ts) formats the live clock using:
 
 ```ts
 currentTime.toLocaleTimeString(locale, {
@@ -193,14 +200,16 @@ The locale comes from:
 
 - `ui.locale.time`
 
-Examples currently configured in [src/content/portfolio/ui.ts](/mnt/c/Users/Cybac/.codex/worktrees/9020/DarinelEscobar.github.io/src/content/portfolio/ui.ts):
+Examples currently configured in [src/content/portfolio/ui.ts](../src/content/portfolio/ui.ts):
 
 - English: `en-US`
 - Spanish: `es-MX`
 
 ### Project month/year formatting
 
-[src/components/Projects/dateUtils.ts](/mnt/c/Users/Cybac/.codex/worktrees/9020/DarinelEscobar.github.io/src/components/Projects/dateUtils.ts) formats dates with:
+The catalog groups projects by year. The following formatter remains available for legacy components.
+
+[src/components/Projects/dateUtils.ts](../src/components/Projects/dateUtils.ts) formats dates with:
 
 ```ts
 toLocaleString(locale, { month: "short", year: "numeric" })
@@ -213,31 +222,28 @@ Then it normalizes output with:
 
 This keeps abbreviated month formatting visually consistent across languages.
 
-### Project duration text
+### Project period
 
-[src/components/DetailsProjects/TechnicalSidebar.tsx](/mnt/c/Users/Cybac/.codex/worktrees/9020/DarinelEscobar.github.io/src/components/DetailsProjects/TechnicalSidebar.tsx) calculates localized duration labels using:
-
-- `locale.duration`
-- `monthSingular`
-- `monthPlural`
-- `weekSingular`
-- `weekPlural`
-- `andLabel`
-
-That means duration output is language-aware both in date formatting and in unit wording.
+`TechnicalSidebar` displays the available start and end dates using
+`locale.date`, long month names, the year, and UTC to avoid date shifts
+between time zones. Missing dates are omitted; no duration is inferred.
 
 ## Adding or Updating Copy
 
 ### Add a new UI string
 
-1. Add the field to `UiCopy` in [src/content/portfolio/types.ts](/mnt/c/Users/Cybac/.codex/worktrees/9020/DarinelEscobar.github.io/src/content/portfolio/types.ts)
-2. Add the value for `en` in [src/content/portfolio/ui.ts](/mnt/c/Users/Cybac/.codex/worktrees/9020/DarinelEscobar.github.io/src/content/portfolio/ui.ts)
-3. Add the value for `es` in [src/content/portfolio/ui.ts](/mnt/c/Users/Cybac/.codex/worktrees/9020/DarinelEscobar.github.io/src/content/portfolio/ui.ts)
+For presentation strings, add matching keys to both locales in
+`src/content/portfolio/presentation.ts` and consume `usePresentationCopy()`.
+For the existing shared UI contract, follow the steps below.
+
+1. Add the field to `UiCopy` in [src/content/portfolio/types.ts](../src/content/portfolio/types.ts)
+2. Add the value for `en` in [src/content/portfolio/ui.ts](../src/content/portfolio/ui.ts)
+3. Add the value for `es` in [src/content/portfolio/ui.ts](../src/content/portfolio/ui.ts)
 4. Consume it from `usePortfolioContent()` in the component
 
 ### Add a new localized resume/project field
 
-1. Update the relevant shared type in [src/content/portfolio/types.ts](/mnt/c/Users/Cybac/.codex/worktrees/9020/DarinelEscobar.github.io/src/content/portfolio/types.ts)
+1. Update the relevant shared type in [src/content/portfolio/types.ts](../src/content/portfolio/types.ts)
 2. Add the field to both language datasets
 3. Keep both datasets structurally aligned
 4. Read the field through `usePortfolioContent()`
@@ -262,7 +268,7 @@ That means duration output is language-aware both in date formatting and in unit
 
 If language switching stops working, check these points in order:
 
-1. Confirm [src/main.tsx](/mnt/c/Users/Cybac/.codex/worktrees/9020/DarinelEscobar.github.io/src/main.tsx) still wraps the app in `LanguageProvider`.
+1. Confirm [src/main.tsx](../src/main.tsx) still wraps the app in `LanguageProvider`.
 2. Confirm `useLanguage()` is being called inside the provider tree.
 3. Confirm `localStorage["language"]` changes when clicking the switch.
 4. Confirm `document.documentElement.lang` updates after a click.

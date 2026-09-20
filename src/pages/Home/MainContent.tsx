@@ -1,33 +1,30 @@
-import React from "react";
-import img from "../../assets/images/me.webp";
-import { useResumeContent } from "@/lib/portfolioContent";
+import { ArrowUpRight, ArrowDownRight } from "lucide-react";
+import { Link } from "react-router-dom";
+import portrait from "@/assets/images/me.webp";
+import spotlight from "@/assets/images/eztickets.mx/admin-dashboard.webp";
+import { useResumeContent, usePresentationCopy } from "@/lib/portfolioContent";
 
-const MainContent: React.FC = () => {
-  const {
-    personal_info: { short_name },
-  } = useResumeContent();
-
+export default function MainContent() {
+  const { personal_info } = useResumeContent();
+  const copy = usePresentationCopy();
   return (
-    <section className="flex flex-col justify-center md:justify-between items-center bg-whi w-screen min-h-[100dvh] text-dar gap-4 md:gap-0">
-      <div className="flex flex-none md:flex-grow justify-center items-center">
-        <img
-          src={img}
-          alt={short_name}
-          width="200"
-          height="300"
-          className="shadow-lg rounded-md w-[200px] h-[300px] object-cover"
-          fetchPriority="high"
-          decoding="async"
-        />
+    <section className="hero page-shell" aria-labelledby="hero-title">
+      <div className="hero-content">
+        <div className="hero-identity hero-enter">
+          <img src={portrait} alt="" width={48} height={48} decoding="async" />
+          <div><p>{personal_info.short_name}</p><p>{personal_info.rol}</p></div>
+        </div>
+        <h1 id="hero-title" className="hero-name hero-enter">{copy.heroTitle}<span>{copy.heroAccent}</span></h1>
+        <p className="hero-description hero-enter">{copy.intro}</p>
+        <div className="button-row hero-enter">
+          <Link className="button button-primary" to="/#projects">{copy.work}<ArrowDownRight size={18} /></Link>
+          <Link className="button button-outline" to="/Contact">{copy.contact}<ArrowUpRight size={18} /></Link>
+        </div>
       </div>
-
-      <div className="flex justify-center items-center px-4 pb-4 md:pb-8 w-full">
-        <h1 className="custom-title font-cor text-dar text-4xl tracking-wide">
-          {short_name}
-        </h1>
-      </div>
+      <figure className="hero-showcase hero-enter">
+        <div className="hero-showcase-image"><img src={spotlight} alt={copy.spotlightAlt} width={1879} height={968} fetchPriority="high" decoding="async" /></div>
+        <figcaption><div><p>EZTICKET</p><p>{copy.spotlightDescription}</p></div><span>Laravel / Livewire</span></figcaption>
+      </figure>
     </section>
   );
-};
-
-export default MainContent;
+}

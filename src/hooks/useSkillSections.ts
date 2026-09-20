@@ -181,10 +181,6 @@ function getIcon(iconName: string, library: string): React.ReactNode {
   }
 }
 
-function truncate(text: string, max: number): string {
-  return text.length > max ? `${text.slice(0, max)}…` : text;
-}
-
 interface Skill {
   name: string;
   icon: string;
@@ -252,14 +248,14 @@ export default function useSkillSections(): SkillSection[] {
     }
 
     const finalSkills = skillArray.map((sk) => ({
-      name: truncate(sk.name, 16),
+      name: sk.name,
       icon: getIcon(sk.icon, sk.library),
       color: sk.color,
     }));
 
     return {
       id: key,
-      title: truncate(home.skills.sectionTitles[key] ?? key, 24),
+      title: home.skills.sectionTitles[key] ?? key,
       icon: getIcon(secIcon.name, secIcon.library),
       color: secIcon.color,
       skills: finalSkills,
