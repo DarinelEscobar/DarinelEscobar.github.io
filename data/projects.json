@@ -81,6 +81,114 @@
             "url": "assets/images/Sample.webp"
           }
         ]
+      },
+      {
+        "name": "Finance App (Nivo)",
+        "Project_Overview": "Personal finance application for recording income and expenses, reviewing cash flow and organizing budgets, savings goals and recurring transactions with local storage.",
+        "description": "Personal finance application for recording income and expenses, reviewing cash flow and organizing budgets, savings goals and recurring transactions with local storage.",
+        "role": "Personal project developer",
+        "technologies": {
+          "Stack": [
+            "Flutter",
+            "Dart",
+            "Drift",
+            "SQLite",
+            "Material"
+          ]
+        },
+        "start_date": "2026-04-22",
+        "end_date": "2026-10-11",
+        "responsibilities": [
+          "Developed the Flutter application and local Drift/SQLite persistence.",
+          "Implemented transaction entry, filters, cash tracking and period-based reports.",
+          "Built budgeting, savings-goal and recurring-transaction tools and refined the mobile interface."
+        ],
+        "achievements": [
+          "Created a personal mobile finance application with local data ownership.",
+          "Produced Android builds and documented emulator previews."
+        ],
+        "client": "Personal",
+        "quick_view": {
+          "summary": "Personal finance application for recording income and expenses, reviewing cash flow and organizing budgets, savings goals and recurring transactions with local storage.",
+          "impact_label": "Personal finance",
+          "stack_highlights": [
+            "Flutter",
+            "Dart",
+            "Drift"
+          ]
+        },
+        "media": [
+          {
+            "type": "image",
+            "url": "assets/images/Finance-App/home.webp",
+            "description": "Home — Android emulator demo"
+          },
+          {
+            "type": "image",
+            "url": "assets/images/Finance-App/transactions.webp",
+            "description": "Transactions — Android emulator demo"
+          },
+          {
+            "type": "image",
+            "url": "assets/images/Finance-App/reports-category.webp",
+            "description": "Category reports — Android emulator demo"
+          }
+        ],
+        "repository": "https://github.com/DarinelEscobar/Finance-app"
+      },
+      {
+        "name": "FitLog",
+        "Project_Overview": "Personal workout application for structured routines, in-session set logging, exercise progress and local backup import/export.",
+        "description": "Personal workout application for structured routines, in-session set logging, exercise progress and local backup import/export.",
+        "role": "Personal project developer",
+        "technologies": {
+          "Stack": [
+            "Flutter",
+            "Dart",
+            "Riverpod",
+            "SQLite",
+            "Material"
+          ]
+        },
+        "start_date": "2025-04-21",
+        "end_date": "2026-10-25",
+        "responsibilities": [
+          "Built routine management, active sessions and set logging with weights, repetitions, RIR and rest timing.",
+          "Implemented workout history, exercise progress and performance views.",
+          "Developed local persistence, ZIP/XLSX backup flows and session-summary interfaces."
+        ],
+        "achievements": [
+          "Created a personal training app centered on on-device records and backups.",
+          "Iterated on workout UX and delivered versioned Android builds."
+        ],
+        "client": "Personal",
+        "quick_view": {
+          "summary": "Personal workout application for structured routines, in-session set logging, exercise progress and local backup import/export.",
+          "impact_label": "Workout tracking",
+          "stack_highlights": [
+            "Flutter",
+            "Dart",
+            "Riverpod"
+          ]
+        },
+        "media": [
+          {
+            "type": "image",
+            "url": "assets/images/FitLog/routines-library.webp",
+            "description": "Routine library — Android emulator demo"
+          },
+          {
+            "type": "image",
+            "url": "assets/images/FitLog/active-workout-session.webp",
+            "description": "Active workout — Android emulator demo"
+          },
+          {
+            "type": "image",
+            "url": "assets/images/FitLog/performance-dashboard.webp",
+            "description": "Performance dashboard — Android emulator demo"
+          }
+        ],
+        "repository": "https://github.com/DarinelEscobar/fit_log"
       }
     ]
   }

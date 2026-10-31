@@ -1,0 +1,75 @@
+\documentclass[10pt,letterpaper]{article}
+
+%-----------------------
+% PACKAGES
+%-----------------------
+\usepackage[top=1.8cm, bottom=1.8cm, left=1.8cm, right=1.8cm]{geometry}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{lmodern}
+\usepackage{fontawesome5}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{enumitem}
+
+
+
+%-----------------------
+% HYPERLINK SETTINGS
+%-----------------------
+\hypersetup{
+    colorlinks=true,
+    urlcolor=teal,
+    linkcolor=teal
+}
+
+%-----------------------
+% PAGE AND TEXT SETTINGS
+%-----------------------
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{3pt}
+
+%-----------------------
+% SECTION STYLE
+%-----------------------
+\titleformat{\section}
+  {\large\bfseries}
+  {}
+  {0pt}
+  {}[\titlerule\vspace{2pt}]
+\titlespacing{\section}{0pt}{6pt}{3pt}
+
+%-----------------------
+% HEADER
+%-----------------------
+
+
+\begin{document}
+
+%--------------------------------------
+% HEADER
+%--------------------------------------
+\begin{center}
+    {\huge \textbf{Christian Darinel Escobar Guillen}}\,\textbar\,Mexico\\[4pt]
+    \small
+    \href{mailto:darinel.escobar@outlook.com}{darinel.escobar@outlook.com} \,|\,
+    \href{https://wa.me/529613021060}{+52\,961\,302\,1060} \,|\,
+    \faLink\;\href{https://darinelescobar.github.io/}{darinelescobar.github.io} \,|\,
+    \faLinkedin\;\href{https://www.linkedin.com/in/DarinelEscobar}{DarinelEscobar} \,|\,
+    \faGithub\;\href{https://github.com/DarinelEscobar}{DarinelEscobar}
+\end{center}
+
+
+
+%--------------------------------------
+% MAIN CONTENT (choose language)
+%--------------------------------------
+% Uncomment ONE of the following lines:
+% \input{cv_en} % English
+\input{cv_es} % Spanish
+
+
+
+\end{document}

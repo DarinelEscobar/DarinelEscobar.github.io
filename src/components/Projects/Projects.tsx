@@ -1,85 +1,49 @@
-import React, { Suspense, lazy, useState } from "react";
-import { useInView } from "react-intersection-observer";
+import { useRef, useState } from "react";
+import { Link } from "react-router-dom";
+import { ArrowUpRight } from "lucide-react";
 import { usePortfolioContent } from "@/lib/portfolioContent";
-import { cn } from "@/lib/utils";
-import ProjectsSourceFilter from "./ProjectsSourceFilter";
-import SimplifiedProjectsView from "./SimplifiedProjectsView";
-import {
-  filterProjectsBySource,
-  type ProjectsLayoutMode,
-  type ProjectsSourceFilterMode,
-} from "./quickViewUtils";
+import { getAssetImage } from "@/lib/assetImages";
+import type { ProjectData } from "@/content/portfolio/types";
+import { filterProjectsBySource, selectFeaturedProjects, type ProjectsLayoutMode, type ProjectsSourceFilterMode } from "./quickViewUtils";
+import DetailsProjects from "../DetailsProjects/DetailsProjects";
 
-const DetailsProjects = lazy(() => import("../DetailsProjects/DetailsProjects"));
-const floatingControlsClassName =
-  "fixed left-1/2 bottom-[calc(env(safe-area-inset-bottom)+12px)] z-40 inline-flex -translate-x-1/2 items-center rounded-full bg-gray-200/[0.35] px-3 py-2 shadow-lg shadow-black/10 backdrop-blur-sm dark:bg-gray-700/[0.45] dark:shadow-black/40";
+const featuredNames = ["FREX Club", "EZTICKET - Event Ticketing and Access Control Platform", "AMIFIT Cobro App"];
 
-interface ProjectsProps {
-  layoutMode?: ProjectsLayoutMode;
-}
+export default function Projects({ layoutMode = "page" }: { layoutMode?: ProjectsLayoutMode }) {
+  const { projects, language } = usePortfolioContent();
+  const [filter, setFilter] = useState<ProjectsSourceFilterMode>("all");
+  const [selected, setSelected] = useState<ProjectData | null>(null);
+  const opener = useRef<HTMLButtonElement | null>(null);
+  const es = language === "es";
+  const featured = layoutMode === "section";
+  const visible = featured ? selectFeaturedProjects(projects, featuredNames) : filterProjectsBySource(projects, filter);
 
-const Projects: React.FC<ProjectsProps> = ({ layoutMode = "page" }) => {
-  const { projects, ui } = usePortfolioContent();
-  const { ref, inView } = useInView({
-    threshold: 0,
-    rootMargin: "-15% 0px -15% 0px",
-  });
-  const [sourceFilter, setSourceFilter] = useState<ProjectsSourceFilterMode>("all");
-  const [expandedProjectIndex, setExpandedProjectIndex] = useState<number | null>(null);
-  const visibleProjects = filterProjectsBySource(projects, sourceFilter);
-
-  const handleOpenProject = (projectIndex: number) => {
-    if (projectIndex < 0 || projectIndex >= visibleProjects.length) {
-      return;
-    }
-
-    setExpandedProjectIndex(projectIndex);
-  };
-
-  const handleCloseDetails = () => {
-    setExpandedProjectIndex(null);
-  };
-
-  return (
-    <div ref={ref} className="relative w-full bg-whi text-dar">
-      <div
-        className={cn(
-          "mx-auto w-full max-w-[1740px] px-2 pb-24 pt-24 sm:px-3 sm:pb-28 lg:px-4",
-          layoutMode === "section" ? "py-8 lg:py-24" : "min-h-screen"
-        )}
-      >
-        <div className={cn("w-full", layoutMode === "section" && "rounded-[2rem]")}>
-          <SimplifiedProjectsView
-            projects={visibleProjects}
-            copy={ui.projects}
-            dateLocale={ui.locale.date}
-            onOpenProject={handleOpenProject}
-          />
-        </div>
+  return <section className="work-section">
+    <div className="editorial-wrap">
+      <div className="section-heading"><div><p className="section-label">{es ? "Una selección de mi trabajo" : "A selection of my work"}</p>{featured ? <h2>{es ? "Proyectos que toman forma." : "Work brought to life."}</h2> : <h1>{es ? "Proyectos que toman forma." : "Work brought to life."}</h1>}</div>
+        {featured ? <Link className="text-link" to="/Project">{es ? "Todos los proyectos" : "All projects"} <ArrowUpRight size={16} /></Link> :
+          <div className="project-filters" aria-label={es ? "Filtrar proyectos" : "Filter projects"}>
+            <button type="button" aria-pressed={filter === "all"} onClick={() => setFilter("all")}>{es ? "Todos" : "All work"}</button>
+            <button type="button" aria-pressed={filter === "experience"} onClick={() => setFilter("experience")}>{es ? "Profesionales" : "Professional"}</button>
+          </div>}
       </div>
-
-      {inView ? (
-        <div className={floatingControlsClassName}>
-          <ProjectsSourceFilter
-            allProjectsLabel={ui.projects.allProjectsFilterLabel}
-            realExperienceLabel={ui.projects.realExperienceFilterLabel}
-            value={sourceFilter}
-            onChange={setSourceFilter}
-          />
-        </div>
-      ) : null}
-
-      {expandedProjectIndex !== null && (
-        <Suspense fallback={<div className="fixed inset-0 z-50 bg-black/70" />}>
-          <DetailsProjects
-            projects={visibleProjects}
-            projectIndex={expandedProjectIndex}
-            onClose={handleCloseDetails}
-          />
-        </Suspense>
-      )}
+      <div className={featured ? "project-grid featured-grid" : "project-grid"}>
+        {visible.map((project, index) => {
+          const image = project.media[0];
+          const src = image ? getAssetImage(image.url) : "";
+          return <article className="project-card" key={project.name}>
+            <button className="project-image" onClick={event => { opener.current = event.currentTarget; setSelected(project); }} aria-label={`${es ? "Ver proyecto" : "View project"}: ${project.name}`}>
+              {src ? <img src={src} alt={image.description || project.name} loading="lazy" /> : <span>{project.name}</span>}
+              <span className="project-image-action" aria-hidden="true"><ArrowUpRight size={21} /></span>
+            </button>
+            <div className="project-meta"><span>{String(index + 1).padStart(2, "0")}{project.client ? ` / ${project.client}` : project.source === "personal" ? ` / ${es ? "Proyecto personal" : "Personal project"}` : ""}</span><span>{project.end_date?.slice(0, 4) || ""}</span></div>
+            <h3><button onClick={event => { opener.current = event.currentTarget; setSelected(project); }}>{project.name}</button></h3>
+            <p>{project.quick_view?.summary || project.description}</p>
+            <div className="project-role">{project.role} <span>↗</span></div>
+          </article>;
+        })}
+      </div>
     </div>
-  );
-};
-
-export default Projects;
+    {selected && <DetailsProjects project={selected} onClose={() => { setSelected(null); requestAnimationFrame(() => opener.current?.focus()); }} />}
+  </section>;
+}

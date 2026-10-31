@@ -1,0 +1,131 @@
+% informacion.tex
+% Banco de informaci\'on editable (copia/duplica este archivo por puesto: informacion_backend.tex, informacion_data.tex, etc.)
+% Luego en cv_es.tex o cv_en.tex puedes hacer: \input{informacion_backend}
+
+%-----------------------
+% PERFIL / TITULAR
+%-----------------------
+\newcommand{\CVTitle}{Desarrollador Full-Stack}
+\newcommand{\CVLocation}{Mexico}
+
+%-----------------------
+% RESUMEN (ES) / SUMMARY (EN)
+%-----------------------
+\newcommand{\CVResumenES}{%
+Desarrollador Full-Stack con experiencia en backend y frontend, construyendo aplicaciones web escalables.
+}
+
+\newcommand{\CVSummaryEN}{%
+Full-Stack Developer with backend and frontend experience, building scalable web applications.
+}
+
+%-----------------------
+% LISTAS (edita libremente)
+%-----------------------
+\newcommand{\CVHabilidadesES}{%
+\begin{itemize}
+  \item \textbf{Programaci\'on:} JavaScript, TypeScript, Python
+  \item \textbf{Frontend:} React, Tailwind
+  \item \textbf{Backend:} Node.js, Laravel
+  \item \textbf{Cloud/DevOps:} AWS, Docker
+  \item \textbf{Bases de datos:} MySQL, MongoDB
+\end{itemize}
+}
+
+\newcommand{\CVSkillsEN}{%
+\begin{itemize}
+  \item \textbf{Programming:} JavaScript, TypeScript, Python
+  \item \textbf{Frontend:} React, Tailwind
+  \item \textbf{Backend:} Node.js, Laravel
+  \item \textbf{Cloud/DevOps:} AWS, Docker
+  \item \textbf{Databases:} MySQL, MongoDB
+\end{itemize}
+}
+
+%-----------------------
+% BLOQUES REUTILIZABLES
+%-----------------------
+% #1 Puesto/Empresa
+% #2 Ubicaci\'on + fechas (texto libre)
+% #3 Bullets (\item ...)
+\newcommand{\CVExperienceEntry}[3]{%
+\textbf{#1} \hfill \textit{#2}
+\begin{itemize}
+#3
+\end{itemize}
+}
+
+% #1 Nombre
+% #2 Link (opcional; puede ir vac\'io)
+% #3 Bullets (\item ...)
+\newcommand{\CVProjectEntry}[3]{%
+\textbf{#1} \hfill #2
+\begin{itemize}
+#3
+\end{itemize}
+}
+
+%-----------------------
+% EXPERIENCIA / PROJECTS / EDUCACI\'ON (rellena con tus entradas)
+%-----------------------
+\newcommand{\CVExperienciaES}{%
+\CVExperienceEntry
+  {Desarrollador Full-Stack, Empresa X}
+  {Ciudad, Pa\'is (Mes YYYY -- Mes YYYY)}
+  {%
+    \item Logro medible 1.
+    \item Logro medible 2.
+  }
+}
+
+\newcommand{\CVExperienceEN}{%
+\CVExperienceEntry
+  {Full-Stack Developer, Company X}
+  {City, Country (Mon YYYY -- Mon YYYY)}
+  {%
+    \item Measurable achievement 1.
+    \item Measurable achievement 2.
+  }
+}
+
+\newcommand{\CVProyectosES}{%
+\CVProjectEntry
+  {Proyecto X}
+  {\faExternalLink\;\href{https://example.com}{example.com}}
+  {%
+    \item Qu\'e hiciste y con qu\'e tecnolog\'ias.
+  }
+}
+
+\newcommand{\CVProjectsEN}{%
+\CVProjectEntry
+  {Project X}
+  {\faExternalLink\;\href{https://example.com}{example.com}}
+  {%
+    \item What you built and with which technologies.
+  }
+}
+
+\newcommand{\CVEducacionES}{%
+\textbf{Universidad X}\\
+Licenciatura en Y
+\begin{itemize}
+  \item Cursos relevantes: ...
+\end{itemize}
+}
+
+\newcommand{\CVEducationEN}{%
+\textbf{University X}\\
+B.S. in Y
+\begin{itemize}
+  \item Relevant coursework: ...
+\end{itemize}
+}
+
+\newcommand{\CVIdiomasES}{%
+\textbf{Espa\~nol} (Nativo) \,|\, \textbf{Ingl\'es} (B2)
+}
+
+\newcommand{\CVLanguagesEN}{%
+\textbf{Spanish} (Native) \,|\, \textbf{English} (B2)
+}

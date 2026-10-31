@@ -390,46 +390,105 @@ const spanishTranslations: Record<string, ProjectTranslation> = {
       "Panel para lavadores con gestion de tareas optimizada para campo.",
     ],
   },
-  "TuxVentas Marketplace Platform (web-tuxventa-v1)": {
-    Project_Overview:
-      "TuxVentas es una aplicacion web de marketplace basada en roles, construida para gestionar publicaciones clasificadas de productos, servicios y medicamentos. La plataforma combina un catalogo publico con espacios de trabajo para vendedores y compradores, permitiendo navegar categorias, publicar anuncios, manejar galerias, compartir listados por QR, hacer preguntas publicas, conversar en privado, revelar contacto por aceptacion mutua, dejar reseñas, moderar alertas y automatizar reglas de ciclo de vida.",
-    description:
-      "Desarrollo de una plataforma marketplace en Laravel 10 con catalogo publico, panel para vendedores, flujos de conversacion para compradores y herramientas de moderacion para administradores. El sistema permite publicar anuncios, gestionar galerias y codigos QR, responder preguntas publicas, negociar en privado, revelar datos de contacto tras aceptacion mutua, cerrar tratos, enviar reseñas y monitorear alertas desde un panel operativo.",
-    role: "Desarrollador Full-stack",
-    technologies: {
-      Frontend: ["Laravel Blade", "Livewire 3", "Tailwind CSS", "Flowbite", "JavaScript", "Vite"],
-      Backend: ["PHP 8.1", "Laravel 10", "Laravel Sanctum"],
-      "Base de Datos": ["MySQL"],
-      APIs: ["RESTful APIs", "OpenAPI / Swagger"],
-      Herramientas: ["Composer", "Git", "animejs", "qrcode"],
-      "Gestion del Proyecto": ["Bitbucket"],
+
+  "EcoBrush — POS & CEDIS": {
+    "Project_Overview": "Participé en el mantenimiento y la ampliación de los sistemas existentes de punto de venta y distribución central, trabajando en catálogos, pedidos, inventario y documentos de servicio.",
+    "description": "Participé en el mantenimiento y la ampliación de los sistemas existentes de punto de venta y distribución central, trabajando en catálogos, pedidos, inventario y documentos de servicio.",
+    "role": "Soporte y desarrollo de funcionalidades",
+    "responsibilities": [
+      "Implementé la integración del catálogo maestro entre CEDIS y POS, preservando la identidad de productos y SKU.",
+      "Mejoré validaciones de abastecimiento, cálculos de cobro y sincronización de productos.",
+      "Di soporte a cotizaciones, garantías y documentos de servicio, con correcciones de registros anteriores."
+    ],
+    "achievements": [
+      "Integré mejoras de sincronización de catálogo y flujo de pedidos entre ambos sistemas existentes.",
+      "Agregué validación y manejo de errores en flujos operativos."
+    ],
+    "client": "EcoBrush",
+    "quick_view": {
+      "summary": "Participé en el mantenimiento y la ampliación de los sistemas existentes de punto de venta y distribución central, trabajando en catálogos, pedidos, inventario y documentos de servicio.",
+      "impact_label": "POS + CEDIS"
     },
-    responsibilities: [
-      "Construir el catalogo publico con busqueda por titulo, categoria y subcategoria, ademas de paginas de detalle con preguntas y respuestas publicas.",
-      "Desarrollar el espacio de vendedores para crear anuncios, gestionar estados, subir hasta cinco imagenes, regenerar codigos QR y responder preguntas publicas.",
-      "Implementar los flujos de conversacion entre compradores y vendedores con hilos reutilizables, mensajeria estilo tiempo real, aceptacion mutua, revelado de contacto, cierres y ventanas de retencion.",
-      "Crear el flujo de reseñas y reputacion con contextos SELLER, BUYER y SERVICE, incluyendo generacion automatica de alertas por calificaciones bajas.",
-      "Desarrollar modulos administrativos para metricas generales, alertas, cambios de estado de anuncios, bloqueo o desbloqueo de usuarios e inspeccion de conversaciones.",
-      "Modelar catalogos normalizados de categorias y subcategorias para productos, servicios y medicamentos, exponiendo endpoints publicos y protegidos con autenticacion Sanctum.",
-      "Implementar reglas programadas para expirar anuncios automaticamente y archivar conversaciones cerradas tras el periodo de retencion configurado.",
+    "mediaDescriptions": ["Catálogo y controles de SKU — demo local","Punto de venta — demo local","Flujo de cotización — demo local"]
+  },
+  "Resident Check": {
+    "Project_Overview": "Di soporte e implementé funcionalidades incrementales en una plataforma existente de administración residencial, con trabajo en acceso a cuentas, reportes, notificaciones y compatibilidad de descargas.",
+    "description": "Di soporte e implementé funcionalidades incrementales en una plataforma existente de administración residencial, con trabajo en acceso a cuentas, reportes, notificaciones y compatibilidad de descargas.",
+    "role": "Soporte y desarrollo de funcionalidades",
+    "responsibilities": [
+      "Implementé recuperación de contraseña con token por correo y corregí la sincronización de contraseñas de usuarios invitados.",
+      "Agregué generación de estados de cuenta PDF, vistas previas y descarga de reportes.",
+      "Corregí descargas de QR y reportes en iOS y amplié el manejo de datos en notificaciones."
     ],
-    achievements: [
-      "Entrega de un marketplace multirol que unifico exploracion publica, operacion del vendedor, comunicacion con compradores y moderacion administrativa en una sola aplicacion Laravel.",
-      "Implementacion de un flujo de negociacion con privacidad, revelando datos de contacto solo cuando ambas partes aceptan el trato.",
-      "Inclusion de moderacion automatizada de reseñas al convertir calificaciones bajas en alertas accionables para administracion.",
-      "Reduccion del mantenimiento manual mediante expiracion y retencion automatizadas impulsadas por scheduler.",
-      "Soporte para multiples dominios comerciales a traves de catalogos normalizados y capas reutilizables de presentacion API.",
+    "achievements": [
+      "Amplié los flujos de recuperación de acceso y reportes del sistema existente.",
+      "Resolví errores concretos de acceso y descarga en dispositivos móviles."
     ],
-    mediaDescriptions: [
-      "Catalogo publico del marketplace con busqueda y filtros por titulo, categoria y subcategoria. Ruta: /marketplace. Vista: resources/views/pages/marketplace/index.blade.php",
-      "Pagina de detalle del anuncio con galeria, precio, datos del vendedor, preguntas publicas y CTA para iniciar conversacion. Ruta: /marketplace/listings/{listingId}. Vista: resources/views/pages/marketplace/show.blade.php",
-      "Dashboard del vendedor para gestionar anuncios, estados, estadisticas, modal de creacion, vista previa de galeria y acciones QR. Ruta: /marketplace/me/listings. Vista: resources/views/pages/marketplace/me-listings.blade.php",
-      "Workspace de conversaciones para un anuncio con filtros, lista de mensajes, flujo de aceptacion de trato y acciones de cierre. Ruta: /marketplace/me/conversations?listing_id={listingId}. Vista: resources/views/pages/marketplace/me-conversations.blade.php",
-      "Pantalla de historial de conversaciones del comprador generadas desde anuncios del marketplace. Ruta: /marketplace/me/buyer-conversations. Vista: resources/views/pages/marketplace/my-buyer-conversations.blade.php",
-      "Dashboard administrativo de resumen con metricas de usuarios, anuncios activos y alertas pendientes. Ruta: /dashboard?panel=overview. Vista: resources/views/pages/admin.blade.php",
-      "Centro de moderacion de alertas con cola, filtros, asignacion e inspeccion del contexto de reseñas. Ruta: /dashboard?panel=alerts. Vistas: resources/views/pages/admin.blade.php y resources/views/livewire/admin/alerts-manager.blade.php",
-      "Panel de operaciones de ciclo de vida para expiracion automatica de anuncios y reglas de retencion de conversaciones. Ruta: /dashboard?panel=lifecycle. Vistas: resources/views/pages/admin.blade.php y resources/views/livewire/admin/lifecycle-manager.blade.php",
+    "client": "ResidentCheck",
+    "quick_view": {
+      "summary": "Di soporte e implementé funcionalidades incrementales en una plataforma existente de administración residencial, con trabajo en acceso a cuentas, reportes, notificaciones y compatibilidad de descargas.",
+      "impact_label": "Soporte + features"
+    },
+    "mediaDescriptions": ["Sitio público oficial","Estados de cuenta con registros residenciales ficticios","Recuperación de contraseña — demo local"]
+  },
+  "IMCHISSA": {
+    "Project_Overview": "Formé parte del desarrollo full stack del sitio de IMCHISSA y sus herramientas administrativas, conectando páginas públicas de productos y servicios con contenido editable desde el CMS.",
+    "description": "Formé parte del desarrollo full stack del sitio de IMCHISSA y sus herramientas administrativas, conectando páginas públicas de productos y servicios con contenido editable desde el CMS.",
+    "role": "Desarrollador Full Stack (participación en equipo)",
+    "responsibilities": [
+      "Desarrollé administración CMS e integración pública para inicio, nosotros, remolques, rampas, servicios y contacto.",
+      "Trabajé en catálogo de productos, datos de solicitudes de cotización, validaciones, migraciones y seeders.",
+      "Implementé carga de archivos y manejo de recursos públicos y agregué cobertura funcional de CMS y productos."
     ],
+    "achievements": [
+      "Conecté contenido administrable con varias secciones públicas del sitio.",
+      "Aporté verificaciones de integración del catálogo y CMS junto con la implementación."
+    ],
+    "client": "IMCHISSA",
+    "quick_view": {
+      "summary": "Formé parte del desarrollo full stack del sitio de IMCHISSA y sus herramientas administrativas, conectando páginas públicas de productos y servicios con contenido editable desde el CMS.",
+      "impact_label": "Sitio + CMS"
+    },
+    "mediaDescriptions": ["Sitio oficial — inicio","Sitio oficial — remolques","Sitio oficial — rampas hidráulicas"]
+  },
+  "TuxVentas": {
+    "Project_Overview": "Contribuí principalmente al backend, las estructuras de datos y las reglas de negocio del marketplace para anuncios, conversaciones, reseñas, alertas y flujos de cuenta.",
+    "description": "Contribuí principalmente al backend, las estructuras de datos y las reglas de negocio del marketplace para anuncios, conversaciones, reseñas, alertas y flujos de cuenta.",
+    "role": "Desarrollador Backend — base de datos y lógica de negocio",
+    "responsibilities": [
+      "Implementé estructuras de datos y flujos backend para anuncios, categorías e interacciones de usuarios.",
+      "Desarrollé generación y gestión de QR de anuncios, manejo de imágenes y reglas de acceso.",
+      "Trabajé en notificaciones, conversaciones, reseñas, moderación y validaciones de autenticación."
+    ],
+    "achievements": [
+      "Implementé reglas backend que conectan publicación e interacciones del marketplace.",
+      "Agregué capacidades de QR y notificaciones dentro de la aplicación existente."
+    ],
+    "client": "TuxVentas",
+    "quick_view": {
+      "summary": "Contribuí principalmente al backend, las estructuras de datos y las reglas de negocio del marketplace para anuncios, conversaciones, reseñas, alertas y flujos de cuenta.",
+      "impact_label": "Backend + datos"
+    },
+    "mediaDescriptions": ["Catálogo del marketplace — anuncios ficticios","Detalle de anuncio — demo local","Preguntas públicas y respuestas — demo local"]
+  },
+  "Voldo": {
+    "Project_Overview": "Realicé aportaciones puntuales a una aplicación de ventas existente, centradas en documentos de clientes, archivos de órdenes de venta y mejoras relacionadas de interfaz.",
+    "description": "Realicé aportaciones puntuales a una aplicación de ventas existente, centradas en documentos de clientes, archivos de órdenes de venta y mejoras relacionadas de interfaz.",
+    "role": "Desarrollador — mantenimiento puntual",
+    "responsibilities": [
+      "Agregué persistencia de documentos de clientes mediante migración y cambios de modelo y controlador.",
+      "Integré manejo de documentos en formularios de clientes y órdenes de venta.",
+      "Aporté manejo de imágenes de venta y ajustes de diseño en pantallas de validación de pedidos."
+    ],
+    "achievements": [
+      "Implementé mejoras de manejo de documentos en módulos concretos del sistema existente."
+    ],
+    "client": "Voldo",
+    "quick_view": {
+      "summary": "Realicé aportaciones puntuales a una aplicación de ventas existente, centradas en documentos de clientes, archivos de órdenes de venta y mejoras relacionadas de interfaz.",
+      "impact_label": "Participación puntual"
+    },
+    "mediaDescriptions": ["Clientes con datos de contacto ficticios","Captura de documentos de cliente — demo local","Pantalla de cotización de venta — demo local"]
   },
 };
 

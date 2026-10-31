@@ -153,10 +153,10 @@ export const uiCopy: Record<Language, UiCopy> = {
         titleHighlight: "Habilidades",
         subtitle: "El stack tecnologico que uso para construir soluciones",
         sectionTitles: {
-          technical_skills: "Habilidades Tecnicas",
+          technical_skills: "Habilidades Técnicas",
           devOps: "DevOps",
           databases: "Bases de Datos",
-          mobile_development: "Desarrollo Movil",
+          mobile_development: "Desarrollo Móvil",
           backend_development: "Desarrollo Backend",
           frontend_development: "Desarrollo Frontend",
           tools: "Herramientas",

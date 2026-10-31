@@ -664,13 +664,276 @@
             "url": "assets/images/Cybac-Lavafy/lavador-dashboard.webp"
           }
         ]
+      },
+      {
+        "name": "EcoBrush — POS & CEDIS",
+        "Project_Overview": "Contributed maintenance and operational features to existing store POS and central distribution systems, working on product catalogs, orders, inventory and service documents.",
+        "description": "Contributed maintenance and operational features to existing store POS and central distribution systems, working on product catalogs, orders, inventory and service documents.",
+        "role": "Maintenance and feature development",
+        "technologies": {
+          "Stack": [
+            "Laravel 10",
+            "PHP",
+            "Livewire 3",
+            "MySQL",
+            "Blade"
+          ]
+        },
+        "start_date": "2026-05-05",
+        "end_date": "2026-09-16",
+        "responsibilities": [
+          "Implemented master-catalog integration between CEDIS and POS, preserving product and SKU identity.",
+          "Improved supply-order validation, checkout calculations and product synchronization.",
+          "Maintained quotation, warranty and service-document workflows, including corrections to legacy records."
+        ],
+        "achievements": [
+          "Delivered catalog synchronization and order-flow improvements across the two existing systems.",
+          "Added validation and error handling for operational workflows."
+        ],
+        "client": "EcoBrush",
+        "quick_view": {
+          "summary": "Contributed maintenance and operational features to existing store POS and central distribution systems, working on product catalogs, orders, inventory and service documents.",
+          "impact_label": "POS + CEDIS",
+          "stack_highlights": [
+            "Laravel 10",
+            "PHP",
+            "Livewire 3"
+          ]
+        },
+        "media": [
+          {
+            "type": "image",
+            "url": "assets/images/EcoBrush/eco-products.webp",
+            "description": "Product catalog and SKU controls — local demo"
+          },
+          {
+            "type": "image",
+            "url": "assets/images/EcoBrush/eco-pos.webp",
+            "description": "Point of sale — local demo"
+          },
+          {
+            "type": "image",
+            "url": "assets/images/EcoBrush/eco-quotes.webp",
+            "description": "Quotation workflow — local demo"
+          }
+        ],
+        "url": "https://pos.tuxtla.ecobrush.mx/"
+      },
+      {
+        "name": "Resident Check",
+        "Project_Overview": "Provided support and incremental features for an existing residential-management platform, focusing on account access, reports, notifications and download compatibility.",
+        "description": "Provided support and incremental features for an existing residential-management platform, focusing on account access, reports, notifications and download compatibility.",
+        "role": "Software maintenance and feature development",
+        "technologies": {
+          "Stack": [
+            "Laravel",
+            "PHP",
+            "MySQL",
+            "JavaScript",
+            "PDF"
+          ]
+        },
+        "start_date": "2026-02-16",
+        "end_date": "2026-07-20",
+        "responsibilities": [
+          "Implemented email-token password recovery and corrected password synchronization for invited users.",
+          "Added account-statement PDF generation, inline previews and report downloads.",
+          "Fixed iOS QR/report download behavior and extended notification payload handling."
+        ],
+        "achievements": [
+          "Added recovery and reporting workflows to the existing platform.",
+          "Resolved specific access and mobile-download defects."
+        ],
+        "client": "Resident Check",
+        "quick_view": {
+          "summary": "Provided support and incremental features for an existing residential-management platform, focusing on account access, reports, notifications and download compatibility.",
+          "impact_label": "Support + features",
+          "stack_highlights": [
+            "Laravel",
+            "PHP",
+            "MySQL"
+          ]
+        },
+        "media": [
+          {
+            "type": "image",
+            "url": "assets/images/ResidentCheck/resident-home.webp",
+            "description": "Official public website"
+          },
+          {
+            "type": "image",
+            "url": "assets/images/ResidentCheck/resident-statements.webp",
+            "description": "Account statements with fictional residential records"
+          },
+          {
+            "type": "image",
+            "url": "assets/images/ResidentCheck/resident-recovery.webp",
+            "description": "Password recovery — local demo"
+          }
+        ],
+        "url": "https://residentcheck.com.mx/"
+      },
+      {
+        "name": "IMCHISSA",
+        "Project_Overview": "Participated in full-stack development of the IMCHISSA website and administration tools, connecting public product and service pages to editable CMS content.",
+        "description": "Participated in full-stack development of the IMCHISSA website and administration tools, connecting public product and service pages to editable CMS content.",
+        "role": "Full-stack Developer (team contribution)",
+        "technologies": {
+          "Stack": [
+            "Laravel",
+            "PHP",
+            "Livewire",
+            "MySQL",
+            "Blade",
+            "JavaScript"
+          ]
+        },
+        "start_date": "2025-11-18",
+        "end_date": "2026-04-20",
+        "responsibilities": [
+          "Developed CMS administration and public integration for home, company, trailers, ramps, services and contact sections.",
+          "Worked on the product catalog, quote-request data, validation, migrations and seeders.",
+          "Implemented file-upload and public-asset handling and added feature coverage for CMS and product flows."
+        ],
+        "achievements": [
+          "Connected editable administration content to multiple public website sections.",
+          "Contributed catalog and CMS integration checks alongside implementation."
+        ],
+        "client": "IMCHISSA",
+        "quick_view": {
+          "summary": "Participated in full-stack development of the IMCHISSA website and administration tools, connecting public product and service pages to editable CMS content.",
+          "impact_label": "Website + CMS",
+          "stack_highlights": [
+            "Laravel",
+            "PHP",
+            "Livewire"
+          ]
+        },
+        "media": [
+          {
+            "type": "image",
+            "url": "assets/images/IMCHISSA/imchissa-home.webp",
+            "description": "Official website — home"
+          },
+          {
+            "type": "image",
+            "url": "assets/images/IMCHISSA/imchissa-remolques.webp",
+            "description": "Official website — trailers"
+          },
+          {
+            "type": "image",
+            "url": "assets/images/IMCHISSA/imchissa-rampas.webp",
+            "description": "Official website — hydraulic ramps"
+          }
+        ],
+        "url": "https://imchissa.com/"
+      },
+      {
+        "name": "TuxVentas",
+        "Project_Overview": "Contributed primarily backend implementation, data structures and marketplace business rules for listings, conversations, reviews, alerts and account workflows.",
+        "description": "Contributed primarily backend implementation, data structures and marketplace business rules for listings, conversations, reviews, alerts and account workflows.",
+        "role": "Backend Developer — database and business logic",
+        "technologies": {
+          "Stack": [
+            "Laravel 10",
+            "PHP",
+            "MySQL",
+            "Livewire 3",
+            "Laravel Sanctum"
+          ]
+        },
+        "start_date": "2026-01-09",
+        "end_date": "2026-07-17",
+        "responsibilities": [
+          "Implemented marketplace data and backend workflows for listings, categories and user interactions.",
+          "Developed QR generation and management for listings, image handling and access rules.",
+          "Worked on notifications, conversation flows, reviews, moderation and authentication validation."
+        ],
+        "achievements": [
+          "Delivered backend rules connecting marketplace publication and user interactions.",
+          "Added QR and notification capabilities within the existing application."
+        ],
+        "client": "TuxVentas",
+        "quick_view": {
+          "summary": "Contributed primarily backend implementation, data structures and marketplace business rules for listings, conversations, reviews, alerts and account workflows.",
+          "impact_label": "Backend + data",
+          "stack_highlights": [
+            "Laravel 10",
+            "PHP",
+            "MySQL"
+          ]
+        },
+        "media": [
+          {
+            "type": "image",
+            "url": "assets/images/TuxVentas/tux-marketplace.webp",
+            "description": "Marketplace catalog — fictional listings"
+          },
+          {
+            "type": "image",
+            "url": "assets/images/TuxVentas/tux-detail.webp",
+            "description": "Listing details — local demo"
+          },
+          {
+            "type": "image",
+            "url": "assets/images/TuxVentas/tux-questions.webp",
+            "description": "Public questions and seller replies — local demo"
+          }
+        ]
+      },
+      {
+        "name": "Voldo",
+        "Project_Overview": "Made focused contributions to an existing sales application, covering client documents, sales-order attachments and related interface improvements.",
+        "description": "Made focused contributions to an existing sales application, covering client documents, sales-order attachments and related interface improvements.",
+        "role": "Developer — targeted maintenance",
+        "technologies": {
+          "Stack": [
+            "Laravel",
+            "PHP",
+            "Livewire",
+            "MySQL",
+            "Blade"
+          ]
+        },
+        "start_date": "2025-12-19",
+        "end_date": "2026-07-16",
+        "responsibilities": [
+          "Added client-document persistence with a migration, model and controller changes.",
+          "Integrated document handling into client forms and sales orders.",
+          "Contributed sales-image handling and layout improvements to order-validation screens."
+        ],
+        "achievements": [
+          "Delivered document-handling improvements in specific existing modules."
+        ],
+        "client": "Voldo",
+        "quick_view": {
+          "summary": "Made focused contributions to an existing sales application, covering client documents, sales-order attachments and related interface improvements.",
+          "impact_label": "Targeted contribution",
+          "stack_highlights": [
+            "Laravel",
+            "PHP",
+            "Livewire"
+          ]
+        },
+        "media": [
+          {
+            "type": "image",
+            "url": "assets/images/Voldo/voldo-clients.webp",
+            "description": "Clients with fictional contact details"
+          },
+          {
+            "type": "image",
+            "url": "assets/images/Voldo/voldo-documents.webp",
+            "description": "Client-document entry — local demo"
+          },
+          {
+            "type": "image",
+            "url": "assets/images/Voldo/voldo-orders.webp",
+            "description": "Sales quotation screen — local demo"
+          }
+        ],
+        "url": "https://sistemavoldo.com/"
       }
-
-
-
-
-
-
     ]
   }
 }

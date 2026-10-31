@@ -27,16 +27,16 @@ const resumeEs = cloneResumeData();
 resumeEs.personal_info.rol = "Ingeniero de Software";
 resumeEs.personal_info.location = "Mexico";
 resumeEs.professional_summary = {
-  summary: "Soy Darinel, un ingeniero de software versatil que disfruta el desarrollo full-stack y la resolucion de problemas.",
-  note: "Siempre con ganas de aprender y crecer, disfruto enfrentar nuevos desafios y ampliar mis habilidades.",
+  summary: "Soy Darinel, un ingeniero de software versátil que disfruta el desarrollo full-stack y la resolución de problemas.",
+  note: "Siempre con ganas de aprender y crecer, disfruto enfrentar nuevos desafíos y ampliar mis habilidades.",
 };
 resumeEs.Skills_Technologies.soft_skills.skills = replaceSkillNames(
   resumeEs.Skills_Technologies.soft_skills.skills,
-  ["Resolucion de Problemas", "Gestion del Tiempo"]
+  ["Resolución de Problemas", "Gestión del Tiempo", "Adaptabilidad", "Trabajo en equipo"]
 );
 resumeEs.Skills_Technologies.languages.languages_list = replaceSkillNames(
   resumeEs.Skills_Technologies.languages.languages_list,
-  ["Ingles B2", "Espanol Nativo", "Japones N4"]
+  ["Inglés B2", "Español Nativo", "Japonés N4"]
 );
 resumeEs.education = resumeEs.education.map((item) => ({
   ...item,

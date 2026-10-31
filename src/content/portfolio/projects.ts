@@ -83,6 +83,46 @@ const spanishTranslations: Record<string, ProjectTranslation> = {
     },
     client: "Proyecto personal",
   },
+  "Finance App (Nivo)": {
+    "Project_Overview": "Aplicación personal de finanzas para registrar ingresos y gastos, consultar el flujo de efectivo y organizar presupuestos, metas de ahorro y movimientos recurrentes con almacenamiento local.",
+    "description": "Aplicación personal de finanzas para registrar ingresos y gastos, consultar el flujo de efectivo y organizar presupuestos, metas de ahorro y movimientos recurrentes con almacenamiento local.",
+    "role": "Desarrollador de proyecto personal",
+    "responsibilities": [
+      "Desarrollé la aplicación Flutter y la persistencia local con Drift y SQLite.",
+      "Implementé captura y filtros de movimientos, seguimiento de efectivo y reportes por período.",
+      "Construí herramientas de presupuestos, metas de ahorro y movimientos recurrentes y refiné la interfaz móvil."
+    ],
+    "achievements": [
+      "Creé una aplicación móvil personal de finanzas con datos almacenados localmente.",
+      "Generé versiones Android y documenté vistas reales en emulador."
+    ],
+    "client": "Proyecto personal",
+    "quick_view": {
+      "summary": "Aplicación personal de finanzas para registrar ingresos y gastos, consultar el flujo de efectivo y organizar presupuestos, metas de ahorro y movimientos recurrentes con almacenamiento local.",
+      "impact_label": "Finanzas personales"
+    },
+    "mediaDescriptions": ["Inicio — demo Android en emulador","Movimientos — demo Android en emulador","Reportes por categoría — demo Android en emulador"]
+  },
+  "FitLog": {
+    "Project_Overview": "Aplicación personal de entrenamiento para organizar rutinas, registrar series durante la sesión, revisar progreso por ejercicio e importar y exportar respaldos locales.",
+    "description": "Aplicación personal de entrenamiento para organizar rutinas, registrar series durante la sesión, revisar progreso por ejercicio e importar y exportar respaldos locales.",
+    "role": "Desarrollador de proyecto personal",
+    "responsibilities": [
+      "Desarrollé gestión de rutinas, sesiones activas y registro de series con peso, repeticiones, RIR y descanso.",
+      "Implementé historial de entrenamientos, progreso por ejercicio y vistas de rendimiento.",
+      "Desarrollé persistencia local, respaldos ZIP/XLSX e interfaces de resumen de sesión."
+    ],
+    "achievements": [
+      "Creé una aplicación personal de entrenamiento centrada en registros y respaldos locales.",
+      "Iteré la experiencia de entrenamiento y generé versiones Android."
+    ],
+    "client": "Proyecto personal",
+    "quick_view": {
+      "summary": "Aplicación personal de entrenamiento para organizar rutinas, registrar series durante la sesión, revisar progreso por ejercicio e importar y exportar respaldos locales.",
+      "impact_label": "Registro de entrenamiento"
+    },
+    "mediaDescriptions": ["Biblioteca de rutinas — demo Android en emulador","Entrenamiento activo — demo Android en emulador","Panel de rendimiento — demo Android en emulador"]
+  },
 };
 
 export const personalProjectsContent: Record<Language, ProjectData[]> = {
