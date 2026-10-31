@@ -5,6 +5,74 @@ import { buildProjects, type ProjectTranslation } from "./projectUtils";
 const experienceProjects = experienceSource.experience.projects;
 
 const spanishTranslations: Record<string, ProjectTranslation> = {
+  "FREX Club": {
+    "Project_Overview": "FREX Club es un producto de fidelización multiempresa que conecta la operación diaria de los negocios con una billetera nativa para sus clientes. Como único desarrollador freelance, planifiqué y construí la plataforma Laravel, el panel administrativo, la API versionada y la aplicación Flutter, además de preparar la documentación técnica y de uso. Los negocios administran clientes, membresías con su marca, reglas de puntos, recompensas y promociones; los clientes consultan sus tarjetas, códigos QR, beneficios e historial desde la app. Las imágenes muestran las interfaces reales con datos demostrativos profesionales.",
+    "description": "Desarrollo integral de una plataforma de fidelización: administración de negocios en Laravel, API REST protegida y billetera Flutter para tarjetas, puntos, recompensas y promociones.",
+    "role": "Desarrollador full stack freelance",
+    "technologies": {
+      "Móvil": [
+        "Flutter",
+        "Dart"
+      ],
+      "Frontend": [
+        "Laravel Blade",
+        "Livewire 3",
+        "Tailwind CSS",
+        "Vite"
+      ],
+      "Backend": [
+        "PHP",
+        "Laravel 10",
+        "Laravel Sanctum",
+        "API REST"
+      ],
+      "Base de datos": [
+        "MySQL"
+      ],
+      "Herramientas": [
+        "Git",
+        "Composer",
+        "Emulador Android"
+      ]
+    },
+    "responsibilities": [
+      "Planificar el producto, definir los requerimientos y diseñar el modelo de datos, las reglas de negocio y la arquitectura de las aplicaciones.",
+      "Desarrollar el panel Laravel para registro de clientes, membresías, acumulación de puntos, canje de premios, promociones y reportes.",
+      "Implementar acceso por empresa, permisos por rol, endpoints protegidos e historial auditable de puntos.",
+      "Construir la billetera nativa Flutter con tarjetas de cada comercio, presentación de QR, promociones, recompensas, movimientos y perfil del cliente.",
+      "Integrar la autenticación por enlace de acceso, el almacenamiento seguro de la sesión y los flujos de API que conectan al cliente con la operación del negocio.",
+      "Elaborar guías de despliegue, contratos de API, manuales de uso y documentación de entrega de ambas aplicaciones."
+    ],
+    "achievements": [
+      "Entregué la plataforma del negocio y la app del cliente como un solo producto de fidelización conectado.",
+      "Habilité programas independientes por empresa, con identidad visual, reglas de puntos y catálogos de recompensas propios.",
+      "Conecté las operaciones de puntos en tienda con los saldos del cliente y un historial de movimientos auditable.",
+      "Documenté la entrega técnica: arquitectura, operación, integración de API y compilación de las aplicaciones."
+    ],
+    "quick_view": {
+      "summary": "Un producto de fidelización completo: administración Laravel, API protegida y billetera nativa Flutter para tarjetas, puntos y recompensas.",
+      "impact_label": "Web + móvil",
+      "stack_highlights": [
+        "Laravel",
+        "Flutter",
+        "MySQL"
+      ]
+    },
+    "mediaDescriptions": [
+      "FREX Club: billetera nativa Flutter y panel de administración del negocio. Datos demostrativos.",
+      "Tarjetas de fidelización con identidad de cada comercio y promociones en la billetera del cliente.",
+      "Detalle de tarjeta con puntos disponibles e historial de compras recientes.",
+      "Presentación del QR para identificar al cliente en tienda. El código está protegido en la imagen pública.",
+      "Catálogo de recompensas con costo en puntos y progreso hacia el siguiente beneficio.",
+      "Exploración de promociones de los comercios participantes.",
+      "Detalle de una promoción con fotografía, beneficio y condiciones para utilizarla.",
+      "Resumen del negocio con balances de membresías e indicadores mensuales calculados a partir de operaciones demostrativas.",
+      "Formulario de alta de cliente preparado con datos de contacto ficticios.",
+      "Detalle de la membresía y saldo disponible del cliente desde el panel del negocio.",
+      "Registro de compra en tienda y cálculo de puntos para el cliente seleccionado.",
+      "Gestión de promociones del negocio y su contenido visible para los clientes."
+    ]
+  },
   "Web Platform for Educational Offerings in Chiapas": {
     Project_Overview:
       "Este proyecto tuvo como objetivo crear una plataforma web centralizada para ayudar a estudiantes de Chiapas a explorar programas universitarios con facilidad. La plataforma ofrece una base de datos estructurada con informacion detallada sobre carreras, requisitos de admision, costos y datos institucionales. Incluye herramientas intuitivas de busqueda y filtrado para comparar opciones de forma eficiente, ademas de permitir la descarga de planes de estudio y recordatorios para fechas clave de inscripcion.",

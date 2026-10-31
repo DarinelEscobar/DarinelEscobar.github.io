@@ -3,6 +3,128 @@
   "experience": {
     "projects": [
       {
+        "name": "FREX Club",
+        "Project_Overview": "FREX Club is a multi-company loyalty product that connects daily business operations with a native customer wallet. As the sole freelance developer, I planned and built the Laravel platform, administrative panel, versioned API and Flutter application, and prepared the technical and user documentation. Businesses manage customers, branded memberships, points rules, rewards and promotions; customers access their cards, QR codes, benefits and transaction history from the app. Screenshots show the actual interfaces with professional demonstration data.",
+        "description": "End-to-end development of a loyalty platform: Laravel business administration, a protected REST API and a Flutter wallet for customer cards, points, rewards and promotions.",
+        "role": "Freelance Full-stack Developer",
+        "technologies": {
+          "Mobile": [
+            "Flutter",
+            "Dart"
+          ],
+          "Frontend": [
+            "Laravel Blade",
+            "Livewire 3",
+            "Tailwind CSS",
+            "Vite"
+          ],
+          "Backend": [
+            "PHP",
+            "Laravel 10",
+            "Laravel Sanctum",
+            "REST API"
+          ],
+          "Database": [
+            "MySQL"
+          ],
+          "Tools": [
+            "Git",
+            "Composer",
+            "Android Emulator"
+          ]
+        },
+        "start_date": "2026-06-10",
+        "end_date": "2026-09-10",
+        "responsibilities": [
+          "Plan the product, define requirements and design the data model, business rules and application architecture.",
+          "Develop the Laravel business panel for customer registration, memberships, points accumulation, reward redemption, promotions and reporting.",
+          "Implement company-scoped access, role permissions, protected API endpoints and an auditable points ledger.",
+          "Build the native Flutter wallet with branded digital cards, QR presentation, promotions, rewards, transaction history and customer profile.",
+          "Integrate magic-link authentication, secure local session storage and the API flows connecting customer and business operations.",
+          "Prepare deployment guidance, API contracts, user manuals and delivery documentation for both applications."
+        ],
+        "achievements": [
+          "Delivered the business platform and customer app as a single connected loyalty product.",
+          "Enabled businesses to operate distinct loyalty programs with their own branding, points rules and reward catalogs.",
+          "Connected in-store points operations with customer-visible balances and an auditable transaction history.",
+          "Delivered a documented handoff covering architecture, operation, API integration and application builds."
+        ],
+        "client": "FREX Club",
+        "team_size": 1,
+        "url": "https://app.frex.club/login",
+        "quick_view": {
+          "summary": "A complete loyalty product: Laravel administration, a protected API and a native Flutter wallet for cards, points and rewards.",
+          "impact_label": "Web + mobile",
+          "stack_highlights": [
+            "Laravel",
+            "Flutter",
+            "MySQL"
+          ]
+        },
+        "media": [
+          {
+            "type": "image",
+            "description": "FREX Club: the native Flutter wallet and the business administration panel. Demonstration data.",
+            "url": "assets/images/FREX/cover.webp"
+          },
+          {
+            "type": "image",
+            "description": "Branded loyalty cards and promotions in the customer wallet.",
+            "url": "assets/images/FREX/mobile-home.webp"
+          },
+          {
+            "type": "image",
+            "description": "Card detail with its available points and recent purchases.",
+            "url": "assets/images/FREX/mobile-card.webp"
+          },
+          {
+            "type": "image",
+            "description": "The QR presentation flow used to identify the customer in store. The public image protects the code.",
+            "url": "assets/images/FREX/mobile-qr.webp"
+          },
+          {
+            "type": "image",
+            "description": "Reward catalog with point costs and progress toward the next benefit.",
+            "url": "assets/images/FREX/mobile-rewards.webp"
+          },
+          {
+            "type": "image",
+            "description": "Promotion discovery across participating businesses.",
+            "url": "assets/images/FREX/mobile-promotions.webp"
+          },
+          {
+            "type": "image",
+            "description": "Promotion detail with photography, benefit and redemption conditions.",
+            "url": "assets/images/FREX/mobile-promotion-detail.webp"
+          },
+          {
+            "type": "image",
+            "description": "Business summary with membership balances and monthly purchase indicators from demonstration transactions.",
+            "url": "assets/images/FREX/admin-summary.webp"
+          },
+          {
+            "type": "image",
+            "description": "Customer registration form prepared with fictional contact details.",
+            "url": "assets/images/FREX/admin-client-registration.webp"
+          },
+          {
+            "type": "image",
+            "description": "Customer membership details and available balance in the business panel.",
+            "url": "assets/images/FREX/admin-client-detail.webp"
+          },
+          {
+            "type": "image",
+            "description": "In-store purchase registration and points calculation for the selected customer.",
+            "url": "assets/images/FREX/admin-points.webp"
+          },
+          {
+            "type": "image",
+            "description": "Business promotion management with its customer-facing content.",
+            "url": "assets/images/FREX/admin-promotions.webp"
+          }
+        ]
+      },
+      {
         "name": "Web Platform for Educational Offerings in Chiapas",
         "Project_Overview": "This project aimed to create a centralized web platform to help students in Chiapas explore university programs with ease. The platform provides a structured database with detailed information on degree programs, admission requirements, costs, and institutional details. It offers intuitive search and filtering options, allowing students to compare different programs efficiently. Additionally, the platform enhances accessibility by enabling students to download academic plans and set reminders for key enrollment deadlines.",
         "description": "Development of a web platform for students to search and explore university programs in Chiapas, providing a centralized source of detailed information on degrees, admission criteria, and costs. The platform includes key features for students such as search and filtering options, program details, admission requirements, cost breakdowns, and contact information.",
