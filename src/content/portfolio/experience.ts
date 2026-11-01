@@ -4,9 +4,15 @@ import { buildProjects, type ProjectTranslation } from "./projectUtils";
 
 const experienceProjects = experienceSource.experience.projects;
 
+const englishTranslations: Record<string, ProjectTranslation> = {
+  "Resident Check": { mediaUrls: [undefined, undefined, "assets/images/ResidentCheck/contributions-en.svg"] },
+  "IMCHISSA": { mediaUrls: [undefined, undefined, "assets/images/IMCHISSA/cms-flow-en.svg"] },
+  "TuxVentas": { mediaUrls: [undefined, undefined, undefined, "assets/images/TuxVentas/data-model-en.svg"] },
+};
+
 const spanishTranslations: Record<string, ProjectTranslation> = {
   "FREX Club": {
-    "Project_Overview": "FREX Club es un producto de fidelización multiempresa que conecta la operación diaria de los negocios con una billetera nativa para sus clientes. Como único desarrollador freelance, planifiqué y construí la plataforma Laravel, el panel administrativo, la API versionada y la aplicación Flutter, además de preparar la documentación técnica y de uso. Los negocios administran clientes, membresías con su marca, reglas de puntos, recompensas y promociones; los clientes consultan sus tarjetas, códigos QR, beneficios e historial desde la app. Las imágenes muestran las interfaces reales con datos demostrativos profesionales.",
+    "Project_Overview": "FREX Club permite que cada negocio opere su propio programa de fidelización y que sus clientes reúnan tarjetas y beneficios en una billetera Flutter. Fui el único desarrollador freelance, responsable de la planificación, el panel y la API Laravel, la app y la entrega técnica. Tres decisiones guiaron el MVP: una identidad de cliente con membresías independientes por empresa; un historial de puntos que se corrige mediante nuevos ajustes, sin sobrescribir movimientos; y operaciones en caja a cargo del personal, mientras el cliente consulta sus saldos y recompensas. Las promociones generales y de cumpleaños se incorporaron en iteraciones posteriores. El periodo presentado es junio–septiembre de 2026; las capturas y el video promocional conceptual corresponden a trabajo posterior de octubre de 2026 y utilizan datos demostrativos.",
     "description": "Desarrollo integral de una plataforma de fidelización: administración de negocios en Laravel, API REST protegida y billetera Flutter para tarjetas, puntos, recompensas y promociones.",
     "role": "Desarrollador full stack freelance",
     "technologies": {
@@ -36,18 +42,18 @@ const spanishTranslations: Record<string, ProjectTranslation> = {
       ]
     },
     "responsibilities": [
-      "Planificar el producto, definir los requerimientos y diseñar el modelo de datos, las reglas de negocio y la arquitectura de las aplicaciones.",
-      "Desarrollar el panel Laravel para registro de clientes, membresías, acumulación de puntos, canje de premios, promociones y reportes.",
-      "Implementar acceso por empresa, permisos por rol, endpoints protegidos e historial auditable de puntos.",
-      "Construir la billetera nativa Flutter con tarjetas de cada comercio, presentación de QR, promociones, recompensas, movimientos y perfil del cliente.",
-      "Integrar la autenticación por enlace de acceso, el almacenamiento seguro de la sesión y los flujos de API que conectan al cliente con la operación del negocio.",
-      "Elaborar guías de despliegue, contratos de API, manuales de uso y documentación de entrega de ambas aplicaciones."
+      "Definir el MVP con roles de plataforma, empresa, personal y cliente, manteniendo manuales la operación en caja y la activación de suscripciones en el alcance inicial.",
+      "Modelar una identidad global de cliente con membresías por empresa, tarjetas con marca propia, saldos y catálogos de recompensas independientes.",
+      "Implementar acumulación, canje asistido por personal e historial de puntos sin sobrescritura, con ajustes y reversos para conservar la trazabilidad.",
+      "Construir el panel Laravel, la API REST protegida y la billetera Flutter, con acceso por enlace y almacenamiento seguro de la sesión.",
+      "Ampliar el producto con promociones generales y de cumpleaños a partir de requerimientos posteriores, conectando su configuración con la experiencia del cliente.",
+      "Documentar contratos de API, operación, arquitectura y entrega; apoyar la comunicación del producto con un video promocional conceptual posterior."
     ],
     "achievements": [
-      "Entregué la plataforma del negocio y la app del cliente como un solo producto de fidelización conectado.",
-      "Habilité programas independientes por empresa, con identidad visual, reglas de puntos y catálogos de recompensas propios.",
-      "Conecté las operaciones de puntos en tienda con los saldos del cliente y un historial de movimientos auditable.",
-      "Documenté la entrega técnica: arquitectura, operación, integración de API y compilación de las aplicaciones."
+      "Entregué la plataforma del negocio y la app del cliente de forma integral, desde la definición del alcance hasta la documentación técnica.",
+      "Habilité varias membresías para una misma persona, conservando independientes los puntos y beneficios de cada negocio.",
+      "Hice trazables las operaciones en caja mediante un historial de acumulaciones, canjes, ajustes y reversos.",
+      "Amplié el MVP con flujos documentados de promociones y expliqué el producto a sus compradores empresariales mediante una pieza promocional conceptual."
     ],
     "quick_view": {
       "summary": "Un producto de fidelización completo: administración Laravel, API protegida y billetera nativa Flutter para tarjetas, puntos y recompensas.",
@@ -59,18 +65,16 @@ const spanishTranslations: Record<string, ProjectTranslation> = {
       ]
     },
     "mediaDescriptions": [
-      "FREX Club: billetera nativa Flutter y panel de administración del negocio. Datos demostrativos.",
-      "Tarjetas de fidelización con identidad de cada comercio y promociones en la billetera del cliente.",
-      "Detalle de tarjeta con puntos disponibles e historial de compras recientes.",
-      "Presentación del QR para identificar al cliente en tienda. El código está protegido en la imagen pública.",
-      "Catálogo de recompensas con costo en puntos y progreso hacia el siguiente beneficio.",
-      "Exploración de promociones de los comercios participantes.",
-      "Detalle de una promoción con fotografía, beneficio y condiciones para utilizarla.",
-      "Resumen del negocio con balances de membresías e indicadores mensuales calculados a partir de operaciones demostrativas.",
-      "Formulario de alta de cliente preparado con datos de contacto ficticios.",
-      "Detalle de la membresía y saldo disponible del cliente desde el panel del negocio.",
-      "Registro de compra en tienda y cálculo de puntos para el cliente seleccionado.",
-      "Gestión de promociones del negocio y su contenido visible para los clientes."
+      "FREX Club conecta la operación del negocio con la billetera nativa del cliente. Datos demostrativos.",
+      "Fidelización a tu manera — video promocional conceptual, octubre de 2026. Narración en español con subtítulos; comercios ficticios ilustran programas independientes.",
+      "Una persona, varios comercios: cada tarjeta conserva su marca, saldo y beneficios independientes.",
+      "El cliente presenta el QR de su membresía en tienda; el personal identifica la tarjeta para operar el programa. El código público está protegido.",
+      "El personal registra una compra de $950 MXN; la regla configurada calcula 95 puntos. Ejemplo demostrativo de operación en caja.",
+      "El cliente consulta un saldo de 566 puntos y sus movimientos recientes. Cada operación conserva su trazabilidad en el historial.",
+      "La app explica el costo y el progreso de las recompensas. El cliente solicita el beneficio y el personal realiza el canje en tienda.",
+      "El negocio configura la imagen, el beneficio y las condiciones que sus clientes verán en la app.",
+      "La promoción presenta al cliente la identidad del comercio, el beneficio y las condiciones en un mismo lugar.",
+      "El negocio consulta compras mensuales, rankings y saldos. Todas las cifras visibles son demostrativas; no representan resultados comerciales medidos."
     ]
   },
   "Web Platform for Educational Offerings in Chiapas": {
@@ -392,8 +396,8 @@ const spanishTranslations: Record<string, ProjectTranslation> = {
   },
 
   "EcoBrush — POS & CEDIS": {
-    "Project_Overview": "Participé en el mantenimiento y la ampliación de los sistemas existentes de punto de venta y distribución central, trabajando en catálogos, pedidos, inventario y documentos de servicio.",
-    "description": "Participé en el mantenimiento y la ampliación de los sistemas existentes de punto de venta y distribución central, trabajando en catálogos, pedidos, inventario y documentos de servicio.",
+    "Project_Overview": "El punto de venta de tiendas y el sistema de distribución central comparten información de productos y pedidos. Di mantenimiento a los flujos existentes e implementé integración de catálogo entre ambas aplicaciones.",
+    "description": "Soporte a POS y distribución: integración de catálogo, validaciones de cobro y pedidos.",
     "role": "Soporte y desarrollo de funcionalidades",
     "responsibilities": [
       "Implementé la integración del catálogo maestro entre CEDIS y POS, preservando la identidad de productos y SKU.",
@@ -401,19 +405,22 @@ const spanishTranslations: Record<string, ProjectTranslation> = {
       "Di soporte a cotizaciones, garantías y documentos de servicio, con correcciones de registros anteriores."
     ],
     "achievements": [
-      "Integré mejoras de sincronización de catálogo y flujo de pedidos entre ambos sistemas existentes.",
-      "Agregué validación y manejo de errores en flujos operativos."
+      "Implementé la integración del catálogo entre POS y CEDIS, incluido el manejo de productos y SKU."
     ],
     "client": "EcoBrush",
     "quick_view": {
-      "summary": "Participé en el mantenimiento y la ampliación de los sistemas existentes de punto de venta y distribución central, trabajando en catálogos, pedidos, inventario y documentos de servicio.",
+      "summary": "Soporte a POS y distribución: integración de catálogo, validaciones de cobro y pedidos.",
       "impact_label": "POS + CEDIS"
     },
-    "mediaDescriptions": ["Catálogo y controles de SKU — demo local","Punto de venta — demo local","Flujo de cotización — demo local"]
+    "mediaDescriptions": [
+      "Catálogo con precios de muestra y etiquetas de documentos ilustrativas.",
+      "Carrito del POS con artículos y totales de ejemplo, capturado localmente.",
+      "Cotización ilustrativa: carrito y totales añadidos a la pantalla local."
+    ]
   },
   "Resident Check": {
-    "Project_Overview": "Di soporte e implementé funcionalidades incrementales en una plataforma existente de administración residencial, con trabajo en acceso a cuentas, reportes, notificaciones y compatibilidad de descargas.",
-    "description": "Di soporte e implementé funcionalidades incrementales en una plataforma existente de administración residencial, con trabajo en acceso a cuentas, reportes, notificaciones y compatibilidad de descargas.",
+    "Project_Overview": "Una plataforma existente para administración residencial en la que di soporte a los accesos y reportes. Mis cambios cubrieron recuperación de contraseña, estados de cuenta y descargas móviles.",
+    "description": "Soporte residencial: recuperación de acceso, estados de cuenta y correcciones de descarga en iOS.",
     "role": "Soporte y desarrollo de funcionalidades",
     "responsibilities": [
       "Implementé recuperación de contraseña con token por correo y corregí la sincronización de contraseñas de usuarios invitados.",
@@ -421,19 +428,22 @@ const spanishTranslations: Record<string, ProjectTranslation> = {
       "Corregí descargas de QR y reportes en iOS y amplié el manejo de datos en notificaciones."
     ],
     "achievements": [
-      "Amplié los flujos de recuperación de acceso y reportes del sistema existente.",
-      "Resolví errores concretos de acceso y descarga en dispositivos móviles."
+      "Entregué vistas previas de estados de cuenta en PDF y correcciones de descarga de reportes y QR en móviles."
     ],
-    "client": "ResidentCheck",
+    "client": "Resident Check",
     "quick_view": {
-      "summary": "Di soporte e implementé funcionalidades incrementales en una plataforma existente de administración residencial, con trabajo en acceso a cuentas, reportes, notificaciones y compatibilidad de descargas.",
-      "impact_label": "Soporte + features"
+      "summary": "Soporte residencial: recuperación de acceso, estados de cuenta y correcciones de descarga en iOS.",
+      "impact_label": "Soporte y funcionalidades"
     },
-    "mediaDescriptions": ["Sitio público oficial","Estados de cuenta con registros residenciales ficticios","Recuperación de contraseña — demo local"]
+    "mediaDescriptions": [
+      "Sitio público oficial.",
+      "Estado de cuenta con registros residenciales ficticios.",
+      "Diagrama de aportaciones documentadas; no es una pantalla del producto."
+    ]
   },
   "IMCHISSA": {
-    "Project_Overview": "Formé parte del desarrollo full stack del sitio de IMCHISSA y sus herramientas administrativas, conectando páginas públicas de productos y servicios con contenido editable desde el CMS.",
-    "description": "Formé parte del desarrollo full stack del sitio de IMCHISSA y sus herramientas administrativas, conectando páginas públicas de productos y servicios con contenido editable desde el CMS.",
+    "Project_Overview": "El sitio de IMCHISSA combina páginas públicas de productos y servicios con un CMS administrativo. Participé en ambas capas como integrante del equipo de desarrollo.",
+    "description": "Participación full stack en equipo: CMS editable y páginas de productos y servicios.",
     "role": "Desarrollador Full Stack (participación en equipo)",
     "responsibilities": [
       "Desarrollé administración CMS e integración pública para inicio, nosotros, remolques, rampas, servicios y contacto.",
@@ -441,39 +451,49 @@ const spanishTranslations: Record<string, ProjectTranslation> = {
       "Implementé carga de archivos y manejo de recursos públicos y agregué cobertura funcional de CMS y productos."
     ],
     "achievements": [
-      "Conecté contenido administrable con varias secciones públicas del sitio.",
+      "Conecté contenido editable con secciones públicas del sitio.",
       "Aporté verificaciones de integración del catálogo y CMS junto con la implementación."
     ],
     "client": "IMCHISSA",
     "quick_view": {
-      "summary": "Formé parte del desarrollo full stack del sitio de IMCHISSA y sus herramientas administrativas, conectando páginas públicas de productos y servicios con contenido editable desde el CMS.",
+      "summary": "Participación full stack en equipo: CMS editable y páginas de productos y servicios.",
       "impact_label": "Sitio + CMS"
     },
-    "mediaDescriptions": ["Sitio oficial — inicio","Sitio oficial — remolques","Sitio oficial — rampas hidráulicas"]
+    "mediaDescriptions": [
+      "Sitio oficial: inicio.",
+      "Sitio oficial: rampas hidráulicas.",
+      "Diagrama conceptual del CMS y el sitio; no es una captura de administración.",
+      "Editor de inicio del CMS en una demo local con cuenta administradora ficticia."
+    ]
   },
   "TuxVentas": {
-    "Project_Overview": "Contribuí principalmente al backend, las estructuras de datos y las reglas de negocio del marketplace para anuncios, conversaciones, reseñas, alertas y flujos de cuenta.",
-    "description": "Contribuí principalmente al backend, las estructuras de datos y las reglas de negocio del marketplace para anuncios, conversaciones, reseñas, alertas y flujos de cuenta.",
+    "Project_Overview": "Un marketplace de anuncios e interacciones entre compradores y vendedores. Mi aporte principal fue backend y modelado de datos para publicaciones, conversaciones, reseñas y notificaciones.",
+    "description": "Backend de marketplace: anuncios, conversaciones, reseñas y diseño de datos.",
     "role": "Desarrollador Backend — base de datos y lógica de negocio",
     "responsibilities": [
       "Implementé estructuras de datos y flujos backend para anuncios, categorías e interacciones de usuarios.",
-      "Desarrollé generación y gestión de QR de anuncios, manejo de imágenes y reglas de acceso.",
+      "Contribuí a la interfaz de QR para anuncios, el manejo de imágenes y las reglas de acceso.",
       "Trabajé en notificaciones, conversaciones, reseñas, moderación y validaciones de autenticación."
     ],
     "achievements": [
-      "Implementé reglas backend que conectan publicación e interacciones del marketplace.",
-      "Agregué capacidades de QR y notificaciones dentro de la aplicación existente."
+      "Agregué estructuras de datos para usuarios, anuncios, conversaciones y reseñas.",
+      "Implementé la aceptación y cierre de conversaciones y contribuí al manejo de notificaciones."
     ],
     "client": "TuxVentas",
     "quick_view": {
-      "summary": "Contribuí principalmente al backend, las estructuras de datos y las reglas de negocio del marketplace para anuncios, conversaciones, reseñas, alertas y flujos de cuenta.",
+      "summary": "Backend de marketplace: anuncios, conversaciones, reseñas y diseño de datos.",
       "impact_label": "Backend + datos"
     },
-    "mediaDescriptions": ["Catálogo del marketplace — anuncios ficticios","Detalle de anuncio — demo local","Preguntas públicas y respuestas — demo local"]
+    "mediaDescriptions": [
+      "Catálogo ilustrativo con anuncios de ejemplo editados.",
+      "Detalle de anuncio con descripción y galería ajustadas para la demostración.",
+      "Preguntas y respuestas ficticias añadidas a la pantalla local.",
+      "Modelo de datos simplificado basado en documentación e implementación del proyecto."
+    ]
   },
   "Voldo": {
-    "Project_Overview": "Realicé aportaciones puntuales a una aplicación de ventas existente, centradas en documentos de clientes, archivos de órdenes de venta y mejoras relacionadas de interfaz.",
-    "description": "Realicé aportaciones puntuales a una aplicación de ventas existente, centradas en documentos de clientes, archivos de órdenes de venta y mejoras relacionadas de interfaz.",
+    "Project_Overview": "Una aplicación de ventas existente en la que realicé mantenimiento puntual de documentos de clientes y archivos asociados a órdenes.",
+    "description": "Mantenimiento puntual de documentos de clientes y archivos de ventas.",
     "role": "Desarrollador — mantenimiento puntual",
     "responsibilities": [
       "Agregué persistencia de documentos de clientes mediante migración y cambios de modelo y controlador.",
@@ -481,18 +501,22 @@ const spanishTranslations: Record<string, ProjectTranslation> = {
       "Aporté manejo de imágenes de venta y ajustes de diseño en pantallas de validación de pedidos."
     ],
     "achievements": [
-      "Implementé mejoras de manejo de documentos en módulos concretos del sistema existente."
+      "Entregué cambios para el manejo de documentos en los formularios de clientes y órdenes de venta."
     ],
     "client": "Voldo",
     "quick_view": {
-      "summary": "Realicé aportaciones puntuales a una aplicación de ventas existente, centradas en documentos de clientes, archivos de órdenes de venta y mejoras relacionadas de interfaz.",
+      "summary": "Mantenimiento puntual de documentos de clientes y archivos de ventas.",
       "impact_label": "Participación puntual"
     },
-    "mediaDescriptions": ["Clientes con datos de contacto ficticios","Captura de documentos de cliente — demo local","Pantalla de cotización de venta — demo local"]
+    "mediaDescriptions": [
+      "Clientes con datos de contacto ficticios.",
+      "Captura ilustrativa de documento: nombre de archivo y estado editados para la imagen.",
+      "Cotización ilustrativa con equipo y estado de ejemplo."
+    ]
   },
 };
 
 export const experienceContent: Record<Language, ProjectData[]> = {
-  en: buildProjects(experienceProjects, {}, "experience"),
+  en: buildProjects(experienceProjects, englishTranslations, "experience"),
   es: buildProjects(experienceProjects, spanishTranslations, "experience"),
 };

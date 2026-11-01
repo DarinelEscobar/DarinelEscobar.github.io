@@ -4,7 +4,7 @@
     "projects": [
       {
         "name": "FREX Club",
-        "Project_Overview": "FREX Club is a multi-company loyalty product that connects daily business operations with a native customer wallet. As the sole freelance developer, I planned and built the Laravel platform, administrative panel, versioned API and Flutter application, and prepared the technical and user documentation. Businesses manage customers, branded memberships, points rules, rewards and promotions; customers access their cards, QR codes, benefits and transaction history from the app. Screenshots show the actual interfaces with professional demonstration data.",
+        "Project_Overview": "FREX Club lets businesses run their own loyalty programs while customers keep their cards and benefits in one Flutter wallet. I was the sole freelance developer responsible for planning, the Laravel panel and API, the app, and technical handoff. Three decisions shaped the MVP: one customer identity with independent memberships per business; a points ledger corrected through new adjustments rather than overwritten history; and checkout operations performed by staff while customers consult their balances and rewards. General and birthday promotions were added in later iterations. The portfolio period is June–September 2026; the interface captures and conceptual promotional film represent later work from October 2026 and use demonstration data.",
         "description": "End-to-end development of a loyalty platform: Laravel business administration, a protected REST API and a Flutter wallet for customer cards, points, rewards and promotions.",
         "role": "Freelance Full-stack Developer",
         "technologies": {
@@ -36,18 +36,18 @@
         "start_date": "2026-06-10",
         "end_date": "2026-09-10",
         "responsibilities": [
-          "Plan the product, define requirements and design the data model, business rules and application architecture.",
-          "Develop the Laravel business panel for customer registration, memberships, points accumulation, reward redemption, promotions and reporting.",
-          "Implement company-scoped access, role permissions, protected API endpoints and an auditable points ledger.",
-          "Build the native Flutter wallet with branded digital cards, QR presentation, promotions, rewards, transaction history and customer profile.",
-          "Integrate magic-link authentication, secure local session storage and the API flows connecting customer and business operations.",
-          "Prepare deployment guidance, API contracts, user manuals and delivery documentation for both applications."
+          "Define the MVP with distinct platform, business, staff and customer roles, keeping checkout and subscription activation manual in the initial scope.",
+          "Model a global customer identity with separate company memberships, branded cards, balances and reward catalogs.",
+          "Implement earned points, staff-assisted redemption and an append-only ledger, using adjustments and reversals to preserve transaction history.",
+          "Build the Laravel administration panel, protected REST API and Flutter wallet, including magic-link access and secure session storage.",
+          "Extend the initial product with general and birthday promotions based on subsequent requirements, keeping business configuration and customer presentation connected.",
+          "Document API contracts, operation, architecture and delivery; support product communication with a later conceptual promotional film."
         ],
         "achievements": [
-          "Delivered the business platform and customer app as a single connected loyalty product.",
-          "Enabled businesses to operate distinct loyalty programs with their own branding, points rules and reward catalogs.",
-          "Connected in-store points operations with customer-visible balances and an auditable transaction history.",
-          "Delivered a documented handoff covering architecture, operation, API integration and application builds."
+          "Delivered a connected business platform and customer app independently, from scope definition to technical handoff.",
+          "Supported several loyalty memberships for one customer while preserving each business’s independent points and benefits.",
+          "Made checkout operations traceable through a history of earned points, redemptions, adjustments and reversals.",
+          "Extended the MVP with documented promotion flows and explained the product to business buyers through a conceptual promotional film."
         ],
         "client": "FREX Club",
         "team_size": 1,
@@ -64,63 +64,56 @@
         "media": [
           {
             "type": "image",
-            "description": "FREX Club: the native Flutter wallet and the business administration panel. Demonstration data.",
+            "description": "FREX Club connects business operations and a native customer wallet. Demonstration data.",
             "url": "assets/images/FREX/cover.webp"
           },
           {
+            "type": "video",
+            "url": "videos/frex-club-fidelizacion.mp4",
+            "poster": "assets/images/FREX/video-poster.webp",
+            "captions": "videos/frex-club-fidelizacion.es.vtt",
+            "subtitles": "videos/frex-club-fidelizacion.en.vtt",
+            "description": "Fidelización a tu manera — conceptual promotional film, October 2026. Spanish narration with English subtitles; fictional businesses illustrate independent loyalty programs."
+          },
+          {
             "type": "image",
-            "description": "Branded loyalty cards and promotions in the customer wallet.",
+            "description": "One customer, several businesses: each card has its own branding, balance and benefits.",
             "url": "assets/images/FREX/mobile-home.webp"
           },
           {
             "type": "image",
-            "description": "Card detail with its available points and recent purchases.",
-            "url": "assets/images/FREX/mobile-card.webp"
-          },
-          {
-            "type": "image",
-            "description": "The QR presentation flow used to identify the customer in store. The public image protects the code.",
+            "description": "The customer presents the membership QR in store; staff identifies the card to operate the program. The public code is protected.",
             "url": "assets/images/FREX/mobile-qr.webp"
           },
           {
             "type": "image",
-            "description": "Reward catalog with point costs and progress toward the next benefit.",
-            "url": "assets/images/FREX/mobile-rewards.webp"
-          },
-          {
-            "type": "image",
-            "description": "Promotion discovery across participating businesses.",
-            "url": "assets/images/FREX/mobile-promotions.webp"
-          },
-          {
-            "type": "image",
-            "description": "Promotion detail with photography, benefit and redemption conditions.",
-            "url": "assets/images/FREX/mobile-promotion-detail.webp"
-          },
-          {
-            "type": "image",
-            "description": "Business summary with membership balances and monthly purchase indicators from demonstration transactions.",
-            "url": "assets/images/FREX/admin-summary.webp"
-          },
-          {
-            "type": "image",
-            "description": "Customer registration form prepared with fictional contact details.",
-            "url": "assets/images/FREX/admin-client-registration.webp"
-          },
-          {
-            "type": "image",
-            "description": "Customer membership details and available balance in the business panel.",
-            "url": "assets/images/FREX/admin-client-detail.webp"
-          },
-          {
-            "type": "image",
-            "description": "In-store purchase registration and points calculation for the selected customer.",
+            "description": "Staff records a $950 MXN purchase; the configured rule calculates 95 points. Demonstration of the checkout operation.",
             "url": "assets/images/FREX/admin-points.webp"
           },
           {
             "type": "image",
-            "description": "Business promotion management with its customer-facing content.",
+            "description": "The customer checks a 566-point balance and recent movements. Each transaction remains traceable in the history.",
+            "url": "assets/images/FREX/mobile-card.webp"
+          },
+          {
+            "type": "image",
+            "description": "The app explains reward costs and progress. The customer requests the benefit and staff completes redemption in store.",
+            "url": "assets/images/FREX/mobile-rewards.webp"
+          },
+          {
+            "type": "image",
+            "description": "The business configures the image, benefit and conditions that customers will see in the app.",
             "url": "assets/images/FREX/admin-promotions.webp"
+          },
+          {
+            "type": "image",
+            "description": "A customer-facing promotion presents the business identity, benefit and conditions in one place.",
+            "url": "assets/images/FREX/mobile-promotion-detail.webp"
+          },
+          {
+            "type": "image",
+            "description": "The business reviews monthly purchase activity, rankings and balances. All figures shown are demonstration data, not measured commercial results.",
+            "url": "assets/images/FREX/admin-summary.webp"
           }
         ]
       },
@@ -667,8 +660,8 @@
       },
       {
         "name": "EcoBrush — POS & CEDIS",
-        "Project_Overview": "Contributed maintenance and operational features to existing store POS and central distribution systems, working on product catalogs, orders, inventory and service documents.",
-        "description": "Contributed maintenance and operational features to existing store POS and central distribution systems, working on product catalogs, orders, inventory and service documents.",
+        "Project_Overview": "A store POS and central distribution system that share product and order information. I maintained existing workflows and implemented catalog integration across the two applications.",
+        "description": "POS and distribution support: catalog integration, checkout validation and order workflows.",
         "role": "Maintenance and feature development",
         "technologies": {
           "Stack": [
@@ -687,12 +680,11 @@
           "Maintained quotation, warranty and service-document workflows, including corrections to legacy records."
         ],
         "achievements": [
-          "Delivered catalog synchronization and order-flow improvements across the two existing systems.",
-          "Added validation and error handling for operational workflows."
+          "Implemented catalog integration between POS and CEDIS, including product and SKU handling."
         ],
         "client": "EcoBrush",
         "quick_view": {
-          "summary": "Contributed maintenance and operational features to existing store POS and central distribution systems, working on product catalogs, orders, inventory and service documents.",
+          "summary": "POS and distribution support: catalog integration, checkout validation and order workflows.",
           "impact_label": "POS + CEDIS",
           "stack_highlights": [
             "Laravel 10",
@@ -704,25 +696,26 @@
           {
             "type": "image",
             "url": "assets/images/EcoBrush/eco-products.webp",
-            "description": "Product catalog and SKU controls — local demo"
+            "description": "Catalog with sample prices and illustrative document labels."
           },
           {
             "type": "image",
             "url": "assets/images/EcoBrush/eco-pos.webp",
-            "description": "Point of sale — local demo"
+            "description": "POS cart with sample items and totals, captured locally."
           },
           {
             "type": "image",
             "url": "assets/images/EcoBrush/eco-quotes.webp",
-            "description": "Quotation workflow — local demo"
+            "description": "Illustrative quotation: sample cart and totals added to the local screen."
           }
         ],
-        "url": "https://pos.tuxtla.ecobrush.mx/"
+        "url": "https://pos.tuxtla.ecobrush.mx/",
+        "date_source": "git"
       },
       {
         "name": "Resident Check",
-        "Project_Overview": "Provided support and incremental features for an existing residential-management platform, focusing on account access, reports, notifications and download compatibility.",
-        "description": "Provided support and incremental features for an existing residential-management platform, focusing on account access, reports, notifications and download compatibility.",
+        "Project_Overview": "An existing residential-management platform where I supported account access and reporting. My changes addressed password recovery, account statements and mobile downloads.",
+        "description": "Residential software support: account recovery, statements and iOS download fixes.",
         "role": "Software maintenance and feature development",
         "technologies": {
           "Stack": [
@@ -741,12 +734,11 @@
           "Fixed iOS QR/report download behavior and extended notification payload handling."
         ],
         "achievements": [
-          "Added recovery and reporting workflows to the existing platform.",
-          "Resolved specific access and mobile-download defects."
+          "Delivered account-statement PDF previews and fixes for mobile report and QR downloads."
         ],
         "client": "Resident Check",
         "quick_view": {
-          "summary": "Provided support and incremental features for an existing residential-management platform, focusing on account access, reports, notifications and download compatibility.",
+          "summary": "Residential software support: account recovery, statements and iOS download fixes.",
           "impact_label": "Support + features",
           "stack_highlights": [
             "Laravel",
@@ -758,25 +750,26 @@
           {
             "type": "image",
             "url": "assets/images/ResidentCheck/resident-home.webp",
-            "description": "Official public website"
+            "description": "Official public website."
           },
           {
             "type": "image",
             "url": "assets/images/ResidentCheck/resident-statements.webp",
-            "description": "Account statements with fictional residential records"
+            "description": "Account statement with fictional residential records."
           },
           {
             "type": "image",
-            "url": "assets/images/ResidentCheck/resident-recovery.webp",
-            "description": "Password recovery — local demo"
+            "url": "assets/images/ResidentCheck/contributions.svg",
+            "description": "Contribution diagram based on documented changes; not a product screen."
           }
         ],
-        "url": "https://residentcheck.com.mx/"
+        "url": "https://residentcheck.com.mx/",
+        "date_source": "git"
       },
       {
         "name": "IMCHISSA",
-        "Project_Overview": "Participated in full-stack development of the IMCHISSA website and administration tools, connecting public product and service pages to editable CMS content.",
-        "description": "Participated in full-stack development of the IMCHISSA website and administration tools, connecting public product and service pages to editable CMS content.",
+        "Project_Overview": "The IMCHISSA website combines public product and service pages with an administrative CMS. I contributed to both layers as part of the development team.",
+        "description": "Team full-stack contribution connecting an editable CMS with product and service pages.",
         "role": "Full-stack Developer (team contribution)",
         "technologies": {
           "Stack": [
@@ -796,12 +789,12 @@
           "Implemented file-upload and public-asset handling and added feature coverage for CMS and product flows."
         ],
         "achievements": [
-          "Connected editable administration content to multiple public website sections.",
-          "Contributed catalog and CMS integration checks alongside implementation."
+          "Connected editable content to public sections of the site.",
+          "Contributed catalog and CMS integration checks alongside the implementation."
         ],
         "client": "IMCHISSA",
         "quick_view": {
-          "summary": "Participated in full-stack development of the IMCHISSA website and administration tools, connecting public product and service pages to editable CMS content.",
+          "summary": "Team full-stack contribution connecting an editable CMS with product and service pages.",
           "impact_label": "Website + CMS",
           "stack_highlights": [
             "Laravel",
@@ -813,25 +806,31 @@
           {
             "type": "image",
             "url": "assets/images/IMCHISSA/imchissa-home.webp",
-            "description": "Official website — home"
-          },
-          {
-            "type": "image",
-            "url": "assets/images/IMCHISSA/imchissa-remolques.webp",
-            "description": "Official website — trailers"
+            "description": "Official website: home."
           },
           {
             "type": "image",
             "url": "assets/images/IMCHISSA/imchissa-rampas.webp",
-            "description": "Official website — hydraulic ramps"
+            "description": "Official website: hydraulic ramps."
+          },
+          {
+            "type": "image",
+            "url": "assets/images/IMCHISSA/cms-flow.svg",
+            "description": "Conceptual CMS-to-website diagram; not an administration screenshot."
+          },
+          {
+            "type": "image",
+            "url": "assets/images/IMCHISSA/imchissa-cms.webp",
+            "description": "CMS home editor in a local demo, using a fictional administrator account."
           }
         ],
-        "url": "https://imchissa.com/"
+        "url": "https://imchissa.com/",
+        "date_source": "git"
       },
       {
         "name": "TuxVentas",
-        "Project_Overview": "Contributed primarily backend implementation, data structures and marketplace business rules for listings, conversations, reviews, alerts and account workflows.",
-        "description": "Contributed primarily backend implementation, data structures and marketplace business rules for listings, conversations, reviews, alerts and account workflows.",
+        "Project_Overview": "A marketplace for listings and buyer-seller interactions. My main contribution was backend and data modeling for publications, conversations, reviews and notifications.",
+        "description": "Marketplace backend: listings, conversations, reviews and database design.",
         "role": "Backend Developer — database and business logic",
         "technologies": {
           "Stack": [
@@ -846,16 +845,16 @@
         "end_date": "2026-07-17",
         "responsibilities": [
           "Implemented marketplace data and backend workflows for listings, categories and user interactions.",
-          "Developed QR generation and management for listings, image handling and access rules.",
+          "Contributed listing QR interface, image handling and access rules.",
           "Worked on notifications, conversation flows, reviews, moderation and authentication validation."
         ],
         "achievements": [
-          "Delivered backend rules connecting marketplace publication and user interactions.",
-          "Added QR and notification capabilities within the existing application."
+          "Added database structures for users, listings, conversations and reviews.",
+          "Implemented conversation acceptance and closure and contributed notification handling."
         ],
         "client": "TuxVentas",
         "quick_view": {
-          "summary": "Contributed primarily backend implementation, data structures and marketplace business rules for listings, conversations, reviews, alerts and account workflows.",
+          "summary": "Marketplace backend: listings, conversations, reviews and database design.",
           "impact_label": "Backend + data",
           "stack_highlights": [
             "Laravel 10",
@@ -867,24 +866,30 @@
           {
             "type": "image",
             "url": "assets/images/TuxVentas/tux-marketplace.webp",
-            "description": "Marketplace catalog — fictional listings"
+            "description": "Illustrative marketplace catalog with edited sample listings."
           },
           {
             "type": "image",
             "url": "assets/images/TuxVentas/tux-detail.webp",
-            "description": "Listing details — local demo"
+            "description": "Listing detail with an illustrative description and edited image gallery."
           },
           {
             "type": "image",
             "url": "assets/images/TuxVentas/tux-questions.webp",
-            "description": "Public questions and seller replies — local demo"
+            "description": "Illustrative buyer questions and seller answers added to the local screen."
+          },
+          {
+            "type": "image",
+            "url": "assets/images/TuxVentas/data-model.svg",
+            "description": "Simplified data model based on project documentation and implementation."
           }
-        ]
+        ],
+        "date_source": "git"
       },
       {
         "name": "Voldo",
-        "Project_Overview": "Made focused contributions to an existing sales application, covering client documents, sales-order attachments and related interface improvements.",
-        "description": "Made focused contributions to an existing sales application, covering client documents, sales-order attachments and related interface improvements.",
+        "Project_Overview": "An existing sales application where I made targeted maintenance contributions to client documents and sales-order attachments.",
+        "description": "Focused maintenance for client documents and sales-order files.",
         "role": "Developer — targeted maintenance",
         "technologies": {
           "Stack": [
@@ -903,11 +908,11 @@
           "Contributed sales-image handling and layout improvements to order-validation screens."
         ],
         "achievements": [
-          "Delivered document-handling improvements in specific existing modules."
+          "Delivered document-handling changes across the client and sales-order forms."
         ],
         "client": "Voldo",
         "quick_view": {
-          "summary": "Made focused contributions to an existing sales application, covering client documents, sales-order attachments and related interface improvements.",
+          "summary": "Focused maintenance for client documents and sales-order files.",
           "impact_label": "Targeted contribution",
           "stack_highlights": [
             "Laravel",
@@ -919,20 +924,21 @@
           {
             "type": "image",
             "url": "assets/images/Voldo/voldo-clients.webp",
-            "description": "Clients with fictional contact details"
+            "description": "Clients with fictional contact details."
           },
           {
             "type": "image",
             "url": "assets/images/Voldo/voldo-documents.webp",
-            "description": "Client-document entry — local demo"
+            "description": "Illustrative client document entry; the filename and upload state were edited for the image."
           },
           {
             "type": "image",
             "url": "assets/images/Voldo/voldo-orders.webp",
-            "description": "Sales quotation screen — local demo"
+            "description": "Illustrative quotation screen with a sample equipment record and status."
           }
         ],
-        "url": "https://sistemavoldo.com/"
+        "url": "https://sistemavoldo.com/",
+        "date_source": "git"
       }
     ]
   }

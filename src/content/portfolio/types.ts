@@ -60,6 +60,9 @@ export interface ProjectMedia {
   type: string;
   url: string;
   description?: string;
+  poster?: string;
+  captions?: string;
+  subtitles?: string;
 }
 
 export interface ProjectQuickView {
@@ -80,6 +83,7 @@ export interface ProjectData {
   technologies?: Record<string, string[]>;
   start_date?: string;
   end_date?: string;
+  date_source?: "git";
   responsibilities: string[];
   achievements: string[];
   client?: string;

@@ -84,8 +84,8 @@ const spanishTranslations: Record<string, ProjectTranslation> = {
     client: "Proyecto personal",
   },
   "Finance App (Nivo)": {
-    "Project_Overview": "Aplicación personal de finanzas para registrar ingresos y gastos, consultar el flujo de efectivo y organizar presupuestos, metas de ahorro y movimientos recurrentes con almacenamiento local.",
-    "description": "Aplicación personal de finanzas para registrar ingresos y gastos, consultar el flujo de efectivo y organizar presupuestos, metas de ahorro y movimientos recurrentes con almacenamiento local.",
+    "Project_Overview": "Una aplicación personal en Flutter para mantener registros financieros en el dispositivo. Reúne movimientos, efectivo, presupuestos, metas de ahorro y operaciones recurrentes.",
+    "description": "Finanzas personales en el dispositivo: movimientos, presupuestos y reportes de gastos.",
     "role": "Desarrollador de proyecto personal",
     "responsibilities": [
       "Desarrollé la aplicación Flutter y la persistencia local con Drift y SQLite.",
@@ -93,19 +93,22 @@ const spanishTranslations: Record<string, ProjectTranslation> = {
       "Construí herramientas de presupuestos, metas de ahorro y movimientos recurrentes y refiné la interfaz móvil."
     ],
     "achievements": [
-      "Creé una aplicación móvil personal de finanzas con datos almacenados localmente.",
-      "Generé versiones Android y documenté vistas reales en emulador."
+      "Generé versiones Android y documenté vistas de movimientos y reportes por categoría."
     ],
     "client": "Proyecto personal",
     "quick_view": {
-      "summary": "Aplicación personal de finanzas para registrar ingresos y gastos, consultar el flujo de efectivo y organizar presupuestos, metas de ahorro y movimientos recurrentes con almacenamiento local.",
+      "summary": "Finanzas personales en el dispositivo: movimientos, presupuestos y reportes de gastos.",
       "impact_label": "Finanzas personales"
     },
-    "mediaDescriptions": ["Inicio — demo Android en emulador","Movimientos — demo Android en emulador","Reportes por categoría — demo Android en emulador"]
+    "mediaDescriptions": [
+      "Inicio: panorama financiero con datos de muestra, demo Android.",
+      "Movimientos: ingresos y gastos de muestra, demo Android.",
+      "Reportes por categoría: gastos de muestra, demo Android."
+    ]
   },
   "FitLog": {
-    "Project_Overview": "Aplicación personal de entrenamiento para organizar rutinas, registrar series durante la sesión, revisar progreso por ejercicio e importar y exportar respaldos locales.",
-    "description": "Aplicación personal de entrenamiento para organizar rutinas, registrar series durante la sesión, revisar progreso por ejercicio e importar y exportar respaldos locales.",
+    "Project_Overview": "Una aplicación personal para organizar rutinas y conservar registros de entrenamiento en el dispositivo. Incluye sesiones activas, historial por ejercicio y respaldos locales.",
+    "description": "Entrenamiento personal: rutinas, sesiones activas y seguimiento de progreso.",
     "role": "Desarrollador de proyecto personal",
     "responsibilities": [
       "Desarrollé gestión de rutinas, sesiones activas y registro de series con peso, repeticiones, RIR y descanso.",
@@ -113,15 +116,18 @@ const spanishTranslations: Record<string, ProjectTranslation> = {
       "Desarrollé persistencia local, respaldos ZIP/XLSX e interfaces de resumen de sesión."
     ],
     "achievements": [
-      "Creé una aplicación personal de entrenamiento centrada en registros y respaldos locales.",
-      "Iteré la experiencia de entrenamiento y generé versiones Android."
+      "Generé versiones Android con registros de entrenamiento y respaldos locales."
     ],
     "client": "Proyecto personal",
     "quick_view": {
-      "summary": "Aplicación personal de entrenamiento para organizar rutinas, registrar series durante la sesión, revisar progreso por ejercicio e importar y exportar respaldos locales.",
+      "summary": "Entrenamiento personal: rutinas, sesiones activas y seguimiento de progreso.",
       "impact_label": "Registro de entrenamiento"
     },
-    "mediaDescriptions": ["Biblioteca de rutinas — demo Android en emulador","Entrenamiento activo — demo Android en emulador","Panel de rendimiento — demo Android en emulador"]
+    "mediaDescriptions": [
+      "Biblioteca de rutinas con entrenamientos ficticios, demo Android.",
+      "Sesión activa con series ficticias, demo Android.",
+      "Panel de rendimiento con datos ficticios, demo Android."
+    ]
   },
 };
 

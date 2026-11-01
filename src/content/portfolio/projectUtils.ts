@@ -9,6 +9,7 @@ interface RawProjectData {
   technologies?: Record<string, string[]>;
   start_date?: string;
   end_date?: string;
+  date_source?: string;
   responsibilities?: string[];
   achievements?: string[];
   client?: string;
@@ -28,6 +29,7 @@ export interface ProjectTranslation {
   achievements?: string[];
   client?: string;
   mediaDescriptions?: string[];
+  mediaUrls?: (string | undefined)[];
   quick_view?: Partial<ProjectQuickView>;
 }
 
@@ -39,9 +41,10 @@ function cleanOptionalValue(value?: string): string | undefined {
   return value;
 }
 
-function normalizeMedia(media: ProjectMedia[] | undefined, descriptions: string[] | undefined): ProjectMedia[] {
+function normalizeMedia(media: ProjectMedia[] | undefined, descriptions: string[] | undefined, urls: (string | undefined)[] | undefined): ProjectMedia[] {
   return (media ?? []).map((item, index) => ({
     ...item,
+    url: urls?.[index] ?? item.url,
     description: descriptions?.[index] ?? item.description,
   }));
 }
@@ -110,13 +113,14 @@ export function buildProjects(
       technologies,
       start_date: cleanOptionalValue(project.start_date),
       end_date: cleanOptionalValue(project.end_date),
+      date_source: project.date_source === "git" ? "git" : undefined,
       responsibilities: translatedProject?.responsibilities ?? project.responsibilities ?? [],
       achievements: translatedProject?.achievements ?? project.achievements ?? [],
       client: translatedProject?.client ?? cleanOptionalValue(project.client),
       team_size: typeof project.team_size === "number" ? project.team_size : undefined,
       url: cleanOptionalValue(project.url),
       repository: cleanOptionalValue(project.repository),
-      media: normalizeMedia(project.media, translatedProject?.mediaDescriptions),
+      media: normalizeMedia(project.media, translatedProject?.mediaDescriptions, translatedProject?.mediaUrls),
       quick_view: normalizeQuickView(project, translatedProject, technologies),
     };
   });

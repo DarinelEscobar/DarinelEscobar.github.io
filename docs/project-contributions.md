@@ -94,19 +94,19 @@ Identidades confirmadas: Darinel Escobar (variantes de mayúsculas), Darinel EG;
 
 ## Capturas y reproducción
 
-Se integraron 21 imágenes WebP, tres por ficha. Son capturas de interfaces reales; no se crearon maquetas ni se alteraron pantallas para simular funcionalidad.
+La galería contiene 23 recursos por idioma: 20 capturas WebP y tres diagramas SVG localizados en español e inglés. Algunas capturas usan datos ficticios o se modificaron temporalmente en el navegador para ilustrar información; esas imágenes están identificadas en sus descripciones. No demuestran que se haya guardado un archivo, concretado una cotización o ejecutado una transacción.
 
 | Ficha / carpeta de imágenes | Procedencia y vistas |
 | --- | --- |
-| EcoBrush | Captura nueva en localhost: catálogo, punto de venta y cotización del POS. La galería muestra POS; el alcance CEDIS se respalda con commits y documentación. |
-| ResidentCheck | [Sitio público oficial](https://residentcheck.com.mx/), estado de cuenta y recuperación de contraseña locales. Residencial, vivienda, cuota de $1,500 y pago parcial de $1,000 son ficticios. |
-| IMCHISSA | Captura nueva en [inicio](https://imchissa.com/), [remolques](https://imchissa.com/remolques) y [rampas](https://imchissa.com/rampas). Vistas del producto desarrollado en equipo, no prueba de autoría exclusiva. |
-| TuxVentas | Catálogo, detalle de anuncio y preguntas/respuestas locales. Se ejecutaron los seeders de muestra existentes; los anuncios seleccionados se ajustaron para que título, categoría, precio e imagen fueran coherentes. |
-| Voldo | Clientes, captura de documentos y creación de cotización locales. Nombres, contactos y datos fiscales sustituidos por ejemplos antes de capturar. El formulario de documentos muestra la captura de un título; no representa una carga de archivo completada. |
-| Finance-App | Se reutilizaron las capturas Android con datos demo documentadas en el README del proyecto: docs/screenshots/home.png, transactions.png y reports-category.png. Referencia versionada: 5e57add (2026-10-04). No se presentan como capturas nuevas de esta sesión. |
+| EcoBrush | Catálogo y cotización locales: precios, etiquetas de archivos y renglón/totales de cotización añadidos temporalmente al DOM como ejemplos; no son documentos reales. El carrito POS se llenó mediante la interfaz local con un artículo y precio de muestra. CEDIS se respalda con commits y documentación. |
+| ResidentCheck | [Sitio público oficial](https://residentcheck.com.mx/), estado de cuenta local y diagrama explicativo de las aportaciones. Residencial, vivienda, cuota de $1,500, abono aplicado de $1,000 y saldo pendiente de $500 son ficticios; la aplicación del pago se registró en la base demo. El diagrama no es una captura de pantalla. |
+| IMCHISSA | Capturas públicas de [inicio](https://imchissa.com/) y [rampas](https://imchissa.com/rampas), un diagrama conceptual CMS-sitio basado en la implementación y una captura del editor CMS local con cuenta administradora ficticia. Desarrollo en equipo; el diagrama no es una captura del CMS. |
+| TuxVentas | Catálogo y detalle locales con anuncios ficticios. En el catálogo se editaron títulos, descripciones y ubicación, y se ocultaron tarjetas; en el detalle se modificó temporalmente la descripción y se ocultaron miniaturas sin imagen; las preguntas y respuestas de ejemplo se insertaron en el DOM y se ocultaron dos miniaturas sin imagen. El diagrama es una simplificación de entidades documentadas; no muestra pagos integrados ni todo el esquema. |
+| Voldo | Clientes, documento y cotización locales con datos ficticios. El nombre y el indicador del PDF, el estado de disponibilidad, el registro del equipo y el resumen de precio e IVA se añadieron o modificaron temporalmente en el DOM: no se subió un archivo ni se completó una venta. |
+| Finance-App | La portada reutiliza docs/screenshots/home.png (referencia 5e57add, 2026-10-04). Movimientos y reportes se recapturaron en un emulador Android de solo lectura con el conjunto público de datos de muestra, sin importar el paquete privado. La captura de reportes muestra noviembre de 2026. |
 | FitLog | Se reutilizaron capturas Android con fixture ficticia main_demo.dart documentadas en el README: docs/images/screens/routines-library.png, active-workout-session.png y performance-dashboard.png. Referencia: 2c6565f (2026-10-04). No se presentan como capturas nuevas. |
 
-Las capturas web nuevas se tomaron durante esta revisión. Las originales PNG quedan en la carpeta temporal portfolio-contributions/captures del usuario; las versiones WebP están en src/assets/images, dentro de la carpeta indicada por ficha. Las descripciones se guardan en el catálogo inglés y en su traducción española, en el mismo orden.
+Las capturas web nuevas se tomaron localmente durante las revisiones. Las versiones PNG quedan en la carpeta temporal portfolio-contributions/captures del usuario; las versiones WebP están en src/assets/images, dentro de la carpeta indicada por ficha. Los diagramas SVG también se encuentran en esas carpetas. Las descripciones se guardan en el catálogo inglés y en su traducción española, en el mismo orden.
 
 ### Dominios
 
@@ -132,10 +132,10 @@ Las capturas web nuevas se tomaron durante esta revisión. Las originales PNG qu
 
 Las fichas reutilizan el catálogo y las traducciones existentes. Finance App y FitLog tienen source=personal; EcoBrush, Resident Check, IMCHISSA, TuxVentas y Voldo tienen source=experience. No hay cambios de API, tipos públicos ni dependencias del portafolio.
 
-Comprobar con npm run lint, npm run build y node --test tests/portfolio-projects.test.mjs. La revisión de datos debe exigir una ficha por nombre, tres imágenes por ficha, archivos resolubles y textos/captions en español e inglés. Revisar el filtro profesional y los controles de galería a 1440 px y 390 px. No se validó el funcionamiento de módulos privados de producción ni se enviaron solicitudes en sitios oficiales.
+Comprobar con npm run lint, npm run build y node --test tests/portfolio-projects.test.mjs. La revisión de datos debe exigir una ficha por nombre, recursos resolubles y textos/captions en español e inglés. TuxVentas e IMCHISSA tienen cuatro recursos; las demás fichas, tres. Revisar el filtro profesional y los controles de galería a 1440 px y 390 px. No se validó el funcionamiento de módulos privados de producción ni se enviaron solicitudes en sitios oficiales.
 
 
-### Resultados de esta revisión
+### Resultados de la revisión inicial (antes de los cambios editoriales)
 
 - npm run lint: PASS.
 - npm run build: PASS.
@@ -144,3 +144,28 @@ Comprobar con npm run lint, npm run build y node --test tests/portfolio-projects
 - Filtro profesional: 14 fichas; Finance App y FitLog quedan fuera. Galería verificada en escritorio y móvil de 390 px, incluyendo avance a imagen 2/3 y cambio de idioma.
 - git diff --check: sin errores de espacios en los archivos de esta tarea.
 - Los navegadores de captura y servidores PHP/MySQL de demostración se cierran al finalizar; la instancia temporal se conserva en disco. El servidor Vite del portafolio queda en localhost:5199 para revisión.
+
+### Revisión editorial y visual posterior
+
+- Las fechas marcadas como «Actividad documentada en Git» delimitan el primer y último commit propio observado, no una relación laboral ni la duración total del producto. La marca se aplica únicamente a estas siete fichas.
+- El catálogo y la cotización EcoBrush, las preguntas y la galería de TuxVentas y las pantallas de documento y cotización de Voldo contienen modificaciones temporales del DOM. Son ejemplos ilustrativos identificados en cada pie de imagen, no transacciones ni archivos guardados.
+- Los tres diagramas son interpretaciones resumidas: Resident Check se basa en cambios propios de acceso y reportes; IMCHISSA en la integración CMS/sitio desarrollada en equipo; TuxVentas en migraciones, controladores y `specs/ERD.md`. No representan esquemas completos ni autoría exclusiva.
+- TuxVentas no se presenta con pasarela de pagos: su especificación describe acuerdos entre usuarios. La atribución del QR se limita a su interfaz.
+- Finance App y FitLog mantienen capturas existentes de emulador y se identifican como proyectos personales. No se validaron módulos privados de producción.
+- Verificación posterior: las siete fichas tienen textos en ambos idiomas y recursos cargados; se inspeccionó la galería en escritorio y a 390 px. Finance App y FitLog conservan la clasificación de proyectos personales.
+- Vite, ESLint y dos pruebas de portafolio: correctos. La comprobación adicional tsc -b falla por seis errores preexistentes, reproducidos también en el commit de respaldo: cuatro incompatibilidades de tipos en datos importados y dos módulos ausentes en src/pages/Home/index.ts.
+
+### Corrección visual posterior
+
+- Resident Check: se registró en la base de demostración la aplicación del abono de $1,000 a la cuota de $1,500. La interfaz muestra $500 pendientes; la captura corresponde a la interfaz real con datos ficticios.
+- TuxVentas: la captura de preguntas conserva respuestas insertadas en el DOM y oculta dos miniaturas sin imagen.
+- IMCHISSA: se migró una base local aislada `portfolio_demo_imchissa` en 127.0.0.1:3317 y se ejecutaron los seeders de estados, roles, personas, usuarios y CMS. Se sustituyó el administrador usado para la captura por una cuenta ficticia. La imagen muestra el editor real de inicio; el diagrama se conserva.
+- Validación posterior: build, ESLint y dos pruebas de portafolio correctos; galerías y descripciones de los tres casos comprobadas en español e inglés y a 390 px y 1440 px.
+
+### Ajustes posteriores de presentación
+
+- Resident Check: se recapturó el estado de cuenta local con todos los totales visibles; la cuota ficticia de $1,500 y el abono de $1,000 dejan $500 pendientes.
+- TuxVentas: se recapturaron catálogo, detalle y preguntas para mantener visible el buscador, la fotografía y las respuestas; las modificaciones temporales del DOM y los datos ficticios siguen identificados en los pies.
+- Los pies de Nivo y FitLog identifican los registros como datos de muestra o ficticios. Las fichas distinguen entregables comprobables de responsabilidades y no presentan la sincronización de EcoBrush como una mejora medida.
+
+- Nivo: se recapturaron movimientos y reporte mensual en inglés con los datos públicos de muestra en un emulador Android de solo lectura. No se importaron registros personales. La portada anterior se conserva.

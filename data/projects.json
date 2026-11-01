@@ -84,8 +84,8 @@
       },
       {
         "name": "Finance App (Nivo)",
-        "Project_Overview": "Personal finance application for recording income and expenses, reviewing cash flow and organizing budgets, savings goals and recurring transactions with local storage.",
-        "description": "Personal finance application for recording income and expenses, reviewing cash flow and organizing budgets, savings goals and recurring transactions with local storage.",
+        "Project_Overview": "A personal Flutter app for keeping financial records on the device. It brings transactions, cash, budgets, savings goals and recurring movements together.",
+        "description": "Personal finance on device: transactions, budgets and spending reports.",
         "role": "Personal project developer",
         "technologies": {
           "Stack": [
@@ -104,12 +104,11 @@
           "Built budgeting, savings-goal and recurring-transaction tools and refined the mobile interface."
         ],
         "achievements": [
-          "Created a personal mobile finance application with local data ownership.",
-          "Produced Android builds and documented emulator previews."
+          "Produced Android builds and documented transaction and category-report views."
         ],
         "client": "Personal",
         "quick_view": {
-          "summary": "Personal finance application for recording income and expenses, reviewing cash flow and organizing budgets, savings goals and recurring transactions with local storage.",
+          "summary": "Personal finance on device: transactions, budgets and spending reports.",
           "impact_label": "Personal finance",
           "stack_highlights": [
             "Flutter",
@@ -121,25 +120,26 @@
           {
             "type": "image",
             "url": "assets/images/Finance-App/home.webp",
-            "description": "Home — Android emulator demo"
+            "description": "Home: a snapshot of personal finances with sample data, Android demo."
           },
           {
             "type": "image",
             "url": "assets/images/Finance-App/transactions.webp",
-            "description": "Transactions — Android emulator demo"
+            "description": "Transactions: review sample income and expenses, Android demo."
           },
           {
             "type": "image",
             "url": "assets/images/Finance-App/reports-category.webp",
-            "description": "Category reports — Android emulator demo"
+            "description": "Category reports: explore sample spending, Android demo."
           }
         ],
-        "repository": "https://github.com/DarinelEscobar/Finance-app"
+        "repository": "https://github.com/DarinelEscobar/Finance-app",
+        "date_source": "git"
       },
       {
         "name": "FitLog",
-        "Project_Overview": "Personal workout application for structured routines, in-session set logging, exercise progress and local backup import/export.",
-        "description": "Personal workout application for structured routines, in-session set logging, exercise progress and local backup import/export.",
+        "Project_Overview": "A personal workout app built around routines and on-device training records. It supports active-session logging, exercise history and local backups.",
+        "description": "Personal workout tracking: routines, active sessions and progress.",
         "role": "Personal project developer",
         "technologies": {
           "Stack": [
@@ -158,12 +158,11 @@
           "Developed local persistence, ZIP/XLSX backup flows and session-summary interfaces."
         ],
         "achievements": [
-          "Created a personal training app centered on on-device records and backups.",
-          "Iterated on workout UX and delivered versioned Android builds."
+          "Produced Android builds with local training records and backup flows."
         ],
         "client": "Personal",
         "quick_view": {
-          "summary": "Personal workout application for structured routines, in-session set logging, exercise progress and local backup import/export.",
+          "summary": "Personal workout tracking: routines, active sessions and progress.",
           "impact_label": "Workout tracking",
           "stack_highlights": [
             "Flutter",
@@ -175,20 +174,21 @@
           {
             "type": "image",
             "url": "assets/images/FitLog/routines-library.webp",
-            "description": "Routine library — Android emulator demo"
+            "description": "Routine library with fictional workouts, Android demo."
           },
           {
             "type": "image",
             "url": "assets/images/FitLog/active-workout-session.webp",
-            "description": "Active workout — Android emulator demo"
+            "description": "Active workout with fictional set data, Android demo."
           },
           {
             "type": "image",
             "url": "assets/images/FitLog/performance-dashboard.webp",
-            "description": "Performance dashboard — Android emulator demo"
+            "description": "Performance dashboard with fictional progress data, Android demo."
           }
         ],
-        "repository": "https://github.com/DarinelEscobar/fit_log"
+        "repository": "https://github.com/DarinelEscobar/fit_log",
+        "date_source": "git"
       }
     ]
   }

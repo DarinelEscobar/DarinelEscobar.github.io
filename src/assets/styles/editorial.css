@@ -62,7 +62,7 @@ body { font-family: Lato, sans-serif; }
 .detail-intro p:not(.section-label), .detail-body p, .detail-body li { line-height: 1.7; }
 .detail-links { display: flex; gap: 1.5rem; flex-wrap: wrap; margin-top: 1.5rem; }
 .detail-links a { display: inline-flex; align-items: center; gap: .5rem; border-bottom: 1px solid var(--copper); padding-bottom: .4rem; }
-.detail-figure img { width: 100%; max-height: 80vh; object-fit: contain; background: #dedbd1; }
+.detail-figure img, .detail-figure video { width: 100%; max-height: 80vh; object-fit: contain; background: #dedbd1; }
 .detail-figure figcaption { display: flex; align-items: center; justify-content: space-between; gap: 1rem; color: var(--muted); font-size: .8rem; }
 .gallery-controls { display: flex; align-items: center; gap: .5rem; white-space: nowrap; }
 .detail-body { display: grid; grid-template-columns: 2fr 1fr; gap: 8vw; margin-top: 6rem; }

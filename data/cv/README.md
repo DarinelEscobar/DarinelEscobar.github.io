@@ -2,6 +2,8 @@
 
 La versión predeterminada editable está en `source/`: `main.tex` genera el CV en español y `main-en.tex` el de inglés. Sus secciones están en `source/uploads/cv_es.tex` y `cv_en.tex`. Se conserva el formato del archivo recibido. Los proyectos Lavafy y EZTICKET se basan en `data/experience.json`; Lavafy no tiene fechas en esa fuente, por lo que no se afirma cuándo se realizó.
 
+El borrador general actualizado se exportó en `output/pdf/cv-general-2026.pdf`. Incluye FREX Club, EcoBrush, Resident Check, TuxVentas, IMCHISSA, EZTICKET, COEPES y Lavafy; sus descripciones y periodos provienen de `data/experience.json`. Las fechas se muestran por mes y año. Los PDF ya generados son instantáneas y deben regenerarse después de editar el contenido.
+
 Ambos idiomas reúnen la experiencia y los proyectos en una sola sección. `source/main-soltero.tex` es la variante en español que añade el estado civil al encabezado y comparte el contenido de `uploads/cv_es.tex` con la versión general; su PDF es `output/pdf/main-soltero.pdf`. El PDF `cv-actualizado-es.pdf` es la instantánea anterior a esta reorganización.
 
 `original/prism-projects-2026-10-30.zip` es el archivo recibido sin modificar y `original/extracted/` contiene su extracción. Incluye un archivo de conversación: revisa su contenido antes de compartirlo o publicarlo. El banco `source/uploads/informacion.tex` proviene del original y contiene ejemplos; no se incluye en el CV generado.
