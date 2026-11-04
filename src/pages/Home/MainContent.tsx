@@ -1,26 +1,33 @@
-import { Link } from "react-router-dom";
-import { ArrowDownRight, ArrowUpRight } from "lucide-react";
-import portrait from "@/assets/images/me.webp";
-import { usePortfolioContent } from "@/lib/portfolioContent";
+import React from "react";
+import img from "../../assets/images/me.webp";
+import { useResumeContent } from "@/lib/portfolioContent";
 
-export default function MainContent() {
-  const { language, resume } = usePortfolioContent();
-  const es = language === "es";
-  return <section className="hero editorial-wrap">
-    <div className="hero-copy">
-      <p className="hero-intro">{resume.personal_info.rol} <span> / </span> México</p>
-      <h1>{es ? <>Ideas que se convierten en <em>experiencias digitales.</em></> : <>Ideas shaped into <em>digital experiences.</em></>}</h1>
-      <p className="hero-description">{es ? "Soy Darinel Escobar. Desarrollo productos digitales y soluciones full-stack para desafíos reales." : "I’m Darinel Escobar. I build digital products and full-stack solutions for real-world challenges."}</p>
-      <div className="hero-actions">
-        <Link className="editorial-button" to="/Project">{es ? "Ver proyectos" : "View projects"} <ArrowUpRight size={17} /></Link>
-        <Link className="text-link" to="/Contact">{es ? "Hablemos" : "Let’s talk"} <ArrowUpRight size={17} /></Link>
+const MainContent: React.FC = () => {
+  const {
+    personal_info: { short_name },
+  } = useResumeContent();
+
+  return (
+    <section className="flex flex-col justify-center md:justify-between items-center bg-whi w-screen min-h-[100dvh] text-dar gap-4 md:gap-0">
+      <div className="flex flex-none md:flex-grow justify-center items-center">
+        <img
+          src={img}
+          alt={short_name}
+          width="200"
+          height="300"
+          className="shadow-lg rounded-md w-[200px] h-[300px] object-cover"
+          fetchPriority="high"
+          decoding="async"
+        />
       </div>
-    </div>
-    <div className="hero-visual">
-      <div className="portrait-frame"><img src={portrait} alt={resume.personal_info.short_name} fetchPriority="high" /></div>
-      <div className="portrait-caption"><span>Darinel Escobar</span><span>{es ? "Ingeniería y diseño digital" : "Engineering & digital design"}</span></div>
-      <span className="hero-mark" aria-hidden="true">DE</span>
-    </div>
-    <div className="hero-bottom"><span>{es ? "Portafolio seleccionado" : "Selected portfolio"}</span><button type="button" onClick={() => document.getElementById("work")?.scrollIntoView()}>{es ? "Explorar" : "Explore"} <ArrowDownRight size={16} /></button></div>
-  </section>;
-}
+
+      <div className="flex justify-center items-center px-4 pb-4 md:pb-8 w-full">
+        <h1 className="custom-title font-cor text-dar text-4xl tracking-wide">
+          {short_name}
+        </h1>
+      </div>
+    </section>
+  );
+};
+
+export default MainContent;

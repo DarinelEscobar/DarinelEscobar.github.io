@@ -46,6 +46,8 @@ const HeroSection: React.FC<HeroSectionProps> = ({ project }) => {
   const {
     ui: { projects },
   } = usePortfolioContent();
+  const heroMedia = project.media[0];
+  const heroImage = heroMedia?.type === "video" ? heroMedia.poster : heroMedia?.url;
 
   return (
     <motion.section
@@ -108,10 +110,10 @@ const HeroSection: React.FC<HeroSectionProps> = ({ project }) => {
           whileHover={{ scale: 1.02, rotateZ: 0.5 }}
         >
           <div className="shadow-2xl border border-5whi dark:border-5dar rounded-xl overflow-hidden">
-            {project.media && project.media.length > 0 ? (
+            {heroImage ? (
               <motion.img
-                src={getAssetImage(project.media[0].url)}
-                alt={project.media[0].description || projects.multimediaMaterialLabel}
+                src={getAssetImage(heroImage)}
+                alt={heroMedia?.description || projects.multimediaMaterialLabel}
                 width={800}
                 height={500}
                 className="object-cover group-hover:scale-105 transition-transform duration-300"

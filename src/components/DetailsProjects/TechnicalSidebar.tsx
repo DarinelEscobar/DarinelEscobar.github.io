@@ -7,7 +7,7 @@ import type { ProjectData } from "@/content/portfolio/types";
 import { usePortfolioContent } from "@/lib/portfolioContent";
 
 interface TechnicalSidebarProps {
-  project: Pick<ProjectData, "start_date" | "end_date" | "client" | "team_size" | "role" | "technologies">;
+  project: Pick<ProjectData, "start_date" | "end_date" | "date_source" | "client" | "team_size" | "role" | "technologies">;
 }
 
 // Variantes para contenedor principal
@@ -105,6 +105,7 @@ const calculateDuration = (
 const TechnicalSidebar: React.FC<TechnicalSidebarProps> = ({ project }) => {
   const {
     ui: { locale, projects },
+    language,
   } = usePortfolioContent();
   const duration = project.start_date && project.end_date
     ? calculateDuration(project.start_date, project.end_date, locale.duration, {
@@ -115,6 +116,11 @@ const TechnicalSidebar: React.FC<TechnicalSidebarProps> = ({ project }) => {
         andLabel: projects.andLabel,
       })
     : null;
+  const dateRange = [project.start_date, project.end_date].filter(Boolean).join(" — ");
+  const timelineValue = project.date_source === "git" ? dateRange : duration;
+  const timelineLabel = project.date_source === "git"
+    ? (language === "es" ? "Actividad documentada en Git" : "Documented Git activity")
+    : projects.durationLabel;
 
   return (
     <motion.div
@@ -150,12 +156,12 @@ const TechnicalSidebar: React.FC<TechnicalSidebarProps> = ({ project }) => {
               </motion.div>
             )}
 
-            {duration && (
+            {timelineValue && (
               <motion.div className="flex items-center gap-4" variants={sidebarItem}>
                 <Calendar className="w-6 h-6 text-blue-500" />
                 <div>
-                  <p className="text-5dar text-sm">{projects.durationLabel}</p>
-                  <p className="font-rob font-medium text-lg">{duration}</p>
+                  <p className="text-5dar text-sm">{timelineLabel}</p>
+                  <p className="font-rob font-medium text-lg">{timelineValue}</p>
                 </div>
               </motion.div>
             )}

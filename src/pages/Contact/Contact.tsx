@@ -1,6 +1,16 @@
-import Header from "@/components/Header/Header";
-import ContactMe from "@/components/ContactMe/ContactMe";
+// src/pages/Home/Contact.tsx
+import React from 'react';
+import Header from '@/components/Header/Header';
+import ContactMe from '@/components/ContactMe/ContactMe';
 
-export default function Contact() {
-  return <main className="portfolio-page"><Header /><ContactMe page /></main>;
-}
+const Contact: React.FC = () => {
+  return (
+   <main className="relative bg-whi  scroll-smooth text-dar">
+  <Header />
+  <ContactMe />
+</main>
+
+  );
+};
+
+export default Contact;

@@ -3,10 +3,6 @@ import type { ProjectData } from "@/content/portfolio/types";
 export type ProjectsLayoutMode = "section" | "page";
 export type ProjectsSourceFilterMode = "all" | "experience";
 
-export function selectFeaturedProjects(projects: ProjectData[], names: string[]): ProjectData[] {
-  return names.flatMap((name) => projects.filter((project) => project.name === name));
-}
-
 export function getProjectYear(project: ProjectData): string {
   const dateCandidate = project.end_date ?? project.start_date;
 

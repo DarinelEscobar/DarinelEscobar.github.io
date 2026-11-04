@@ -1,39 +1,179 @@
-import { useEffect, useRef, useState } from "react";
-import { X, ArrowUpRight, ArrowLeft, ArrowRight } from "lucide-react";
-import { getAssetImage } from "@/lib/assetImages";
-import { usePortfolioContent } from "@/lib/portfolioContent";
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import { X } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
 import type { ProjectData } from "@/content/portfolio/types";
+import HeroSection from "./HeroSection";
+import ProjectDetails from "./ProjectDetails";
+import TechnicalSidebar from "./TechnicalSidebar";
+import MediaGallery from "./MediaGallery";
+import ScrollIndicator from "./ScrollIndicator";
+import { usePortfolioContent } from "@/lib/portfolioContent";
 
-export default function DetailsProjects({ project, onClose }: { project: ProjectData; onClose: () => void }) {
-  const dialog = useRef<HTMLDialogElement>(null);
-  const [imageIndex, setImageIndex] = useState(0);
-  const { language } = usePortfolioContent();
-  const es = language === "es";
-  useEffect(() => {
-    const element = dialog.current;
-    element?.showModal();
-    return () => element?.close();
-  }, []);
-  const image = project.media[imageIndex];
-  const isVideo = image?.type === "video";
-  const imageUrl = image ? (isVideo ? `${import.meta.env.BASE_URL}${image.url}` : getAssetImage(image.url)) : "";
-  return <dialog ref={dialog} className="project-dialog" aria-labelledby="project-dialog-title" onCancel={event => { event.preventDefault(); onClose(); }}>
-    <div className="detail-bar"><span>{es ? "Proyecto" : "Project"} / {project.client || project.role}</span><button autoFocus onClick={onClose} aria-label={es ? "Cerrar detalle" : "Close details"}><X size={22} /></button></div>
-    <div className="detail-content">
-      <div className="detail-intro"><div><p className="section-label">{project.role}</p><h2 id="project-dialog-title">{project.name}</h2></div><div><p>{project.quick_view?.summary || project.description}</p><div className="detail-links">{project.url && <a href={project.url} target="_blank" rel="noreferrer">{es ? "Visitar proyecto" : "Visit project"} <ArrowUpRight size={16} /></a>}{project.repository && <a href={project.repository} target="_blank" rel="noreferrer">{es ? "Ver repositorio" : "View repository"} <ArrowUpRight size={16} /></a>}</div></div></div>
-      {imageUrl && <figure className="detail-figure">
-        {isVideo ? <video key={image.url} controls playsInline preload="none" poster={image.poster ? getAssetImage(image.poster) : undefined} aria-label={image.description || project.name}>
-          <source src={imageUrl} type="video/mp4" />
-          {image.captions && <track kind="captions" src={`${import.meta.env.BASE_URL}${image.captions}`} srcLang="es" label="Español" default={es} />}
-          {image.subtitles && <track kind="subtitles" src={`${import.meta.env.BASE_URL}${image.subtitles}`} srcLang="en" label="English" default={!es} />}
-          <a href={imageUrl}>{es ? "Abrir video" : "Open video"}</a>
-        </video> : <img src={imageUrl} alt={image.description || project.name} />}
-        <figcaption><span>{image.description}</span>{project.media.length > 1 && <div className="gallery-controls"><button onClick={() => setImageIndex((imageIndex + project.media.length - 1) % project.media.length)} aria-label={es ? "Imagen anterior" : "Previous image"}><ArrowLeft size={18} /></button><span>{imageIndex + 1} / {project.media.length}</span><button onClick={() => setImageIndex((imageIndex + 1) % project.media.length)} aria-label={es ? "Imagen siguiente" : "Next image"}><ArrowRight size={18} /></button></div>}</figcaption>
-      </figure>}
-      <div className="detail-body"><div><p className="section-label">{es ? "El proyecto" : "The project"}</p><h3>{es ? "Contexto y contribución" : "Context & contribution"}</h3><p>{project.Project_Overview || project.description}</p>
-        {project.responsibilities.length > 0 && <><h4>{es ? "Responsabilidades" : "Responsibilities"}</h4><ul>{project.responsibilities.map(item => <li key={item}>{item}</li>)}</ul></>}
-        {project.achievements.length > 0 && <><h4>{es ? "Resultados" : "Outcomes"}</h4><ul>{project.achievements.map(item => <li key={item}>{item}</li>)}</ul></>}</div>
-        <aside><p className="section-label">{es ? "Detalles" : "Details"}</p>{project.client && <p><strong>{es ? "Cliente" : "Client"}</strong><br />{project.client}</p>}<p><strong>{es ? "Rol" : "Role"}</strong><br />{project.role}</p>{project.start_date && <p><strong>{project.date_source === "git" ? (es ? "Actividad documentada en Git" : "Documented Git activity") : (es ? "Periodo" : "Period")}</strong><br />{project.start_date}{project.end_date ? ` — ${project.end_date}` : ""}</p>}{project.technologies && <p><strong>Stack</strong><br />{Object.values(project.technologies).flat().join(" · ")}</p>}</aside></div>
-    </div>
-  </dialog>;
+interface DetailsProjectsProps {
+  projects: ProjectData[];
+  projectIndex: number;
+  onClose: () => void;
 }
+
+const modalVariants = {
+  hidden: { opacity: 0, scale: 0.85 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 0.5, ease: "easeOut" },
+  },
+};
+
+const DetailsProjects: React.FC<DetailsProjectsProps> = ({
+  projects,
+  projectIndex,
+  onClose,
+}) => {
+  const dialogRef = useRef<HTMLDialogElement | null>(null);
+  const scrollContainerRef = useRef<HTMLDivElement | null>(null);
+  const contentRef = useRef<HTMLDivElement | null>(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [showScrollHint, setShowScrollHint] = useState(false);
+  const { language } = usePortfolioContent();
+
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    dialog?.showModal();
+    return () => dialog?.close();
+  }, []);
+
+  const updateScrollHint = useCallback(() => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+
+    const overflowDistance = container.scrollHeight - container.clientHeight;
+    const hasOverflow = overflowDistance > 32;
+    const hasMoreBelow = overflowDistance - container.scrollTop > 32;
+    const shouldShowHint = hasOverflow && container.scrollTop < 220 && hasMoreBelow;
+
+    setShowScrollHint((previousValue) =>
+      previousValue === shouldShowHint ? previousValue : shouldShowHint
+    );
+  }, []);
+
+  const handleScrollHintClick = () => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+
+    container.scrollTo({
+      top: Math.min(
+        container.scrollTop + Math.max(container.clientHeight * 0.65, 320),
+        container.scrollHeight
+      ),
+      behavior: "smooth",
+    });
+  };
+
+  useEffect(() => {
+    const container = scrollContainerRef.current;
+    const content = contentRef.current;
+    if (!container) return;
+
+    updateScrollHint();
+
+    const handleScroll = () => updateScrollHint();
+    const frameId = window.requestAnimationFrame(updateScrollHint);
+    const resizeObserver =
+      typeof ResizeObserver !== "undefined"
+        ? new ResizeObserver(() => updateScrollHint())
+        : null;
+
+    container.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", updateScrollHint);
+    resizeObserver?.observe(container);
+
+    if (content) {
+      resizeObserver?.observe(content);
+    }
+
+    return () => {
+      window.cancelAnimationFrame(frameId);
+      container.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", updateScrollHint);
+      resizeObserver?.disconnect();
+    };
+  }, [projectIndex, updateScrollHint]);
+
+  useEffect(() => {
+    setCurrentImageIndex(0);
+  }, [projectIndex]);
+
+  if (projectIndex < 0 || projectIndex >= projects.length) {
+    return null;
+  }
+
+  const project = projects[projectIndex];
+
+  return (
+    <dialog
+      ref={dialogRef}
+      className="fixed inset-0 z-50 m-0 h-dvh max-h-none w-screen max-w-none overflow-hidden border-0 bg-transparent p-0"
+      aria-label={`${language === "es" ? "Proyecto" : "Project"}: ${project.name}`}
+      onCancel={(event) => {
+        event.preventDefault();
+        onClose();
+      }}
+    >
+      <div ref={scrollContainerRef} className="h-full w-full overflow-y-auto bg-black/70 overscroll-contain">
+       <motion.div
+        ref={contentRef}
+        className="min-h-full w-full"
+        variants={modalVariants}
+        initial="hidden"
+        animate="visible"
+       >
+        <button
+          type="button"
+          autoFocus
+          onClick={onClose}
+          aria-label={language === "es" ? "Cerrar detalle del proyecto" : "Close project details"}
+          className="fixed right-4 top-4 z-50 rounded-full border border-black/5 bg-white/90 p-2 text-dar shadow-lg shadow-black/[0.15] transition-colors hover:bg-white dark:border-white/10 dark:bg-gray-800/[0.85] dark:shadow-black/50 dark:hover:bg-gray-700"
+        >
+          <X className="h-5 w-5" />
+        </button>
+
+        <div className="min-h-screen bg-whi text-dar">
+          <HeroSection project={project} />
+
+          <section className="px-4 py-24">
+            <div className="container mx-auto grid gap-12 lg:grid-cols-3">
+              <ProjectDetails
+                project={{
+                  ...project,
+                  responsibilities: project.responsibilities || [],
+                  achievements: project.achievements || [],
+                }}
+              />
+              <TechnicalSidebar project={project} />
+            </div>
+          </section>
+
+          {project.media && project.media.length > 0 && (
+            <MediaGallery
+              media={project.media}
+              currentImageIndex={currentImageIndex}
+              setCurrentImageIndex={setCurrentImageIndex}
+            />
+          )}
+        </div>
+       </motion.div>
+
+      <AnimatePresence>
+        {showScrollHint && (
+          <ScrollIndicator
+            containerRef={scrollContainerRef}
+            onClick={handleScrollHintClick}
+          />
+        )}
+      </AnimatePresence>
+      </div>
+    </dialog>
+  );
+};
+
+export default DetailsProjects;

@@ -12,11 +12,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useSwipeable } from "react-swipeable";
 import { useHotkeys } from "react-hotkeys-hook";
 import { usePortfolioContent } from "@/lib/portfolioContent";
+import type { ProjectMedia } from "@/content/portfolio/types";
 
-interface MediaItem {
-  url: string;
-  description?: string;
-}
+type MediaItem = ProjectMedia;
 
 interface MediaGalleryProps {
   media: MediaItem[];
@@ -64,6 +62,7 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({
 }) => {
   const {
     ui: { projects },
+    language,
   } = usePortfolioContent();
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -72,6 +71,7 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({
     height: number;
   } | null>(null);
   const [containerRef, setContainerRef] = useState<HTMLDivElement | null>(null);
+  const currentMedia = media[currentImageIndex];
 
   const calculateImagePosition = useCallback(() => {
     if (!containerRef || !imageDimensions) return {};
@@ -122,8 +122,15 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({
   }, [isFullscreen]);
 
   useEffect(() => {
+    setImageDimensions(null);
+    if (!currentMedia || currentMedia.type === "video") {
+      setIsLoading(false);
+      return;
+    }
+
+    setIsLoading(true);
     const img = new Image();
-    img.src = getAssetImage(media[currentImageIndex].url);
+    img.src = getAssetImage(currentMedia.url);
     img.onload = () => {
       setIsLoading(false);
       setImageDimensions({ width: img.width, height: img.height });
@@ -132,7 +139,7 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({
       setIsLoading(false);
       setImageDimensions(null);
     };
-  }, [currentImageIndex, media]);
+  }, [currentMedia]);
 
   const toggleFullscreen = () => {
     setIsFullscreen((currentValue) => !currentValue);
@@ -177,25 +184,34 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({
                   </div>
                 )}
 
-                <img
-                  src={getAssetImage(media[currentImageIndex].url)}
-                  alt={media[currentImageIndex].description || projects.multimediaMaterialLabel}
-                  {...(media[currentImageIndex].url.includes("fav-400.webp")
-                    ? {
-                        width: 383,
-                        height: 295,
-                        loading: "lazy",
-                        decoding: "async",
-                      }
-                    : {})}
-                  className={`transition-opacity duration-300 ${
-                    isLoading ? "opacity-0" : "opacity-100"
-                  }`}
-                  style={{
-                    ...calculateImagePosition(),
-                    objectFit: "contain",
-                  }}
-                />
+                {currentMedia?.type === "video" ? (
+                  <video
+                    key={currentMedia.url}
+                    controls
+                    playsInline
+                    preload="none"
+                    poster={currentMedia.poster ? getAssetImage(currentMedia.poster) : undefined}
+                    aria-label={currentMedia.description || projects.multimediaMaterialLabel}
+                    className="max-h-[80vh] w-full object-contain"
+                    style={{ maxHeight: isFullscreen ? "90vh" : "80vh" }}
+                    onLoadedData={() => setIsLoading(false)}
+                  >
+                    <source src={`${import.meta.env.BASE_URL}${currentMedia.url}`} type="video/mp4" />
+                    {currentMedia.captions && <track kind="captions" src={`${import.meta.env.BASE_URL}${currentMedia.captions}`} srcLang="es" label="Español" default={language === "es"} />}
+                    {currentMedia.subtitles && <track kind="subtitles" src={`${import.meta.env.BASE_URL}${currentMedia.subtitles}`} srcLang="en" label="English" default={language === "en"} />}
+                    <a href={`${import.meta.env.BASE_URL}${currentMedia.url}`}>{language === "es" ? "Abrir video" : "Open video"}</a>
+                  </video>
+                ) : currentMedia ? (
+                  <img
+                    src={getAssetImage(currentMedia.url)}
+                    alt={currentMedia.description || projects.multimediaMaterialLabel}
+                    {...(currentMedia.url.includes("fav-400.webp")
+                      ? { width: 383, height: 295, loading: "lazy", decoding: "async" }
+                      : {})}
+                    className={`transition-opacity duration-300 ${isLoading ? "opacity-0" : "opacity-100"}`}
+                    style={{ ...calculateImagePosition(), objectFit: "contain" }}
+                  />
+                ) : null}
 
                 <div className="pointer-events-none absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/70 to-transparent px-6 pb-4 pt-16">
                   <p className="text-lg font-medium text-white/90 drop-shadow-lg">
@@ -212,6 +228,10 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({
 
             <div className="absolute right-4 top-4 z-10 flex gap-2">
               <Button
+                type="button"
+                aria-label={isFullscreen
+                  ? language === "es" ? "Salir de pantalla completa" : "Exit fullscreen"
+                  : language === "es" ? "Ver en pantalla completa" : "View fullscreen"}
                 variant="ghost"
                 size="sm"
                 className="bg-black/30 text-white/90 backdrop-blur-sm hover:bg-black/40 hover:text-white"
@@ -255,7 +275,10 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({
             <div className="flex gap-1.5">
               {media.map((_, index) => (
                 <button
+                  type="button"
                   key={index}
+                  aria-label={`${projects.multimediaMaterialLabel} ${index + 1}`}
+                  aria-current={index === currentImageIndex ? "true" : undefined}
                   onClick={() => setCurrentImageIndex(index)}
                   className={`h-2.5 w-2.5 rounded-full transition-all ${
                     index === currentImageIndex
@@ -276,35 +299,45 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({
           viewport={{ once: false, amount: 0.2 }}
         >
           {media.map((mediaItem, index) => (
-            <motion.div
+            <motion.button
               key={index}
+              type="button"
+              aria-pressed={index === currentImageIndex}
+              aria-label={mediaItem.description || `${projects.multimediaMaterialLabel} ${index + 1}`}
               className={`relative cursor-pointer overflow-hidden rounded-lg border-2 transition-all duration-300 ${
                 index === currentImageIndex
                   ? "z-10 scale-105 border-blue-500"
                   : "border-transparent hover:border-blue-300"
-              }`}
+              } w-full p-0 text-left`}
               variants={thumbnailItem}
               whileHover={{ scale: 1.05, rotateZ: 0.5 }}
               onClick={() => setCurrentImageIndex(index)}
             >
               <div className="relative aspect-square bg-gray-100 dark:bg-gray-900">
-                <img
-                  src={getAssetImage(mediaItem.url)}
-                  alt={mediaItem.description || `${projects.multimediaMaterialLabel} ${index + 1}`}
-                  className="absolute inset-0 h-full w-full object-cover"
-                />
+                {mediaItem.type === "video" ? (
+                  mediaItem.poster ? <img src={getAssetImage(mediaItem.poster)} alt="" className="absolute inset-0 h-full w-full object-cover" /> :
+                    <span className="absolute inset-0 flex items-center justify-center">{language === "es" ? "Video" : "Video"}</span>
+                ) : (
+                  <img
+                    src={getAssetImage(mediaItem.url)}
+                    alt=""
+                    className="absolute inset-0 h-full w-full object-cover"
+                  />
+                )}
                 {index === currentImageIndex && (
                   <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px]" />
                 )}
               </div>
-            </motion.div>
+            </motion.button>
           ))}
         </motion.div>
       </div>
 
       {isFullscreen && (
         <button
+          type="button"
           className="absolute right-6 top-6 z-50 text-white/90 hover:text-white"
+          aria-label={language === "es" ? "Salir de pantalla completa" : "Exit fullscreen"}
           onClick={toggleFullscreen}
         >
           <Minimize className="h-8 w-8" />

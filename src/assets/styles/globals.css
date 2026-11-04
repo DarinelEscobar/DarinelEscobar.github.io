@@ -173,3 +173,18 @@ html, body {
   overflow: hidden;
   text-align: center;
 }
+
+:focus-visible {
+  outline: 3px solid #b96743;
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+}
