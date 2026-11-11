@@ -11,11 +11,10 @@ interface ProjectDetailsProps {
 
 // Variantes globales para el contenedor principal
 const detailsVariants = {
-  hidden: { opacity: 0, rotateX: 15, scale: 0.9 },
+  hidden: { opacity: 0, y: 12 },
   visible: {
     opacity: 1,
-    rotateX: 0,
-    scale: 1,
+    y: 0,
     transition: {
       duration: 0.6,
       type: "spring",
@@ -105,10 +104,9 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({ project }) => {
               <motion.div
                 key={index}
                 variants={cardItem}
-                whileHover={{ scale: 1.03, rotateZ: 1 }}
               >
                 <Card
-                  className="hover:shadow-md border border-5dar dark:border-5dar/30 dark:bg-white/5 transition-shadow duration-300"
+                  className="border border-5dar dark:border-5dar/30 dark:bg-white/5 transition-shadow duration-300"
                 >
                   <CardContent className="flex flex-col gap-4 p-6">
                     <div className="flex items-start gap-3">
@@ -153,7 +151,6 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({ project }) => {
               <motion.div
                 key={index}
                 variants={cardItem}
-                whileHover={{ scale: 1.03, rotateZ: 1 }}
               >
                 <Card
                   className="bg-gradient-to-r from-whi/5 to-transparent hover:shadow-md border border-5whi dark:border-5dar/30 border-blue-500/50 border-l-4 transition-shadow duration-300 dark:bg-white/5"

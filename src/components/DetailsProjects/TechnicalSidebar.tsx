@@ -12,11 +12,10 @@ interface TechnicalSidebarProps {
 
 // Variantes para contenedor principal
 const sidebarVariants = {
-  hidden: { opacity: 0, rotateX: 15, scale: 0.9 },
+  hidden: { opacity: 0, y: 12 },
   visible: {
     opacity: 1,
-    rotateX: 0,
-    scale: 1,
+    y: 0,
     transition: {
       duration: 0.6,
       ease: "easeOut",
@@ -42,10 +41,8 @@ const sidebarItem = {
 
 // Para animar cada badge
 const badgeItem = {
-  hidden: { scale: 0.8, rotateY: 90, opacity: 0 },
+  hidden: { opacity: 0 },
   visible: {
-    scale: 1,
-    rotateY: 0,
     opacity: 1,
     transition: { type: "spring", damping: 12, stiffness: 120 },
   },
@@ -203,7 +200,7 @@ const TechnicalSidebar: React.FC<TechnicalSidebarProps> = ({ project }) => {
               >
                 {projects.technologyStackLabel}
               </motion.h4>
-              <motion.div className="flex flex-wrap gap-3" variants={sidebarItem}>
+              <motion.div className="space-y-4 border-t border-black/10 pt-4 dark:border-white/10" variants={sidebarItem}>
                 {Object.entries(project.technologies).map(
                   ([category, techs]: [string, string[]]) => (
                     <div key={category} className="space-y-2">
@@ -215,7 +212,6 @@ const TechnicalSidebar: React.FC<TechnicalSidebarProps> = ({ project }) => {
                           <motion.div
                             key={tech}
                             variants={badgeItem}
-                            whileHover={{ rotateY: 180, scale: 1.1 }}
                           >
                             <Badge
                               variant="outline"

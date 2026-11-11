@@ -92,7 +92,7 @@ function ProjectHeaderMeta({
     <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
       <ProjectIdentityTag project={project} copy={copy} />
 
-      <p className="font-rob text-[11px] uppercase tracking-[0.22em] text-black/45 dark:text-white/45">
+      <p className="font-rob text-[11px] uppercase tracking-[0.16em] text-black/60 dark:text-white/65">
         {project.role}
       </p>
 
@@ -121,7 +121,7 @@ function DesktopProjectsTable({
   return (
     <div className="hidden md:block">
       <div className="overflow-hidden rounded-[2rem] border border-black/12 bg-[rgba(247,244,238,0.78)] shadow-[0_24px_60px_rgba(15,23,42,0.08)] backdrop-blur-md dark:border-white/10 dark:bg-[rgba(22,22,22,0.75)] dark:shadow-[0_30px_70px_rgba(0,0,0,0.3)]">
-        <div className="sticky top-0 z-20 bg-[rgba(242,238,230,0.95)] font-rob text-[11px] uppercase tracking-[0.22em] text-black/45 backdrop-blur-md dark:bg-[rgba(20,20,20,0.94)] dark:text-white/45">
+        <div className="sticky top-0 z-20 bg-[rgba(242,238,230,0.95)] font-rob text-[11px] uppercase tracking-[0.16em] text-black/60 backdrop-blur-md dark:bg-[rgba(20,20,20,0.94)] dark:text-white/65">
           <div className="grid grid-cols-[144px_minmax(0,1fr)_220px]">
             <div
               className="relative z-10 flex min-h-[56px] items-end border-b border-r border-black/10 bg-[rgba(242,238,230,0.98)] px-4 py-3 dark:border-white/10 dark:bg-[rgba(20,20,20,0.98)]"
@@ -193,7 +193,7 @@ function DesktopProjectsTable({
                           <ProjectHeaderMeta project={project} copy={copy} dateLabel={dateLabel} />
                           <button
                             type="button"
-                            className="inline-flex items-center gap-2 font-rob text-[11px] uppercase tracking-[0.18em] text-black/55 transition-colors hover:text-dar dark:text-white/55 dark:hover:text-white"
+                            className="inline-flex items-center gap-2 font-rob text-[11px] uppercase tracking-[0.12em] text-black/70 transition-colors hover:text-dar dark:text-white/70 dark:hover:text-white"
                             onClick={() => onOpenProject(projectIndex)}
                           >
                             {copy.openProjectDetailsLabel}

@@ -1,349 +1,122 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import { ChevronLeft, ChevronRight, Expand, Minimize, ZoomIn, ZoomOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import {
-  ChevronLeft,
-  ChevronRight,
-  Expand,
-  Minimize,
-  Loader2,
-} from "lucide-react";
 import { getAssetImage } from "./utils";
-import { motion, AnimatePresence } from "framer-motion";
-import { useSwipeable } from "react-swipeable";
 import { useHotkeys } from "react-hotkeys-hook";
+import { useSwipeable } from "react-swipeable";
 import { usePortfolioContent } from "@/lib/portfolioContent";
 import type { ProjectMedia } from "@/content/portfolio/types";
 
-type MediaItem = ProjectMedia;
-
 interface MediaGalleryProps {
-  media: MediaItem[];
+  media: ProjectMedia[];
   currentImageIndex: number;
   setCurrentImageIndex: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const galleryVariants = {
-  hidden: { opacity: 0, y: 50, scale: 0.9 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: { duration: 0.6, delay: 0.1, ease: "easeOut" },
-  },
-};
-
-const thumbnailsContainer = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.08,
-    },
-  },
-};
-
-const thumbnailItem = {
-  hidden: { y: 20, opacity: 0, scale: 0.9 },
-  visible: {
-    y: 0,
-    opacity: 1,
-    scale: 1,
-    transition: {
-      type: "spring",
-      stiffness: 120,
-      damping: 14,
-    },
-  },
-};
-
-const MediaGallery: React.FC<MediaGalleryProps> = ({
-  media,
-  currentImageIndex,
-  setCurrentImageIndex,
-}) => {
-  const {
-    ui: { projects },
-    language,
-  } = usePortfolioContent();
+const MediaGallery: React.FC<MediaGalleryProps> = ({ media, currentImageIndex, setCurrentImageIndex }) => {
+  const { ui: { projects }, language } = usePortfolioContent();
   const [isFullscreen, setIsFullscreen] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-  const [imageDimensions, setImageDimensions] = useState<{
-    width: number;
-    height: number;
-  } | null>(null);
-  const [containerRef, setContainerRef] = useState<HTMLDivElement | null>(null);
+  const [isZoomed, setIsZoomed] = useState(false);
+  const expandRef = useRef<HTMLButtonElement>(null);
+  const closeRef = useRef<HTMLButtonElement>(null);
   const currentMedia = media[currentImageIndex];
-
-  const calculateImagePosition = useCallback(() => {
-    if (!containerRef || !imageDimensions) return {};
-    const aspectRatio = imageDimensions.width / imageDimensions.height;
-    if (aspectRatio > 1) {
-      return {
-        width: "100%",
-        height: "auto",
-        maxHeight: "100%",
-      };
-    }
-    return {
-      width: "auto",
-      height: "100%",
-      maxWidth: "100%",
-    };
-  }, [containerRef, imageDimensions]);
-
-  const nextImage = useCallback(() => {
-    setIsLoading(true);
-    setCurrentImageIndex((currentImageIndex + 1) % media.length);
-  }, [currentImageIndex, media.length, setCurrentImageIndex]);
-
-  const prevImage = useCallback(() => {
-    setIsLoading(true);
-    setCurrentImageIndex(
-      (currentImageIndex - 1 + media.length) % media.length
-    );
-  }, [currentImageIndex, media.length, setCurrentImageIndex]);
-
-  const handlers = useSwipeable({
-    onSwipedLeft: nextImage,
-    onSwipedRight: prevImage,
-    trackMouse: true,
-    delta: 50,
-  });
-
+  const nextImage = useCallback(() => setCurrentImageIndex((index) => (index + 1) % media.length), [media.length, setCurrentImageIndex]);
+  const prevImage = useCallback(() => setCurrentImageIndex((index) => (index - 1 + media.length) % media.length), [media.length, setCurrentImageIndex]);
+  const handlers = useSwipeable({ onSwipedLeft: nextImage, onSwipedRight: prevImage, delta: 50 });
   useHotkeys("left", prevImage);
   useHotkeys("right", nextImage);
-  useHotkeys("esc", () => setIsFullscreen(false));
 
+  useEffect(() => { setIsZoomed(false); }, [currentImageIndex]);
   useEffect(() => {
-    document.body.style.overflow = isFullscreen ? "hidden" : "";
-
-    return () => {
-      document.body.style.overflow = "";
+    if (!isFullscreen) return;
+    closeRef.current?.focus();
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        setIsFullscreen(false);
+        expandRef.current?.focus();
+      }
     };
+    window.addEventListener("keydown", onKeyDown, true);
+    return () => window.removeEventListener("keydown", onKeyDown, true);
   }, [isFullscreen]);
 
-  useEffect(() => {
-    setImageDimensions(null);
-    if (!currentMedia || currentMedia.type === "video") {
-      setIsLoading(false);
-      return;
-    }
-
-    setIsLoading(true);
-    const img = new Image();
-    img.src = getAssetImage(currentMedia.url);
-    img.onload = () => {
-      setIsLoading(false);
-      setImageDimensions({ width: img.width, height: img.height });
-    };
-    img.onerror = () => {
-      setIsLoading(false);
-      setImageDimensions(null);
-    };
-  }, [currentMedia]);
-
-  const toggleFullscreen = () => {
-    setIsFullscreen((currentValue) => !currentValue);
+  const closeFullscreen = () => {
+    setIsFullscreen(false);
+    setIsZoomed(false);
+    expandRef.current?.focus();
   };
 
-  return (
-    <motion.section
-      className={`${
-        isFullscreen
-          ? "fixed inset-0 z-50 bg-black/95 backdrop-blur-lg"
-          : "bg-transparent relative"
-      }`}
-      variants={galleryVariants}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: false, amount: 0.1 }}
-    >
-      <div className="space-y-6 mx-auto container">
-        <h2 className="mb-8 text-center text-3xl font-bold text-gray-800 dark:text-gray-100">
-          {projects.multimediaMaterialLabel}
-        </h2>
-
-        <div className="group relative mx-auto max-w-6xl" {...handlers}>
-          <div
-            ref={setContainerRef}
-            className={`relative flex items-center justify-center overflow-hidden rounded-xl border border-gray-300 bg-gray-100 shadow-xl dark:border-gray-600/50 dark:bg-gray-900 ${
-              isFullscreen ? "h-[90vh] w-[95vw]" : "max-h-[80vh]"
-            }`}
-          >
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={currentImageIndex}
-                initial={{ opacity: 0, scale: 0.98 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 1.02 }}
-                transition={{ duration: 0.3 }}
-                className="relative flex h-full w-full items-center justify-center"
-              >
-                {isLoading && (
-                  <div className="absolute inset-0 flex items-center justify-center bg-gray-100 dark:bg-gray-900">
-                    <Loader2 className="h-12 w-12 animate-spin text-blue-500" />
-                  </div>
-                )}
-
-                {currentMedia?.type === "video" ? (
-                  <video
-                    key={currentMedia.url}
-                    controls
-                    playsInline
-                    preload="none"
-                    poster={currentMedia.poster ? getAssetImage(currentMedia.poster) : undefined}
-                    aria-label={currentMedia.description || projects.multimediaMaterialLabel}
-                    className="max-h-[80vh] w-full object-contain"
-                    style={{ maxHeight: isFullscreen ? "90vh" : "80vh" }}
-                    onLoadedData={() => setIsLoading(false)}
-                  >
-                    <source src={`${import.meta.env.BASE_URL}${currentMedia.url}`} type="video/mp4" />
-                    {currentMedia.captions && <track kind="captions" src={`${import.meta.env.BASE_URL}${currentMedia.captions}`} srcLang="es" label="Español" default={language === "es"} />}
-                    {currentMedia.subtitles && <track kind="subtitles" src={`${import.meta.env.BASE_URL}${currentMedia.subtitles}`} srcLang="en" label="English" default={language === "en"} />}
-                    <a href={`${import.meta.env.BASE_URL}${currentMedia.url}`}>{language === "es" ? "Abrir video" : "Open video"}</a>
-                  </video>
-                ) : currentMedia ? (
-                  <img
-                    src={getAssetImage(currentMedia.url)}
-                    alt={currentMedia.description || projects.multimediaMaterialLabel}
-                    {...(currentMedia.url.includes("fav-400.webp")
-                      ? { width: 383, height: 295, loading: "lazy", decoding: "async" }
-                      : {})}
-                    className={`transition-opacity duration-300 ${isLoading ? "opacity-0" : "opacity-100"}`}
-                    style={{ ...calculateImagePosition(), objectFit: "contain" }}
-                  />
-                ) : null}
-
-                <div className="pointer-events-none absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/70 to-transparent px-6 pb-4 pt-16">
-                  <p className="text-lg font-medium text-white/90 drop-shadow-lg">
-                    {media[currentImageIndex].description}
-                  </p>
-                  {imageDimensions && (
-                    <p className="mt-1 text-sm text-white/60">
-                      {imageDimensions.width}x{imageDimensions.height}px
-                    </p>
-                  )}
-                </div>
-              </motion.div>
-            </AnimatePresence>
-
-            <div className="absolute right-4 top-4 z-10 flex gap-2">
-              <Button
-                type="button"
-                aria-label={isFullscreen
-                  ? language === "es" ? "Salir de pantalla completa" : "Exit fullscreen"
-                  : language === "es" ? "Ver en pantalla completa" : "View fullscreen"}
-                variant="ghost"
-                size="sm"
-                className="bg-black/30 text-white/90 backdrop-blur-sm hover:bg-black/40 hover:text-white"
-                onClick={toggleFullscreen}
-              >
-                {isFullscreen ? (
-                  <Minimize className="h-5 w-5" />
-                ) : (
-                  <Expand className="h-5 w-5" />
-                )}
-              </Button>
-            </div>
-          </div>
-
-          <div className="absolute top-1/2 z-10 flex w-full -translate-y-1/2 justify-between px-4">
-            <Button
-              aria-label={projects.previousImageLabel}
-              variant="ghost"
-              size="lg"
-              className="rounded-full bg-white/90 p-3 text-dar shadow-xl shadow-black/[0.15] transition-transform hover:scale-105 hover:bg-white dark:bg-gray-900/90 dark:shadow-black/50 dark:hover:bg-gray-900"
-              onClick={prevImage}
-            >
-              <ChevronLeft className="h-8 w-8" />
-            </Button>
-            <Button
-              aria-label={projects.nextImageLabel}
-              variant="ghost"
-              size="lg"
-              className="rounded-full bg-white/90 p-3 text-dar shadow-xl shadow-black/[0.15] transition-transform hover:scale-105 hover:bg-white dark:bg-gray-900/90 dark:shadow-black/50 dark:hover:bg-gray-900"
-              onClick={nextImage}
-            >
-              <ChevronRight className="h-8 w-8" />
-            </Button>
-          </div>
-
-          <div className="absolute bottom-4 left-1/2 z-10 flex -translate-x-1/2 items-center gap-3 rounded-full bg-black/30 px-4 py-2 backdrop-blur-sm dark:bg-white/20">
-            <span className="text-sm font-medium text-white">
-              {currentImageIndex + 1} / {media.length}
-            </span>
-            <div className="h-4 w-px bg-white/30" />
-            <div className="flex gap-1.5">
-              {media.map((_, index) => (
-                <button
-                  type="button"
-                  key={index}
-                  aria-label={`${projects.multimediaMaterialLabel} ${index + 1}`}
-                  aria-current={index === currentImageIndex ? "true" : undefined}
-                  onClick={() => setCurrentImageIndex(index)}
-                  className={`h-2.5 w-2.5 rounded-full transition-all ${
-                    index === currentImageIndex
-                      ? "scale-125 bg-blue-500"
-                      : "scale-100 bg-white/50 hover:bg-white/70"
-                  }`}
-                />
-              ))}
-            </div>
-          </div>
-        </div>
-
-        <motion.div
-          className="grid grid-cols-2 gap-3 px-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5"
-          variants={thumbnailsContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: false, amount: 0.2 }}
-        >
-          {media.map((mediaItem, index) => (
-            <motion.button
-              key={index}
-              type="button"
-              aria-pressed={index === currentImageIndex}
-              aria-label={mediaItem.description || `${projects.multimediaMaterialLabel} ${index + 1}`}
-              className={`relative cursor-pointer overflow-hidden rounded-lg border-2 transition-all duration-300 ${
-                index === currentImageIndex
-                  ? "z-10 scale-105 border-blue-500"
-                  : "border-transparent hover:border-blue-300"
-              } w-full p-0 text-left`}
-              variants={thumbnailItem}
-              whileHover={{ scale: 1.05, rotateZ: 0.5 }}
-              onClick={() => setCurrentImageIndex(index)}
-            >
-              <div className="relative aspect-square bg-gray-100 dark:bg-gray-900">
-                {mediaItem.type === "video" ? (
-                  mediaItem.poster ? <img src={getAssetImage(mediaItem.poster)} alt="" className="absolute inset-0 h-full w-full object-cover" /> :
-                    <span className="absolute inset-0 flex items-center justify-center">{language === "es" ? "Video" : "Video"}</span>
-                ) : (
-                  <img
-                    src={getAssetImage(mediaItem.url)}
-                    alt=""
-                    className="absolute inset-0 h-full w-full object-cover"
-                  />
-                )}
-                {index === currentImageIndex && (
-                  <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px]" />
-                )}
-              </div>
-            </motion.button>
-          ))}
-        </motion.div>
-      </div>
-
-      {isFullscreen && (
-        <button
-          type="button"
-          className="absolute right-6 top-6 z-50 text-white/90 hover:text-white"
-          aria-label={language === "es" ? "Salir de pantalla completa" : "Exit fullscreen"}
-          onClick={toggleFullscreen}
-        >
-          <Minimize className="h-8 w-8" />
-        </button>
+  const mediaContent = (fullscreen: boolean) => (
+    <div className={fullscreen ? "flex min-h-0 flex-1 overflow-auto rounded-lg bg-gray-100 dark:bg-gray-900" : "flex h-[min(60vh,34rem)] items-center justify-center overflow-hidden rounded-lg bg-gray-100 dark:bg-gray-900"}>
+      {currentMedia?.type === "video" ? (
+        <video key={currentMedia.url} controls playsInline preload="none"
+          poster={currentMedia.poster ? getAssetImage(currentMedia.poster) : undefined}
+          aria-label={currentMedia.description || projects.multimediaMaterialLabel}
+          className="m-auto max-h-full max-w-full object-contain">
+          <source src={`${import.meta.env.BASE_URL}${currentMedia.url}`} type="video/mp4" />
+          {currentMedia.captions && <track kind="captions" src={`${import.meta.env.BASE_URL}${currentMedia.captions}`} srcLang="es" label="Español" default={language === "es"} />}
+          {currentMedia.subtitles && <track kind="subtitles" src={`${import.meta.env.BASE_URL}${currentMedia.subtitles}`} srcLang="en" label="English" default={language === "en"} />}
+          <a href={`${import.meta.env.BASE_URL}${currentMedia.url}`}>{language === "es" ? "Abrir video" : "Open video"}</a>
+        </video>
+      ) : currentMedia && (
+        <img src={getAssetImage(currentMedia.url)}
+          alt={currentMedia.description || projects.multimediaMaterialLabel}
+          className={fullscreen && isZoomed ? "m-auto h-auto w-auto max-w-none" : "m-auto h-full w-full object-contain"}
+          style={fullscreen && isZoomed ? { height: "200%", minHeight: "200%" } : undefined}
+        />
       )}
-    </motion.section>
+    </div>
+  );
+
+  const navigation = (
+    <div className="flex items-center justify-center gap-4">
+      <Button type="button" variant="outline" size="sm" aria-label={projects.previousImageLabel} onClick={prevImage}><ChevronLeft className="h-5 w-5" /></Button>
+      <span className="min-w-12 text-center text-sm font-medium">{currentImageIndex + 1} / {media.length}</span>
+      <Button type="button" variant="outline" size="sm" aria-label={projects.nextImageLabel} onClick={nextImage}><ChevronRight className="h-5 w-5" /></Button>
+    </div>
+  );
+
+  return (
+    <section className="container relative mx-auto px-4 pb-20">
+      <h2 className="mb-8 text-center font-cor text-3xl font-bold text-dar">{projects.multimediaMaterialLabel}</h2>
+      <div className="mx-auto max-w-6xl rounded-xl border border-black/10 bg-white/50 p-3 shadow-lg dark:border-white/10 dark:bg-white/5 sm:p-4">
+        <div {...handlers}>{mediaContent(false)}</div>
+        <div className="mt-4 flex flex-wrap items-center justify-between gap-4">
+          <p className="min-w-0 flex-1 text-sm leading-relaxed text-dar">{currentMedia?.description}</p>
+          {navigation}
+          <Button ref={expandRef} type="button" variant="outline" size="sm"
+            aria-label={language === "es" ? "Ampliar contenido" : "Expand media"}
+            onClick={() => setIsFullscreen(true)}><Expand className="h-5 w-5" /></Button>
+        </div>
+      </div>
+      <div className="mx-auto mt-5 grid max-w-6xl grid-cols-3 gap-3 sm:grid-cols-4 lg:grid-cols-5">
+        {media.map((item, index) => (
+          <button key={index} type="button" aria-pressed={index === currentImageIndex}
+            aria-label={item.description || `${projects.multimediaMaterialLabel} ${index + 1}`}
+            onClick={() => setCurrentImageIndex(index)}
+            className={`aspect-[4/3] overflow-hidden rounded-lg border-2 bg-gray-100 transition-colors dark:bg-gray-900 ${index === currentImageIndex ? "border-blue-500" : "border-transparent hover:border-blue-300"}`}>
+            {item.type === "video" && !item.poster ? <span>Video</span> :
+              <img src={getAssetImage(item.type === "video" ? item.poster! : item.url)} alt="" loading="lazy" className="h-full w-full object-contain" />}
+          </button>
+        ))}
+      </div>
+      {isFullscreen && (
+        <div role="dialog" aria-modal="true" aria-label={projects.multimediaMaterialLabel}
+          className="fixed inset-0 z-[100] flex flex-col gap-3 bg-black/95 p-3 text-white sm:p-5">
+          <div className="flex items-center justify-between gap-3">
+            <p className="min-w-0 truncate text-sm">{currentMedia?.description}</p>
+            <div className="flex shrink-0 gap-2">
+              {currentMedia?.type !== "video" && <Button type="button" variant="outline" size="sm" aria-label={isZoomed ? (language === "es" ? "Reducir imagen" : "Zoom out") : (language === "es" ? "Acercar imagen" : "Zoom in")} aria-pressed={isZoomed} onClick={() => setIsZoomed(!isZoomed)}>{isZoomed ? <ZoomOut className="h-5 w-5" /> : <ZoomIn className="h-5 w-5" />}</Button>}
+              <Button ref={closeRef} type="button" variant="outline" size="sm" aria-label={language === "es" ? "Cerrar vista ampliada" : "Close expanded view"} onClick={closeFullscreen}><Minimize className="h-5 w-5" /></Button>
+            </div>
+          </div>
+          {mediaContent(true)}
+          {navigation}
+        </div>
+      )}
+    </section>
   );
 };
 

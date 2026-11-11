@@ -68,7 +68,7 @@ const Skills: React.FC = () => {
       {/* Decorative background elements can remain but subtle or removed if they clash with original BG. Keeping them off for "fit in single screen" cleanness or subtle.
           The user asked to keep original hierarchy, usually implies the main gradient. I will omit the 'blobs' to strictly follow 'original color hierarchy' and 'professional' look. */}
 
-      <div className="z-10 flex w-full max-w-[1280px] flex-col md:max-h-[calc(100dvh-5rem)]">
+      <div className="z-10 flex w-full max-w-[1280px] flex-col">
         {/* Compact Header */}
         <div className="mb-5 flex flex-col items-center justify-between gap-3 md:mb-6 md:flex-row">
           <div className="text-center md:text-left">
@@ -106,7 +106,7 @@ const Skills: React.FC = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="grid auto-rows-min grid-cols-1 content-start gap-4 overflow-y-auto pr-1 md:grid-cols-3 xl:grid-cols-4"
+          className="grid auto-rows-min grid-cols-1 content-start gap-4 md:grid-cols-3 xl:grid-cols-4"
         >
           {orderedSections.map((section, index) => {
             const spanClass = getSpanClass(section.id)
@@ -115,10 +115,9 @@ const Skills: React.FC = () => {
               <motion.div
                 key={index}
                 variants={itemVariants}
-                whileHover={{ y: -4, scale: 1.01 }}
                 className={cn(
                   // Adjusted card background to match original hierarchy: more opaque to stand out against the gradient, or glass
-                  "group relative overflow-hidden rounded-[1.7rem] border border-gray-200/50 bg-white/60 p-4 shadow-sm backdrop-blur-md transition-all duration-300 hover:shadow-lg dark:border-gray-700/50 dark:bg-gray-800/60 dark:shadow-black/30 md:p-4",
+                  "group relative overflow-hidden rounded-[1.7rem] border border-gray-200/50 bg-white/60 p-4 shadow-sm backdrop-blur-md transition-all duration-300 hover:shadow-md dark:border-gray-700/50 dark:bg-gray-800/60 dark:shadow-black/30 md:p-4",
                   spanClass
                 )}
               >
@@ -150,7 +149,7 @@ const Skills: React.FC = () => {
                       <Badge
                         key={skillIndex}
                         variant="secondary"
-                        className="flex items-center gap-1.5 border border-gray-100 bg-white/50 px-2.5 py-1 text-xs font-normal text-gray-600 transition-colors hover:border-gray-300 hover:bg-white dark:border-gray-700 dark:bg-gray-700/50 dark:text-gray-300 dark:hover:border-gray-600"
+                        className="flex items-center gap-1.5 border border-gray-100 bg-white/50 px-2.5 py-1 text-sm font-normal text-gray-700 transition-colors hover:border-gray-300 hover:bg-white dark:border-gray-700 dark:bg-gray-700/50 dark:text-gray-300 dark:hover:border-gray-600"
                       >
                          {/* Very small icon */}
                         {React.cloneElement(skill.icon as React.ReactElement, {

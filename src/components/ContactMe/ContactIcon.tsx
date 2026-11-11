@@ -43,7 +43,7 @@ const ContactIcon: React.FC<ContactIconProps> = ({ Icon, href, position, ariaLab
         gridRowStart: position.row,
       }}
       className="flex items-center justify-center border border-5bla"
-      whileHover={{ scale: 1.15, rotate: 2 }}
+      whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.9 }}
       transition={{ duration: 0.2 }}
     >

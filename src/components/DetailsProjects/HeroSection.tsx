@@ -51,7 +51,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ project }) => {
 
   return (
     <motion.section
-      className="flex items-center px-4 py-24 min-h-[50vh]"
+      className="flex min-h-[50vh] items-center px-4 py-16 sm:py-20"
       variants={containerVariants}
       initial="hidden"
       whileInView="visible"
@@ -107,16 +107,15 @@ const HeroSection: React.FC<HeroSectionProps> = ({ project }) => {
         <motion.div
           className="group relative w-full lg:w-1/2"
           variants={childVariants}
-          whileHover={{ scale: 1.02, rotateZ: 0.5 }}
         >
-          <div className="shadow-2xl border border-5whi dark:border-5dar rounded-xl overflow-hidden">
+          <div className="flex h-[min(55vh,32rem)] items-center justify-center overflow-hidden rounded-xl border border-5whi bg-white/50 shadow-xl dark:border-5dar dark:bg-black/10">
             {heroImage ? (
               <motion.img
                 src={getAssetImage(heroImage)}
                 alt={heroMedia?.description || projects.multimediaMaterialLabel}
                 width={800}
                 height={500}
-                className="object-cover group-hover:scale-105 transition-transform duration-300"
+                className="h-full w-full object-contain"
               />
             ) : (
               <div className="flex justify-center items-center bg-5whi dark:bg-5dar w-full h-full">

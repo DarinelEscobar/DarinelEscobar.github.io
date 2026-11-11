@@ -89,7 +89,6 @@ const AboutMe: React.FC = () => {
             {/* Cada línea del título animada por separado */}
             <motion.div
               variants={variantsLine}
-              whileHover={{ scale: 1.1, color: "#2563EB" }}
             >
               {home.about.line1Prefix}
               <span className="text-blue-500 dark:text-blue-400">{home.about.line1Highlight}</span>
@@ -98,10 +97,6 @@ const AboutMe: React.FC = () => {
 
             <motion.div
               variants={variantsLine}
-              whileHover={{
-                x: -5,
-                textShadow: "2px 2px 5px rgba(59, 130, 246, 0.5)",
-              }}
             >
               {home.about.line2Prefix}
               <span className="text-gray-600 dark:text-gray-300">
@@ -112,7 +107,6 @@ const AboutMe: React.FC = () => {
 
             <motion.div
               variants={variantsLine}
-              whileHover={{ x: 5, scale: 1.05, rotate: 1 }}
             >
               {home.about.line3Prefix}
               <span className="text-gray-600 dark:text-gray-300">
@@ -123,10 +117,6 @@ const AboutMe: React.FC = () => {
 
             <motion.div
               variants={variantsLine}
-              whileHover={{
-                y: -5,
-                textShadow: "2px 2px 5px rgba(0, 0, 0, 0.2)",
-              }}
             >
               {home.about.line4Prefix}
               <span className="text-gray-600 dark:text-gray-300">
@@ -154,10 +144,6 @@ const AboutMe: React.FC = () => {
                 initial={{ backgroundSize: "0% 2px" }}
                 animate={{ backgroundSize: "100% 2px" }}
                 transition={{ delay: 0.8, duration: 0.8 }}
-                whileHover={{
-                  scale: 1.1,
-                  textShadow: "2px 2px 5px rgba(37, 99, 235, 0.5)",
-                }}
                 className="hover-effect text-cool-gray-600 dark:text-gray-300
                            font-semibold bg-gradient-to-r from-cool-gray-600 to-cool-gray-600
                            dark:from-gray-400 dark:to-gray-400
@@ -170,11 +156,6 @@ const AboutMe: React.FC = () => {
                 initial={{ backgroundSize: "0% 2px" }}
                 animate={{ backgroundSize: "100% 2px" }}
                 transition={{ delay: 1.0, duration: 0.8 }}
-                whileHover={{
-                  scale: 1.1,
-                  rotate: 1,
-                  textShadow: "2px 2px 5px rgba(37, 99, 235, 0.5)",
-                }}
                 className="hover-effect text-cool-gray-600 dark:text-gray-300
                            font-semibold bg-gradient-to-r from-cool-gray-600 to-cool-gray-600
                            dark:from-gray-400 dark:to-gray-400

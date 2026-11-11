@@ -25,11 +25,7 @@ const letterVariants = {
     x: 0,
     transition: { type: "spring", stiffness: 140, damping: 8 },
   },
-  hover: {
-    scale: 1.1,
-    rotate: [0, 3, -3, 0],
-    transition: { duration: 0.8, repeat: Infinity },
-  },
+
 };
 
 const ContactGrid: React.FC = () => {
@@ -63,7 +59,6 @@ const ContactGrid: React.FC = () => {
             variants={letterVariants}
             initial="hidden"
             animate={inView ? "show" : "hidden"}
-            whileHover="hover"
             ref={ref}
             className="flex items-center justify-center"
             style={{
@@ -79,7 +74,6 @@ const ContactGrid: React.FC = () => {
             variants={letterVariants}
             initial="hidden"
             animate={inView ? "show" : "hidden"}
-            whileHover="hover"
             ref={ref}
             className="flex items-center justify-center"
             style={{
