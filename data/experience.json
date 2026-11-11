@@ -73,7 +73,7 @@
             "poster": "assets/images/FREX/video-poster.webp",
             "captions": "videos/frex-club-fidelizacion.es.vtt",
             "subtitles": "videos/frex-club-fidelizacion.en.vtt",
-            "description": "Fidelización a tu manera — conceptual promotional film, October 2026. Spanish narration with English subtitles; fictional businesses illustrate independent loyalty programs."
+            "description": "FREX Club — V6.2 promotional film with the V6 voice, October 2026. Spanish narration with English subtitles; illustrative interfaces explain rewards, points and staff-assisted redemption."
           },
           {
             "type": "image",
@@ -140,11 +140,9 @@
           "Develop features for students to set reminders for important dates such as enrollment deadlines and exams."
         ],
         "achievements": [
-          "Significant reduction in system response time thanks to pagination.",
-          "Improved accessibility of educational information for students in Chiapas.",
-          "Successful implementation of a centralized platform, reducing the time students spend searching for educational opportunities.",
-          "Increased student awareness of the range of educational options available in Chiapas.",
-          "Development of an intuitive system allowing students to compare educational programs side-by-side, aiding informed decision-making."
+          "Implemented pagination for the educational-program catalog.",
+          "Brought university and program information together in a searchable public platform.",
+          "Added tools for comparing programs and downloading academic information."
         ],
         "client": "Coepes Chiapas",
         "team_size": 6,
@@ -216,9 +214,7 @@
           "An intuitive interface that facilitated interaction for non-technical users.",
           "A platform allowing institutions to easily manage their academic programs, promotions, and updates, reducing reliance on manual processes.",
           "A system that allows administrators to generate reports displaying the number of visits to each university within the system.",
-          "A centralized system for managing data to ensure information is current, contributing to the reduction of academic lag in Chiapas.",
-          "Enhanced institutional engagement, with universities actively updating and maintaining their program information.",
-          "A significant increase in platform adoption and student usage, improving access to education-related data."
+          "Centralized institution and program data for administrative updates."
         ],
         "client": "Coepes Chiapas",
         "team_size": 6,
@@ -605,9 +601,9 @@
         ],
         "achievements": [
           "Successfully launched a production-ready platform serving multiple user roles with distinct permissions.",
-          "Reduced appointment booking time by 40% through an intuitive UI and optimized backend logic.",
-          "Achieved 95% test coverage for critical payment and scheduling pathways using PestPHP.",
-          "Implemented a scalable database schema capable of handling high-volume concurrent bookings."
+          "Implemented appointment scheduling and payment workflows.",
+          "Supported separate interfaces for customers, managers and washers.",
+          "Designed a database schema for bookings, customers and staff operations."
         ],
         "quick_view": {
           "summary": "Multi-role car wash platform for bookings, staff operations, appointment scheduling, and integrated payments.",
@@ -707,6 +703,11 @@
             "type": "image",
             "url": "assets/images/EcoBrush/eco-quotes.webp",
             "description": "Illustrative quotation: sample cart and totals added to the local screen."
+          },
+          {
+            "type": "image",
+            "url": "assets/images/EcoBrush/contributions.svg",
+            "description": "Diagram of documented catalog, checkout and support contributions; not a product screen."
           }
         ],
         "url": "https://pos.tuxtla.ecobrush.mx/",
@@ -761,6 +762,11 @@
             "type": "image",
             "url": "assets/images/ResidentCheck/contributions.svg",
             "description": "Contribution diagram based on documented changes; not a product screen."
+          },
+          {
+            "type": "image",
+            "url": "assets/images/ResidentCheck/resident-recovery.webp",
+            "description": "Password recovery screen captured locally; no email was sent."
           }
         ],
         "url": "https://residentcheck.com.mx/",
@@ -822,6 +828,11 @@
             "type": "image",
             "url": "assets/images/IMCHISSA/imchissa-cms.webp",
             "description": "CMS home editor in a local demo, using a fictional administrator account."
+          },
+          {
+            "type": "image",
+            "url": "assets/images/IMCHISSA/imchissa-remolques.webp",
+            "description": "Official website: trailers section."
           }
         ],
         "url": "https://imchissa.com/",
@@ -935,6 +946,11 @@
             "type": "image",
             "url": "assets/images/Voldo/voldo-orders.webp",
             "description": "Illustrative quotation screen with a sample equipment record and status."
+          },
+          {
+            "type": "image",
+            "url": "assets/images/Voldo/contributions.svg",
+            "description": "Diagram of documented client-document and sales-order contributions; not a product screen."
           }
         ],
         "url": "https://sistemavoldo.com/",

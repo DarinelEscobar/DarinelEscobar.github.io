@@ -94,7 +94,7 @@ Identidades confirmadas: Darinel Escobar (variantes de mayúsculas), Darinel EG;
 
 ## Capturas y reproducción
 
-La galería contiene 23 recursos por idioma: 20 capturas WebP y tres diagramas SVG localizados en español e inglés. Algunas capturas usan datos ficticios o se modificaron temporalmente en el navegador para ilustrar información; esas imágenes están identificadas en sus descripciones. No demuestran que se haya guardado un archivo, concretado una cotización o ejecutado una transacción.
+Las galerías combinan capturas WebP y diagramas SVG localizados en español e inglés. Algunas capturas usan datos ficticios o se modificaron temporalmente en el navegador para ilustrar información; esas imágenes están identificadas en sus descripciones. No demuestran que se haya guardado un archivo, concretado una cotización o ejecutado una transacción.
 
 | Ficha / carpeta de imágenes | Procedencia y vistas |
 | --- | --- |
@@ -132,7 +132,7 @@ Las capturas web nuevas se tomaron localmente durante las revisiones. Las versio
 
 Las fichas reutilizan el catálogo y las traducciones existentes. Finance App y FitLog tienen source=personal; EcoBrush, Resident Check, IMCHISSA, TuxVentas y Voldo tienen source=experience. No hay cambios de API, tipos públicos ni dependencias del portafolio.
 
-Comprobar con npm run lint, npm run build y node --test tests/portfolio-projects.test.mjs. La revisión de datos debe exigir una ficha por nombre, recursos resolubles y textos/captions en español e inglés. TuxVentas e IMCHISSA tienen cuatro recursos; las demás fichas, tres. Revisar el filtro profesional y los controles de galería a 1440 px y 390 px. No se validó el funcionamiento de módulos privados de producción ni se enviaron solicitudes en sitios oficiales.
+Comprobar con npm run lint, npm run build y node --test tests/portfolio-projects.test.mjs. La revisión de datos debe exigir una ficha por nombre, recursos resolubles y textos/captions en español e inglés. Revisar el filtro profesional y los controles de galería a 1440 px y 390 px. No se validó el funcionamiento de módulos privados de producción ni se enviaron solicitudes en sitios oficiales.
 
 
 ### Resultados de la revisión inicial (antes de los cambios editoriales)
@@ -169,3 +169,10 @@ Comprobar con npm run lint, npm run build y node --test tests/portfolio-projects
 - Los pies de Nivo y FitLog identifican los registros como datos de muestra o ficticios. Las fichas distinguen entregables comprobables de responsabilidades y no presentan la sincronización de EcoBrush como una mejora medida.
 
 - Nivo: se recapturaron movimientos y reporte mensual en inglés con los datos públicos de muestra en un emulador Android de solo lectura. No se importaron registros personales. La portada anterior se conserva.
+
+### Ampliación de galerías y revisión de afirmaciones (2026-11-11)
+
+- EcoBrush y Voldo incluyen diagramas bilingües de sus aportaciones, basados en la evidencia anterior; son gráficos explicativos, no capturas de las aplicaciones.
+- Resident Check recupera la captura local del formulario de contraseña, sin envío de correo. IMCHISSA incorpora la captura ya existente de la sección pública de remolques.
+- Nivo agrega la captura de configuración del README (`docs/screenshots/settings-planning.png`, referencia `5e57add`); FitLog agrega historial y gestión de respaldos de la fixture ficticia `main_demo.dart` (`docs/images/screens/history-overview.png` y `data-management.png`, referencia `2c6565f`). Se convirtieron a WebP sin modificar el contenido visual.
+- Se retiraron de Lavafy los porcentajes de ahorro de tiempo y cobertura que no se pudieron respaldar en esta revisión. También se sustituyeron afirmaciones de adopción y efectos no cuantificados en COEPES, así como afirmaciones de visibilidad del portafolio y productividad de SmartNavbar, por descripciones de funciones. Esto no acredita las demás métricas o resultados históricos que todavía requieran evidencia.

@@ -5,6 +5,8 @@ import { buildProjects, type ProjectTranslation } from "./projectUtils";
 const experienceProjects = experienceSource.experience.projects;
 
 const englishTranslations: Record<string, ProjectTranslation> = {
+  "EcoBrush — POS & CEDIS": { mediaUrls: [undefined, undefined, undefined, "assets/images/EcoBrush/contributions-en.svg"] },
+  "Voldo": { mediaUrls: [undefined, undefined, undefined, "assets/images/Voldo/contributions-en.svg"] },
   "Resident Check": { mediaUrls: [undefined, undefined, "assets/images/ResidentCheck/contributions-en.svg"] },
   "IMCHISSA": { mediaUrls: [undefined, undefined, "assets/images/IMCHISSA/cms-flow-en.svg"] },
   "TuxVentas": { mediaUrls: [undefined, undefined, undefined, "assets/images/TuxVentas/data-model-en.svg"] },
@@ -66,7 +68,7 @@ const spanishTranslations: Record<string, ProjectTranslation> = {
     },
     "mediaDescriptions": [
       "FREX Club conecta la operación del negocio con la billetera nativa del cliente. Datos demostrativos.",
-      "Fidelización a tu manera — video promocional conceptual, octubre de 2026. Narración en español con subtítulos; comercios ficticios ilustran programas independientes.",
+      "FREX Club — video promocional V6.2 con la voz de V6, octubre de 2026. Narración en español con subtítulos; interfaces ilustrativas explican recompensas, puntos y canjes asistidos por el personal.",
       "Una persona, varios comercios: cada tarjeta conserva su marca, saldo y beneficios independientes.",
       "El cliente presenta el QR de su membresía en tienda; el personal identifica la tarjeta para operar el programa. El código público está protegido.",
       "El personal registra una compra de $950 MXN; la regla configurada calcula 95 puntos. Ejemplo demostrativo de operación en caja.",
@@ -99,11 +101,9 @@ const spanishTranslations: Record<string, ProjectTranslation> = {
       "Desarrollar funciones para configurar recordatorios de fechas importantes como inscripciones y examenes.",
     ],
     achievements: [
-      "Reduccion significativa en el tiempo de respuesta del sistema gracias a la paginacion.",
-      "Mejora en la accesibilidad de la informacion educativa para estudiantes de Chiapas.",
-      "Implementacion exitosa de una plataforma centralizada que reduce el tiempo de busqueda de oportunidades educativas.",
-      "Mayor visibilidad para estudiantes sobre la variedad de opciones educativas disponibles en Chiapas.",
-      "Desarrollo de un sistema intuitivo para comparar programas lado a lado y facilitar decisiones informadas.",
+      "Implementación de paginación para el catálogo de programas educativos.",
+      "Información de universidades y programas reunida en una plataforma pública con búsqueda.",
+      "Herramientas para comparar programas y descargar información académica.",
     ],
     quick_view: {
       summary:
@@ -148,9 +148,7 @@ const spanishTranslations: Record<string, ProjectTranslation> = {
       "Interfaz intuitiva que facilito la operacion para usuarios no tecnicos.",
       "Plataforma que permite a las instituciones gestionar sus programas, promociones y actualizaciones con menor dependencia de procesos manuales.",
       "Sistema para generar reportes con el numero de visitas a cada universidad dentro de la plataforma.",
-      "Sistema centralizado para mantener informacion actualizada y contribuir a reducir el rezago academico en Chiapas.",
-      "Mayor participacion institucional, con universidades actualizando activamente la informacion de sus programas.",
-      "Incremento relevante en la adopcion de la plataforma y en el uso por parte de estudiantes.",
+      "Información de instituciones y programas centralizada para su actualización administrativa.",
     ],
     quick_view: {
       summary:
@@ -374,9 +372,9 @@ const spanishTranslations: Record<string, ProjectTranslation> = {
     ],
     achievements: [
       "Lanzamiento exitoso de una plataforma lista para produccion con multiples roles y permisos diferenciados.",
-      "Reduccion del tiempo de reserva en 40% gracias a una UI intuitiva y una logica backend optimizada.",
-      "95% de cobertura en rutas criticas de pagos y agenda mediante PestPHP.",
-      "Implementacion de un esquema de base de datos escalable capaz de soportar reservas concurrentes de alto volumen.",
+      "Implementación de flujos de reserva y pagos.",
+      "Interfaces diferenciadas para clientes, encargados y lavadores.",
+      "Diseño de un esquema de datos para reservas, clientes y operación del personal.",
     ],
     quick_view: {
       summary:
@@ -415,7 +413,8 @@ const spanishTranslations: Record<string, ProjectTranslation> = {
     "mediaDescriptions": [
       "Catálogo con precios de muestra y etiquetas de documentos ilustrativas.",
       "Carrito del POS con artículos y totales de ejemplo, capturado localmente.",
-      "Cotización ilustrativa: carrito y totales añadidos a la pantalla local."
+      "Cotización ilustrativa: carrito y totales añadidos a la pantalla local.",
+      "Diagrama de aportaciones documentadas en catálogo, cobro y soporte; no es una pantalla del producto."
     ]
   },
   "Resident Check": {
@@ -438,7 +437,8 @@ const spanishTranslations: Record<string, ProjectTranslation> = {
     "mediaDescriptions": [
       "Sitio público oficial.",
       "Estado de cuenta con registros residenciales ficticios.",
-      "Diagrama de aportaciones documentadas; no es una pantalla del producto."
+      "Diagrama de aportaciones documentadas; no es una pantalla del producto.",
+      "Pantalla de recuperación de contraseña capturada localmente; no se envió correo."
     ]
   },
   "IMCHISSA": {
@@ -463,7 +463,8 @@ const spanishTranslations: Record<string, ProjectTranslation> = {
       "Sitio oficial: inicio.",
       "Sitio oficial: rampas hidráulicas.",
       "Diagrama conceptual del CMS y el sitio; no es una captura de administración.",
-      "Editor de inicio del CMS en una demo local con cuenta administradora ficticia."
+      "Editor de inicio del CMS en una demo local con cuenta administradora ficticia.",
+      "Sitio oficial: sección de remolques."
     ]
   },
   "TuxVentas": {
@@ -511,7 +512,8 @@ const spanishTranslations: Record<string, ProjectTranslation> = {
     "mediaDescriptions": [
       "Clientes con datos de contacto ficticios.",
       "Captura ilustrativa de documento: nombre de archivo y estado editados para la imagen.",
-      "Cotización ilustrativa con equipo y estado de ejemplo."
+      "Cotización ilustrativa con equipo y estado de ejemplo.",
+      "Diagrama de aportaciones documentadas en documentos de clientes y órdenes; no es una pantalla del producto."
     ]
   },
 };

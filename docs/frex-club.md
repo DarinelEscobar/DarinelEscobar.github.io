@@ -17,7 +17,7 @@ El negocio compra la plataforma para operar su programa de fidelización; sus cl
 - Responsabilidad integral: planificación, requerimientos, arquitectura, desarrollo y documentación.
 - Desarrollo: 10 de junio a 10 de septiembre de 2026, tres meses según confirmación del autor.
 - Las capturas del portafolio se prepararon el 30 de octubre de 2026. Representan una revisión posterior del producto; no prueban una fecha de publicación en tiendas.
-- El video conceptual se produjo el 16 de octubre de 2026 y se incorporó al caso el 31 de octubre. No se presenta como parte de una campaña comercial aprobada.
+- El video conceptual corresponde a la entrega V6.2 del 17 de octubre de 2026, con la voz de V6. Sustituyó a la V4.2 en el portafolio el 11 de noviembre por elección del autor. No se presenta como parte de una campaña comercial aprobada.
 
 ## Fuentes y contenido
 
@@ -37,7 +37,7 @@ La selección principal combina nueve imágenes y un video. Las imágenes de [FR
 | Archivo | Escena |
 | --- | --- |
 | `cover.webp` | Portada web y móvil |
-| `frex-club-fidelizacion.mp4` | Video promocional conceptual «Fidelización a tu manera» |
+| `frex-club-fidelizacion.mp4` | Video promocional conceptual FREX Club V6.2, con la voz de V6 |
 | `mobile-home.webp` | Tarjetas y promociones |
 | `mobile-qr.webp` | Presentación del QR con código protegido |
 | `admin-points.webp` | Compra de $950 MXN y cálculo de 95 puntos |
@@ -51,11 +51,11 @@ Las capturas de alta de cliente, ficha y listado de promociones se conservan com
 
 ### Video seleccionado
 
-[Ver el MP4](../public/videos/frex-club-fidelizacion.mp4): variante F16 V4.2, «Fidelización a tu manera», 41.55 segundos, 1920×1080 a 60 fps, H.264/AAC. Se eligió por su variedad de giros y por explicar con claridad que cada negocio configura un programa independiente.
+[Ver el MP4](../public/videos/frex-club-fidelizacion.mp4): archivo «01 - Frex Club - V6.2 - Voz de V6.mp4», 40.6 segundos, 1920×1080 a 30 fps, H.264/AAC. Elegido por el autor para presentar recompensas configurables, reglas de puntos, operación del personal y consulta del cliente. Se conserva el nombre público del archivo para mantener los enlaces existentes.
 
 Es una pieza conceptual de comunicación para compradores empresariales, con comercios y operaciones ficticios. Utiliza ilustraciones e interfaces diseñadas para el video. Las capturas de la aplicación aportan por separado la evidencia de la interfaz real.
 
-La reproducción se inicia con los controles nativos del navegador, sin autoplay. Incluye una portada y [subtítulos en español](../public/videos/frex-club-fidelizacion.es.vtt) e [inglés](../public/videos/frex-club-fidelizacion.en.vtt), basados en el guion y los tiempos de la locución del proyecto original. El MP4 se conserva sin recodificación.
+La reproducción se inicia con los controles nativos del navegador, sin autoplay. Incluye una portada extraída de la V6.2 y [subtítulos en español](../public/videos/frex-club-fidelizacion.es.vtt) e [inglés](../public/videos/frex-club-fidelizacion.en.vtt), actualizados según el guion, la transcripción final y los tiempos del montaje de esa versión. El MP4 se conserva sin recodificación: SHA-256 `1ab65856756642470cd1ca66668cfb15248184b2079c8a6fd58a204f81847bc9`.
 
 ## Datos demostrativos
 

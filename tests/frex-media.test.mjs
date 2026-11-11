@@ -19,12 +19,12 @@ test('FREX keeps an image cover and an accessible promotional video with matchin
     const text = fs.readFileSync(new URL(`../public/${file}`, import.meta.url), 'utf8');
     assert.ok(text.startsWith('WEBVTT\n'));
     const cues = [...text.matchAll(/(\d{2}:\d{2}:\d{2}\.\d{3}) --> (\d{2}:\d{2}:\d{2}\.\d{3})\n([^\n]+)/gu)];
-    assert.equal(cues.length, 15);
+    assert.equal(cues.length, 9);
     let previousEnd = 0;
     for (const [, start, end, caption] of cues) {
       assert.ok(toSeconds(start) >= previousEnd);
       assert.ok(toSeconds(end) > toSeconds(start));
-      assert.ok(toSeconds(end) <= 41.55);
+      assert.ok(toSeconds(end) <= 40.6);
       assert.ok(caption.trim());
       previousEnd = toSeconds(end);
     }

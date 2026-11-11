@@ -22,7 +22,7 @@ const englishTranslations: Record<string, ProjectTranslation> = {
       "Integrate polished Framer Motion animations to highlight key sections.",
     ],
     achievements: [
-      "Increased the visibility of personal work and received feedback from recruiters.",
+      "Presented personal projects and professional experience in one place.",
       "The modular structure enabled future content updates without friction.",
       "Delivered a fully responsive experience with strong performance on mobile devices.",
     ],
@@ -51,7 +51,7 @@ const englishTranslations: Record<string, ProjectTranslation> = {
       "Optimize performance through DOM observation and dynamic content updates.",
     ],
     achievements: [
-      "Significantly improved productivity for users who rely heavily on ChatGPT.",
+      "Provided shortcuts for organizing and finding prompts within the extension.",
       "Implemented a flexible search system that supports incomplete words and multiple fragments.",
       "Added automatic preference persistence to make continued use smoother.",
     ],
@@ -103,7 +103,8 @@ const spanishTranslations: Record<string, ProjectTranslation> = {
     "mediaDescriptions": [
       "Inicio: panorama financiero con datos de muestra, demo Android.",
       "Movimientos: ingresos y gastos de muestra, demo Android.",
-      "Reportes por categoría: gastos de muestra, demo Android."
+      "Reportes por categoría: gastos de muestra, demo Android.",
+      "Configuración con accesos a presupuestos, metas de ahorro y movimientos recurrentes, demo Android."
     ]
   },
   "FitLog": {
@@ -126,7 +127,9 @@ const spanishTranslations: Record<string, ProjectTranslation> = {
     "mediaDescriptions": [
       "Biblioteca de rutinas con entrenamientos ficticios, demo Android.",
       "Sesión activa con series ficticias, demo Android.",
-      "Panel de rendimiento con datos ficticios, demo Android."
+      "Panel de rendimiento con datos ficticios, demo Android.",
+      "Historial por semana con sesiones ficticias, demo Android.",
+      "Opciones de exportación e importación de respaldos locales, demo Android."
     ]
   },
 };

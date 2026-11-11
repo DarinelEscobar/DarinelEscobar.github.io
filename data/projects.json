@@ -19,7 +19,7 @@
           "Integrar animaciones suaves con Framer Motion para destacar secciones clave."
         ],
         "achievements": [
-          "Incremento en la visibilidad de proyectos personales, recibiendo feedback de reclutadores.",
+          "Presentación centralizada de proyectos personales y experiencia profesional.",
           "La estructura modular permitió realizar futuras actualizaciones de contenido sin complicaciones.",
           "Diseño completamente responsivo con excelente rendimiento en dispositivos móviles."
         ],
@@ -60,7 +60,7 @@
           "Optimizar el rendimiento mediante la observación del DOM y la actualización dinámica del contenido."
         ],
         "achievements": [
-          "Mejoró significativamente la productividad de usuarios que utilizan ChatGPT de forma intensiva.",
+          "Integración de accesos para organizar y encontrar prompts desde la extensión.",
           "Implementación de un sistema de búsqueda flexible que soporta palabras incompletas o múltiples fragmentos.",
           "Nueva funcionalidad de autoguardado de preferencias del usuario, facilitando el uso continuo."
         ],
@@ -131,6 +131,11 @@
             "type": "image",
             "url": "assets/images/Finance-App/reports-category.webp",
             "description": "Category reports: explore sample spending, Android demo."
+          },
+          {
+            "type": "image",
+            "url": "assets/images/Finance-App/settings-planning.webp",
+            "description": "Settings with access to budgeting, savings goals and recurring transactions, Android demo."
           }
         ],
         "repository": "https://github.com/DarinelEscobar/Finance-app",
@@ -185,6 +190,16 @@
             "type": "image",
             "url": "assets/images/FitLog/performance-dashboard.webp",
             "description": "Performance dashboard with fictional progress data, Android demo."
+          },
+          {
+            "type": "image",
+            "url": "assets/images/FitLog/history-overview.webp",
+            "description": "Workout history grouped by week with fictional session data, Android demo."
+          },
+          {
+            "type": "image",
+            "url": "assets/images/FitLog/data-management.webp",
+            "description": "Local backup export and import options, Android demo."
           }
         ],
         "repository": "https://github.com/DarinelEscobar/fit_log",
