@@ -24,7 +24,7 @@ const ScrollIndicator: React.FC<ScrollIndicatorProps> = ({
       aria-label={text}
       onClick={onClick}
       style={{ opacity, y }}
-      className="fixed bottom-6 left-1/2 z-40 flex -translate-x-1/2 flex-col items-center gap-2 text-dar/60 drop-shadow-[0_2px_12px_rgba(255,255,255,0.32)] transition-colors hover:text-dar/85 dark:drop-shadow-[0_2px_16px_rgba(0,0,0,0.78)]"
+      className="fixed bottom-6 left-1/2 z-40 hidden sm:flex -translate-x-1/2 flex-col items-center gap-2 text-dar/60 drop-shadow-[0_2px_12px_rgba(255,255,255,0.32)] transition-colors hover:text-dar/85 dark:drop-shadow-[0_2px_16px_rgba(0,0,0,0.78)]"
     >
       <span className="font-rob text-[11px] uppercase tracking-[0.34em]">
         {text}

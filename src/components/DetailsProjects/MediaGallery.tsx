@@ -19,6 +19,7 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({ media, currentImageIndex, s
   const [isZoomed, setIsZoomed] = useState(false);
   const expandRef = useRef<HTMLButtonElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
+  const fullscreenRef = useRef<HTMLDivElement>(null);
   const currentMedia = media[currentImageIndex];
   const nextImage = useCallback(() => setCurrentImageIndex((index) => (index + 1) % media.length), [media.length, setCurrentImageIndex]);
   const prevImage = useCallback(() => setCurrentImageIndex((index) => (index - 1 + media.length) % media.length), [media.length, setCurrentImageIndex]);
@@ -35,6 +36,7 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({ media, currentImageIndex, s
         event.preventDefault();
         event.stopImmediatePropagation();
         setIsFullscreen(false);
+        setIsZoomed(false);
         expandRef.current?.focus();
       }
     };
@@ -49,7 +51,8 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({ media, currentImageIndex, s
   };
 
   const mediaContent = (fullscreen: boolean) => (
-    <div className={fullscreen ? "flex min-h-0 flex-1 overflow-auto rounded-lg bg-gray-100 dark:bg-gray-900" : "flex h-[min(60vh,34rem)] items-center justify-center overflow-hidden rounded-lg bg-gray-100 dark:bg-gray-900"}>
+    <div tabIndex={fullscreen && isZoomed ? 0 : undefined}
+      className={fullscreen ? "flex min-h-0 flex-1 overflow-auto rounded-lg bg-gray-100 dark:bg-gray-900" : "flex h-[min(60vh,34rem)] items-center justify-center overflow-hidden rounded-lg bg-gray-100 dark:bg-gray-900"}>
       {currentMedia?.type === "video" ? (
         <video key={currentMedia.url} controls playsInline preload="none"
           poster={currentMedia.poster ? getAssetImage(currentMedia.poster) : undefined}
@@ -72,9 +75,9 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({ media, currentImageIndex, s
 
   const navigation = (
     <div className="flex items-center justify-center gap-4">
-      <Button type="button" variant="outline" size="sm" aria-label={projects.previousImageLabel} onClick={prevImage}><ChevronLeft className="h-5 w-5" /></Button>
+      <Button type="button" variant="outline" size="sm" className="bg-white text-gray-900 hover:bg-gray-100 hover:text-gray-900" aria-label={projects.previousImageLabel} onClick={prevImage}><ChevronLeft className="h-5 w-5" /></Button>
       <span className="min-w-12 text-center text-sm font-medium">{currentImageIndex + 1} / {media.length}</span>
-      <Button type="button" variant="outline" size="sm" aria-label={projects.nextImageLabel} onClick={nextImage}><ChevronRight className="h-5 w-5" /></Button>
+      <Button type="button" variant="outline" size="sm" className="bg-white text-gray-900 hover:bg-gray-100 hover:text-gray-900" aria-label={projects.nextImageLabel} onClick={nextImage}><ChevronRight className="h-5 w-5" /></Button>
     </div>
   );
 
@@ -82,11 +85,11 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({ media, currentImageIndex, s
     <section className="container relative mx-auto px-4 pb-20">
       <h2 className="mb-8 text-center font-cor text-3xl font-bold text-dar">{projects.multimediaMaterialLabel}</h2>
       <div className="mx-auto max-w-6xl rounded-xl border border-black/10 bg-white/50 p-3 shadow-lg dark:border-white/10 dark:bg-white/5 sm:p-4">
-        <div {...handlers}>{mediaContent(false)}</div>
+        <div {...handlers}>{isFullscreen ? <div className="h-[min(60vh,34rem)]" /> : mediaContent(false)}</div>
         <div className="mt-4 flex flex-wrap items-center justify-between gap-4">
           <p className="min-w-0 flex-1 text-sm leading-relaxed text-dar">{currentMedia?.description}</p>
           {navigation}
-          <Button ref={expandRef} type="button" variant="outline" size="sm"
+          <Button ref={expandRef} type="button" variant="outline" size="sm" className="bg-white text-gray-900 hover:bg-gray-100 hover:text-gray-900"
             aria-label={language === "es" ? "Ampliar contenido" : "Expand media"}
             onClick={() => setIsFullscreen(true)}><Expand className="h-5 w-5" /></Button>
         </div>
@@ -103,13 +106,22 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({ media, currentImageIndex, s
         ))}
       </div>
       {isFullscreen && (
-        <div role="dialog" aria-modal="true" aria-label={projects.multimediaMaterialLabel}
+        <div ref={fullscreenRef} role="dialog" aria-modal="true" aria-label={projects.multimediaMaterialLabel}
+          onKeyDown={(event) => {
+            if (event.key !== "Tab") return;
+            const controls = fullscreenRef.current?.querySelectorAll<HTMLElement>("button, video[controls], [tabindex='0']");
+            if (!controls?.length) return;
+            const first = controls[0];
+            const last = controls[controls.length - 1];
+            if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+            else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+          }}
           className="fixed inset-0 z-[100] flex flex-col gap-3 bg-black/95 p-3 text-white sm:p-5">
           <div className="flex items-center justify-between gap-3">
             <p className="min-w-0 truncate text-sm">{currentMedia?.description}</p>
             <div className="flex shrink-0 gap-2">
-              {currentMedia?.type !== "video" && <Button type="button" variant="outline" size="sm" aria-label={isZoomed ? (language === "es" ? "Reducir imagen" : "Zoom out") : (language === "es" ? "Acercar imagen" : "Zoom in")} aria-pressed={isZoomed} onClick={() => setIsZoomed(!isZoomed)}>{isZoomed ? <ZoomOut className="h-5 w-5" /> : <ZoomIn className="h-5 w-5" />}</Button>}
-              <Button ref={closeRef} type="button" variant="outline" size="sm" aria-label={language === "es" ? "Cerrar vista ampliada" : "Close expanded view"} onClick={closeFullscreen}><Minimize className="h-5 w-5" /></Button>
+              {currentMedia?.type !== "video" && <Button type="button" variant="outline" size="sm" className="bg-white text-gray-900 hover:bg-gray-100 hover:text-gray-900" aria-label={isZoomed ? (language === "es" ? "Reducir imagen" : "Zoom out") : (language === "es" ? "Acercar imagen" : "Zoom in")} aria-pressed={isZoomed} onClick={() => setIsZoomed(!isZoomed)}>{isZoomed ? <ZoomOut className="h-5 w-5" /> : <ZoomIn className="h-5 w-5" />}</Button>}
+              <Button ref={closeRef} type="button" variant="outline" size="sm" className="bg-white text-gray-900 hover:bg-gray-100 hover:text-gray-900" aria-label={language === "es" ? "Cerrar vista ampliada" : "Close expanded view"} onClick={closeFullscreen}><Minimize className="h-5 w-5" /></Button>
             </div>
           </div>
           {mediaContent(true)}
