@@ -101,6 +101,7 @@ const spanishTranslations: Record<string, ProjectTranslation> = {
       "impact_label": "Finanzas personales"
     },
     "mediaDescriptions": [
+      "Nivo: portada conceptual del portafolio; no es una captura del producto.",
       "Inicio: panorama financiero con datos de muestra, demo Android.",
       "Movimientos: ingresos y gastos de muestra, demo Android.",
       "Reportes por categoría: gastos de muestra, demo Android.",
@@ -125,6 +126,7 @@ const spanishTranslations: Record<string, ProjectTranslation> = {
       "impact_label": "Registro de entrenamiento"
     },
     "mediaDescriptions": [
+      "FitLog: portada conceptual del portafolio; no es una captura del producto.",
       "Biblioteca de rutinas con entrenamientos ficticios, demo Android.",
       "Sesión activa con series ficticias, demo Android.",
       "Panel de rendimiento con datos ficticios, demo Android.",

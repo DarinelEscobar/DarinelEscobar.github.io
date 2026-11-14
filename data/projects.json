@@ -119,6 +119,11 @@
         "media": [
           {
             "type": "image",
+            "url": "assets/images/Finance-App/cover.webp",
+            "description": "Nivo: conceptual portfolio cover, not a product screenshot."
+          },
+          {
+            "type": "image",
             "url": "assets/images/Finance-App/home.webp",
             "description": "Home: a snapshot of personal finances with sample data, Android demo."
           },
@@ -176,6 +181,11 @@
           ]
         },
         "media": [
+          {
+            "type": "image",
+            "url": "assets/images/FitLog/cover.webp",
+            "description": "FitLog: conceptual portfolio cover, not a product screenshot."
+          },
           {
             "type": "image",
             "url": "assets/images/FitLog/routines-library.webp",

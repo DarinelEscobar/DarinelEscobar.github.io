@@ -676,7 +676,7 @@
           "Maintained quotation, warranty and service-document workflows, including corrections to legacy records."
         ],
         "achievements": [
-          "Implemented catalog integration between POS and CEDIS, including product and SKU handling."
+          "Added numeric validation to the POS color-price calculation for cart items."
         ],
         "client": "EcoBrush",
         "quick_view": {
@@ -689,6 +689,11 @@
           ]
         },
         "media": [
+          {
+            "type": "image",
+            "url": "assets/images/EcoBrush/cover.webp",
+            "description": "EcoBrush: conceptual portfolio cover, not a product screenshot."
+          },
           {
             "type": "image",
             "url": "assets/images/EcoBrush/eco-products.webp",
@@ -750,6 +755,11 @@
         "media": [
           {
             "type": "image",
+            "url": "assets/images/ResidentCheck/cover.webp",
+            "description": "Resident Check: conceptual portfolio cover, not a product screenshot."
+          },
+          {
+            "type": "image",
             "url": "assets/images/ResidentCheck/resident-home.webp",
             "description": "Official public website."
           },
@@ -809,6 +819,11 @@
           ]
         },
         "media": [
+          {
+            "type": "image",
+            "url": "assets/images/IMCHISSA/cover.webp",
+            "description": "IMCHISSA: conceptual portfolio cover, not a product screenshot."
+          },
           {
             "type": "image",
             "url": "assets/images/IMCHISSA/imchissa-home.webp",
@@ -876,6 +891,11 @@
         "media": [
           {
             "type": "image",
+            "url": "assets/images/TuxVentas/cover.webp",
+            "description": "TuxVentas: conceptual portfolio cover, not a product screenshot."
+          },
+          {
+            "type": "image",
             "url": "assets/images/TuxVentas/tux-marketplace.webp",
             "description": "Illustrative marketplace catalog with edited sample listings."
           },
@@ -919,7 +939,7 @@
           "Contributed sales-image handling and layout improvements to order-validation screens."
         ],
         "achievements": [
-          "Delivered document-handling changes across the client and sales-order forms."
+          "Added the database migration, model and controller for client documents."
         ],
         "client": "Voldo",
         "quick_view": {
@@ -932,6 +952,11 @@
           ]
         },
         "media": [
+          {
+            "type": "image",
+            "url": "assets/images/Voldo/cover.webp",
+            "description": "Voldo: conceptual portfolio cover, not a product screenshot."
+          },
           {
             "type": "image",
             "url": "assets/images/Voldo/voldo-clients.webp",

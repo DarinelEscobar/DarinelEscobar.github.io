@@ -158,7 +158,7 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({
       viewport={{ once: false, amount: 0.1 }}
     >
       <div className="space-y-6 mx-auto container">
-        <h2 className="mb-8 text-center text-3xl font-bold text-gray-800 dark:text-gray-100">
+        <h2 className={isFullscreen ? "sr-only" : "mb-8 text-center text-3xl font-bold text-gray-800 dark:text-gray-100"}>
           {projects.multimediaMaterialLabel}
         </h2>
 
@@ -166,7 +166,7 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({
           <div
             ref={setContainerRef}
             className={`relative flex items-center justify-center overflow-hidden rounded-xl border border-gray-300 bg-gray-100 shadow-xl dark:border-gray-600/50 dark:bg-gray-900 ${
-              isFullscreen ? "h-[90vh] w-[95vw]" : "max-h-[80vh]"
+              isFullscreen ? "h-[90vh] w-full" : "max-h-[80vh]"
             }`}
           >
             <AnimatePresence mode="wait">
@@ -213,16 +213,13 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({
                   />
                 ) : null}
 
-                <div className="pointer-events-none absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/70 to-transparent px-6 pb-4 pt-16">
-                  <p className="text-lg font-medium text-white/90 drop-shadow-lg">
-                    {media[currentImageIndex].description}
-                  </p>
-                  {imageDimensions && (
-                    <p className="mt-1 text-sm text-white/60">
-                      {imageDimensions.width}x{imageDimensions.height}px
+                {isFullscreen && (
+                  <div className="pointer-events-none absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/70 to-transparent px-6 pb-16 pt-16">
+                    <p className="text-lg font-medium text-white/90 drop-shadow-lg">
+                      {currentMedia?.description}
                     </p>
-                  )}
-                </div>
+                  </div>
+                )}
               </motion.div>
             </AnimatePresence>
 
@@ -291,6 +288,17 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({
           </div>
         </div>
 
+        {!isFullscreen && (
+          <div className="mx-auto max-w-6xl px-4 text-gray-700 dark:text-gray-300">
+            <p className="text-base font-medium">{currentMedia?.description}</p>
+            {imageDimensions && (
+              <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                {imageDimensions.width}x{imageDimensions.height}px
+              </p>
+            )}
+          </div>
+        )}
+
         <motion.div
           className="grid grid-cols-2 gap-3 px-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5"
           variants={thumbnailsContainer}
@@ -321,7 +329,7 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({
                   <img
                     src={getAssetImage(mediaItem.url)}
                     alt=""
-                    className="absolute inset-0 h-full w-full object-cover"
+                    className="absolute inset-0 h-full w-full object-contain"
                   />
                 )}
                 {index === currentImageIndex && (
@@ -333,16 +341,6 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({
         </motion.div>
       </div>
 
-      {isFullscreen && (
-        <button
-          type="button"
-          className="absolute right-6 top-6 z-50 text-white/90 hover:text-white"
-          aria-label={language === "es" ? "Salir de pantalla completa" : "Exit fullscreen"}
-          onClick={toggleFullscreen}
-        >
-          <Minimize className="h-8 w-8" />
-        </button>
-      )}
     </motion.section>
   );
 };
