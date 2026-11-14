@@ -108,14 +108,14 @@ const HeroSection: React.FC<HeroSectionProps> = ({ project }) => {
           className="group relative w-full lg:w-1/2"
           variants={childVariants}
         >
-          <div className="flex h-[min(55vh,32rem)] items-center justify-center overflow-hidden rounded-xl border border-5whi bg-white/50 shadow-xl dark:border-5dar dark:bg-black/10">
+          <div className={`mx-auto flex max-w-full items-center justify-center overflow-hidden rounded-xl border border-5whi bg-white/50 shadow-xl dark:border-5dar dark:bg-black/10 ${heroImage ? "w-fit" : "h-[min(55vh,32rem)] w-full"}`}>
             {heroImage ? (
               <motion.img
                 src={getAssetImage(heroImage)}
                 alt={heroMedia?.description || projects.multimediaMaterialLabel}
                 width={800}
                 height={500}
-                className="h-full w-full object-contain"
+                className="block h-auto w-auto max-h-[min(55vh,32rem)] max-w-full object-contain"
               />
             ) : (
               <div className="flex justify-center items-center bg-5whi dark:bg-5dar w-full h-full">

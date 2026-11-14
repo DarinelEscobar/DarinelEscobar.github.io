@@ -5,11 +5,11 @@ import { buildProjects, type ProjectTranslation } from "./projectUtils";
 const experienceProjects = experienceSource.experience.projects;
 
 const englishTranslations: Record<string, ProjectTranslation> = {
-  "EcoBrush — POS & CEDIS": { mediaUrls: [undefined, undefined, undefined, "assets/images/EcoBrush/contributions-en.svg"] },
-  "Voldo": { mediaUrls: [undefined, undefined, undefined, "assets/images/Voldo/contributions-en.svg"] },
-  "Resident Check": { mediaUrls: [undefined, undefined, "assets/images/ResidentCheck/contributions-en.svg"] },
-  "IMCHISSA": { mediaUrls: [undefined, undefined, "assets/images/IMCHISSA/cms-flow-en.svg"] },
-  "TuxVentas": { mediaUrls: [undefined, undefined, undefined, "assets/images/TuxVentas/data-model-en.svg"] },
+  "EcoBrush — POS & CEDIS": { mediaUrls: [undefined, undefined, undefined, undefined, "assets/images/EcoBrush/contributions-en.svg"] },
+  "Voldo": { mediaUrls: [undefined, undefined, undefined, undefined, "assets/images/Voldo/contributions-en.svg"] },
+  "Resident Check": { mediaUrls: [undefined, undefined, undefined, "assets/images/ResidentCheck/contributions-en.svg"] },
+  "IMCHISSA": { mediaUrls: [undefined, undefined, undefined, "assets/images/IMCHISSA/cms-flow-en.svg"] },
+  "TuxVentas": { mediaUrls: [undefined, undefined, undefined, undefined, "assets/images/TuxVentas/data-model-en.svg"] },
 };
 
 const spanishTranslations: Record<string, ProjectTranslation> = {
@@ -403,7 +403,7 @@ const spanishTranslations: Record<string, ProjectTranslation> = {
       "Di soporte a cotizaciones, garantías y documentos de servicio, con correcciones de registros anteriores."
     ],
     "achievements": [
-      "Implementé la integración del catálogo entre POS y CEDIS, incluido el manejo de productos y SKU."
+      "Agregué validación numérica al cálculo del precio de color de los artículos del carrito POS."
     ],
     "client": "EcoBrush",
     "quick_view": {
@@ -411,6 +411,7 @@ const spanishTranslations: Record<string, ProjectTranslation> = {
       "impact_label": "POS + CEDIS"
     },
     "mediaDescriptions": [
+      "EcoBrush: portada conceptual del portafolio; no es una captura del producto.",
       "Catálogo con precios de muestra y etiquetas de documentos ilustrativas.",
       "Carrito del POS con artículos y totales de ejemplo, capturado localmente.",
       "Cotización ilustrativa: carrito y totales añadidos a la pantalla local.",
@@ -435,6 +436,7 @@ const spanishTranslations: Record<string, ProjectTranslation> = {
       "impact_label": "Soporte y funcionalidades"
     },
     "mediaDescriptions": [
+      "Resident Check: portada conceptual del portafolio; no es una captura del producto.",
       "Sitio público oficial.",
       "Estado de cuenta con registros residenciales ficticios.",
       "Diagrama de aportaciones documentadas; no es una pantalla del producto.",
@@ -460,6 +462,7 @@ const spanishTranslations: Record<string, ProjectTranslation> = {
       "impact_label": "Sitio + CMS"
     },
     "mediaDescriptions": [
+      "IMCHISSA: portada conceptual del portafolio; no es una captura del producto.",
       "Sitio oficial: inicio.",
       "Sitio oficial: rampas hidráulicas.",
       "Diagrama conceptual del CMS y el sitio; no es una captura de administración.",
@@ -486,6 +489,7 @@ const spanishTranslations: Record<string, ProjectTranslation> = {
       "impact_label": "Backend + datos"
     },
     "mediaDescriptions": [
+      "TuxVentas: portada conceptual del portafolio; no es una captura del producto.",
       "Catálogo ilustrativo con anuncios de ejemplo editados.",
       "Detalle de anuncio con descripción y galería ajustadas para la demostración.",
       "Preguntas y respuestas ficticias añadidas a la pantalla local.",
@@ -502,7 +506,7 @@ const spanishTranslations: Record<string, ProjectTranslation> = {
       "Aporté manejo de imágenes de venta y ajustes de diseño en pantallas de validación de pedidos."
     ],
     "achievements": [
-      "Entregué cambios para el manejo de documentos en los formularios de clientes y órdenes de venta."
+      "Agregué la migración, el modelo y el controlador para documentos de clientes."
     ],
     "client": "Voldo",
     "quick_view": {
@@ -510,6 +514,7 @@ const spanishTranslations: Record<string, ProjectTranslation> = {
       "impact_label": "Participación puntual"
     },
     "mediaDescriptions": [
+      "Voldo: portada conceptual del portafolio; no es una captura del producto.",
       "Clientes con datos de contacto ficticios.",
       "Captura ilustrativa de documento: nombre de archivo y estado editados para la imagen.",
       "Cotización ilustrativa con equipo y estado de ejemplo.",

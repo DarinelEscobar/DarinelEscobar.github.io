@@ -17,6 +17,7 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({ media, currentImageIndex, s
   const { ui: { projects }, language } = usePortfolioContent();
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [isZoomed, setIsZoomed] = useState(false);
+  const [imageDimensions, setImageDimensions] = useState<{ width: number; height: number } | null>(null);
   const expandRef = useRef<HTMLButtonElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
   const fullscreenRef = useRef<HTMLDivElement>(null);
@@ -27,7 +28,7 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({ media, currentImageIndex, s
   useHotkeys("left", prevImage);
   useHotkeys("right", nextImage);
 
-  useEffect(() => { setIsZoomed(false); }, [currentImageIndex]);
+  useEffect(() => { setIsZoomed(false); setImageDimensions(null); }, [currentImageIndex]);
   useEffect(() => {
     if (!isFullscreen) return;
     closeRef.current?.focus();
@@ -66,6 +67,7 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({ media, currentImageIndex, s
       ) : currentMedia && (
         <img src={getAssetImage(currentMedia.url)}
           alt={currentMedia.description || projects.multimediaMaterialLabel}
+          onLoad={(event) => setImageDimensions({ width: event.currentTarget.naturalWidth, height: event.currentTarget.naturalHeight })}
           className={fullscreen && isZoomed ? "m-auto h-auto w-auto max-w-none" : "m-auto h-full w-full object-contain"}
           style={fullscreen && isZoomed ? { height: "200%", minHeight: "200%" } : undefined}
         />
@@ -87,7 +89,10 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({ media, currentImageIndex, s
       <div className="mx-auto max-w-6xl rounded-xl border border-black/10 bg-white/50 p-3 shadow-lg dark:border-white/10 dark:bg-white/5 sm:p-4">
         <div {...handlers}>{isFullscreen ? <div className="h-[min(60vh,34rem)]" /> : mediaContent(false)}</div>
         <div className="mt-4 flex flex-wrap items-center justify-between gap-4">
-          <p className="min-w-0 flex-1 text-sm leading-relaxed text-dar">{currentMedia?.description}</p>
+          <div className="min-w-0 flex-1 text-sm leading-relaxed text-dar">
+            <p>{currentMedia?.description}</p>
+            {imageDimensions && <p className="text-gray-500">{imageDimensions.width}x{imageDimensions.height}px</p>}
+          </div>
           {navigation}
           <Button ref={expandRef} type="button" variant="outline" size="sm" className="bg-white text-gray-900 hover:bg-gray-100 hover:text-gray-900"
             aria-label={language === "es" ? "Ampliar contenido" : "Expand media"}
@@ -118,7 +123,7 @@ const MediaGallery: React.FC<MediaGalleryProps> = ({ media, currentImageIndex, s
           }}
           className="fixed inset-0 z-[100] flex flex-col gap-3 bg-black/95 p-3 text-white sm:p-5">
           <div className="flex items-center justify-between gap-3">
-            <p className="min-w-0 truncate text-sm">{currentMedia?.description}</p>
+            <p className="min-w-0 max-h-20 overflow-auto text-sm leading-relaxed">{currentMedia?.description}</p>
             <div className="flex shrink-0 gap-2">
               {currentMedia?.type !== "video" && <Button type="button" variant="outline" size="sm" className="bg-white text-gray-900 hover:bg-gray-100 hover:text-gray-900" aria-label={isZoomed ? (language === "es" ? "Reducir imagen" : "Zoom out") : (language === "es" ? "Acercar imagen" : "Zoom in")} aria-pressed={isZoomed} onClick={() => setIsZoomed(!isZoomed)}>{isZoomed ? <ZoomOut className="h-5 w-5" /> : <ZoomIn className="h-5 w-5" />}</Button>}
               <Button ref={closeRef} type="button" variant="outline" size="sm" className="bg-white text-gray-900 hover:bg-gray-100 hover:text-gray-900" aria-label={language === "es" ? "Cerrar vista ampliada" : "Close expanded view"} onClick={closeFullscreen}><Minimize className="h-5 w-5" /></Button>

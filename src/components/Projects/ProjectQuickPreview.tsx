@@ -328,7 +328,7 @@ const ProjectQuickPreview: React.FC<ProjectQuickPreviewProps> = ({ project, clas
         <img
           src={imageSource}
           alt={firstMedia?.description ?? project.name}
-          className="h-full min-h-[132px] w-full rounded-[0.9rem] object-cover"
+          className="h-full w-full rounded-[0.9rem] object-contain"
           loading="lazy"
           decoding="async"
           onError={() => setImageFailed(true)}
